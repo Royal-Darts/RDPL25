@@ -40,6 +40,7 @@
       border: none;
       font-size: 1rem;
       cursor: pointer;
+      transition: background 0.16s;
     }
     nav button:hover,
     nav button.active {
@@ -72,6 +73,8 @@
     }
     th {
       background: #ececec;
+      cursor: pointer;
+      user-select: none;
     }
     /* --- MOBILE & WRAPPING --- */
     .team-cell {
@@ -250,6 +253,7 @@
     </section>
     <!-- Stats -->
     <section id="stats" class="section">
+      <input id="stats-search" type="text" placeholder="Search player or team..." style="margin-bottom:1rem;padding:0.4rem 0.6rem;font-size:1rem;width:240px;border-radius:6px;border:1px solid #ccc;">
       <div id="highlights"></div>
       <div id="stats-table"></div>
     </section>
@@ -286,7 +290,7 @@
       "Vyana Warriors": "team_logos/Vyana-Warriors.avif"
     };
 
-    // *** USE YOUR NEW WORKING API URL BELOW! ***
+    // *** YOUR API URL! ***
     const API_URL = 'https://script.google.com/macros/s/AKfycby6BCE5cyBaxpz-Jt-TeRH6k5Jeq-vqelr8S7rt32e7wFjBzEvuBrYi4yPaEBz2Kari/exec';
 
     function showTab(tabId) {
@@ -298,6 +302,10 @@
 
     let fixturesCache = [];
     let statsCache = [];
+    let bestLegCache = [];
+    let statsSortKey = null;
+    let statsSortDir = 1;
+    let statsSearchTerm = "";
 
     async function loadData() {
       try {
@@ -308,8 +316,9 @@
         renderResults(data.Results, fixturesCache);
         renderStandings(data.Standings);
         renderSquads(data.Squads);
-        statsCache = (data.Stats || []).filter(row => row.Player); // Skip any blank rows
-        renderStats(statsCache);
+        statsCache = (data.Stats || []).filter(row => row.Player);
+        bestLegCache = (data["Best Leg"] || []).filter(row => row["Best Leg"]);
+        renderStats(statsCache, bestLegCache);
       } catch (err) {
         console.error('Failed to load data:', err);
       }
@@ -482,9 +491,40 @@
       container.innerHTML = html;
     }
 
-    // --- STATS + HIGHLIGHTS ---
-    function renderStats(stats) {
-      // Highlights (min 2 matches)
+    // --- STATS + HIGHLIGHTS + SORT + SEARCH ---
+    function renderStats(stats, bestLegsSheet) {
+      // SEARCH
+      const searchInput = document.getElementById('stats-search');
+      if (searchInput && !searchInput._listenerAdded) {
+        searchInput.addEventListener("input", () => {
+          statsSearchTerm = searchInput.value.trim().toLowerCase();
+          renderStats(statsCache, bestLegCache);
+        });
+        searchInput._listenerAdded = true;
+      }
+
+      let filteredStats = stats;
+      if (statsSearchTerm) {
+        filteredStats = stats.filter(
+          p => (p.Player && p.Player.toLowerCase().includes(statsSearchTerm)) ||
+               (p.Team && p.Team.toLowerCase().includes(statsSearchTerm))
+        );
+      }
+
+      // SORT
+      if (statsSortKey) {
+        filteredStats = [...filteredStats].sort((a, b) => {
+          let v1 = a[statsSortKey], v2 = b[statsSortKey];
+          let n1 = parseFloat(v1), n2 = parseFloat(v2);
+          if (!isNaN(n1) && !isNaN(n2)) {
+            return statsSortDir * (n1 - n2);
+          } else {
+            return statsSortDir * (String(v1).localeCompare(String(v2)));
+          }
+        });
+      }
+
+      // HIGHLIGHTS (min 2 matches)
       const highlightsDefs = [
         { key: "3 Dart Avg", label: "Best 3-Dart Avg", compare: (a,b) => +b["3 Dart Avg"] - +a["3 Dart Avg"] },
         { key: "First 9 Avg", label: "Best First 9 Avg", compare: (a,b) => +b["First 9 Avg"] - +a["First 9 Avg"] },
@@ -502,30 +542,34 @@
                  </div>`;
       });
 
-      // Best Leg highlight: find player(s) with the *lowest* (fastest) Best Leg
-      const bestLegs = eligible.filter(p => p["Best Leg"] && !isNaN(Number(p["Best Leg"])));
-      let minBestLeg = Math.min(...bestLegs.map(p => Number(p["Best Leg"])));
-      let bestLegPlayers = bestLegs.filter(p => Number(p["Best Leg"]) === minBestLeg);
-
-      html += `<div class='highlight-card'><strong>Best Leg</strong>
-        <p>${
-          bestLegPlayers.length
-            ? bestLegPlayers.map(p => `${p.Player} (${p["Best Leg"]})`).join("<br>")
-            : "—"
-        }</p></div>`;
-
+      // BEST LEG from the Best Leg sheet
+      let bestLegHtml = "—";
+      if (bestLegsSheet && bestLegsSheet.length) {
+        let minBest = Math.min(...bestLegsSheet.map(row => Number(row["Best Leg"])).filter(n => !isNaN(n)));
+        let bestRows = bestLegsSheet.filter(row => Number(row["Best Leg"]) === minBest);
+        bestLegHtml = bestRows.length
+          ? bestRows.map(row =>
+              `${row.Players} (${row.Team})<br><span style='font-size:1.06rem;font-weight:700;color:#197e25;'>${row["Best Leg"]}</span>`
+            ).join("<br>")
+          : "—";
+      }
+      html += `<div class='highlight-card'><strong>Best Leg</strong><p>${bestLegHtml}</p></div>`;
       html += "</div>";
       document.getElementById("highlights").innerHTML = html;
 
-      // Stats Table
-      if (stats.length) {
-        const wantedHeaders = Object.keys(stats[0]).filter(
+      // TABLE: sortable by clicking headers
+      if (filteredStats.length) {
+        const wantedHeaders = Object.keys(filteredStats[0]).filter(
           h => h && h !== "" && h !== undefined && h !== null
         );
-        let table = "<div class='table-scroll'><table><thead><tr>" +
-          wantedHeaders.map(h => `<th>${h}</th>`).join("") +
-          "</tr></thead><tbody>";
-        stats.forEach(row => {
+        let table = "<div class='table-scroll'><table><thead><tr>";
+        wantedHeaders.forEach(h => {
+          let dirArrow = "";
+          if (statsSortKey === h) dirArrow = statsSortDir > 0 ? " ▲" : " ▼";
+          table += `<th onclick="setStatsSort('${h}')">${h}${dirArrow}</th>`;
+        });
+        table += "</tr></thead><tbody>";
+        filteredStats.forEach(row => {
           table += "<tr>" + wantedHeaders.map(h => `<td>${row[h] ?? ""}</td>`).join("") + "</tr>";
         });
         table += "</tbody></table></div>";
@@ -535,7 +579,17 @@
       }
     }
 
-    // --- AUTO-REFRESH ---
+    // GLOBAL SORT HOOK for table headers
+    window.setStatsSort = function(h) {
+      if (statsSortKey === h) {
+        statsSortDir = -statsSortDir;
+      } else {
+        statsSortKey = h;
+        statsSortDir = 1;
+      }
+      renderStats(statsCache, bestLegCache);
+    };
+
     loadData();
     setInterval(loadData, 60000);
   </script>
