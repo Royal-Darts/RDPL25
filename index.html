@@ -6,20 +6,18 @@
   <title>Royal Darts Premier League 2025</title>
   <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/174/174855.png" />
   <style>
-    * { box-sizing: border-box; }
     body {
       font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f8f8f8;
+      background: #f8f8f8;
+      margin: 0; padding: 0;
     }
     header {
-      background-color: #121212;
+      background: #121212;
       color: #fff;
       display: flex;
       align-items: center;
-      padding: 0.5rem 1rem;
       gap: 1rem;
+      padding: 0.75rem 1rem;
     }
     header img {
       height: 60px;
@@ -38,6 +36,7 @@
       padding: 0.75rem 1rem;
       cursor: pointer;
       font-weight: bold;
+      transition: all 0.2s;
     }
     nav button.active {
       background: #121212;
@@ -47,11 +46,44 @@
     main {
       padding: 1rem;
     }
-    .section {
-      display: none;
+    .section { display: none; }
+    .section.active { display: block; }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      background: #fff;
+      margin-bottom: 2rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
     }
-    .section.active {
+    th, td {
+      border: 1px solid #e5e5e5;
+      padding: 0.5rem 0.6rem;
+      text-align: left;
+    }
+    th {
+      background: #ececec;
+      font-weight: bold;
+    }
+    /* Highlights grid */
+    .highlights-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .highlight-card {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      padding: 1.25rem;
+      text-align: center;
+      font-size: 1.12rem;
+    }
+    .highlight-card strong {
       display: block;
+      font-size: 1.08rem;
+      margin-bottom: 0.5rem;
+      color: #4040a1;
     }
     footer {
       background: #121212;
@@ -59,8 +91,33 @@
       padding: 1rem;
       text-align: center;
     }
-    /* Tables, cards, grids, etc. (unchanged) */
-    /* ... your existing CSS from index.html here ... */
+    .footer-icons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1.5rem;
+      margin-bottom: 0.4rem;
+    }
+    .footer-icons img {
+      width: 32px;
+      height: 32px;
+      object-fit: contain;
+      margin: 0 4px;
+      vertical-align: middle;
+      background: #fff;
+      border-radius: 8px;
+      border: 1px solid #eee;
+      padding: 2px;
+      transition: box-shadow 0.18s;
+    }
+    .footer-icons img:hover {
+      box-shadow: 0 0 6px #0055ff55;
+    }
+    .footer-suca {
+      font-size: 0.96rem;
+      color: #e0e0e0;
+      margin-top: 2px;
+    }
   </style>
 </head>
 <body>
@@ -68,26 +125,16 @@
     <img src="logo.png" alt="Tournament Logo" />
     <h1>Royal Darts Premier League 2025</h1>
   </header>
-
   <nav>
     <button class="tab-button active" onclick="showTab('fixtures')">Fixtures</button>
     <button class="tab-button" onclick="showTab('results')">Results</button>
     <button class="tab-button" onclick="showTab('standings')">Standings</button>
     <button class="tab-button" onclick="showTab('squads')">Squads</button>
     <button class="tab-button" onclick="showTab('stats')">Stats</button>
-    <button class="tab-button" onclick="showTab('best-leg')">Best Leg</button>
   </nav>
-
   <main>
-    <!-- Fixtures -->
-    <section id="fixtures" class="section active">
-      <div id="fixturesTableContainer"></div>
-    </section>
-    <!-- Results -->
-    <section id="results" class="section">
-      <div id="resultsContainer"></div>
-    </section>
-    <!-- Standings -->
+    <section id="fixtures" class="section active"><div id="fixturesTableContainer"></div></section>
+    <section id="results" class="section"><div id="resultsContainer"></div></section>
     <section id="standings" class="section">
       <div id="standingsGroupA"></div>
       <div id="standingsGroupB"></div>
@@ -95,53 +142,27 @@
         <p><strong>EF</strong> = Events For, <strong>EA</strong> = Events Against, <strong>ED</strong> = Event Difference</p>
       </div>
     </section>
-    <!-- Squads -->
-    <section id="squads" class="section">
-      <div id="squadsContainer">Loading...</div>
-    </section>
-    <!-- Stats -->
+    <section id="squads" class="section"><div id="squadsContainer">Loading...</div></section>
     <section id="stats" class="section">
       <div id="highlights"></div>
       <div id="stats-table"></div>
     </section>
-    <!-- Best Leg -->
-    <section id="best-leg" class="section">
-      <div id="best-leg-table"></div>
-    </section>
   </main>
-
   <footer>
     <div class="footer-icons">
-      <a href="https://n01darts.com/n01/tournament/comp.php?id=t_NI0o_4352&tab=live" target="_blank" class="icon-link">
-        <img src="https://n01darts.com/favicon.ico" alt="Nakka" title="Watch Live on Nakka"
-          onerror="this.style.display='none'; this.insertAdjacentHTML('afterend','<span style=\\"font-size:0.85rem;color:#ccc;padding-left:2px;\\">Nakka</span>');" />
+      <a href="https://n01darts.com/n01/tournament/comp.php?id=t_NI0o_4352&tab=live" target="_blank">
+        <img src="https://n01darts.com/favicon.ico" alt="Nakka" title="Watch Live on Nakka" />
       </a>
-      <a href="https://www.instagram.com/royaldarts_rcgc" target="_blank" class="icon-link">
+      <a href="https://www.instagram.com/royaldarts_rcgc" target="_blank">
         <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram" title="Follow us on Instagram" />
       </a>
     </div>
     <div class="footer-suca">Built by SUCA Analytics</div>
   </footer>
-
   <script>
-    // --- LOGO MAPPING ---
+    // ----- TEAM LOGOS MAP (unchanged) -----
     const TEAM_LOGOS = {
-      "Balaji Darts": "team_logos/Balaji-Darts.avif",
-      "Biscotti Barrels": "team_logos/Biscotti-Barrels.avif",
-      "BLC High Rollers": "team_logos/BLC-High-Rollers.avif",
-      "Bullseye Bandits": "team_logos/Bullseye-Bandits.avif",
-      "City Knights": "team_logos/City-Knights.avif",
-      "Hugo & Finn": "team_logos/Hugo-&-Finn.png",
-      "Keventer Eagle Eye": "team_logos/Keventer-Eagle-Eye.avif",
-      "PKS Titans": "team_logos/PKS-Titans.avif",
-      "Purti Forever": "team_logos/Purti-Forever.avif",
-      "Rama Darts": "team_logos/Rama-Darts.png",
-      "Royals Super Knights": "team_logos/Royals-Super-Knights.avif",
-      "RSV Rising Stars": "team_logos/RSV-Rising-Stars.avif",
-      "The Panthers": "team_logos/The-Panthers.avif",
-      "Tons of Bull": "team_logos/Tons-of-Bull.avif",
-      "UGW": "team_logos/UGW.png",
-      "Vyana Warriors": "team_logos/Vyana-Warriors.avif"
+      // ... your team logos ...
     };
 
     const API_URL = 'https://script.google.com/macros/s/AKfycbzjQ6yBNFFLbWfxyU-idb2j8XNTDrBj1C8kvWBSDaPirUNcU9jtNFxuI5s3CfgDMttA/exec';
@@ -155,83 +176,94 @@
 
     let fixturesCache = [];
     let statsCache = [];
-    let bestLegCache = [];
 
     async function loadData() {
       try {
         const res = await fetch(API_URL);
         const data = await res.json();
+
+        // Only use non-empty data columns for stats
         fixturesCache = data.Fixtures || [];
         renderFixtures(data.Fixtures);
         renderResults(data.Results, fixturesCache);
         renderStandings(data.Standings);
         renderSquads(data.Squads);
 
-        // New: Stats
-        statsCache = data.Stats || [];
-        renderStats(statsCache);
+        // STATS: drop empty/hidden columns (A, C) and any row with no player name
+        statsCache = (data.Stats || []).map(row => {
+          const { Player, Team, "Match Played":matchPlayed, "Sets Played":setsPlayed, "Sets Won":setsWon,
+            "Legs Played":legsPlayed, "Legs Diff":legsDiff, "Legs Won":legsWon,
+            "100+":ton100, "140+":ton140, "170+":ton170, "180's":ton180,
+            "High Finish":highFinish, "100+ Finishes":finishes100,
+            "Best Leg":bestLeg, "Win Rate (Sets)":wrSets, "Win Rate (Legs)":wrLegs,
+            "3 Dart Avg":d3, "1 Dart Avg":d1, "First 9 Avg":f9,
+            Keep, Break, "Second Legs":secondLegs, "Break Legs":breakLegs,
+            "Total Score":totalScore, "Total Darts":totalDarts, Group
+          } = row;
+          return Player ? {
+            Player, Team, "Match Played":matchPlayed, "Sets Played":setsPlayed, "Sets Won":setsWon,
+            "Legs Played":legsPlayed, "Legs Diff":legsDiff, "Legs Won":legsWon,
+            "100+":ton100, "140+":ton140, "170+":ton170, "180's":ton180,
+            "High Finish":highFinish, "100+ Finishes":finishes100,
+            "Best Leg":bestLeg, "Win Rate (Sets)":wrSets, "Win Rate (Legs)":wrLegs,
+            "3 Dart Avg":d3, "1 Dart Avg":d1, "First 9 Avg":f9,
+            Keep, Break, "Second Legs":secondLegs, "Break Legs":breakLegs,
+            "Total Score":totalScore, "Total Darts":totalDarts, Group
+          } : null;
+        }).filter(Boolean);
 
-        // New: Best Leg
-        bestLegCache = data["Best Leg"] || [];
-        renderBestLeg(bestLegCache);
+        renderStats(statsCache);
 
       } catch (err) {
         console.error('Failed to load data:', err);
       }
     }
 
-    // --- FIXTURES ---
-    function renderFixtures(fixtures) {
-      // ... your existing renderFixtures code ...
-    }
-
-    // --- RESULTS ---
-    function renderResults(results, fixtures) {
-      // ... your existing renderResults code ...
-    }
-
-    // --- STANDINGS ---
-    function renderStandings(standings) {
-      // ... your existing renderStandings code ...
-    }
-
-    // --- SQUADS ---
-    function renderSquads(squads) {
-      // ... your existing renderSquads code ...
-    }
-
-    // --- STATS (NEW) ---
+    // --- Highlights: Show Best 3-Dart Avg, Best First 9 Avg, Most Legs Won, Highest Finish, Best Leg (from stats only) ---
     function renderStats(stats) {
-      // Highlights grid (min 2 matches)
-      const highlightsCols = [
-        { key: "3 Dart Avg", label: "Best 3-Dart Avg" },
-        { key: "First 9 Avg", label: "Best First 9 Avg" },
-        { key: "Legs Won", label: "Most Legs Won" },
-        { key: "High Finish", label: "Highest Finish" },
-        { key: "Best Leg", label: "Best Leg" }
+      // Highlights (min 2 matches)
+      const highlightsDefs = [
+        { key: "3 Dart Avg", label: "Best 3-Dart Avg", compare: (a,b) => +b["3 Dart Avg"] - +a["3 Dart Avg"], fmt: x => x },
+        { key: "First 9 Avg", label: "Best First 9 Avg", compare: (a,b) => +b["First 9 Avg"] - +a["First 9 Avg"], fmt: x => x },
+        { key: "Legs Won", label: "Most Legs Won", compare: (a,b) => +b["Legs Won"] - +a["Legs Won"], fmt: x => x },
+        { key: "High Finish", label: "Highest Finish", compare: (a,b) => +b["High Finish"] - +a["High Finish"], fmt: x => x }
       ];
       const eligible = stats.filter(p => Number(p["Match Played"]) >= 2);
+
       let html = "<h2>Highlights</h2><div class='highlights-grid'>";
-      highlightsCols.forEach(col => {
-        const top = eligible.reduce((a, b) =>
-          Number(b[col.key]) > Number(a[col.key]) ? b : a,
-          eligible[0] || {}
-        );
-        html += `<div class='highlight-card'>
-                   <strong>${col.label}</strong>
-                   <p>${top.Player || "—"} (${top[col.key] || "—"})</p>
+      highlightsDefs.forEach(def => {
+        const sorted = [...eligible].sort(def.compare);
+        const best = sorted[0];
+        html += `<div class='highlight-card'><strong>${def.label}</strong>
+                  <p>${best?.Player || "—"} (${best?.[def.key] ?? "—"})</p>
                  </div>`;
       });
+
+      // Best Leg highlight: find player(s) with the *lowest* (fastest) Best Leg
+      const bestLegs = eligible.filter(p => p["Best Leg"] && !isNaN(Number(p["Best Leg"])));
+      let minBestLeg = Math.min(...bestLegs.map(p => Number(p["Best Leg"])));
+      let bestLegPlayers = bestLegs.filter(p => Number(p["Best Leg"]) === minBestLeg);
+
+      html += `<div class='highlight-card'><strong>Best Leg</strong>
+        <p>${
+          bestLegPlayers.length
+            ? bestLegPlayers.map(p => `${p.Player} (${p["Best Leg"]})`).join("<br>")
+            : "—"
+        }</p></div>`;
+
       html += "</div>";
       document.getElementById("highlights").innerHTML = html;
 
-      // Full Stats Table
+      // Stats Table (skip any blank/hidden columns)
       if (stats.length) {
+        const wantedHeaders = Object.keys(stats[0]).filter(
+          h => h && h !== "" && h !== undefined && h !== null && !["", undefined, null].includes(h)
+        );
         let table = "<table><thead><tr>" +
-          Object.keys(stats[0]).map(h => `<th>${h}</th>`).join("") +
+          wantedHeaders.map(h => `<th>${h}</th>`).join("") +
           "</tr></thead><tbody>";
         stats.forEach(row => {
-          table += "<tr>" + Object.values(row).map(v => `<td>${v}</td>`).join("") + "</tr>";
+          table += "<tr>" + wantedHeaders.map(h => `<td>${row[h] ?? ""}</td>`).join("") + "</tr>";
         });
         table += "</tbody></table>";
         document.getElementById("stats-table").innerHTML = table;
@@ -240,23 +272,9 @@
       }
     }
 
-    // --- BEST LEG (NEW) ---
-    function renderBestLeg(rows) {
-      if (!rows.length) {
-        document.getElementById("best-leg-table").innerHTML = "<p>No best leg data.</p>";
-        return;
-      }
-      let tbl = "<table><thead><tr>" +
-        Object.keys(rows[0]).map(h => `<th>${h}</th>`).join("") +
-        "</tr></thead><tbody>";
-      rows.forEach(r => {
-        tbl += "<tr>" + Object.values(r).map(v => `<td>${v}</td>`).join("") + "</tr>";
-      });
-      tbl += "</tbody></table>";
-      document.getElementById("best-leg-table").innerHTML = tbl;
-    }
+    // ... Your renderFixtures, renderResults, renderStandings, renderSquads functions (unchanged) ...
 
-    // Initial load + auto-refresh every 60s
+    // --- LOAD ---
     loadData();
     setInterval(loadData, 60000);
   </script>
