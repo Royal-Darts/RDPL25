@@ -9,37 +9,26 @@
     header { background: #2B2A29; color: #FFD700; padding: 0.75rem 1rem; display: flex; align-items: center; }
     header img { height: 60px; margin-right: 1rem; }
     nav { background: #3C3B39; display: flex; flex-wrap: wrap; justify-content: center; }
-    nav button {
-      padding: 0.6rem 1.2rem; margin: 0.3rem; border: none;
-      background: #FFD700; color: #2B2A29; font-weight: bold;
-      border-radius: 6px; cursor: pointer;
-      transition: background 0.2s;
-    }
+    nav button { padding: 0.6rem 1.2rem; margin: 0.3rem; border: none; background: #FFD700; color: #2B2A29; font-weight: bold; border-radius: 6px; cursor: pointer; transition: background 0.2s; }
     nav button:hover, nav button.active { background: #E5C100; }
     section { display: none; padding: 2rem; background: white; }
     section.active { display: block; }
-    /* Fixtures */
+    .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
     table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
-    th, td { padding: 0.6rem; border: 1px solid #ccc; text-align: center; }
+    th, td { padding: 0.6rem; border: 1px solid #ccc; text-align: center; white-space: nowrap; }
     th { background: #eaecef; color: #2B2A29; }
     .fixture-row.today td { background: #fff4e5; }
-    /* Results */
     .result-row.winner td { font-weight: bold; }
     .result-row.upset td { background: #ffe5e5; }
-    /* Standings */
     .standings-group { margin-bottom: 1.5rem; }
     .standings-group h3 { margin: 1rem 0 0.5rem; color: #3C3B39; }
-    /* Squads */
     .squad-card { display: flex; align-items: center; margin-bottom: 1rem; }
     .squad-card img { height: 32px; width: 32px; object-fit: contain; margin-right: 0.5rem; }
-    /* Stats Cards */
     .view-toggle { margin: 1rem 0; text-align: center; }
-    .view-toggle button { margin: 0 0.5rem; }
-    .cards { display: none; flex-wrap: wrap; justify-content: center; gap: 1.5rem; }
-    .player-card { width: 280px; border-radius: 12px;
-      background: linear-gradient(135deg, #1d2630, #33415f);
-      color: #f0f0f0; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-      overflow: hidden; display: flex; flex-direction: column; }
+    .view-toggle button { margin: 0 0.5rem; padding: 0.5rem 1rem; border: none; background: #FFD700; color: #2B2A29; font-weight: bold; border-radius: 6px; cursor: pointer; }
+    .view-toggle button.active, .view-toggle button:hover { background: #E5C100; }
+    .cards { display: none; flex-wrap: wrap; justify-content: center; gap: 1.5rem; margin-top: 1rem; }
+    .player-card { width: 280px; border-radius: 12px; background: linear-gradient(135deg, #1d2630, #33415f); color: #f0f0f0; box-shadow: 0 4px 15px rgba(0,0,0,0.3); overflow: hidden; display: flex; flex-direction: column; }
     .player-banner { background: linear-gradient(to right, #4a90e2, #357ABD); padding: 1rem; text-align: center; }
     .player-banner .player-name { margin: 0; font-size: 1.25rem; font-weight: 700; }
     .player-banner .player-team { margin-top: 0.25rem; font-size: 0.9rem; color: #cbd4e6; }
@@ -50,7 +39,7 @@
 </head>
 <body>
   <header>
-    <img src="logo.png" alt="Tournament Logo" />
+    <img src="/logo.png" alt="Tournament Logo" />
     <h1>Royal Darts Premier League 2025</h1>
   </header>
   <nav>
@@ -63,18 +52,22 @@
 
   <section id="fixtures">
     <h2>Fixtures</h2>
-    <div class="table-scroll"><table>
-      <thead><tr><th>Date</th><th>Time</th><th>Match</th></tr></thead>
-      <tbody id="fixturesBody"><tr><td colspan="3">Loading...</td></tr></tbody>
-    </table></div>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>Date</th><th>Time</th><th>Match</th></tr></thead>
+        <tbody id="fixturesBody"><tr><td colspan="3">Loading...</td></tr></tbody>
+      </table>
+    </div>
   </section>
 
   <section id="results">
     <h2>Results</h2>
-    <div class="table-scroll"><table>
-      <thead><tr><th>Group</th><th>Avg 1</th><th>Team 1</th><th>Score</th><th>vs</th><th>Score</th><th>Team 2</th><th>Avg 2</th></tr></thead>
-      <tbody id="resultsBody"><tr><td colspan="8">Loading...</td></tr></tbody>
-    </table></div>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>Group</th><th>Avg 1</th><th>Team 1</th><th>Score</th><th>vs</th><th>Score</th><th>Team 2</th><th>Avg 2</th></tr></thead>
+        <tbody id="resultsBody"><tr><td colspan="8">Loading...</td></tr></tbody>
+      </table>
+    </div>
   </section>
 
   <section id="standings">
@@ -129,7 +122,7 @@
       } catch(e) { console.error(e); }
     }
     function renderFixtures(fixtures) {
-      const tbody = document.getElementById('fixturesBody'), today = new Date().toDateString(); tbody.innerHTML = '';
+      const tbody = document.getElementById('fixturesBody'); const today = new Date().toDateString(); tbody.innerHTML = '';
       fixtures.forEach(f => {
         const d = new Date(f.Date).toDateString();
         const cls = d===today ? 'fixture-row today' : '';
@@ -139,49 +132,4 @@
     function renderResults(results) {
       const tbody = document.getElementById('resultsBody'); tbody.innerHTML = '';
       results.forEach(r=>{
-        const w1 = r['Legs 1']>r['Legs 2'], upset = (r['Avg 1']>r['Avg 2']&&r['Legs 1']<r['Legs 2'])||(r['Avg 2']>r['Avg 1']&&r['Legs 2']<r['Legs 1']);
-        const cls = 'result-row ' + (w1?'winner':'') + (upset?' upset':'');
-        tbody.innerHTML += `<tr class="${cls}"><td>${r.Group}</td><td>${r['Avg 1']}</td><td>${r['Team 1']}</td><td>${r['Legs 1']}</td><td>vs</td><td>${r['Legs 2']}</td><td>${r['Team 2']}</td><td>${r['Avg 2']}</td></tr>`;
-      });
-    }
-    function renderStandings(standings) {
-      const container = document.getElementById('standingsContainer'); container.innerHTML = '';
-      [...new Set(standings.map(s=>s.Group))].forEach(g => {
-        container.innerHTML += `<div class="standings-group"><h3>Group ${g}</h3><table class="standings-table"><thead><tr><th>Team</th><th>P</th><th>W</th><th>L</th><th>EF</th><th>EA</th><th>ED</th><th>Pts</th><th>Avg</th></tr></thead><tbody>`;
-        standings.filter(s=>s.Group===g).sort((a,b)=>b.Points-a.Points).forEach(s=>{
-          container.innerHTML += `<tr><td>${s.Team}</td><td>${s.P}</td><td>${s.W}</td><td>${s.L}</td><td>${s.LF}</td><td>${s.LA}</td><td>${s.LD}</td><td>${s.Points}</td><td>${s.Avg}</td></tr>`;
-        });
-        container.innerHTML += '</tbody></table></div>';
-      });
-    }
-    function renderSquads(squads) {
-      const cont = document.getElementById('squadsContainer'); cont.innerHTML = '';
-      [...new Set(squads.map(s=>s.Team))].forEach(team => {
-        const logo = team.toLowerCase().replace(/\s+/g,'-') + '.png';
-        cont.innerHTML += `<div class="squad-card"><img src="team_logos/${logo}" alt="${team}"/><h3>${team}</h3></div>`;
-      });
-    }
-    function renderStats(stats) {
-      const hl = document.getElementById('statsHighlights'); hl.innerHTML = '';
-      stats.slice().filter(p=>p.Match_Played>=2).sort((a,b)=>b['3 Dart Avg']-a['3 Dart Avg']).slice(0,1)
-        .forEach(p=> hl.innerHTML += `<li><strong>Best 3-Dart Avg:</strong> ${p.Player} (${p.Team}) – ${p['3 Dart Avg']}</li>`);
-      stats.slice().filter(p=>p.Match_Played>=2).sort((a,b)=>b['First 9 Avg']-a['First 9 Avg']).slice(0,1)
-        .forEach(p=> hl.innerHTML += `<li><strong>Best First 9 Average:</strong> ${p.Player} (${p.Team}) – ${p['First 9 Avg']}</li>`);
-      stats.slice().filter(p=>p.Match_Played>=2).sort((a,b)=>b['Legs Won']-a['Legs Won']).slice(0,1)
-        .forEach(p=> hl.innerHTML += `<li><strong>Most Legs Won:</strong> ${p.Player} (${p.Team}) – ${p['Legs Won']}</li>`);
-      stats.slice().filter(p=>p.Match_Played>=2).sort((a,b)=>b['High Finish']-a['High Finish']).slice(0,1)
-        .forEach(p=> hl.innerHTML += `<li><strong>Highest Finish:</strong> ${p.Player} (${p.Team}) – ${p['High Finish']}</li>`);
-      const bestLeg = stats.reduce((best,p)=> p['Best Leg']<best['Best Leg']?p:best, stats[0]);
-      hl.innerHTML += `<li><strong>Best Leg:</strong> ${bestLeg.Players} (${bestLeg.Team}) – ${bestLeg['Best Leg']} Darts in ${bestLeg['Set Name']}</li>`;
-      // Table
-      const tb = document.getElementById('statsTableBody'); tb.innerHTML = '';
-      stats.forEach(p=>{ if(p.Match_Played>=2) tb.innerHTML += `<tr><td>${p.Player}</td><td>${p.Team}</td><td>${p['3 Dart Avg']}</td><td>${p['First 9 Avg']}</td><td>${p['High Finish']}</td><td>${p['Legs Won']}</td><td>${p['Sets Won']}</td><td>${p['100+']}</td><td>${p['140+']}</td><td>${p['180s']}</td></tr>`; });
-      // Cards
-      const cv = document.getElementById('cardView'); cv.innerHTML = '';
-      stats.forEach(p=>{ if(p.Match_Played>=2) cv.innerHTML += 
-        `<div class="player-card"><div class="player-banner"><h3 class="player-name">${p.Player}</h3><div class="player-team">${p.Team}</div></div><div class="player-body"><div class="stats-grid"><div><span class="label">3 Dart Avg</span><span>${p['3 Dart Avg']}</span></div><div><span class="label">First 9 Avg</span><span>${p['First 9 Avg']}</span></div><div><span class="label">High Finish</span><span>${p['High Finish']}</span></div><div><span class="label">Legs Won</span><span>${p['Legs Won']}</span></div><div><span class="label">Sets Won</span><span>${p['Sets Won']}</span></div><div><span class="label">100+</span><span>${p['100+']}</span></div><div><span class="label">140+</span><span>${p['140+']}</span></div><div><span class="label">180s</span><span>${p['180s']}</span></div></div></div></div>`; });
-    }
-    window.onload = function() { showTab('standings'); loadData(); };
-  </script>
-</body>
-</html>
+        const w1 = r['Legs 1']>r['Legs 2']; const upset = (r['Avg 1']>r['
