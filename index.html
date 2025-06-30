@@ -2,178 +2,284 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
   <title>Royal Darts Premier League 2025</title>
   <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/174/174855.png" />
+  <meta name="theme-color" content="#232323">
   <style>
-    html,body { background:#f7f9fc; margin:0; color:#21243a; font-family: 'Segoe UI',Arial,sans-serif;}
-    header { background:#181f2b; color:#fff; padding:1.2rem 1rem 0.9rem 1rem; text-align:center; min-width:0;}
-    header img { max-height:52px; margin-bottom:0.25rem;}
-    .hamburger {
-      display: none; position: absolute; right:18px; top:18px; background:none; border:none; z-index:99;
-      flex-direction:column;justify-content:center;align-items:center; width:38px;height:38px;cursor:pointer;
+    html,body {
+      background: #f7f9fc;
+      margin: 0;
+      color: #21243a;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      min-height:100%;
+      overscroll-behavior-y: none;
     }
-    .hamburger span { display:block; width:27px; height:4px; background:#fff; margin:4px 0; border-radius:3px;}
+    header {
+      background: #181f2b;
+      color: #fff;
+      padding: 1.1rem 0.6rem 1rem 0.6rem;
+      text-align: center;
+    }
+    header img {max-height:45px;}
+    header h1 {
+      margin: 0.25rem 0 0 0;
+      font-size: 1.45em;
+      letter-spacing: 0.01em;
+      font-weight: 800;
+    }
+    /* Responsive NAV BAR */
     nav {
-      background:#232323; border-bottom:1px solid #232323; width:100vw; position:sticky;top:0;z-index:40;
-      display:flex;justify-content:center;align-items:center;transition:height 0.15s;
+      background: #232323;
+      width: 100vw;
+      z-index: 50;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-bottom: 1px solid #222;
     }
-    .nav-main { display:flex; justify-content:center; align-items:center; gap:0.2rem; flex-wrap:nowrap; }
-    nav button {
-      flex: 1 0 auto;
-      padding:1rem 1.1rem;
-      color:white;
-      background:none;
-      border:none;
-      cursor:pointer;
-      font-weight:500;
-      font-size:1.1em;
-      transition:background 0.13s;
-      white-space:nowrap;
+    nav .tab-button {
+      flex: 1 1 0;
+      border: none;
+      background: none;
+      color: #eee;
+      font-size: 1.05em;
+      font-weight: 600;
+      padding: 0.87em 0;
+      text-align: center;
+      outline: none;
+      cursor: pointer;
+      transition: background 0.16s, color 0.14s;
+      position:relative;
+      display: flex; flex-direction: column; align-items: center; gap: 0.13em;
     }
-    nav button:hover,nav button.active {background:#353535;}
-    nav .tab-button { border-radius:0; }
-    nav.open .nav-main { display:flex;flex-direction:column; width:100vw;}
-    nav.open { position:fixed; top:0; left:0; width:100vw; height:100vh; background:#222c; z-index:999;}
-    nav.open button { width:100vw;text-align:left; font-size:1.15em; padding:1.3rem 1.3rem;}
-    main { max-width: 1170px; margin:auto; padding:2rem 2vw 1.5rem 2vw; }
-    .section {display:none;}
-    .section.active {display:block;}
-    .dashboard-fixtures-list {width:100%;max-width:540px;margin:0 auto 2em auto;}
+    nav .tab-button.active, nav .tab-button:active {
+      background: #232b44;
+      color: #ffd100;
+    }
+    nav .tab-icon { font-size: 1.29em; display: block; margin-bottom: 0.08em; }
+
+    main { max-width: 970px; margin: auto; padding: 0.7rem 0.2rem 1.2rem 0.2rem; }
+    .section { display: none; }
+    .section.active { display: block; }
+
+    /* Tables & Scrolls */
+    .table-scroll {
+      overflow-x: auto;
+      width: 100%;
+      margin-bottom: 1.7em;
+      -webkit-overflow-scrolling: touch;
+      scroll-snap-type: x proximity;
+      border-radius: 10px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px #0001;
+      min-width: 450px;
+    }
+    th,td {
+      padding: 0.47em 0.3em;
+      border: 1px solid #e6e6e6;
+      text-align: center;
+      font-size: 0.96em;
+      white-space: nowrap;
+      scroll-snap-align: start;
+    }
+    th {
+      background: #f6f7fa;
+      font-weight: 700;
+    }
+    .gold-row { background: #fff5d2; }
+    .silver-row { background: #ebecf1; }
+    .elim-row { background: #ffd7d7; }
+    .date-heading {
+      margin: 1.2em 0 0.7em 0.1em;
+      font-size: 1.09em;
+      font-weight: 800;
+      color: #18449e;
+      background: #fff8e4;
+      padding: 0.22em 1em 0.22em 1.0em;
+      border-radius: 5px;
+      display: inline-block;
+    }
+    .group-title {
+      margin: 0.6em 0 0.3em 0;
+      font-size: 1.07em;
+      font-weight: 700;
+      color: #18449e;
+    }
+    /* Compact Standings, Squads, Stats */
+    .standings-legend {
+      margin: 0.18em 0 0.8em 0;
+      font-size: 0.97em;
+      display: flex; gap: 1.1em;
+      flex-wrap: wrap;
+      color: #232323;
+    }
+    .gold-legend { color: #a58400; }
+    .silver-legend { color: #888; }
+    .elim-legend { color: #cc2222; }
+
+    /* Fixtures/Results Cards (Dashboard) */
+    .dashboard-fixtures-list {
+      margin: 0 0 1.2em 0;
+    }
     .dashboard-fixture-row {
-      background:#fff; border-radius:9px;
-      box-shadow:0 1px 4px #0001; display:flex;align-items:center;justify-content:space-between;
-      padding:0.55em 0.6em 0.48em 0.6em; margin-bottom:0.54em;
-      gap:0.6em; font-size:1.01em;min-width:0;
+      background: #fff;
+      border-radius: 9px;
+      box-shadow: 0 1px 4px #0001;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.5em 0.55em;
+      margin-bottom: 0.55em;
+      gap: 0.23em;
+      font-size: 1em;
     }
-    .dash-fixt-time {color:#1856e7; font-weight:700; font-size:0.96em;min-width:61px;}
-    .dash-fixt-team {display:flex;align-items:center;gap:0.32em; font-weight:600;min-width:0;max-width:44vw;overflow:hidden;}
-    .dash-fixt-logo {width:19px;height:19px;border-radius:7px;background:#fff;border:1.2px solid #e6e6e6;object-fit:contain;}
-    .dash-fixt-vs {font-size:1.05em; font-weight:700; color:#232323;}
+    .dash-fixt-time {color: #1856e7; font-weight: 700; font-size: 0.95em; min-width: 57px;}
+    .dash-fixt-team {display: flex; align-items: center; gap: 0.29em; font-weight: 600; min-width: 0; max-width: 40vw; overflow: hidden; font-size: 0.98em;}
+    .dash-fixt-logo {width: 18px; height: 18px; border-radius: 4px; background: #fff; border: 1px solid #eee; object-fit: contain;}
+    .dash-fixt-vs {font-size: 1.02em; font-weight: 700; color: #232323;}
     .show-all-btn {
-      border:none;background:#ececec;color:#1856e7;padding:7px 23px;border-radius:8px;cursor:pointer;
-      font-size:1em;margin:0 auto 1.2em auto;display:block;font-weight:600;transition:background 0.13s;
+      border: none;
+      background: #ececec;
+      color: #1856e7;
+      padding: 5px 20px;
+      border-radius: 7px;
+      cursor: pointer;
+      font-size: 1em;
+      margin: 0 auto 1em auto;
+      display: block;
+      font-weight: 600;
+      transition: background 0.13s;
     }
-    .show-all-btn:hover {background:#d6e6ff;}
-    .standings-row {display:flex;align-items:center;justify-content:space-between;border-radius:7px;padding:6px 9px;margin-bottom:5px;}
-    .cup-gold {background:#ffe083;}
-    .cup-silver {background:#ececec;}
-    .cup-elim {background:#ffd6d6;}
-    .cup-badge {font-size:0.96em;padding:2px 7px;border-radius:6px;margin-left:5px;font-weight:700;}
-    .cup-badge.gold {background:gold;color:#222;}
-    .cup-badge.silver {background:silver;color:#222;}
-    .cup-badge.elim {background:#ffeded;color:#666;}
-    .standings-title {font-size:1.13em;font-weight:700;margin:1em 0 0.35em 0;}
-    .dash-high-bar {display:flex;gap:0.6em;justify-content:center;flex-wrap:wrap;margin:1.4em 0 1.1em 0;}
-    .dash-high-card {background:#fff;border-radius:10px;box-shadow:0 2px 8px #0001;min-width:110px;max-width:145px;padding:0.78em 0.3em;display:flex;flex-direction:column;align-items:center;}
-    .dash-high-label {color:#18449e;font-size:0.97em;font-weight:700;}
-    .dash-high-main {font-size:1.27em;font-weight:800;color:#eab403;margin:0.08em 0;}
-    .dash-high-player {font-size:0.92em;text-align:center;margin-top:0.13em;}
-    .dash-high-player img {width:15px;height:15px;vertical-align:middle;margin-right:5px;border-radius:4px;}
-    .dash-teamday-card {background:#ebf5ff;border-radius:10px;box-shadow:0 2px 8px #3385cc11;min-width:124px;max-width:170px;padding:0.78em 0.5em;display:flex;flex-direction:column;align-items:center;}
-    .dash-teamday-logo {width:25px;height:25px;border-radius:6px;margin-bottom:0.14em;}
-    .dash-teamday-title {font-size:1em;font-weight:700;margin-bottom:0.13em;color:#18449e;}
-    .dash-teamday-main {font-size:1.19em;font-weight:900;color:#1856e7;}
-    .latestres-title {font-size:1.03em;font-weight:700;margin-bottom:0.11em;}
-    .latestres-row {background:#fff;border-radius:8px;box-shadow:0 1px 6px #0001;display:flex;align-items:center;justify-content:space-between;padding:0.63em 0.8em;margin-bottom:0.38em;gap:0.5em;}
-    .latestres-team {display:flex;align-items:center;gap:0.32em;}
-    .latestres-logo {width:15px;height:15px;border-radius:4px;object-fit:contain;}
-    .latestres-score {font-size:1em;font-weight:700;}
-    .latestres-winner {background:#ffe083;padding:1px 5px;border-radius:4px;font-weight:700;margin-left:5px;}
-    .dashboard-navstrip {display:flex;flex-wrap:wrap;gap:0.7em;justify-content:center;margin:2em 0 0.5em 0;}
-    .dashboard-navcard {background:#fff;border-radius:8px;box-shadow:0 2px 8px #0001;padding:0.6em 1.1em;font-weight:700;color:#18449e;font-size:0.96rem;letter-spacing:0.01em;border:none;cursor:pointer;min-width: 90px;transition:background 0.14s;}
-    .dashboard-navcard:hover {background:#e8eaff;}
-    .footer-icons {margin-top:0.7rem;text-align:center;display:flex;justify-content:center;align-items:center;gap:1.2rem;}
-    .footer-icons img {height:23px;width:23px;vertical-align:middle;border-radius:5px;background:#fff;border:1px solid #eee;box-shadow:0 1px 4px rgba(0,0,0,0.05);}
-    .footer-suca {margin-top:0.5rem;text-align:center;color:#bdbdbd;font-size:0.93rem;}
-    .table-scroll {overflow-x:auto;width:100%;margin-bottom:1rem;}
-    table {width:100%;border-collapse:collapse;margin-bottom:1.2rem;background:#fff;border-radius:10px;box-shadow:0 2px 8px #0001;}
-    th,td {padding:0.43rem 0.2rem;border:1px solid #e6e6e6;text-align:center;vertical-align:middle;font-size:0.98rem;white-space:nowrap;}
-    th {background:#f7f7f7;font-weight:700;}
-    .gold-row {background:#ffe083;}
-    .silver-row {background:#ececec;}
-    .elim-row {background:#ffd6d6;}
-    .date-heading {background: #181f2b;color:#fff;font-size:0.98rem;font-weight:bold;letter-spacing:1px;padding:0.3rem 0.7rem;border-radius:6px;margin:18px 0 6px 0;display:inline-block;}
-    .group-title {font-size:1.02rem;font-weight:700;margin:10px 0 5px 0;color:#21405a;}
-    .squad-grid {display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1.2em;}
-    .squad-card {background:#fff;border-radius:10px;box-shadow:0 2px 8px #0001;padding:0.7em 0.55em;display:flex;flex-direction:column;align-items:center;transition:box-shadow 0.14s;}
-    .squad-card img {width:33px;height:33px;border-radius:7px;margin-bottom:0.6em;object-fit:contain;}
-    .squad-card h3 {font-weight:800;color:#18449e;margin:0 0 0.24em 0;text-align:center;font-size:1em;}
-    .squad-players {display:grid;grid-template-columns:1fr;gap:1px 6px;width:100%;}
-    .squad-player {font-size:0.97em;margin:1px 0;}
-    .stat-high-bar {display:flex;gap:0.6em;justify-content:center;flex-wrap:wrap;margin-bottom:1.2em;}
-    .stat-high-card {background:#fff;border-radius:8px;box-shadow:0 2px 8px #0001;min-width:110px;max-width:140px;padding:0.7em 0.4em;display:flex;flex-direction:column;align-items:center;}
-    .stat-high-label {color:#18449e;font-size:0.97em;font-weight:700;}
-    .stat-high-main {font-size:1.25em;font-weight:800;color:#eab403;}
-    .stat-high-player {font-size:0.93em;text-align:center;margin-top:0.12em;}
-    .stat-high-player img {width:15px;height:15px;vertical-align:middle;margin-right:5px;border-radius:4px;}
-    .team-filter-bar {text-align:center;margin-bottom:0.6em;}
-    .team-filter-select {margin:0 auto 0.9em auto;padding:0.36em 0.82em;border-radius:5px;border:1px solid #d3d3d3;background:#f7f7f7;color:#21405a;font-size:1em;font-weight:600;max-width:230px;}
-    #stats-search {margin-bottom:0.7rem;padding:0.35rem 0.45rem;font-size:0.97rem;width:98%;max-width:230px;border-radius:5px;border:1px solid #ccc;display:block;margin:auto;}
-    @media (max-width:900px){
-      .dashboard-row{flex-direction:column;gap:1.2em;}
+    .show-all-btn:hover { background: #d6e6ff; }
+
+    /* Stats Highlights, Cards, Dropdown */
+    .stat-high-bar, .dash-high-bar {
+      display: flex;
+      gap: 0.85em;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 1.5em;
+      margin-top: 1.1em;
     }
-    @media (max-width:650px){
-      main {padding:1.1rem 1vw 0.6rem 1vw;}
-      .dashboard-row{flex-direction:column;}
-      .standings-title, .group-title {font-size:1em;}
-      .squad-card h3{font-size:0.97em;}
-      nav .nav-main {gap:0;}
+    .stat-high-card, .dash-high-card {
+      background: #fff;
+      border-radius: 7px;
+      box-shadow: 0 1px 6px #0001;
+      min-width: 120px;
+      max-width: 150px;
+      padding: 0.7em 0.5em;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
-    @media (max-width:600px){
-      nav,nav .nav-main {flex-direction:column;}
-      nav button {font-size:1.08em;padding:1em 0.6em;}
-      .dashboard-navcard {min-width:80px;font-size:0.92em;}
+    .stat-high-label, .dash-high-label { color: #18449e; font-size: 0.99em; font-weight: 700; }
+    .stat-high-main, .dash-high-main { font-size: 1.34em; font-weight: 800; color: #eab403; }
+    .stat-high-player, .dash-high-player { font-size: 0.95em; text-align: center; margin-top: 0.12em;}
+    .stat-high-player img, .dash-high-player img {width: 15px; height: 15px; border-radius: 3px; vertical-align: middle; margin-right: 4px;}
+    .team-filter-bar {text-align: center; margin-bottom: 1.2em;}
+    .team-filter-dropdown {
+      width: 99vw;
+      max-width: 320px;
+      margin: 0 auto 1.2em auto;
+      padding: 0.5em;
+      font-size: 1.03em;
+      border-radius: 6px;
+      border: 1px solid #d6d6d6;
+      background: #fff;
+      color: #18449e;
+      font-weight: 600;
+      outline: none;
     }
-    @media (max-width:430px){
-      th,td {font-size:0.84em;}
-      .stat-high-card {min-width:95px;max-width:99vw;}
+    /* Squads Grid */
+    .squad-grid {display: grid; grid-template-columns: repeat(auto-fit,minmax(175px,1fr)); gap: 1.1em;}
+    .squad-card {
+      background: #fff;
+      border-radius: 9px;
+      box-shadow: 0 2px 8px #0001;
+      padding: 0.8em 0.7em;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
-    @media (max-width:410px){
-      .dashboard-fixture-row {font-size:0.95em;}
+    .squad-card img {width: 38px; height: 38px; border-radius: 9px; margin-bottom: 0.5em; object-fit: contain;}
+    .squad-card h3 {font-weight: 800; color: #18449e; margin: 0 0 0.25em 0; text-align: center; font-size: 1em;}
+    .squad-players {display: grid; grid-template-columns: 1fr; gap: 0px 11px; width: 100%;}
+    .squad-player {font-size: 0.95em; margin: 1.5px 0;}
+    /* Misc */
+    .footer-icons {margin-top: 1.3rem;text-align: center;display: flex;justify-content: center;align-items: center;gap: 1.2rem;}
+    .footer-icons img {height: 22px;width: 22px;vertical-align: middle;border-radius: 4px;background: #fff;border: 1px solid #eee;box-shadow: 0 1px 4px rgba(0,0,0,0.04);}
+    .footer-suca {margin-top: 0.7rem;text-align: center;color: #bdbdbd;font-size: 0.93rem;}
+    @media (max-width: 670px) {
+      main { padding: 0.5rem 0.1rem 1.5rem 0.1rem; }
+      .table-scroll {border-radius: 6px;}
+      table {min-width: 360px;}
+      .squad-card img {width: 32px;height: 32px;}
+      .dashboard-row {flex-direction: column; gap: 0.9em;}
+      .stat-high-card, .dash-high-card {min-width: 90px;max-width: 99vw;padding:0.5em 0.2em;}
+    }
+    @media (max-width: 570px) {
+      nav {
+        position: fixed; bottom: 0; left: 0; right: 0;
+        top: auto; z-index: 99;
+        border-top: 1.5px solid #1d1e24;
+        border-bottom: none;
+        box-shadow: 0 -2px 18px #0002;
+      }
+      nav .tab-button {
+        padding: 0.47em 0 0.37em 0;
+        font-size: 0.93em;
+      }
+      nav .tab-icon { font-size: 1.18em; }
+      main { padding-bottom: 65px; }
+      header { padding-bottom: 0.7em;}
+      .squad-card img {width: 28px;height: 28px;}
     }
   </style>
+  <!-- Icons for nav bar -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lucide-static@0.322.0/font/lucide.css"/>
 </head>
 <body>
   <header>
     <img src="logo.png" alt="Tournament Logo" />
-    <h1 style="font-size:2em;">Royal Darts Premier League 2025</h1>
-    <button class="hamburger" id="hamburger" aria-label="Open Navigation">
-      <span></span><span></span><span></span>
-    </button>
+    <h1>Royal Darts Premier League 2025</h1>
   </header>
-  <nav id="navbar">
-    <div class="nav-main">
-      <button class="tab-button active" onclick="showTab('dashboard')">Dashboard</button>
-      <button class="tab-button" onclick="showTab('fixtures')">Fixtures</button>
-      <button class="tab-button" onclick="showTab('results')">Results</button>
-      <button class="tab-button" onclick="showTab('standings')">Standings</button>
-      <button class="tab-button" onclick="showTab('squads')">Squads</button>
-      <button class="tab-button" onclick="showTab('stats')">Stats</button>
-      <button class="tab-button" onclick="window.open('https://n01darts.com/n01/tournament/comp.php?id=t_NI0o_4352&tab=live','_blank')">Live</button>
-    </div>
+  <nav>
+    <button class="tab-button active" onclick="showTab('dashboard')"><span class="tab-icon lucide lucide-home"></span>Dashboard</button>
+    <button class="tab-button" onclick="showTab('fixtures')"><span class="tab-icon lucide lucide-calendar-days"></span>Fixtures</button>
+    <button class="tab-button" onclick="showTab('results')"><span class="tab-icon lucide lucide-list-start"></span>Results</button>
+    <button class="tab-button" onclick="showTab('standings')"><span class="tab-icon lucide lucide-trophy"></span>Standings</button>
+    <button class="tab-button" onclick="showTab('squads')"><span class="tab-icon lucide lucide-users"></span>Squads</button>
+    <button class="tab-button" onclick="showTab('stats')"><span class="tab-icon lucide lucide-bar-chart"></span>Stats</button>
+    <button class="tab-button" onclick="window.open('https://n01darts.com/n01/tournament/comp.php?id=t_NI0o_4352&tab=live','_blank')"><span class="tab-icon lucide lucide-radio"></span>Live</button>
   </nav>
   <main>
+    <!-- DASHBOARD -->
     <section id="dashboard" class="section active">
-      <h2 style="margin-bottom:0.7em;font-size:1.12em;">Today's Fixtures</h2>
+      <h2 style="margin-bottom:0.7em;font-size:1.14em;">Today's Fixtures</h2>
       <div id="dashboard-fixtures"></div>
-      <div class="dashboard-row" style="display:flex;gap:2.2em 3vw;flex-wrap:wrap;margin-top:1.1em;">
-        <div style="flex:1;min-width:160px;max-width:430px;">
+      <div class="dashboard-row" style="display:flex;gap:1.1em;flex-wrap:wrap;">
+        <div style="flex:1;min-width:175px;max-width:440px;">
           <div class="standings-title">Group A Standings</div>
           <div id="dashboard-standingsA"></div>
         </div>
-        <div style="flex:1;min-width:160px;max-width:430px;">
+        <div style="flex:1;min-width:175px;max-width:440px;">
           <div class="standings-title">Group B Standings</div>
           <div id="dashboard-standingsB"></div>
         </div>
       </div>
       <div class="dash-high-bar" id="dashboard-highlights"></div>
-      <div id="dashboard-teamday" style="margin:1.3em 0 0.9em 0;display:flex;justify-content:center;"></div>
+      <div id="dashboard-teamday" style="margin:1.8em 0 1.2em 0;display:flex;justify-content:center;"></div>
       <div>
-        <div class="latestres-title">Latest Results</div>
+        <div class="latestres-title" style="margin:0.5em 0 0.5em 0;font-weight:700;font-size:1.02em;">Latest Results</div>
         <div id="dashboard-latestres"></div>
       </div>
-      <div class="dashboard-navstrip">
+      <div class="dashboard-navstrip" style="margin-bottom:0;">
         <button class="dashboard-navcard" onclick="showTab('fixtures')">Fixtures</button>
         <button class="dashboard-navcard" onclick="showTab('results')">Results</button>
         <button class="dashboard-navcard" onclick="showTab('standings')">Standings</button>
@@ -182,14 +288,19 @@
         <button class="dashboard-navcard" onclick="window.open('https://n01darts.com/n01/tournament/comp.php?id=t_NI0o_4352&tab=live','_blank')">Watch Live</button>
       </div>
     </section>
+    <!-- FIXTURES -->
     <section id="fixtures" class="section"><div id="fixturesTableContainer"></div></section>
+    <!-- RESULTS -->
     <section id="results" class="section"><div id="resultsContainer"></div></section>
+    <!-- STANDINGS -->
     <section id="standings" class="section"><div id="standingsGroupA"></div><div id="standingsGroupB"></div></section>
+    <!-- SQUADS -->
     <section id="squads" class="section"><div id="squadsContainer">Loading...</div></section>
+    <!-- STATS -->
     <section id="stats" class="section">
       <div id="stat-highlights"></div>
       <div class="team-filter-bar" id="team-filter-bar"></div>
-      <input id="stats-search" type="text" placeholder="Search player or team..." style="margin-bottom:0.7rem;">
+      <input id="stats-search" type="text" placeholder="Search player or team..." style="margin-bottom:0.8em;padding:0.39em 0.6em;font-size:0.96em;width:98vw;max-width:260px;border-radius:6px;border:1px solid #ccc;display:block;margin:auto;">
       <div id="stats-table"></div>
     </section>
   </main>
@@ -201,20 +312,7 @@
     <div class="footer-suca">Built by SUCA Analytics</div>
   </footer>
   <script>
-    // NAVIGATION - Mobile hamburger
-    const hamburger = document.getElementById('hamburger');
-    const navbar = document.getElementById('navbar');
-    hamburger.onclick = () => {
-      navbar.classList.toggle('open');
-      if(navbar.classList.contains('open')) document.body.style.overflow='hidden';
-      else document.body.style.overflow='';
-    };
-    document.body.onclick = (e)=>{
-      if(navbar.classList.contains('open') && !navbar.contains(e.target) && !hamburger.contains(e.target)){
-        navbar.classList.remove('open');document.body.style.overflow='';
-      }
-    };
-    // TEAM LOGOS & API
+    // LOGOS, API
     const TEAM_LOGOS = {
       "Balaji Darts": "team_logos/Balaji-Darts.avif",
       "Biscotti Barrels": "team_logos/Biscotti-Barrels.avif",
@@ -240,18 +338,15 @@
       document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
       document.querySelectorAll('.dashboard-navcard').forEach(btn => btn.classList.remove('active'));
       document.getElementById(tabId).classList.add('active');
-      let navBtn = Array.from(document.querySelectorAll('nav button')).find(b => b.innerText.toLowerCase() === tabId);
+      let navBtn = Array.from(document.querySelectorAll('nav button')).find(b => b.innerText.replace(/\s+/g,"").toLowerCase() === tabId);
       if(navBtn) navBtn.classList.add('active');
-      navbar.classList.remove('open');document.body.style.overflow='';
       window.scrollTo({top:0,behavior:'smooth'});
     }
-
     let fixturesCache = [], resultsCache = [], standingsCache = [], squadsCache = [], statsCache = [], bestLegCache = [];
     let statsSortKey = null, statsSortDir = 1, statsSearchTerm = "", teamFilter = null;
     const STATS_HIDE_COLUMNS = new Set([
       "Keep", "Break", "Second Legs", "Break Legs", "Total Score", "Total Darts", "Group", "Best Leg", "Worst Leg"
     ]);
-
     async function loadData() {
       try {
         const res = await fetch(API_URL);
@@ -272,30 +367,363 @@
         renderTeamFilter(statsCache);
       } catch (err) {console.error('Failed to load data:', err);}
     }
-
-    // --- renderDashboard, renderDashboardFixtures, renderDashboardStandings, renderDashboardHighlights,
-    // renderDashboardTeamOfDay, renderDashboardLatestResults, renderFixtures, renderResults, resultsTable, renderStandings,
-    // renderSquads, renderStatHighlights (SAME as previous full solution) ---
-    // For brevity, you can copy all those functions from the previous solution above.
-    // Below are the changed functions for Stats tab:
-
-    // --- STATS TAB (Mobile Optimized) ---
+    // === Dashboard (unchanged from earlier except fixture row card) ===
+    function renderDashboard() {
+      renderDashboardFixtures();
+      renderDashboardStandings();
+      renderDashboardHighlights();
+      renderDashboardTeamOfDay();
+      renderDashboardLatestResults();
+    }
+    function getISTTodayRange() {
+      const now = new Date();
+      const IST_OFFSET = 330;
+      const local = new Date(now.getTime() + ((IST_OFFSET - now.getTimezoneOffset())*60*1000));
+      const istYear = local.getFullYear(), istMonth = local.getMonth(), istDay = local.getDate();
+      const istStart = new Date(Date.UTC(istYear, istMonth, istDay, 0, -IST_OFFSET, 0));
+      const istEnd = new Date(Date.UTC(istYear, istMonth, istDay, 23, 59-IST_OFFSET, 59));
+      return [istStart, istEnd, ""];
+    }
+    function renderDashboardFixtures() {
+      const [istStart, istEnd] = getISTTodayRange();
+      const todaysFixtures = fixturesCache.filter(fix => {
+        const d = new Date(fix.Date);
+        return d >= istStart && d <= istEnd;
+      });
+      let html = '';
+      let limit = 5;
+      let showingAll = false;
+      function showAllFixtures() {
+        showingAll = true;
+        renderDashboardFixtures();
+      }
+      html += `<div class="dashboard-fixtures-list">`;
+      const showList = showingAll ? todaysFixtures : todaysFixtures.slice(0, limit);
+      showList.forEach(f => {
+        html += `<div class="dashboard-fixture-row">
+          <span class="dash-fixt-time">${f.Day}, ${new Date(f.Time).toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit',hour12:true,timeZone:'Asia/Kolkata'})}</span>
+          <span class="dash-fixt-team"><img src="${TEAM_LOGOS[f['Team 1']]||''}" class="dash-fixt-logo">${f['Team 1']}</span>
+          <span class="dash-fixt-vs">vs</span>
+          <span class="dash-fixt-team">${f['Team 2']}<img src="${TEAM_LOGOS[f['Team 2']]||''}" class="dash-fixt-logo"></span>
+        </div>`;
+      });
+      if (!showingAll && todaysFixtures.length > limit)
+        html += `<button class="show-all-btn" onclick="window.showAllFixtures()">Show All</button>`;
+      html += `</div>`;
+      if (!todaysFixtures.length)
+        html = `<div style="color:#888;font-size:1.12em;padding:1.3em 0 0.6em 0;">No fixtures today.</div>`;
+      document.getElementById('dashboard-fixtures').innerHTML = html;
+      window.showAllFixtures = showAllFixtures; // So button can call it
+    }
+    function renderDashboardStandings() {
+      let groupHTML = group => {
+        let arr = standingsCache.filter(s => s.Group && s.Group.toUpperCase() === group)
+          .sort((a,b)=>b.Points-a.Points || b.LD-a.LD)
+          .map((s,i)=>{
+            let badge = i<3 ? `<span class="cup-badge gold">Gold</span>` :
+                        i<6 ? `<span class="cup-badge silver">Silver</span>` :
+                              `<span class="cup-badge elim">Elim</span>`;
+            let band = i<3?'cup-gold':i<6?'cup-silver':'cup-elim';
+            return `<div class="standings-row ${band}">
+              <span style="font-weight:600;"><img src="${TEAM_LOGOS[s.Team]||''}" style="width:18px;height:18px;border-radius:4px;vertical-align:middle;margin-right:8px;">${s.Team}${badge}</span>
+              <span style="font-weight:700;">${s.Points} pts</span>
+            </div>`;
+          }).join('');
+        return arr;
+      };
+      document.getElementById('dashboard-standingsA').innerHTML = groupHTML('A');
+      document.getElementById('dashboard-standingsB').innerHTML = groupHTML('B');
+    }
+    function renderDashboardHighlights() {
+      const defs = [
+        {key:"3 Dart Avg", label:"Best 3-Dart Avg"},
+        {key:"Legs Won", label:"Most Legs Won"},
+        {key:"High Finish", label:"Highest Finish"},
+        {key:"Best Leg", label:"Best Leg", sheet:true}
+      ];
+      let html = '';
+      defs.forEach(def=>{
+        let val = '', player = '', team = '', logo = '';
+        if (def.sheet) {
+          let best = bestLegCache && bestLegCache.length ? bestLegCache.sort((a,b)=>a["Best Leg"]-b["Best Leg"])[0] : null;
+          if (best) {
+            val = best["Best Leg"];
+            player = best.Players;
+            team = best.Team; logo = TEAM_LOGOS[team]||'';
+          }
+        } else {
+          const eligible = statsCache.filter(p=>Number(p["Match Played"])>=2);
+          const sorted = eligible.sort((a,b)=> +b[def.key]-(+a[def.key]) );
+          if (sorted[0]) {
+            val = sorted[0][def.key];
+            player = sorted[0].Player;
+            team = sorted[0].Team;
+            logo = TEAM_LOGOS[team]||'';
+          }
+        }
+        html += `<div class="dash-high-card">
+          <div class="dash-high-label">${def.label}</div>
+          <div class="dash-high-main">${val||'-'}</div>
+          <div class="dash-high-player">${logo?`<img src="${logo}">`:''}${player ? player+'<br>':''}${team ? `<span style="font-size:0.94em;font-weight:600;color:#18449e;">${team}</span>`:''}</div>
+        </div>`;
+      });
+      document.getElementById('dashboard-highlights').innerHTML = html;
+    }
+    function renderDashboardTeamOfDay() {
+      if (!resultsCache.length) {document.getElementById('dashboard-teamday').innerHTML=''; return;}
+      const groupByDate = {};
+      resultsCache.forEach(r => {
+        let d = r.Date && r.Date !== "null" && r.Date !== "" && r.Date !== undefined ? new Date(r.Date).toISOString().slice(0,10) : "";
+        if (!d) return;
+        if (!groupByDate[d]) groupByDate[d] = [];
+        groupByDate[d].push(r);
+      });
+      let allDates = Object.keys(groupByDate).sort();
+      if (!allDates.length) {document.getElementById('dashboard-teamday').innerHTML=''; return;}
+      let lastDate = allDates[allDates.length-1];
+      let matches = groupByDate[lastDate] || [];
+      let best = null, bestAvg = -1;
+      matches.forEach(m => {
+        let win = +m["Legs 1"] > +m["Legs 2"] ? {team:m["Team 1"], avg:+m["Avg 1"]} :
+                  +m["Legs 2"] > +m["Legs 1"] ? {team:m["Team 2"], avg:+m["Avg 2"]} : null;
+        if (win && win.avg > bestAvg) { bestAvg = win.avg; best = win; }
+      });
+      if (!best) {document.getElementById('dashboard-teamday').innerHTML=''; return;}
+      let logo = TEAM_LOGOS[best.team]||'';
+      let html = `<div class="dash-teamday-card">
+        <div class="dash-teamday-title">Team of the Day</div>
+        <img src="${logo}" class="dash-teamday-logo" alt="">
+        <div class="dash-teamday-main">${best.team}</div>
+        <div style="color:#333;font-size:1.03em;margin-top:0.18em;">Winning Avg: <span style="font-weight:700;">${bestAvg}</span></div>
+        <div style="font-size:0.93em;color:#4a6b92;margin-top:0.09em;">(Best average by a winner in the last match day)</div>
+      </div>`;
+      document.getElementById('dashboard-teamday').innerHTML = html;
+    }
+    function renderDashboardLatestResults() {
+      if (!resultsCache.length) {document.getElementById('dashboard-latestres').innerHTML=''; return;}
+      const groupByDate = {};
+      resultsCache.forEach(r => {
+        let d = r.Date && r.Date !== "null" && r.Date !== "" && r.Date !== undefined ? new Date(r.Date).toISOString().slice(0,10) : "";
+        if (!d) return;
+        if (!groupByDate[d]) groupByDate[d] = [];
+        groupByDate[d].push(r);
+      });
+      let allDates = Object.keys(groupByDate).sort();
+      if (!allDates.length) {document.getElementById('dashboard-latestres').innerHTML=''; return;}
+      let lastDate = allDates[allDates.length-1];
+      let matches = groupByDate[lastDate] || [];
+      matches = matches.slice(-3);
+      let html = '';
+      matches.forEach(m => {
+        let t1 = m["Team 1"], t2 = m["Team 2"], l1=+m["Legs 1"], l2=+m["Legs 2"];
+        let winner = l1 > l2 ? t1 : l2 > l1 ? t2 : "";
+        let t1logo = TEAM_LOGOS[t1]||'', t2logo = TEAM_LOGOS[t2]||'';
+        html += `<div class="latestres-row">
+          <div class="latestres-team">${t1logo?`<img src="${t1logo}" class="latestres-logo">`:''}${t1}${winner===t1?'<span class="latestres-winner">Winner</span>':''}</div>
+          <div class="latestres-score" style="${winner===t1?'color:#1ca311;':''}">${m["Legs 1"]}</div>
+          <div style="font-weight:600;margin:0 6px;">vs</div>
+          <div class="latestres-score" style="${winner===t2?'color:#1ca311;':''}">${m["Legs 2"]}</div>
+          <div class="latestres-team">${t2logo?`<img src="${t2logo}" class="latestres-logo">`:''}${t2}${winner===t2?'<span class="latestres-winner">Winner</span>':''}</div>
+        </div>`;
+      });
+      document.getElementById('dashboard-latestres').innerHTML = html;
+    }
+    // Fixtures, Results, Standings, Squads (unchanged except logo sizes and table cell padding/font-size are all optimized)
+    // ... (full functions from earlier, already fully mobile-optimized, are pasted above)
+    function renderFixtures(fixtures) {
+      const container = document.getElementById('fixturesTableContainer');
+      if (!fixtures.length) {
+        container.innerHTML = '<div class="table-scroll"><table><tbody><tr><td>Loading...</td></tr></tbody></table></div>';
+        return;
+      }
+      const byDate = {};
+      fixtures.forEach(f => {
+        const d = new Date(f.Date).toDateString();
+        if (!byDate[d]) byDate[d] = [];
+        byDate[d].push(f);
+      });
+      let html = '';
+      Object.keys(byDate).sort((a, b) => new Date(a) - new Date(b)).forEach(dateStr => {
+        html += `<div class="date-heading">${dateStr}</div>
+        <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>Time</th><th>Team 1</th><th></th><th>Team 2</th></tr>
+          </thead>
+          <tbody>`;
+        byDate[dateStr].forEach(f => {
+          html += `<tr>
+              <td>${new Date(f.Time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</td>
+              <td>${f['Team 1']}</td>
+              <td>vs</td>
+              <td>${f['Team 2']}</td>
+            </tr>`;
+        });
+        html += `</tbody></table></div>`;
+      });
+      container.innerHTML = html;
+    }
+    function renderResults(results, fixtures) {
+      const fixtureDateMap = {};
+      fixtures.forEach(fix => {
+        const t1 = fix["Team 1"], t2 = fix["Team 2"];
+        const dateStr = new Date(fix.Date).toDateString();
+        fixtureDateMap[`${t1}|${t2}`] = dateStr;
+        fixtureDateMap[`${t2}|${t1}`] = dateStr;
+      });
+      const byDate = {};
+      results.forEach(r => {
+        let dateVal = "";
+        if (r.Date && r.Date !== "null" && r.Date !== "" && r.Date !== undefined) {
+          dateVal = new Date(r.Date).toDateString();
+        } else {
+          const t1 = r["Team 1"], t2 = r["Team 2"];
+          dateVal = fixtureDateMap[`${t1}|${t2}`] || fixtureDateMap[`${t2}|${t1}`] || "Unknown Date";
+        }
+        if (!byDate[dateVal]) byDate[dateVal] = [];
+        byDate[dateVal].push(r);
+      });
+      let html = '';
+      Object.keys(byDate).sort((a, b) => new Date(a) - new Date(b)).forEach(dateStr => {
+        html += `<div class="date-heading">${dateStr}</div>`;
+        const groupA = byDate[dateStr].filter(r => r.Group?.toUpperCase() === 'A');
+        if (groupA.length) html += resultsTable(groupA, 'A');
+        const groupB = byDate[dateStr].filter(r => r.Group?.toUpperCase() === 'B');
+        if (groupB.length) html += resultsTable(groupB, 'B');
+      });
+      document.getElementById('resultsContainer').innerHTML = html || '';
+    }
+    function resultsTable(arr, group) {
+      return `
+        <div class="group-title">Group ${group}</div>
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Avg 1</th>
+                <th>Team 1</th>
+                <th>Score</th>
+                <th>vs</th>
+                <th>Score</th>
+                <th>Team 2</th>
+                <th>Avg 2</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${arr.map(r => {
+                const win1 = +r['Legs 1'] > +r['Legs 2'];
+                const win2 = +r['Legs 2'] > +r['Legs 1'];
+                return `<tr>
+                  <td>${r['Avg 1']}</td>
+                  <td${win1?' style="background: #fffdc2;font-weight:700;"':''}>${r['Team 1']}${win1?' 🏆':''}</td>
+                  <td${win1?' style="font-weight:700;"':''}>${r['Legs 1']}</td>
+                  <td>vs</td>
+                  <td${win2?' style="font-weight:700;"':''}>${r['Legs 2']}</td>
+                  <td${win2?' style="background: #fffdc2;font-weight:700;"':''}>${r['Team 2']}${win2?' 🏆':''}</td>
+                  <td>${r['Avg 2']}</td>
+                </tr>`;
+              }).join('')}
+            </tbody>
+          </table>
+        </div>`;
+    }
+    function renderStandings(standings) {
+      const A = standings.filter(s => s.Group?.toUpperCase() === 'A');
+      const B = standings.filter(s => s.Group?.toUpperCase() === 'B');
+      const legend = `<div class="standings-legend">
+        <span class="gold-legend">Gold Cup (Top 3)</span>
+        <span class="silver-legend">Silver Cup (4-6)</span>
+        <span class="elim-legend">Eliminated (7-8)</span>
+        </div>`;
+      function tableHTML(arr, group) {
+        return `<div class="group-title">Group ${group}</div>
+          <div class="table-scroll"><table>
+            <thead><tr>
+              <th>Team</th><th>P</th><th>W</th><th>L</th><th>EF</th><th>EA</th><th>ED</th><th>Pts</th><th>Avg</th>
+            </tr></thead>
+            <tbody>
+            ${arr.sort((a, b) => b.Points - a.Points || b.LD - a.LD).map((s, i) => {
+              let rowClass = i<3?"gold-row":i<6?"silver-row":"elim-row";
+              return `<tr class="${rowClass}">
+                <td><img src="${TEAM_LOGOS[s.Team]||''}" alt="${s.Team}" style="width:15px;height:15px;vertical-align:middle;margin-right:5px;">${s.Team}</td>
+                <td>${s.P}</td><td>${s.W}</td><td>${s.L}</td>
+                <td>${s.LF}</td><td>${s.LA}</td><td>${s.LD}</td>
+                <td>${s.Points}</td><td>${s.Avg}</td>
+              </tr>`;
+            }).join('')}
+            </tbody></table></div>`;
+      }
+      document.getElementById('standingsGroupA').innerHTML = legend + tableHTML(A, 'A');
+      document.getElementById('standingsGroupB').innerHTML = tableHTML(B, 'B');
+    }
+    function renderSquads(squads) {
+      const container = document.getElementById('squadsContainer');
+      if (!squads.length) { container.innerHTML = 'Loading...'; return; }
+      const teams = [...new Set(squads.map(s => s.Team))];
+      let html = '<div class="squad-grid">';
+      teams.forEach(team => {
+        const logo = TEAM_LOGOS[team] || "";
+        const players = squads.filter(s => s.Team === team).map(p => `<div class="squad-player">${p.Player}</div>`).join('');
+        html += `<div class="squad-card">
+          <img src="${logo}" alt="${team} logo"/>
+          <h3>${team}</h3>
+          <div class="squad-players">${players}</div>
+        </div>`;
+      });
+      html += '</div>';
+      container.innerHTML = html;
+    }
+    // --- Stats Tab ---
+    function renderStatHighlights(stats, bestLegsSheet) {
+      const defs = [
+        {key:"3 Dart Avg", label:"Best 3-Dart Avg"},
+        {key:"First 9 Avg", label:"Best First 9 Avg"},
+        {key:"Legs Won", label:"Most Legs Won"},
+        {key:"High Finish", label:"Highest Finish"}
+      ];
+      const eligible = stats.filter(p => Number(p["Match Played"]) >= 2);
+      let html = `<div class="stat-high-bar">`;
+      defs.forEach(def => {
+        const sorted = [...eligible].sort((a,b) => +b[def.key] - +a[def.key]);
+        const player = sorted[0];
+        if (!player) return;
+        const team = player.Team || "";
+        const logo = TEAM_LOGOS[team] || "";
+        let val = player[def.key] ?? "—";
+        html += `<div class="stat-high-card">
+          <div class="stat-high-label">${def.label}</div>
+          <div class="stat-high-main">${val}</div>
+          <div class="stat-high-player">${logo?`<img src="${logo}">`:''}${player.Player} (${team})</div>
+        </div>`;
+      });
+      // Best Leg (from sheet)
+      if (bestLegsSheet && bestLegsSheet.length) {
+        let best = bestLegsSheet.sort((a,b)=>Number(a["Best Leg"])-Number(b["Best Leg"]))[0];
+        const logo = TEAM_LOGOS[best.Team] || "";
+        html += `<div class="stat-high-card">
+          <div class="stat-high-label">Best Leg</div>
+          <div class="stat-high-main">${best["Best Leg"]}</div>
+          <div class="stat-high-player">${logo?`<img src="${logo}">`:''}${best.Players} (${best.Team})</div>
+        </div>`;
+      }
+      html += "</div>";
+      document.getElementById('stat-highlights').innerHTML = html;
+    }
     function renderTeamFilter(stats) {
       const bar = document.getElementById('team-filter-bar');
       if (!stats || !stats.length) { bar.innerHTML = ''; return;}
       const allTeams = Array.from(new Set(stats.map(p => p.Team).filter(Boolean))).sort();
-      let html = `<select class="team-filter-select" onchange="setTeamFilterDropdown(this)">
+      let html = `<select class="team-filter-dropdown" onchange="setTeamFilter(this.value)">
         <option value="">All Teams</option>`;
       allTeams.forEach(team => {
-        html += `<option value="${team.replace(/"/g,'&quot;')}"${teamFilter===team?" selected":""}>${team}</option>`;
+        html += `<option value="${team.replace(/"/g, "&quot;")}"${teamFilter===team?" selected":""}>${team}</option>`;
       });
       html += `</select>`;
       bar.innerHTML = html;
     }
-    window.setTeamFilterDropdown = function(sel) {
-      teamFilter = sel.value || null;
+    window.setTeamFilter = function(team) {
+      teamFilter = team || null;
       renderStats(statsCache, bestLegCache);
-      renderTeamFilter(statsCache);
     };
     function renderStats(stats, bestLegsSheet) {
       const searchInput = document.getElementById('stats-search');
@@ -307,9 +735,7 @@
         searchInput._listenerAdded = true;
       }
       let filteredStats = stats;
-      if (teamFilter) {
-        filteredStats = filteredStats.filter(p => p.Team === teamFilter);
-      }
+      if (teamFilter) filteredStats = filteredStats.filter(p => p.Team === teamFilter);
       if (statsSearchTerm) {
         filteredStats = filteredStats.filter(
           p => (p.Player && p.Player.toLowerCase().includes(statsSearchTerm)) ||
@@ -345,7 +771,7 @@
               val = isNaN(parseFloat(val)) ? "" : `${Math.round(parseFloat(val) * 100)}%`;
             }
             if (h === "Team" && TEAM_LOGOS[val]) {
-              return `<td><img src="${TEAM_LOGOS[val]}" alt="${val}" style="width:13px;height:13px;border-radius:3px;vertical-align:middle;margin-right:4px;">${val}</td>`;
+              return `<td><img src="${TEAM_LOGOS[val]}" alt="${val}" style="width:14px;height:14px;vertical-align:middle;margin-right:5px;">${val}</td>`;
             }
             return `<td>${val}</td>`;
           }).join("") + "</tr>";
@@ -365,10 +791,6 @@
       }
       renderStats(statsCache, bestLegCache);
     };
-
-    // --- Copy all other render functions from previous message as-is (for brevity not repeated here) ---
-    // (renderDashboard, renderDashboardFixtures, etc...)
-
     loadData();
     setInterval(loadData, 60000);
     window.addEventListener('resize', function() {
