@@ -2,7 +2,7 @@
 <html lang="en" >
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
   <title>Royal Darts Premier League 2025</title>
   <meta property="og:title" content="Royal Darts Premier League 2025" />
   <meta property="og:description" content="Live results, fixtures, standings, and stats for the Royal Darts Premier League." />
@@ -16,7 +16,7 @@
   <meta name="theme-color" content="#171e30">
 
   <style>
-    /* ===== ROOT & GLOBAL ===== */
+    /* Root colors and fonts */
     :root {
       --primary: #171e30;
       --primary2: #22355c;
@@ -27,206 +27,181 @@
       --silver: #bfc9da;
       --eliminated: #f55353;
       --card: #fff;
-      --nav-bg: #1b2a50;
-      --table-border: #d1deed;
+      --table-border: #e2ecf4;
       --text: #1d253c;
       --wa-green: #25D366;
       --font-sans: 'Segoe UI', Arial, sans-serif;
       --font-heading: 'Segoe UI Semibold', Arial, sans-serif;
-      --font-mono: 'Segoe UI Mono', Consolas, monospace;
-      --shadow-light: rgba(56,182,255,0.16);
-      --shadow-medium: rgba(34,53,92,0.2);
+    }
+
+    /* Reset & base */
+    * {
+      box-sizing: border-box;
     }
     html, body {
-      margin: 0; padding: 0;
       height: 100%;
+      margin: 0; padding: 0;
       font-family: var(--font-sans);
       background: linear-gradient(120deg, #e9f3ff 0%, #ffffff 100%);
       color: var(--text);
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
-      scroll-behavior: smooth;
-      font-size: 14.5px; /* slightly smaller for mobile */
-      line-height: 1.42;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      overflow-x: hidden;
+      font-size: 14px;
+      line-height: 1.3;
     }
     body {
+      display: flex;
       flex-direction: column;
       min-height: 100vh;
-      overflow-x: hidden;
-    }
-    main {
-      flex-grow: 1;
-      max-width: 540px;
-      margin: 0 auto;
-      padding: 1rem 1rem 5.5rem 1rem; /* bottom padding for nav */
-      width: 100%;
-      min-height: 0;
-      overflow-anchor: none;
-    }
-    /* Prevent breaking words in curl text, only break at spaces */
-    .curl {
-      white-space: pre-wrap !important;
-      overflow-wrap: break-word;
-      word-break: normal !important;
-      user-select: text;
     }
 
-    /* ===== HEADER ===== */
+    /* Header */
     header {
       background: linear-gradient(120deg, var(--primary2) 80%, var(--accent) 120%);
       color: #fff;
-      padding: 1.1rem 1.2rem;
-      text-align: left;
+      padding: 1rem 1.2rem;
       display: flex;
       align-items: center;
       gap: 0.8em;
       border-bottom: 1.5px solid #b2d9fc;
-      box-shadow: 0 3px 30px #22355c0b;
+      box-shadow: 0 3px 15px #22355c33;
       position: sticky;
       top: 0;
-      z-index: 30;
+      z-index: 100;
+      user-select: none;
     }
     header img {
-      height: 44px;
-      margin-right: 0.65em;
-      border-radius: 9px;
+      height: 36px;
+      border-radius: 8px;
       box-shadow: 0 2px 8px #38b6ff33;
       user-select: none;
+      pointer-events: none;
     }
-    header .titlebox {
-      flex: 1;
-      user-select: none;
-    }
-    header h1 {
+    header .titlebox h1 {
       margin: 0;
-      font-size: 1.25rem;
-      font-weight: 800;
-      color: #fff;
-      letter-spacing: 0.02em;
+      font-size: 1.2rem;
+      font-weight: 700;
       font-family: var(--font-heading);
-      text-shadow: 0 1px 6px #22355caa;
+      letter-spacing: 0.015em;
     }
 
-    /* ===== CARDS ===== */
+    /* Main content */
+    main {
+      flex-grow: 1;
+      max-width: 540px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 1rem 1rem 1rem 1rem;
+      min-height: 0;
+      overflow-anchor: none;
+      user-select: text;
+    }
+
+    /* Sections */
+    .section {
+      display: none;
+    }
+    .section.active {
+      display: block;
+      animation: fadeInSection 0.22s ease forwards;
+    }
+    @keyframes fadeInSection {
+      from {opacity: 0; transform: translateY(12px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    /* Cards */
     .card {
       background: var(--card);
-      border-radius: 18px;
-      box-shadow: 0 4px 28px var(--shadow-light);
+      border-radius: 14px;
+      box-shadow: 0 3px 14px #38b6ff22;
       margin-bottom: 1.25em;
-      padding: 1.2em 1.1em 1.1em 1.1em;
-      border: 1.5px solid #cae0ff44;
-      transition: box-shadow 0.3s ease;
-      word-break: break-word;
-    }
-    .card:hover {
-      box-shadow: 0 8px 38px var(--shadow-medium);
+      padding: 1em 1em 1em 1em;
+      border: 1.2px solid var(--table-border);
+      font-size: 13.6px;
+      user-select: text;
     }
     .card h3 {
+      font-weight: 800;
+      font-size: 1.05rem;
       color: var(--primary2);
-      margin: 0 0 0.45em 0;
-      font-weight: 900;
-      font-size: 1.12em;
-      letter-spacing: 0.015em;
-      font-family: var(--font-heading);
+      margin: 0 0 0.7em 0;
       user-select: none;
     }
 
-    /* ===== TABLES ===== */
+    /* Table styles */
     .table-scroll {
       overflow-x: auto;
       width: 100%;
-      border-radius: 12px;
-      margin-bottom: 0.4em;
+      border-radius: 10px;
+      margin-bottom: 0.5em;
       scrollbar-width: thin;
       scrollbar-color: var(--accent) var(--primary-light);
-      -webkit-overflow-scrolling: touch;
     }
     .table-scroll::-webkit-scrollbar {
       height: 7px;
     }
     .table-scroll::-webkit-scrollbar-track {
       background: var(--primary-light);
-      border-radius: 12px;
+      border-radius: 10px;
     }
     .table-scroll::-webkit-scrollbar-thumb {
       background: var(--accent);
-      border-radius: 12px;
+      border-radius: 10px;
     }
     table {
       width: 100%;
-      background: transparent;
       border-collapse: separate;
       border-spacing: 0;
-      margin: 0;
-      font-size: 1em;
+      font-size: 13.4px;
       border: none;
-      user-select: none;
-      min-width: 280px;
+      user-select: text;
     }
     th, td {
-      padding: 0.55em 0.6em;
+      padding: 0.48em 0.4em;
       text-align: center;
-      font-size: 0.93em;
       border-bottom: 1px solid var(--table-border);
-      background: transparent;
       color: var(--text);
       word-break: break-word;
       white-space: pre-line;
-      overflow-wrap: anywhere;
-      line-height: 1.16;
+      line-height: 1.15;
       user-select: text;
     }
     th {
-      color: var(--primary2);
       font-weight: 700;
-      background: transparent;
+      color: var(--primary2);
       border-bottom: 2px solid #b2d9fc;
       cursor: pointer;
       user-select: none;
-      transition: color 0.22s;
-      min-width: 80px;
       white-space: nowrap;
+      letter-spacing: 0.04em;
+      transition: color 0.22s ease;
     }
     th:hover {
       color: var(--accent);
     }
     th.sort-asc::after {
       content: " ▲";
-      font-size: 0.75em;
+      font-size: 0.7em;
       color: var(--accent);
     }
     th.sort-desc::after {
       content: " ▼";
-      font-size: 0.75em;
+      font-size: 0.7em;
       color: var(--accent);
     }
-    /* Scroll tables horizontally on small screens */
-    @media (max-width: 520px) {
-      table {
-        font-size: 0.89em;
-      }
-      th, td {
-        padding: 0.45em 0.5em;
-        font-size: 0.82em;
-      }
-    }
 
-    /* ===== Standings Row Colors ===== */
+    /* Standings row styles */
     .stand-row {
       background: #fff;
-      border-radius: 8px;
-      font-weight: 700;
-      font-size: 0.97em;
-      margin-bottom: 0.12em;
-      position: relative;
-      box-shadow: 0 2px 12px var(--shadow-light);
+      border-radius: 7px;
+      font-weight: 600;
+      font-size: 13.6px;
+      margin-bottom: 0.08em;
+      box-shadow: 0 2px 10px #38b6ff10;
       text-align: center;
-      user-select: none;
       transition: background-color 0.3s ease;
+      user-select: text;
     }
     .stand-row.gold .pos-cell {
       background: var(--gold) !important;
@@ -240,61 +215,27 @@
       background: var(--eliminated) !important;
       color: #fff;
     }
-    .stand-teamlogo {
-      width: 18px;
-      height: 18px;
-      border-radius: 4px;
-      vertical-align: middle;
-      margin-right: 6px;
-      user-select: none;
-    }
-    .stand-points {
-      font-weight: 800;
-      font-size: 0.95em;
-    }
-    .stand-legend {
-      text-align: center;
-      font-size: 0.89em;
-      margin-bottom: 0.7em;
-      user-select: none;
-    }
-    .stand-legend span {
-      display: inline-block;
-      border-radius: 4px;
-      padding: 2px 9px;
-      margin: 0 5px;
+    .pos-cell {
+      border-radius: 6px;
       font-weight: 700;
-      font-size: 0.85em;
-    }
-    .stand-legend .gold {
-      background: var(--gold);
-      color: #2e2e2e;
-    }
-    .stand-legend .silver {
-      background: var(--silver);
-      color: #232323;
-    }
-    .stand-legend .elim {
-      background: #ffdbdb;
-      color: #99111c;
     }
 
-    /* ===== Date Heading ===== */
+    /* Date heading for results & fixtures */
     .date-heading {
+      font-size: 1.05rem;
+      font-weight: 800;
       color: var(--primary2);
-      font-size: 1.1em;
-      font-weight: 900;
       margin: 1.3em 0 0.15em 0;
       padding-bottom: 0.14em;
-      border-bottom: 3.5px solid var(--accent);
-      letter-spacing: 0.02em;
+      border-bottom: 3px solid var(--accent);
       user-select: none;
     }
 
-    /* ===== Result Rows ===== */
+    /* Result rows */
     .result-row {
-      border-left: 0px solid transparent;
+      border-left: 0;
       transition: border-color 0.3s ease;
+      font-size: 13.6px;
     }
     .result-row.winner1 {
       border-left: 5px solid var(--gold);
@@ -303,10 +244,10 @@
       border-left: 5px solid var(--accent);
     }
     .winner-cell {
-      font-weight: 800;
+      font-weight: 700;
     }
     .winner-icon {
-      font-size: 1.15em;
+      font-size: 1.1em;
       vertical-align: middle;
       margin-left: 3px;
       user-select: none;
@@ -328,51 +269,41 @@
       display: inline-block;
     }
 
-    /* ===== Squads ===== */
+    /* Squads cards */
     .squad-team-card {
-      margin-bottom: 1.3em;
-      padding: 0.9em 0.65em;
-      border-radius: 14px;
+      margin-bottom: 1.1em;
+      padding: 0.85em 0.55em;
+      border-radius: 12px;
       background: var(--primary-light);
-      box-shadow: 0 2px 7px var(--shadow-light);
-      user-select: none;
-      transition: box-shadow 0.3s ease;
+      box-shadow: 0 2px 7px #38b6ff22;
+      user-select: text;
       cursor: default;
+      transition: box-shadow 0.3s ease;
     }
     .squad-team-card:hover {
-      box-shadow: 0 5px 18px var(--shadow-medium);
-    }
-    .squad-logo-frame img {
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      margin-bottom: 6px;
-      background: #fff;
-      user-select: none;
-      pointer-events: none;
+      box-shadow: 0 5px 18px #38b6ff44;
     }
     .squad-team-name {
-      font-weight: 800;
-      font-size: 1em;
+      font-weight: 700;
+      font-size: 1rem;
       color: var(--primary2);
       margin-bottom: 0.28em;
-      user-select: none;
+      user-select: text;
     }
     .squad-players {
       display: flex;
       flex-wrap: wrap;
-      gap: 6px;
+      gap: 7px;
       justify-content: center;
     }
     .squad-player-name {
       background: #fff;
       padding: 0.28em 0.5em;
       border-radius: 8px;
-      font-size: 0.91em;
-      box-shadow: 0 1px 4px var(--shadow-light);
-      margin-bottom: 2px;
+      font-size: 0.9rem;
+      box-shadow: 0 1px 4px #38b6ff12;
       cursor: pointer;
-      user-select: none;
+      user-select: text;
       transition: background-color 0.15s ease;
       white-space: nowrap;
     }
@@ -383,42 +314,43 @@
       box-shadow: 0 0 8px var(--accent);
     }
 
-    /* ===== Stats Tip ===== */
+    /* Stats tip */
     #stats-tip {
-      font-size: 0.9em;
+      font-size: 0.9rem;
       color: var(--primary2);
-      margin: 0.38em 0 0.81em 0;
+      margin: 0.3em 0 0.6em 0;
       text-align: center;
       background: #e9f3ff;
       border-radius: 7px;
-      padding: 5px 9px;
+      padding: 5px 8px;
       user-select: none;
     }
     #stats-table th, #stats-table td {
-      min-width: 64px;
-      max-width: 100px;
+      min-width: 60px;
+      max-width: 90px;
       word-wrap: break-word;
       white-space: pre-line;
       cursor: default;
       user-select: text;
+      font-size: 0.85rem;
     }
     #stats-table td.stat-player, #stats-table td.stat-team {
       white-space: pre-line;
       word-break: break-word;
-      line-height: 1.15;
+      line-height: 1.12;
       cursor: pointer;
       user-select: text;
     }
     #stats-table td.stat-team img {
-      width: 12px;
-      height: 12px;
+      width: 10px;
+      height: 10px;
       vertical-align: middle;
       margin-right: 2px;
       user-select: none;
       pointer-events: none;
     }
 
-    /* ===== Player Popup ===== */
+    /* Player popup */
     #player-popup {
       display: none;
       position: fixed;
@@ -439,26 +371,26 @@
     }
     #player-popup .popup-card {
       background: #fff;
-      border-radius: 12px;
+      border-radius: 10px;
       box-shadow: 0 2px 20px #b1e1ff55;
-      padding: 1.25em 1.4em;
+      padding: 1.2em 1.3em;
       color: var(--primary-dark);
-      min-width: 280px;
-      max-width: 95vw;
+      min-width: 260px;
+      max-width: 92vw;
       text-align: center;
       font-weight: 700;
       position: relative;
       user-select: text;
     }
     #player-popup .popup-head {
-      font-size: 1.14em;
+      font-size: 1.05em;
       font-weight: 900;
-      margin-bottom: 0.3em;
+      margin-bottom: 0.25em;
       user-select: text;
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 0.5em;
+      gap: 0.4em;
     }
     #player-popup .popup-team {
       color: var(--primary2);
@@ -468,19 +400,19 @@
     }
     #player-popup .popup-label {
       color: var(--primary);
-      font-size: 0.93em;
-      margin-top: 0.16em;
+      font-size: 0.9em;
+      margin-top: 0.14em;
       user-select: text;
       text-align: left;
     }
     #player-popup .popup-close {
       color: #222;
-      font-size: 1.4em;
+      font-size: 1.3em;
       background: none;
       border: none;
       position: absolute;
-      top: 1.05em;
-      right: 1.2em;
+      top: 1.1em;
+      right: 1.1em;
       cursor: pointer;
       user-select: none;
       transition: color 0.3s ease;
@@ -492,11 +424,11 @@
       margin-top: 1em;
       background: var(--accent);
       border: none;
-      border-radius: 8px;
+      border-radius: 7px;
       color: #fff;
       font-weight: 800;
       font-size: 1em;
-      padding: 0.5em 1.1em;
+      padding: 0.45em 1em;
       cursor: pointer;
       transition: background-color 0.25s ease;
       user-select: none;
@@ -505,41 +437,42 @@
       background: var(--primary2);
     }
 
-    /* ===== Footer ===== */
+    /* Footer fix - sticky bottom only if viewport taller */
     footer {
-      width: 100%;
       max-width: 540px;
-      margin: 1.8em auto 1.5em auto;
-      background: none;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0.75em 1em;
+      background: transparent;
       color: #7a7a7a;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       user-select: none;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 10px;
-      box-sizing: border-box;
-      flex-shrink: 0;
-    }
-    .footer-icons {
       display: flex;
       justify-content: flex-start;
       align-items: center;
+      gap: 1.4rem;
+      flex-shrink: 0;
+      box-sizing: border-box;
+      position: relative;
+      bottom: 0;
+      z-index: 12;
+    }
+    .footer-icons {
+      display: flex;
       gap: 1.2rem;
+      align-items: center;
       user-select: none;
       flex-shrink: 0;
     }
     .footer-icons img, .footer-icons .wa-btn {
-      height: 24px;
-      width: 24px;
-      vertical-align: middle;
+      height: 22px;
+      width: 22px;
       border-radius: 6px;
       background: #fff;
-      border: 1.3px solid #bfe4fa;
+      border: 1.2px solid #bfe4fa;
       box-shadow: 0 1px 4px rgba(0,0,0,0.04);
       object-fit: cover;
       padding: 3px;
-      transition: transform 0.18s ease;
       cursor: pointer;
       user-select: none;
     }
@@ -555,7 +488,7 @@
       border-radius: 9px;
       padding: 0;
       font-weight: 700;
-      font-size: 1.24em;
+      font-size: 1.1em;
       vertical-align: middle;
       box-shadow: 0 3px 10px #25d36640;
       text-decoration: none;
@@ -563,259 +496,264 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      height: 24px;
-      width: 24px;
+      height: 22px;
+      width: 22px;
       user-select: none;
     }
     .wa-btn .lucide {
-      font-size: 1.24em;
+      font-size: 1.1em;
       pointer-events: none;
       user-select: none;
     }
     .footer-suca {
+      margin-left: auto;
       font-style: italic;
       color: #aaa;
       user-select: none;
-      font-size: 0.87rem;
-      flex-shrink: 0;
       white-space: nowrap;
     }
 
-    /* ===== NAVIGATION ===== */
-    /* --- Bottom fixed bar for wide & medium screens --- */
-    .nav-bar-glass {
+    /* Navigation top bar with hamburger menu */
+    .nav-top-bar {
       position: fixed;
+      top: 0;
       left: 0;
       right: 0;
-      bottom: 0;
-      width: 100vw;
       max-width: 540px;
-      z-index: 110;
-      background: var(--nav-bg);
-      box-shadow: 0 6px 36px #22355ccc;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-radius: 18px 18px 0 0;
       margin: 0 auto;
-      min-height: 58px;
-      height: 58px;
-      overflow: hidden;
+      height: 56px;
+      background: var(--nav-bg);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1rem;
+      z-index: 110;
+      box-shadow: 0 4px 10px #22355cbb;
       user-select: none;
-      font-family: var(--font-heading);
-      padding: 0 4px;
     }
-    .nav-bar-glass .nav-btn {
-      flex: 1 1 0;
+    .nav-top-bar .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      color: #e2eaf5;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 1.2rem;
+      user-select: none;
+    }
+    .nav-top-bar .logo img {
+      height: 28px;
+      border-radius: 6px;
+      user-select: none;
+      pointer-events: none;
+    }
+    .nav-top-bar button.menu-toggle {
       background: none;
       border: none;
       color: #e2eaf5;
-      font-size: 1.15em;
-      padding: 0.2em 0 0.1em 0;
-      text-align: center;
-      outline: none;
-      position: relative;
+      font-size: 1.6rem;
       cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-width: 0;
-      transition: color 0.22s ease;
-      font-weight: 700;
-      letter-spacing: 0.03em;
-      text-shadow: 0 0 2px #0009;
-    }
-    .nav-bar-glass .nav-btn i {
-      font-size: 1.45em;
-      line-height: 1.02;
-      transition: color 0.18s ease;
-      margin-bottom: 0.06em;
-    }
-    .nav-bar-glass .nav-label {
-      display: block;
-      font-size: 0.75em;
-      margin-top: 0.01em;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      line-height: 1.02;
-      opacity: 1;
-      transition: opacity 0.22s ease;
-      white-space: nowrap;
-      text-shadow: 0 0 2px #000b;
-    }
-    .nav-bar-glass .nav-btn.active,
-    .nav-bar-glass .nav-btn:active {
-      color: var(--accent2);
-      font-weight: 900;
-      text-shadow: 0 0 5px var(--accent2);
-    }
-    .nav-bar-glass .nav-indicator {
-      display: block;
-      position: absolute;
-      left: 20%;
-      right: 20%;
-      bottom: 6px;
-      height: 5px;
-      border-radius: 5px;
-      background: linear-gradient(90deg, var(--accent2) 0%, var(--accent) 100%);
-      opacity: 0;
-      transform: scaleX(0.7);
-      transition: opacity 0.22s ease, transform 0.25s ease;
-      z-index: 2;
       user-select: none;
-    }
-    .nav-bar-glass .nav-btn.active .nav-indicator {
-      opacity: 1;
-      transform: scaleX(1);
+      padding: 0;
     }
 
-    /* === Nav burger menu for narrow screens (width < 400px) === */
-    .nav-burger-btn {
-      display: none;
+    /* Side nav drawer */
+    .side-nav-drawer {
       position: fixed;
-      bottom: 16px;
-      right: 16px;
-      z-index: 120;
+      top: 56px;
+      left: 0;
+      width: 240px;
+      height: calc(100vh - 56px);
       background: var(--nav-bg);
-      border-radius: 14px;
-      width: 52px;
-      height: 52px;
-      box-shadow: 0 6px 22px #22355cbb;
+      box-shadow: 3px 0 10px #22355cbb;
+      transform: translateX(-260px);
+      transition: transform 0.3s ease;
+      z-index: 115;
+      display: flex;
+      flex-direction: column;
+      padding-top: 0.5rem;
+    }
+    .side-nav-drawer.open {
+      transform: translateX(0);
+    }
+    .side-nav-drawer button.close-btn {
+      align-self: flex-end;
+      margin: 0 0.5rem 0.5rem 0;
+      background: none;
       border: none;
-      cursor: pointer;
+      font-size: 1.7rem;
       color: #e2eaf5;
-      font-size: 2.1em;
-      align-items: center;
-      justify-content: center;
+      cursor: pointer;
+    }
+    .side-nav-drawer button.close-btn:hover {
+      color: var(--accent2);
+    }
+    .side-nav-drawer nav {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      padding-left: 1rem;
       user-select: none;
-      transition: background-color 0.3s ease;
     }
-    .nav-burger-btn:hover {
-      background: var(--accent);
-      color: #fff;
+    .side-nav-drawer nav button {
+      background: none;
+      border: none;
+      color: #e2eaf5;
+      font-weight: 600;
+      font-size: 1.03rem;
+      text-align: left;
+      padding: 0.65em 0.8em;
+      cursor: pointer;
+      border-radius: 6px;
+      user-select: none;
+      transition: background-color 0.2s ease;
     }
-    .nav-burger-btn:focus {
-      outline: 2px solid var(--accent2);
-      outline-offset: 3px;
+    .side-nav-drawer nav button.active,
+    .side-nav-drawer nav button:hover {
+      background-color: var(--accent);
+      color: #172a4d;
+      font-weight: 700;
     }
-    /* Burger visible only below 400px */
-    @media (max-width: 399px) {
-      .nav-bar-glass {
+
+    /* Prevent main content from hiding behind nav bar */
+    main, .side-nav-drawer.open ~ main {
+      padding-bottom: 1rem;
+      margin-bottom: 0;
+    }
+
+    /* Hide original nav bar */
+    nav.nav-bar-glass {
+      display: none;
+    }
+
+    /* Responsive for larger screens: show original nav bar, hide top nav & drawer */
+    @media (min-width: 550px) {
+      nav.nav-bar-glass {
+        display: flex;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        max-width: 540px;
+        margin: 0 auto;
+        z-index: 110;
+        background: var(--nav-bg);
+        box-shadow: 0 6px 36px #22355ccc;
+        border-radius: 18px 18px 0 0;
+        height: 64px;
+        min-height: 64px;
+        overflow: hidden;
+        font-family: var(--font-heading);
+      }
+      .nav-top-bar, .side-nav-drawer {
         display: none;
       }
-      .nav-burger-btn {
-        display: flex;
-      }
       main {
-        padding-bottom: 0; /* padding moved to overlay nav */
+        padding-bottom: 80px;
       }
     }
 
-    /* === Fullscreen nav overlay === */
-    #nav-overlay {
-      display: none;
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      z-index: 130;
-      background: var(--nav-bg);
-      backdrop-filter: saturate(180%) blur(10px);
-      padding-top: 68px;
-      overflow-y: auto;
-      font-family: var(--font-heading);
+    /* Cursor styles */
+    .curl {
+      white-space: pre-line;
+      word-break: break-word;
+      user-select: text;
     }
-    #nav-overlay.active {
-      display: block;
-    }
-    #nav-overlay nav {
+
+    /* Stat Highlights Bar */
+    .stat-high-bar {
       display: flex;
-      flex-direction: column;
-      gap: 10px;
-      padding: 0 20px 20px 20px;
+      gap: 0.35em;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 0.7em;
     }
-    #nav-overlay nav button {
-      background: none;
-      border: none;
-      color: #e2eaf5;
-      font-size: 1.3em;
-      font-weight: 700;
-      padding: 14px 0;
-      border-bottom: 1px solid #4178d1aa;
-      cursor: pointer;
-      text-align: left;
-      letter-spacing: 0.04em;
-      text-shadow: 0 0 4px #000c;
-      user-select: none;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    #nav-overlay nav button i {
-      font-size: 1.5em;
-      margin-right: 6px;
-    }
-    #nav-overlay nav button.active {
-      color: var(--accent2);
-      border-bottom-color: var(--accent2);
-      text-shadow: 0 0 10px var(--accent2);
-    }
-
-    /* === Responsive fixes for small screens === */
-    @media (max-width: 520px) {
-      main {
-        padding: 1rem 1rem 6rem 1rem;
-      }
-      .card {
-        padding: 1rem 0.9rem 0.9rem 0.9rem;
-      }
-      .squad-players {
-        gap: 4px;
-      }
-      .squad-player-name {
-        font-size: 0.84em;
-        padding: 0.26em 0.46em;
-      }
-      #stats-table th, #stats-table td {
-        font-size: 0.82em;
-        padding: 0.32em 0.44em;
-      }
-      .result-row td {
-        font-size: 0.85em;
-      }
-      th, td {
-        padding: 0.35em 0.25em;
-      }
-      .stat-high-card {
-        min-width: 82px;
-        max-width: 100px;
-        padding: 0.48em 0.3em;
-      }
-    }
-
-    /* ===== Player Comparison page styles ===== */
-    #compare {
-      padding-top: 0.15em;
-    }
-    #compare .compare-instruction {
-      font-size: 1rem;
-      font-weight: 700;
-      margin-bottom: 0.6em;
+    .stat-high-card {
+      background: var(--primary-light);
+      border-radius: 10px;
+      padding: 0.5em 0.3em;
+      min-width: 90px;
+      max-width: 110px;
       text-align: center;
+      box-shadow: 0 1px 6px #b1e1ff50;
+      user-select: none;
+      transition: background-color 0.3s ease;
+      font-size: 0.85rem;
+      line-height: 1.1;
+    }
+    .stat-high-card:hover {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 2px 14px #38b6ffbb;
+      cursor: default;
+    }
+    .stat-high-label {
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 0.15em;
+      user-select: none;
+    }
+    .stat-high-main {
+      font-weight: 900;
+      color: var(--primary);
+      user-select: none;
+      font-size: 1.15rem;
+      line-height: 1.2;
+    }
+    .stat-high-player {
+      font-weight: 600;
+      margin-top: 0.1em;
       color: var(--primary2);
       user-select: none;
+      font-size: 0.82rem;
+      line-height: 1.1;
+    }
+
+    /* Team Filter Dropdown */
+    .team-filter-dropdown {
+      width: 100%;
+      max-width: 210px;
+      padding: 0.3em 0.5em;
+      font-size: 0.9rem;
+      border-radius: 6px;
+      border: 1.5px solid var(--table-border);
+      margin: 0 auto 1em auto;
+      display: block;
+      user-select: none;
+      font-family: var(--font-sans);
+      cursor: pointer;
+      transition: border-color 0.22s ease;
+    }
+    .team-filter-dropdown:hover, .team-filter-dropdown:focus {
+      border-color: var(--accent);
+      outline: none;
+    }
+
+    /* Player Comparison Page */
+    #compare {
+      padding-top: 0.2rem;
+    }
+    #compare .compare-instruction {
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--primary2);
+      text-align: center;
+      user-select: none;
+      font-size: 1rem;
+      line-height: 1.25;
     }
     #compare .player-select-container {
       max-width: 440px;
-      margin: 0 auto 1em auto;
+      margin: 0 auto 1rem auto;
       display: flex;
-      gap: 0.7em;
+      gap: 0.8rem;
       flex-wrap: wrap;
       justify-content: center;
     }
     #compare select {
       flex: 1 1 140px;
-      padding: 0.38em 0.6em;
-      font-size: 0.94em;
+      padding: 0.4em 0.6em;
+      font-size: 0.9rem;
       border-radius: 7px;
       border: 1.5px solid var(--table-border);
       font-family: var(--font-sans);
@@ -857,7 +795,7 @@
       border: none;
       border-radius: 9px;
       font-weight: 900;
-      font-size: 1.1em;
+      font-size: 1.05rem;
       padding: 0.48em 1.15em;
       cursor: pointer;
       transition: background-color 0.28s ease;
@@ -873,32 +811,31 @@
     #compare .compare-btn:hover:not(:disabled) {
       background: var(--primary2);
     }
+
+    /* Compare results container */
     #compare-results {
       margin-top: 1.2em;
       overflow-x: auto;
-      user-select: none;
+      user-select: text;
+      font-size: 0.9rem;
+      line-height: 1.2;
     }
     #compare-results table {
       width: 100%;
       max-width: 100%;
       border-collapse: collapse;
       font-family: var(--font-sans);
-      font-size: 0.92em;
       min-width: 320px;
-      box-shadow: 0 4px 15px var(--shadow-light);
-      border-radius: 14px;
+      box-shadow: 0 4px 15px #38b6ff11;
+      border-radius: 12px;
       overflow: hidden;
     }
     #compare-results th, #compare-results td {
       border: 1px solid var(--table-border);
-      padding: 0.48em 0.85em;
+      padding: 0.5em 0.8em;
       text-align: center;
       vertical-align: middle;
       user-select: text;
-      white-space: nowrap;
-      max-width: 90px;
-      overflow: hidden;
-      text-overflow: ellipsis;
     }
     #compare-results th {
       background: var(--primary-light);
@@ -907,6 +844,7 @@
       position: sticky;
       top: 0;
       z-index: 5;
+      white-space: nowrap;
     }
     #compare-results th.metric-header {
       text-align: left;
@@ -917,44 +855,77 @@
       position: sticky;
       left: 0;
       z-index: 6;
-      min-width: 140px;
+      min-width: 130px;
+      max-width: 130px;
       white-space: normal;
-      word-break: break-word;
+      word-wrap: break-word;
+      line-height: 1.15;
     }
     #compare-results td.player-name-cell {
       font-weight: 700;
       color: var(--primary2);
       white-space: nowrap;
       min-width: 110px;
-      user-select: text;
       max-width: 110px;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      user-select: text;
     }
     #compare-results td.player-name-cell img {
-      width: 20px;
-      height: 20px;
-      vertical-align: middle;
-      margin-right: 6px;
-      border-radius: 5px;
-      pointer-events: none;
-      user-select: none;
+      display: none; /* logos removed as per request */
     }
+    /* Zebra stripes */
     #compare-results tbody tr:nth-child(even) {
       background: #f8fbff;
     }
+
+    /* Cursor styles */
+    .curl {
+      white-space: pre-line;
+      word-break: break-word;
+      user-select: text;
+    }
+
+    /* Responsive adjustments */
     @media (max-width: 480px) {
-      #compare-results table {
-        font-size: 0.84em;
+      body, html {
+        font-size: 13px;
+      }
+      header .titlebox h1 {
+        font-size: 1.1rem;
+      }
+      main {
+        padding: 0.6rem 1rem 1rem 1rem;
+      }
+      table, th, td {
+        font-size: 12.6px;
+        padding: 0.3em 0.3em;
+      }
+      .card h3 {
+        font-size: 1rem;
+      }
+      #compare select {
+        font-size: 0.85rem;
+        min-width: 100%;
+      }
+      #compare .player-select-container {
+        flex-direction: column;
+        gap: 0.4rem;
+        max-width: 300px;
+        margin: 0.4rem auto 1rem auto;
+      }
+      #compare .compare-btn {
+        font-size: 1rem;
         min-width: 100%;
       }
       #compare-results th.metric-header {
-        min-width: 100px;
-        font-size: 0.8em;
+        min-width: 110px;
+        max-width: 110px;
+        white-space: normal;
+        font-size: 0.85rem;
       }
       #compare-results td.player-name-cell {
         min-width: 100px;
-        font-size: 0.8em;
+        max-width: 100px;
+        font-size: 0.85rem;
       }
     }
   </style>
@@ -967,13 +938,41 @@
     </div>
   </header>
 
+  <!-- Top navigation with hamburger -->
+  <div class="nav-top-bar" role="navigation" aria-label="Main Navigation">
+    <div class="logo">
+      <img src="logo.png" alt="RDPL Logo" draggable="false" />
+      <span>RDPL 2025</span>
+    </div>
+    <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="side-nav">
+      <i class="lucide lucide-menu"></i>
+    </button>
+  </div>
+
+  <!-- Side navigation drawer -->
+  <div class="side-nav-drawer" id="side-nav" aria-label="Navigation menu" role="menu" tabindex="-1">
+    <button class="close-btn" aria-label="Close menu">
+      <i class="lucide lucide-x"></i>
+    </button>
+    <nav>
+      <button data-tab="dashboard" role="menuitem" tabindex="0" class="active">Home</button>
+      <button data-tab="fixtures" role="menuitem" tabindex="0">Fixtures</button>
+      <button data-tab="results" role="menuitem" tabindex="0">Results</button>
+      <button data-tab="standings" role="menuitem" tabindex="0">Standings</button>
+      <button data-tab="squads" role="menuitem" tabindex="0">Squads</button>
+      <button data-tab="stats" role="menuitem" tabindex="0">Stats</button>
+      <button data-tab="live" role="menuitem" tabindex="0">Live</button>
+      <button data-tab="compare" role="menuitem" tabindex="0">Compare</button>
+    </nav>
+  </div>
+
   <main>
     <!-- Dashboard -->
     <section id="dashboard" class="section active" aria-label="Dashboard Home">
       <div class="card">
         <h3>Today's Fixtures</h3>
         <div class="table-scroll">
-          <table class="fixtures-table" id="dashboard-fixtures-table" role="table" aria-describedby="dashboard-fixtures-desc">
+          <table class="fixtures-table" role="table" aria-describedby="dashboard-fixtures-desc">
             <thead>
               <tr>
                 <th scope="col">Time</th>
@@ -987,7 +986,7 @@
           <div id="dashboard-fixtures-desc" class="sr-only">List of today's fixtures</div>
         </div>
       </div>
-      <div class="card" style="margin-top:-0.8em;">
+      <div class="card" style="margin-top:-0.6em;">
         <h3>Quick Standings</h3>
         <div class="standings-group-title" aria-hidden="true">Group A</div>
         <div class="table-scroll" role="table" aria-label="Group A standings">
@@ -998,7 +997,7 @@
             <tbody id="dashboard-standings-a" aria-live="polite" aria-atomic="true"></tbody>
           </table>
         </div>
-        <div class="standings-group-title" aria-hidden="true" style="margin-top:0.8em;">Group B</div>
+        <div class="standings-group-title" aria-hidden="true" style="margin-top:0.7em;">Group B</div>
         <div class="table-scroll" role="table" aria-label="Group B standings">
           <table class="standings-table" role="grid">
             <thead>
@@ -1031,13 +1030,13 @@
       <div class="card" style="margin-bottom:0.8em;">
         <div class="stand-legend" aria-hidden="true">
           <span class="gold" title="Gold Cup (Top 3)">
-            <i class="lucide lucide-trophy" style="font-size:1.09em;vertical-align:middle;margin-right:3px;"></i>Gold Cup (Top 3)
+            <i class="lucide lucide-trophy" style="font-size:1.05em;vertical-align:middle;margin-right:3px;"></i>Gold Cup (Top 3)
           </span>
           <span class="silver" title="Silver Cup (4-6)">
             <i class="lucide lucide-award" style="font-size:1.05em;vertical-align:middle;margin-right:3px;"></i>Silver Cup (4-6)
           </span>
           <span class="elim" title="Eliminated (7-8)">
-            <i class="lucide lucide-x-circle" style="font-size:1.03em;vertical-align:middle;margin-right:3px;"></i>Eliminated (7-8)
+            <i class="lucide lucide-x-circle" style="font-size:1.05em;vertical-align:middle;margin-right:3px;"></i>Eliminated (7-8)
           </span>
           <span style="margin-left:8px;">EF = Events For, EA = Events Against, ED = Events Diff</span>
         </div>
@@ -1064,7 +1063,7 @@
         <div id="stats-tip">Tip: Tap any player name in the table below to view and save their full player card.</div>
         <div id="stat-highlights"></div>
         <div class="team-filter-bar" id="team-filter-bar"></div>
-        <input id="stats-search" type="text" placeholder="Search player or team..." aria-label="Search player or team" style="margin-bottom:0.8em;padding:0.33em 0.49em;font-size:0.96em;width:98vw;max-width:210px;border-radius:5px;border:1px solid var(--table-border);display:block;margin:auto;">
+        <input id="stats-search" type="text" placeholder="Search player or team..." aria-label="Search player or team" style="margin-bottom:0.8em;padding:0.33em 0.49em;font-size:0.9rem;width:98vw;max-width:210px;border-radius:5px;border:1px solid var(--table-border);display:block;margin:auto;">
         <div id="stats-table"></div>
       </div>
     </section>
@@ -1073,78 +1072,21 @@
     <section id="live" class="section" aria-label="Live Stream">
       <div class="card">
         <h3>Watch Live</h3>
-        <iframe src="https://n01darts.com/n01/tournament/comp.php?id=t_NI0o_4352&tab=live" width="100%" height="420" frameborder="0" style="border-radius:12px;border:none;" title="Live tournament stream"></iframe>
+        <iframe src="https://n01darts.com/n01/tournament/comp.php?id=t_NI0o_4352&tab=live" width="100%" height="380" frameborder="0" style="border-radius:12px;border:none;" title="Live tournament stream"></iframe>
       </div>
     </section>
 
-    <!-- Compare (NEW PAGE) -->
+    <!-- Compare -->
     <section id="compare" class="section" aria-label="Player Comparison">
       <div class="card">
         <h3>Player Comparison</h3>
         <p class="compare-instruction" id="compare-instruction">Select two or more players to compare their stats side-by-side.</p>
-        <div class="player-select-container" role="group" aria-labelledby="compare-instruction">
-          <!-- Player selects inserted by JS -->
-        </div>
+        <div class="player-select-container" role="group" aria-labelledby="compare-instruction"></div>
         <button id="compare-btn" class="compare-btn" disabled aria-disabled="true" aria-describedby="compare-instruction">Compare Players</button>
-
         <div id="compare-results" aria-live="polite" aria-atomic="true"></div>
       </div>
     </section>
   </main>
-
-  <!-- NAVIGATION BAR (desktop & tablet) -->
-  <nav class="nav-bar-glass" role="navigation" aria-label="Main Navigation">
-    <button class="nav-btn active" data-tab="dashboard" title="Home" aria-current="page" aria-label="Go to Home">
-      <i class="lucide lucide-home" aria-hidden="true"></i><span class="nav-label">Home</span>
-      <span class="nav-indicator"></span>
-    </button>
-    <button class="nav-btn" data-tab="fixtures" title="Fixtures" aria-label="Go to Fixtures">
-      <i class="lucide lucide-calendar-days" aria-hidden="true"></i><span class="nav-label">Fixtures</span>
-      <span class="nav-indicator"></span>
-    </button>
-    <button class="nav-btn" data-tab="results" title="Results" aria-label="Go to Results">
-      <i class="lucide lucide-list-start" aria-hidden="true"></i><span class="nav-label">Results</span>
-      <span class="nav-indicator"></span>
-    </button>
-    <button class="nav-btn" data-tab="standings" title="Standings" aria-label="Go to Standings">
-      <i class="lucide lucide-trophy" aria-hidden="true"></i><span class="nav-label">Standings</span>
-      <span class="nav-indicator"></span>
-    </button>
-    <button class="nav-btn" data-tab="squads" title="Squads" aria-label="Go to Squads">
-      <i class="lucide lucide-users" aria-hidden="true"></i><span class="nav-label">Squads</span>
-      <span class="nav-indicator"></span>
-    </button>
-    <button class="nav-btn" data-tab="stats" title="Stats" aria-label="Go to Player Stats">
-      <i class="lucide lucide-bar-chart" aria-hidden="true"></i><span class="nav-label">Stats</span>
-      <span class="nav-indicator"></span>
-    </button>
-    <button class="nav-btn" data-tab="live" title="Live" aria-label="Go to Live Stream">
-      <i class="lucide lucide-play-circle" aria-hidden="true"></i><span class="nav-label">Live</span>
-      <span class="nav-indicator"></span>
-    </button>
-    <button class="nav-btn" data-tab="compare" title="Compare Players" aria-label="Go to Player Comparison">
-      <i class="lucide lucide-columns" aria-hidden="true"></i><span class="nav-label">Compare</span>
-      <span class="nav-indicator"></span>
-    </button>
-  </nav>
-
-  <!-- NAVIGATION BURGER (mobile) -->
-  <button aria-label="Toggle navigation menu" id="nav-burger" class="nav-burger-btn" aria-expanded="false" aria-controls="nav-overlay" aria-haspopup="true" aria-pressed="false">
-    <i class="lucide lucide-menu"></i>
-  </button>
-  <div id="nav-overlay" aria-hidden="true" role="dialog" aria-modal="true">
-    <nav role="navigation" aria-label="Mobile main navigation">
-      <!-- buttons injected by JS -->
-    </nav>
-  </div>
-
-  <!-- Player popup -->
-  <div id="player-popup" onclick="hidePlayerPopup(event)" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="player-popup-head" tabindex="-1">
-    <div class="popup-card" role="document">
-      <!-- Popup content injected by JS -->
-    </div>
-    <button class="popup-close" onclick="hidePlayerPopup(event)" aria-label="Close player card">&times;</button>
-  </div>
 
   <!-- Footer -->
   <footer>
@@ -1166,74 +1108,67 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
 
   <script defer>
-    const TEAM_LOGOS = {
-      "Balaji Darts": "team_logos/Balaji-Darts.avif",
-      "Biscotti Barrels": "team_logos/Biscotti-Barrels.avif",
-      "BLC High Rollers": "team_logos/BLC-High-Rollers.avif",
-      "Bullseye Bandits": "team_logos/Bullseye-Bandits.avif",
-      "City Knights": "team_logos/City-Knights.avif",
-      "Hugo & Finn": "team_logos/Hugo-&-Finn.png",
-      "Keventer Eagle Eye": "team_logos/Keventer-Eagle-Eye.avif",
-      "PKS Titans": "team_logos/PKS-Titans.avif",
-      "Purti Forever": "team_logos/Purti-Forever.avif",
-      "Rama Darts": "team_logos/Rama-Darts.png",
-      "Royals Super Knights": "team_logos/Royals-Super-Knights.avif",
-      "RSV Rising Stars": "team_logos/RSV-Rising-Stars.avif",
-      "The Panthers": "team_logos/The-Panthers.avif",
-      "Tons of Bull": "team_logos/Tons-of-Bull.avif",
-      "UGW": "team_logos/UGW.png",
-      "Vyana Warriors": "team_logos/Vyana-Warriors.avif"
-    };
+    // TEAM LOGOS REMOVED as per request
+    const TEAM_LOGOS = {};
+
     const API_URL = 'https://script.google.com/macros/s/AKfycby6BCE5cyBaxpz-Jt-TeRH6k5Jeq-vqelr8S7rt32e7wFjBzEvuBrYi4yPaEBz2Kari/exec';
 
+    // Global caches
     let fixturesCache = [], standingsCache = [], statsCache = [], bestLegCache = [], squadsCache = [], resultsCache = [];
-    let statsSortKey = null, statsSortDir = 1, statsSearchTerm = "", teamFilter = null;
-    const STATS_HIDE_COLUMNS = new Set(["Keep", "Break", "Second Legs", "Break Legs", "Total Score", "Total Darts", "Group", "Best Leg", "Worst Leg"]);
 
+    // Sort and filter state
+    let statsSortKey = null, statsSortDir = 1, statsSearchTerm = "", teamFilter = null;
+
+    // Columns to hide in stats table
+    const STATS_HIDE_COLUMNS = new Set([
+      "Keep", "Break", "Second Legs", "Break Legs", "Total Score", "Total Darts", "Group", "Best Leg", "Worst Leg"
+    ]);
+
+    // Show tab
     function showTab(tabId) {
-      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-      document.querySelectorAll('.nav-bar-glass .nav-btn').forEach(b => b.classList.remove('active'));
-      const sec = document.getElementById(tabId);
-      if (sec) sec.classList.add('active');
-      document.querySelectorAll('.nav-bar-glass .nav-btn').forEach(b => {
-        if (b.getAttribute('data-tab') === tabId) {
-          b.classList.add('active');
-          b.setAttribute('aria-current', 'page');
-        } else {
-          b.removeAttribute('aria-current');
+      document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+      document.querySelectorAll('.side-nav-drawer nav button').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.side-nav-drawer nav button').forEach(btn => {
+        if (btn.getAttribute('data-tab') === tabId) {
+          btn.classList.add('active');
         }
       });
-      // If overlay nav is open, close it on tab change
-      closeOverlayNav();
-      window.scrollTo({top: 0, behavior: 'smooth'});
+      document.getElementById(tabId)?.classList.add('active');
+      window.scrollTo({top:0,behavior:'smooth'});
+      closeSideNav();
     }
+
+    // Curl text (don't break words)
     function curlText(txt) {
       if (!txt) return '';
-      // Split only on spaces, no breaking words awkwardly
-      const parts = txt.split(' ');
-      if (parts.length <= 1) return txt;
-      const mid = Math.ceil(parts.length / 2);
-      return parts.slice(0, mid).join(' ') + '\n' + parts.slice(mid).join(' ');
+      const words = txt.split(' ');
+      if (words.length <= 1) return txt;
+      const half = Math.ceil(words.length / 2);
+      return words.slice(0, half).join(' ') + '\n' + words.slice(half).join(' ');
     }
+
+    // WhatsApp share
     function setupWhatsAppShare() {
       const waBtn = document.getElementById("wa-share-btn");
-      if (waBtn) {
-        waBtn.addEventListener("click", e => {
-          e.preventDefault();
-          const shareUrl = window.location.href.split('?')[0];
-          const msg = encodeURIComponent(`Check out the Royal Darts Premier League 2025 – live results, fixtures, stats and more! ${shareUrl}`);
-          window.open(`https://wa.me/?text=${msg}`, "_blank");
-        });
-      }
+      if (!waBtn) return;
+      waBtn.addEventListener("click", e => {
+        e.preventDefault();
+        const shareUrl = window.location.href.split('?')[0];
+        const msg = encodeURIComponent("Check out the Royal Darts Premier League 2025 – live results, fixtures, stats and more! " + shareUrl);
+        window.open(`https://wa.me/?text=${msg}`, "_blank");
+      });
     }
+
+    // Load data
     async function loadData() {
       try {
         const res = await fetch(API_URL);
         const data = await res.json();
+
         fixturesCache = data.Fixtures || [];
         standingsCache = data.Standings || [];
-        statsCache = (data.Stats || []).filter(r => r.Player);
-        bestLegCache = (data["Best Leg"] || []).filter(r => r["Best Leg"]);
+        statsCache = (data.Stats || []).filter(row => row.Player);
+        bestLegCache = (data["Best Leg"] || []).filter(row => row["Best Leg"]);
         squadsCache = data.Squads || [];
         resultsCache = data.Results || [];
 
@@ -1243,40 +1178,45 @@
         renderResults(resultsCache, fixturesCache);
         renderStandingsTables();
         renderSquads(squadsCache);
-        renderStatHighlights(statsCache, bestLegCache);
+        renderStatHighlights(statsCache, bestLegCache, "stat-highlights");
         renderStats(statsCache, bestLegCache);
         renderTeamFilter(statsCache);
+
         renderPlayerComparisonSelectors();
+
       } catch (e) {
-        console.error(e);
+        console.error("Data load failed:", e);
       }
     }
 
+    // Dashboard fixtures (IST today)
     function renderDashboardFixtures() {
       const now = new Date();
       const istNow = new Date(now.toLocaleString("en-US", {timeZone: "Asia/Kolkata"}));
-      const year = istNow.getFullYear(), month = istNow.getMonth(), date = istNow.getDate();
+      const Y = istNow.getFullYear(), M = istNow.getMonth(), D = istNow.getDate();
       function isToday(d) {
-        const istD = new Date(new Date(d).toLocaleString("en-US", {timeZone: "Asia/Kolkata"}));
-        return istD.getFullYear() === year && istD.getMonth() === month && istD.getDate() === date;
+        const dt = new Date(new Date(d).toLocaleString("en-US", {timeZone: "Asia/Kolkata"}));
+        return dt.getFullYear() === Y && dt.getMonth() === M && dt.getDate() === D;
       }
       const todaysFixtures = fixturesCache.filter(f => isToday(f.Date));
       let html = '';
-      if (!todaysFixtures.length) {
+      if (todaysFixtures.length === 0) {
         html = `<tr><td colspan="4" style="color:var(--primary);">No fixtures today.</td></tr>`;
       } else {
         todaysFixtures.forEach(f => {
-          const timeStr = new Date(f.Time).toLocaleTimeString('en-IN', {hour: '2-digit', minute: '2-digit', hour12: true, timeZone: 'Asia/Kolkata'});
+          const timeStr = new Date(f.Time).toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit',hour12:true,timeZone:'Asia/Kolkata'});
           html += `<tr>
             <td>${timeStr}</td>
-            <td class="curl">${curlText(f['Team 1']) || ""}</td>
+            <td class="curl">${curlText(f['Team 1'])}</td>
             <td></td>
-            <td class="curl">${curlText(f['Team 2']) || ""}</td>
+            <td class="curl">${curlText(f['Team 2'])}</td>
           </tr>`;
         });
       }
       document.getElementById('dashboard-fixtures').innerHTML = html;
     }
+
+    // Dashboard standings quick
     function renderDashboardStandingsTables() {
       const A = standingsCache.filter(s => s.Group?.toUpperCase() === 'A').sort((a,b) => b.Points - a.Points || b.LD - a.LD);
       const B = standingsCache.filter(s => s.Group?.toUpperCase() === 'B').sort((a,b) => b.Points - a.Points || b.LD - a.LD);
@@ -1284,16 +1224,17 @@
       document.getElementById('dashboard-standings-b').innerHTML = quickStandingsRows(B);
     }
     function quickStandingsRows(arr) {
-      return arr.map((s, i) => {
+      return arr.map((s,i) => {
         let groupClass = i < 3 ? "gold" : i < 6 ? "silver" : "elim";
         return `<tr class="stand-row ${groupClass}">
-          <td class="pos-cell">${i+1}</td>
-          <td class="curl" style="text-align:center;"><img class="stand-teamlogo" src="${TEAM_LOGOS[s.Team] || ''}" alt="">${curlText(s.Team)}</td>
-          <td class="stand-points" style="text-align:center;">${s.Points}</td>
+          <td class="pos-cell">${i + 1}</td>
+          <td class="curl">${s.Team}</td>
+          <td>${s.Points}</td>
         </tr>`;
       }).join('');
     }
 
+    // Fixtures page
     function renderFixtures(fixtures) {
       const container = document.getElementById('fixturesTableContainer');
       if (!fixtures.length) {
@@ -1307,26 +1248,33 @@
         byDate[d].push(f);
       });
       let html = '';
-      Object.keys(byDate).sort((a, b) => new Date(a) - new Date(b)).forEach(dateStr => {
+      Object.keys(byDate).sort((a,b) => new Date(a) - new Date(b)).forEach(dateStr => {
         html += `<div class="date-heading">${dateStr}</div>
-        <div class="table-scroll">
-        <table class="fixtures-table" role="table" aria-label="Fixtures for ${dateStr}">
-          <thead>
-            <tr><th scope="col">Time</th><th scope="col">Team 1</th><th scope="col"></th><th scope="col">Team 2</th></tr>
-          </thead>
-          <tbody>`;
+          <div class="table-scroll">
+            <table class="fixtures-table" role="table" aria-label="Fixtures for ${dateStr}">
+              <thead>
+                <tr>
+                  <th scope="col">Time</th>
+                  <th scope="col">Team 1</th>
+                  <th scope="col"></th>
+                  <th scope="col">Team 2</th>
+                </tr>
+              </thead>
+              <tbody>`;
         byDate[dateStr].forEach(f => {
           html += `<tr>
-              <td>${new Date(f.Time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</td>
-              <td class="curl">${curlText(f['Team 1'] || "")}</td>
-              <td></td>
-              <td class="curl">${curlText(f['Team 2'] || "")}</td>
-            </tr>`;
+            <td>${new Date(f.Time).toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})}</td>
+            <td class="curl">${curlText(f['Team 1'])}</td>
+            <td></td>
+            <td class="curl">${curlText(f['Team 2'])}</td>
+          </tr>`;
         });
         html += `</tbody></table></div>`;
       });
       container.innerHTML = html;
     }
+
+    // Results page (unchanged layout)
     function renderResults(results, fixtures) {
       const fixtureDateMap = {};
       fixtures.forEach(fix => {
@@ -1348,40 +1296,42 @@
         byDate[dateVal].push(r);
       });
       let html = '';
-      Object.keys(byDate).sort((a, b) => new Date(a) - new Date(b)).forEach(dateStr => {
+      Object.keys(byDate).sort((a,b) => new Date(a) - new Date(b)).forEach(dateStr => {
         html += `<div class="date-heading">${dateStr}</div>
-        <div class="table-scroll" role="table" aria-label="Results for ${dateStr}">
-          <table class="results-table" role="grid">
-            <thead>
-              <tr>
-                <th scope="col">Avg 1</th>
-                <th scope="col">Team 1</th>
-                <th scope="col">Score</th>
-                <th scope="col" class="divider-cell" aria-hidden="true"></th>
-                <th scope="col">Score</th>
-                <th scope="col">Team 2</th>
-                <th scope="col">Avg 2</th>
-              </tr>
-            </thead>
-            <tbody>`;
+          <div class="table-scroll" role="table" aria-label="Results for ${dateStr}">
+            <table class="results-table" role="grid">
+              <thead>
+                <tr>
+                  <th scope="col">Avg 1</th>
+                  <th scope="col">Team 1</th>
+                  <th scope="col">Score</th>
+                  <th scope="col" class="divider-cell" aria-hidden="true"></th>
+                  <th scope="col">Score</th>
+                  <th scope="col">Team 2</th>
+                  <th scope="col">Avg 2</th>
+                </tr>
+              </thead>
+              <tbody>`;
         byDate[dateStr].forEach(r => {
           const win1 = +r['Legs 1'] > +r['Legs 2'];
           const win2 = +r['Legs 2'] > +r['Legs 1'];
           let rowClass = win1 ? "winner1" : win2 ? "winner2" : "";
           html += `<tr class="result-row ${rowClass}">
             <td>${r['Avg 1']||""}</td>
-            <td class="curl${win1?" winner-cell":""}" style="text-align:center;">${curlText(r['Team 1']||"")}${win1?' <span class="winner-icon" aria-label="Winner">🏆</span>':''}</td>
-            <td style="text-align:center;"${win1?' class="winner-cell"':''}>${r['Legs 1']==0?"0":r['Legs 1']||"0"}</td>
+            <td class="curl${win1 ? " winner-cell" : ""}">${curlText(r['Team 1'])}${win1 ? ' <span class="winner-icon" aria-label="Winner">🏆</span>' : ''}</td>
+            <td${win1 ? ' class="winner-cell"' : ''} style="text-align:center;">${r['Legs 1'] || "0"}</td>
             <td class="divider-cell" aria-hidden="true"><div class="divider-line"></div></td>
-            <td style="text-align:center;"${win2?' class="winner-cell"':''}>${r['Legs 2']==0?"0":r['Legs 2']||"0"}</td>
-            <td class="curl${win2?" winner-cell":""}" style="text-align:center;">${curlText(r['Team 2']||"")}${win2?' <span class="winner-icon" aria-label="Winner">🏆</span>':''}</td>
-            <td>${r['Avg 2']||""}</td>
+            <td${win2 ? ' class="winner-cell"' : ''} style="text-align:center;">${r['Legs 2'] || "0"}</td>
+            <td class="curl${win2 ? " winner-cell" : ""}">${curlText(r['Team 2'])}${win2 ? ' <span class="winner-icon" aria-label="Winner">🏆</span>' : ''}</td>
+            <td>${r['Avg 2'] || ""}</td>
           </tr>`;
         });
         html += `</tbody></table></div>`;
       });
       document.getElementById('resultsContainer').innerHTML = html || '';
     }
+
+    // Standings page
     function renderStandingsTables() {
       const A = standingsCache.filter(s => s.Group?.toUpperCase() === 'A').sort((a,b) => b.Points - a.Points || b.LD - a.LD);
       const B = standingsCache.filter(s => s.Group?.toUpperCase() === 'B').sort((a,b) => b.Points - a.Points || b.LD - a.LD);
@@ -1403,53 +1353,52 @@
           <th scope="col">Avg</th>
         </tr>
       </thead><tbody>`;
-      arr.forEach((s, i) => {
+      arr.forEach((s,i) => {
         let groupClass = i < 3 ? "gold" : i < 6 ? "silver" : "elim";
         html += `<tr class="stand-row ${groupClass}">
           <td class="pos-cell">${i + 1}</td>
-          <td class="curl" style="text-align:center;"><img class="stand-teamlogo" src="${TEAM_LOGOS[s.Team] || ''}" alt="">${curlText(s.Team)}</td>
+          <td>${s.Team}</td>
           <td style="text-align:center;">${s.P}</td>
           <td style="text-align:center;">${s.W}</td>
           <td style="text-align:center;">${s.L}</td>
           <td style="text-align:center;">${s.LF || 0}</td>
           <td style="text-align:center;">${s.LA || 0}</td>
           <td style="text-align:center;">${s.LD || 0}</td>
-          <td class="stand-points" style="text-align:center;">${s.Points}</td>
+          <td style="text-align:center;">${s.Points}</td>
           <td style="text-align:center;">${s.Avg}</td>
         </tr>`;
       });
       html += "</tbody></table></div>";
       return html;
     }
+
+    // Squads page
     function renderSquads(squads) {
       const container = document.getElementById('squadsContainer');
-      if (!squads.length) {
-        container.innerHTML = 'Loading...';
-        return;
-      }
+      if (!squads.length) { container.innerHTML = 'Loading...'; return; }
       const teams = [...new Set(squads.map(s => s.Team))];
       let html = '';
       teams.forEach(team => {
-        const logo = TEAM_LOGOS[team] || "";
         const players = squads.filter(s => s.Team === team).map(p =>
-          `<div class="squad-player-name curl" tabindex="0" role="button" aria-pressed="false" onclick="showPlayerPopup('${p.Player.replace(/'/g, "\\'")}')" onkeydown="if(event.key==='Enter'||event.key===' ') {event.preventDefault(); showPlayerPopup('${p.Player.replace(/'/g, "\\'")}');}">
+          `<div class="squad-player-name curl" tabindex="0" role="button" aria-pressed="false" onclick="showPlayerPopup('${p.Player.replace(/'/g,"\\'")}')" onkeydown="if(event.key==='Enter'||event.key===' ') {event.preventDefault(); showPlayerPopup('${p.Player.replace(/'/g,"\\'")}');}">
             ${curlText(p.Player)}
           </div>`
         ).join('');
         html += `<div class="squad-team-card" role="region" aria-label="Team ${team}">
-          <div class="squad-logo-frame"><img src="${logo}" alt="${team} logo"></div>
           <div class="squad-team-name curl">${curlText(team)}</div>
           <div class="squad-players">${players}</div>
         </div>`;
       });
       container.innerHTML = html;
     }
+
+    // Stat Highlights
     function renderStatHighlights(stats, bestLegsSheet, id = "stat-highlights") {
       const defs = [
-        {key: "3 Dart Avg", label: "Best 3-Dart Avg"},
-        {key: "First 9 Avg", label: "Best First 9 Avg"},
-        {key: "Legs Won", label: "Most Legs Won"},
-        {key: "High Finish", label: "Highest Finish"}
+        { key: "3 Dart Avg", label: "Best 3-Dart Avg" },
+        { key: "First 9 Avg", label: "Best First 9 Avg" },
+        { key: "Legs Won", label: "Most Legs Won" },
+        { key: "High Finish", label: "Highest Finish" }
       ];
       const eligible = stats.filter(p => Number(p["Match Played"]) >= 2);
       let html = `<div class="stat-high-bar">`;
@@ -1457,39 +1406,29 @@
         const sorted = [...eligible].sort((a, b) => +b[def.key] - +a[def.key]);
         const player = sorted[0];
         if (!player) return;
-        const team = player.Team || "";
-        const logo = TEAM_LOGOS[team] || "";
         let val = player[def.key] ?? "—";
         html += `<div class="stat-high-card">
           <div class="stat-high-label">${def.label}</div>
           <div class="stat-high-main">${val}</div>
-          <div class="stat-high-player">
-            ${logo ? `<img src="${logo}" alt="${team} logo">` : ""}
-            ${player.Player} <br> <span>${player.Team}</span>
-          </div>
+          <div class="stat-high-player">${player.Player}<br><span>${player.Team}</span></div>
         </div>`;
       });
       if (bestLegsSheet && bestLegsSheet.length) {
         let best = bestLegsSheet.sort((a, b) => Number(a["Best Leg"]) - Number(b["Best Leg"]))[0];
-        const logo = TEAM_LOGOS[best.Team] || "";
         html += `<div class="stat-high-card">
           <div class="stat-high-label">Best Leg</div>
           <div class="stat-high-main">${best["Best Leg"]}</div>
-          <div class="stat-high-player">
-            ${logo ? `<img src="${logo}" alt="${best.Team} logo">` : ""}
-            ${best.Players} <br> <span>${best.Team}</span>
-          </div>
+          <div class="stat-high-player">${best.Players}<br><span>${best.Team}</span></div>
         </div>`;
       }
       html += "</div>";
       document.getElementById(id).innerHTML = html;
     }
+
+    // Team filter dropdown
     function renderTeamFilter(stats) {
       const bar = document.getElementById('team-filter-bar');
-      if (!stats || !stats.length) {
-        bar.innerHTML = '';
-        return;
-      }
+      if (!stats || !stats.length) { bar.innerHTML = ''; return; }
       const allTeams = Array.from(new Set(stats.map(p => p.Team).filter(Boolean))).sort();
       let html = `<select class="team-filter-dropdown" onchange="setTeamFilter(this.value)" aria-label="Filter stats by team">
         <option value="">All Teams</option>`;
@@ -1503,6 +1442,8 @@
       teamFilter = team || null;
       renderStats(statsCache, bestLegCache);
     };
+
+    // Stats table
     function renderStats(stats, bestLegsSheet) {
       const searchInput = document.getElementById('stats-search');
       if (searchInput && !searchInput._listenerAdded) {
@@ -1515,7 +1456,10 @@
       let filteredStats = stats;
       if (teamFilter) filteredStats = filteredStats.filter(p => p.Team === teamFilter);
       if (statsSearchTerm) {
-        filteredStats = filteredStats.filter(p => (p.Player && p.Player.toLowerCase().includes(statsSearchTerm)) || (p.Team && p.Team.toLowerCase().includes(statsSearchTerm)));
+        filteredStats = filteredStats.filter(
+          p => (p.Player && p.Player.toLowerCase().includes(statsSearchTerm)) ||
+            (p.Team && p.Team.toLowerCase().includes(statsSearchTerm))
+        );
       }
       if (statsSortKey) {
         filteredStats = [...filteredStats].sort((a, b) => {
@@ -1529,7 +1473,9 @@
         });
       }
       if (filteredStats.length) {
-        const wantedHeaders = Object.keys(filteredStats[0]).filter(h => h && h !== "" && h !== undefined && h !== null && !STATS_HIDE_COLUMNS.has(h));
+        const wantedHeaders = Object.keys(filteredStats[0]).filter(
+          h => h && h !== "" && h !== undefined && h !== null && !STATS_HIDE_COLUMNS.has(h)
+        );
         let table = "<div class='table-scroll'><table role='grid'><thead><tr>";
         wantedHeaders.forEach(h => {
           let dirArrow = "";
@@ -1546,8 +1492,12 @@
             if (h === "Player") {
               return `<td class="stat-player curl" title="${val}" onclick="showPlayerPopup('${row.Player.replace(/'/g, "\\'")}')" tabindex="0" role="button" aria-pressed="false">${curlText(val)}</td>`;
             }
-            if (h === "Team" && TEAM_LOGOS[val]) {
-              return `<td class="stat-team curl" title="${val}"><img src="${TEAM_LOGOS[val]}" alt="${val}" style="width:12px;height:12px;vertical-align:middle;margin-right:2px;">${curlText(val)}</td>`;
+            if (h === "Team") {
+              // Team logos removed as per request, so just text
+              return `<td class="stat-team curl" title="${val}">${curlText(val)}</td>`;
+            }
+            if (h === "100+ Scores" && (val === null || val === undefined || val === "" || val === "-")) {
+              val = "0"; // Fix 100+ count showing dash
             }
             return `<td>${val}</td>`;
           }).join("") + "</tr>";
@@ -1567,11 +1517,12 @@
       }
       renderStats(statsCache, bestLegCache);
     };
+
+    // Player popup
     function showPlayerPopup(playerName) {
       let p = statsCache.find(s => s.Player === playerName);
       if (!p) return;
-      let logo = p.Team && TEAM_LOGOS[p.Team] ? `<img src="${TEAM_LOGOS[p.Team]}" alt="${p.Team} logo" style="width:18px;height:18px;border-radius:5px;vertical-align:middle;margin-bottom:0.15em;">` : "";
-      let card = `<div id="player-popup-head" class="popup-head">${logo}${curlText(p.Player)}</div>
+      let card = `<div id="player-popup-head" class="popup-head">${curlText(p.Player)}</div>
         <div class="popup-team">${curlText(p.Team || "")}</div>
         <div style="color:var(--primary);font-size:1em;font-weight:700;margin-bottom:0.3em;">Stats</div>
         ${Object.keys(p).map(h => {
@@ -1585,10 +1536,10 @@
       popup.setAttribute("aria-hidden", "false");
       popup.focus();
     }
-    window.savePlayerCard = function(e) {
+    window.savePlayerCard = function (e) {
       e.stopPropagation();
       let cardNode = document.querySelector("#player-popup .popup-card");
-      html2canvas(cardNode, {backgroundColor: "#fff", scale: 3}).then(function(canvas) {
+      html2canvas(cardNode, { backgroundColor: "#fff", scale: 3 }).then(function (canvas) {
         let link = document.createElement("a");
         link.download = "Player-Card.png";
         link.href = canvas.toDataURL("image/png");
@@ -1602,41 +1553,52 @@
         popup.setAttribute("aria-hidden", "true");
       }
     }
+
+    // Player Comparison
     function renderPlayerComparisonSelectors() {
       const container = document.querySelector("#compare .player-select-container");
       if (!container || !statsCache.length) return;
+
       container.innerHTML = "";
       const NUM_SELECTS = 4;
       const uniquePlayers = Array.from(new Set(statsCache.map(p => p.Player))).sort((a, b) => a.localeCompare(b));
+
       for (let i = 0; i < NUM_SELECTS; i++) {
         const select = document.createElement("select");
         select.setAttribute("aria-label", `Select player ${i + 1}`);
         select.dataset.idx = i;
+
         const optionDefault = document.createElement("option");
         optionDefault.value = "";
         optionDefault.textContent = i < 2 ? `Select player ${i + 1} (required)` : `Select player ${i + 1} (optional)`;
-        optionDefault.disabled = i < 2;
+        optionDefault.disabled = (i < 2);
         optionDefault.selected = true;
         select.appendChild(optionDefault);
+
         uniquePlayers.forEach(player => {
           const opt = document.createElement("option");
           opt.value = player;
           opt.textContent = player;
           select.appendChild(opt);
         });
+
         container.appendChild(select);
       }
+
       container.querySelectorAll("select").forEach(sel => {
         sel.addEventListener("change", updateCompareButtonState);
       });
+
       document.getElementById("compare-results").innerHTML = "";
       updateCompareButtonState();
     }
+
     function updateCompareButtonState() {
       const selects = document.querySelectorAll("#compare .player-select-container select");
       const selectedValues = Array.from(selects).map(s => s.value).filter(v => v);
       const compareBtn = document.getElementById("compare-btn");
       const uniquePlayers = [...new Set(selectedValues)];
+
       if (uniquePlayers.length >= 2) {
         compareBtn.disabled = false;
         compareBtn.setAttribute("aria-disabled", "false");
@@ -1645,116 +1607,130 @@
         compareBtn.setAttribute("aria-disabled", "true");
       }
     }
+
     function renderPlayerComparison() {
       const selects = document.querySelectorAll("#compare .player-select-container select");
       const selectedPlayers = Array.from(selects).map(s => s.value).filter(v => v);
       const uniquePlayers = [...new Set(selectedPlayers)];
+
       if (uniquePlayers.length < 2) {
         alert("Please select at least two different players to compare.");
         return;
       }
+
       const container = document.getElementById("compare-results");
       container.innerHTML = "";
+
       const keysToShow = [
         "Match Played", "Sets Played", "Sets Won", "Sets Lost", "Win Rate (Sets)",
         "Legs Played", "Legs Won", "Legs Lost", "Win Rate (Legs)",
         "3 Dart Avg", "First 9 Avg", "High Finish", "Checkout %",
         "180s", "100+ Scores", "Best Leg", "High Checkout"
       ];
+
       let thead = "<tr><th class='metric-header' scope='col'>Metric</th>";
       uniquePlayers.forEach(playerName => {
-        const playerData = statsCache.find(p => p.Player === playerName);
-        if (!playerData) return;
-        const teamLogo = playerData.Team && TEAM_LOGOS[playerData.Team]
-          ? `<img src="${TEAM_LOGOS[playerData.Team]}" alt="${playerData.Team} logo" draggable="false"> `
-          : "";
-        thead += `<th class="player-name-cell" scope="col" title="${playerName}">${teamLogo}${playerName}</th>`;
+        thead += `<th class="player-name-cell" scope="col" title="${playerName}">${playerName}</th>`;
       });
       thead += "</tr>";
+
       let tbody = "";
       keysToShow.forEach(metric => {
         tbody += `<tr><th class="metric-header" scope="row">${metric}</th>`;
         uniquePlayers.forEach(playerName => {
           const playerData = statsCache.find(p => p.Player === playerName);
           let val = playerData && metric in playerData ? playerData[metric] : "—";
+
           if (metric.includes("Win Rate") && val !== "—") {
             val = isNaN(parseFloat(val)) ? "—" : `${Math.round(parseFloat(val) * 100)}%`;
+          }
+          if (metric === "100+ Scores" && (val === null || val === undefined || val === "" || val === "-")) {
+            val = "0";
           }
           if (val === "" || val === undefined || val === null) val = "—";
           tbody += `<td>${val}</td>`;
         });
         tbody += "</tr>";
       });
+
       const tableHtml = `<table aria-label="Player comparison table">
         <thead>${thead}</thead>
         <tbody>${tbody}</tbody>
       </table>`;
+
       container.innerHTML = tableHtml;
-      window.scrollTo({top: 0, behavior: 'smooth'});
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-    document.addEventListener("DOMContentLoaded", () => {
-      document.querySelectorAll('.nav-bar-glass .nav-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-          const tab = btn.getAttribute('data-tab');
-          showTab(tab);
-        });
+
+    // Side nav open/close handlers
+    const sideNav = document.getElementById("side-nav");
+    const menuToggle = document.querySelector(".menu-toggle");
+    const closeBtn = sideNav.querySelector(".close-btn");
+
+    function openSideNav() {
+      sideNav.classList.add("open");
+      menuToggle.setAttribute("aria-expanded", "true");
+      sideNav.focus();
+    }
+    function closeSideNav() {
+      sideNav.classList.remove("open");
+      menuToggle.setAttribute("aria-expanded", "false");
+      menuToggle.focus();
+    }
+    menuToggle.addEventListener("click", () => {
+      if (sideNav.classList.contains("open")) {
+        closeSideNav();
+      } else {
+        openSideNav();
+      }
+    });
+    closeBtn.addEventListener("click", closeSideNav);
+
+    // Close side nav on outside click
+    document.addEventListener("click", e => {
+      if (sideNav.classList.contains("open") && !sideNav.contains(e.target) && e.target !== menuToggle) {
+        closeSideNav();
+      }
+    });
+
+    // Keyboard navigation for side nav buttons
+    sideNav.querySelectorAll("nav button").forEach(btn => {
+      btn.addEventListener("click", e => {
+        const tab = btn.getAttribute("data-tab");
+        showTab(tab);
       });
-      document.getElementById("compare-btn").addEventListener("click", renderPlayerComparison);
-      document.getElementById("nav-burger").addEventListener("click", toggleOverlayNav);
+    });
+
+    // On page load
+    document.addEventListener("DOMContentLoaded", () => {
       setupWhatsAppShare();
       loadData();
-      setInterval(loadData, 60000);
+
+      document.getElementById("compare-btn").addEventListener("click", renderPlayerComparison);
     });
-    // Overlay Nav handlers
-    function toggleOverlayNav() {
-      const overlay = document.getElementById('nav-overlay');
-      const burger = document.getElementById('nav-burger');
-      const expanded = burger.getAttribute('aria-expanded') === 'true';
-      if (expanded) {
-        overlay.classList.remove('active');
-        burger.setAttribute('aria-expanded', 'false');
-        overlay.setAttribute('aria-hidden', 'true');
+
+    // Stats sort toggle
+    window.setStatsSort = function (h) {
+      if (statsSortKey === h) {
+        statsSortDir = -statsSortDir;
       } else {
-        overlay.classList.add('active');
-        burger.setAttribute('aria-expanded', 'true');
-        overlay.setAttribute('aria-hidden', 'false');
-        populateOverlayNav();
+        statsSortKey = h;
+        statsSortDir = 1;
       }
-    }
-    function closeOverlayNav() {
-      const overlay = document.getElementById('nav-overlay');
-      const burger = document.getElementById('nav-burger');
-      if (overlay.classList.contains('active')) {
-        overlay.classList.remove('active');
-        burger.setAttribute('aria-expanded', 'false');
-        overlay.setAttribute('aria-hidden', 'true');
-      }
-    }
-    function populateOverlayNav() {
-      const nav = document.querySelector('#nav-overlay nav');
-      nav.innerHTML = '';
-      const tabs = [
-        {id: 'dashboard', icon: 'home', label: 'Home'},
-        {id: 'fixtures', icon: 'calendar-days', label: 'Fixtures'},
-        {id: 'results', icon: 'list-start', label: 'Results'},
-        {id: 'standings', icon: 'trophy', label: 'Standings'},
-        {id: 'squads', icon: 'users', label: 'Squads'},
-        {id: 'stats', icon: 'bar-chart', label: 'Stats'},
-        {id: 'live', icon: 'play-circle', label: 'Live'},
-        {id: 'compare', icon: 'columns', label: 'Compare'}
-      ];
-      tabs.forEach(tab => {
-        const btn = document.createElement('button');
-        btn.className = 'nav-btn-overlay';
-        btn.setAttribute('data-tab', tab.id);
-        btn.innerHTML = `<i class="lucide lucide-${tab.icon}"></i>${tab.label}`;
-        btn.addEventListener('click', () => {
-          showTab(tab.id);
-          closeOverlayNav();
-        });
-        nav.appendChild(btn);
-      });
-    }
+      renderStats(statsCache, bestLegCache);
+    };
+
+    // Show player popup
+    window.showPlayerPopup = showPlayerPopup;
+    window.hidePlayerPopup = hidePlayerPopup;
+    window.savePlayerCard = window.savePlayerCard;
+
   </script>
+
+  <!-- Player popup -->
+  <div id="player-popup" onclick="hidePlayerPopup(event)" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="player-popup-head" tabindex="-1">
+    <div class="popup-card" role="document"></div>
+    <button class="popup-close" onclick="hidePlayerPopup(event)" aria-label="Close player card">&times;</button>
+  </div>
 </body>
 </html>
