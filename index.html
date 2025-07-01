@@ -2,16 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta property="og:title" content="Royal Darts Premier League 2025" />
-  <meta property="og:description" content="Follow Fixtures, Standings, Results and Stats of the RDPL 2025 - India's premier team darts league!" />
-  <meta property="og:image" content="https://rdpl25.vercel.app/logo.png" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Royal Darts Premier League 2025" />
-  <meta name="twitter:image" content="https://rdpl25.vercel.app/logo.png" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
   <title>Royal Darts Premier League 2025</title>
   <meta name="theme-color" content="#171e30">
-  <link rel="icon" href="logo.png" />
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/174/174855.png" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lucide-static@0.322.0/font/lucide.css"/>
   <style>
     :root {
@@ -98,18 +92,19 @@
     .stand-row.gold {border-left: 7px solid var(--gold);}
     .stand-row.silver {border-left: 7px solid var(--silver);}
     .stand-row.elim {border-left: 7px solid var(--eliminated);}
+    .stand-badge { font-size: 0.93em; vertical-align: middle; margin-left: 6px;}
     .stand-teamlogo { width: 20px; height: 20px; border-radius: 4px; vertical-align: middle; margin-right: 7px;}
     .stand-points {font-weight:800; font-size:1.03em;}
-    .cup-badge {font-size:0.93em; font-weight:700; border-radius:6px; padding:2px 9px; display:inline-block;}
-    .cup-gold {background:var(--gold);color:#2e2e2e;}
-    .cup-silver {background:var(--silver);color:#232323;}
-    .cup-elim {background:#e6e6e6;color:#b4312a;}
     /* Standings legend */
     .stand-legend {text-align:center;font-size:0.95em;margin-bottom:0.7em;}
     .stand-legend span {display:inline-block;border-radius:4px;padding:2px 9px;margin:0 5px;font-weight:700;}
     .stand-legend .gold {background:var(--gold);color:#2e2e2e;}
     .stand-legend .silver {background:var(--silver);color:#232323;}
     .stand-legend .elim {background:#ffdbdb;color:#99111c;}
+    .cup-badge {font-size:0.95em; font-weight:700; border-radius:6px; padding:2px 9px; display:inline-block;}
+    .cup-gold {background:var(--gold);color:#2e2e2e;}
+    .cup-silver {background:var(--silver);color:#232323;}
+    .cup-elim {background:#e6e6e6;color:#b4312a;}
     /* Results: winner left border, icon, bold */
     .result-row { border-left: 0px solid transparent; }
     .result-row.winner1 { border-left: 5px solid var(--gold); }
@@ -127,7 +122,6 @@
       letter-spacing: 0.01em;
     }
     /* Stats */
-    .stat-tooltip {color:#4b5563;background:#f7fafd;border-radius:6px;padding:6px 11px;font-size:0.98em;font-weight:600;text-align:center;margin:0 auto 0.37em auto;box-shadow:0 2px 8px #00000013;max-width:340px;}
     #stats-table th, #stats-table td { min-width: 74px; max-width: 108px;}
     #stats-table td.stat-player, #stats-table td.stat-team { white-space:pre-line; word-break:break-word; line-height:1.13; cursor:pointer;}
     #stats-table td.stat-team img {width:12px;height:12px;vertical-align:middle;margin-right:2px;}
@@ -137,12 +131,11 @@
       animation:fadeIn 0.14s; }
     @keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
     #player-popup .popup-card { background:#fff; border-radius:12px; box-shadow:0 2px 14px #b1e1ff33;
-      padding:1em 1.1em; color:var(--primary-dark); min-width:160px;max-width:98vw; text-align:center; font-weight:700; position:relative;}
-    #player-popup .popup-head {font-size:1.18em; font-weight:900; margin-bottom:0.23em;}
-    #player-popup .popup-team {color:var(--primary-dark);font-weight:700;margin-bottom:0.22em;}
-    #player-popup .popup-label {color:#212b36;font-size:0.98em;margin-top:0.11em;}
+      padding:1em 1.1em; color:var(--primary-dark); min-width:130px;max-width:93vw; text-align:center; font-weight:700;}
+    #player-popup .popup-head {font-size:1.08em; font-weight:800; margin-bottom:0.18em;}
+    #player-popup .popup-team {color:var(--primary-dark);font-weight:700;margin-bottom:0.18em;}
+    #player-popup .popup-label {color:#212b36;font-size:0.92em;margin-top:0.11em;}
     #player-popup .popup-close {color:#222; font-size:1.2em; background:none; border:none; position:absolute;top:1.1em;right:1.1em;cursor:pointer;}
-    #player-popup .popup-download { margin-top: 0.8em; background: var(--accent); color: #fff; border:none; border-radius:7px; padding: 7px 18px; font-weight: 800; font-size:1em; box-shadow: 0 2px 7px #38b6ff18; cursor: pointer;}
     /* Squads premium card grid */
     .squad-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(168px,1fr)); gap:1.13em; }
     .squad-team-card {
@@ -219,7 +212,6 @@
     .nav-glass-pill .nav-label { font-size:0.81em; }
     .footer-icons {margin-top:1.15rem;text-align:center;display:flex;justify-content:center;align-items:center;gap:1.2rem;}
     .footer-icons img {height:17px;width:17px;vertical-align:middle;border-radius:3px;background:#fff;border:1px solid #bfe4fa;box-shadow:0 1px 4px rgba(0,0,0,0.02);}
-    .footer-icons .wa-share {background:#25d366;border-radius:6px;padding:0 4px;display:inline-flex;align-items:center;}
     .footer-suca {margin-top:0.6rem;text-align:center;color:#bdbdbd;font-size:0.88rem;}
     @media (max-width:540px) {
       main {padding:0.62rem 0.01rem 3.6rem 0.01rem;}
@@ -285,9 +277,6 @@
           <span class="gold"><i class="lucide lucide-trophy" style="font-size:1.09em;vertical-align:middle;margin-right:3px;"></i>Gold Cup</span>
           <span class="silver"><i class="lucide lucide-award" style="font-size:1.05em;vertical-align:middle;margin-right:3px;"></i>Silver Cup</span>
           <span class="elim"><i class="lucide lucide-x-circle" style="font-size:1.03em;vertical-align:middle;margin-right:3px;"></i>Eliminated</span>
-          <span class="gold" style="margin-left:1.5em;">EF = Events For</span>
-          <span class="silver">EA = Events Against</span>
-          <span class="elim">ED = Event Diff.</span>
         </div>
         <h3>Standings</h3>
         <div class="standings-group-title">Group A</div>
@@ -306,7 +295,6 @@
     <!-- STATS -->
     <section id="stats" class="section">
       <div class="card"><h3>Player Stats</h3>
-        <div class="stat-tooltip">Tap any player name to see full player card and download/share!</div>
         <div id="stat-highlights"></div>
         <div class="team-filter-bar" id="team-filter-bar"></div>
         <input id="stats-search" type="text" placeholder="Search player or team..." style="margin-bottom:0.8em;padding:0.33em 0.49em;font-size:0.96em;width:98vw;max-width:210px;border-radius:5px;border:1px solid #e2ecf4;display:block;margin:auto;">
@@ -340,12 +328,9 @@
     <div class="footer-icons">
       <a href="https://n01darts.com/n01/tournament/comp.php?id=t_NI0o_4352&tab=live" target="_blank"><img src="https://n01darts.com/favicon.ico" alt="Nakka" title="Watch Live on Nakka" /></a>
       <a href="https://www.instagram.com/royaldarts_rcgc" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram" title="Follow us on Instagram" /></a>
-      <a href="#" onclick="shareWhatsapp(event)" class="wa-share" title="Share on WhatsApp"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" style="background:#25d366;border-radius:3px;height:17px;width:17px;"><span style="display:none">WhatsApp</span></a>
     </div>
     <div class="footer-suca">Built by SUCA Analytics</div>
   </footer>
-  <!-- html2canvas for download feature -->
-  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
   <script>
     // TEAM LOGOS, API URL
     const TEAM_LOGOS = {
@@ -368,6 +353,7 @@
     };
     const API_URL = 'https://script.google.com/macros/s/AKfycby6BCE5cyBaxpz-Jt-TeRH6k5Jeq-vqelr8S7rt32e7wFjBzEvuBrYi4yPaEBz2Kari/exec';
 
+    // Nav functionality
     function showTab(tabId) {
       document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
       document.querySelectorAll('.nav-item').forEach(btn => btn.classList.remove('active'));
@@ -378,12 +364,14 @@
       });
       window.scrollTo({top:0,behavior:'smooth'});
     }
+    // Data cache
     let fixturesCache = [], standingsCache = [], statsCache = [], bestLegCache = [], squadsCache = [], resultsCache = [];
     let statsSortKey = null, statsSortDir = 1, statsSearchTerm = "", teamFilter = null;
     const STATS_HIDE_COLUMNS = new Set([
       "Keep", "Break", "Second Legs", "Break Legs", "Total Score", "Total Darts", "Group", "Best Leg", "Worst Leg"
     ]);
 
+    // API Fetch & Render all
     async function loadData() {
       try {
         const res = await fetch(API_URL);
@@ -406,6 +394,7 @@
         renderTeamFilter(statsCache);
       } catch (err) {console.error('Failed to load data:', err);}
     }
+    // --- DASHBOARD: Today's Fixtures ---
     function renderDashboardFixtures() {
       const [istStart, istEnd] = getISTTodayRange();
       const todaysFixtures = fixturesCache.filter(fix => {
@@ -427,6 +416,7 @@
       }
       document.getElementById('dashboard-fixtures').innerHTML = html;
     }
+    // --- DASHBOARD: Standings (2 Tables, all teams, curl names, no elim/medals, centered) ---
     function renderDashboardStandingsTables() {
       const A = standingsCache.filter(s => s.Group?.toUpperCase() === 'A').sort((a,b)=>b.Points-a.Points || b.LD-a.LD);
       const B = standingsCache.filter(s => s.Group?.toUpperCase() === 'B').sort((a,b)=>b.Points-a.Points || b.LD-a.LD);
@@ -443,6 +433,7 @@
         </tr>`;
       }).join('');
     }
+    // --- FIXTURES ---
     function renderFixtures(fixtures) {
       const container = document.getElementById('fixturesTableContainer');
       if (!fixtures.length) {
@@ -476,6 +467,7 @@
       });
       container.innerHTML = html;
     }
+    // --- RESULTS (winner: left border, trophy icon, bold) ---
     function renderResults(results, fixtures) {
       const fixtureDateMap = {};
       fixtures.forEach(fix => {
@@ -531,6 +523,7 @@
       });
       document.getElementById('resultsContainer').innerHTML = html || '';
     }
+    // --- Standings Page (Cup Badge Column) ---
     function renderStandingsTables() {
       const A = standingsCache.filter(s => s.Group?.toUpperCase() === 'A').sort((a,b)=>b.Points-a.Points || b.LD-a.LD);
       const B = standingsCache.filter(s => s.Group?.toUpperCase() === 'B').sort((a,b)=>b.Points-a.Points || b.LD-a.LD);
@@ -539,7 +532,7 @@
     }
     function standingsTable(arr) {
       let html = `<div class="table-scroll"><table class="standings-table"><thead>
-        <tr><th>Pos</th><th>Team</th><th>P</th><th>W</th><th>L</th><th>EF</th><th>EA</th><th>ED</th><th>Pts</th><th>Avg</th><th>Cup</th></tr>
+        <tr><th>Pos</th><th>Team</th><th>P</th><th>W</th><th>L</th><th>Pts</th><th>Avg</th><th>Cup</th></tr>
       </thead><tbody>`;
       arr.forEach((s,i) => {
         let cup, cupClass;
@@ -553,9 +546,6 @@
           <td style="text-align:center;">${s.P}</td>
           <td style="text-align:center;">${s.W}</td>
           <td style="text-align:center;">${s.L}</td>
-          <td style="text-align:center;">${s.LF??s['EF']}</td>
-          <td style="text-align:center;">${s.LA??s['EA']}</td>
-          <td style="text-align:center;">${s.LD??s['ED']}</td>
           <td class="stand-points" style="text-align:center;">${s.Points}</td>
           <td style="text-align:center;">${s.Avg}</td>
           <td style="text-align:center;"><span class="${cupClass}">${cup}</span></td>
@@ -564,6 +554,7 @@
       html += "</tbody></table></div>";
       return html;
     }
+    // --- SQUADS (premium card grid) ---
     function renderSquads(squads) {
       const container = document.getElementById('squadsContainer');
       if (!squads.length) { container.innerHTML = 'Loading...'; return; }
@@ -582,6 +573,7 @@
       });
       container.innerHTML = html;
     }
+    // --- STATS ---
     function renderStatHighlights(stats, bestLegsSheet, id="stat-highlights") {
       const defs = [
         {key:"3 Dart Avg", label:"Best 3-Dart Avg"},
@@ -607,6 +599,7 @@
           </div>
         </div>`;
       });
+      // Best Leg (from sheet)
       if (bestLegsSheet && bestLegsSheet.length) {
         let best = bestLegsSheet.sort((a,b)=>Number(a["Best Leg"])-Number(b["Best Leg"]))[0];
         const logo = TEAM_LOGOS[best.Team] || "";
@@ -672,10 +665,9 @@
         );
         let table = "<div class='table-scroll'><table><thead><tr>";
         wantedHeaders.forEach(h => {
-          let display = h.replace("Legs", "Events").replace("LF","EF").replace("LA","EA").replace("LD","ED");
           let dirArrow = "";
           if (statsSortKey === h) dirArrow = statsSortDir > 0 ? " ▲" : " ▼";
-          table += `<th onclick="setStatsSort('${h}')">${display}${dirArrow}</th>`;
+          table += `<th onclick="setStatsSort('${h}')">${h}${dirArrow}</th>`;
         });
         table += "</tr></thead><tbody>";
         filteredStats.forEach(row => {
@@ -708,38 +700,28 @@
       }
       renderStats(statsCache, bestLegCache);
     };
+    // Player pop-up functionality
     function showPlayerPopup(playerName) {
       let p = statsCache.find(s => s.Player === playerName);
       if (!p) return;
       let logo = p.Team && TEAM_LOGOS[p.Team] ? `<img src="${TEAM_LOGOS[p.Team]}" style="width:18px;height:18px;border-radius:5px;vertical-align:middle;margin-bottom:0.13em;"><br>` : "";
-      let card = `<div class="popup-card" id="popup-playercard">
+      let card = `<div class="popup-card">
         <div class="popup-head">${logo}${curlText(p.Player)}</div>
         <div class="popup-team">${curlText(p.Team||"")}</div>
         <div style="color:var(--primary);font-size:1em;font-weight:700;">Stats</div>
         ${Object.keys(p).map(h => {
           if (["Player", "Team"].includes(h) || STATS_HIDE_COLUMNS.has(h) || !p[h]) return "";
-          let disp = h.replace("Legs", "Events").replace("LF","EF").replace("LA","EA").replace("LD","ED");
-          return `<div class="popup-label"><span style="color:var(--accent);font-weight:600;">${disp}:</span> ${p[h]}</div>`;
+          return `<div class="popup-label"><span style="color:var(--accent);font-weight:600;">${h}:</span> ${p[h]}</div>`;
         }).join("")}
-        <button class="popup-download" onclick="downloadPlayerCard(event)">Download as Image</button>
       </div>`;
-      document.querySelector("#player-popup .popup-card").outerHTML = card;
+      document.querySelector("#player-popup .popup-card").innerHTML = card;
       document.getElementById("player-popup").style.display = "flex";
     }
     function hidePlayerPopup(e) {
       if (!e || !e.target || e.target.id === "player-popup" || e.target.classList.contains("popup-close"))
         document.getElementById("player-popup").style.display = "none";
     }
-    window.downloadPlayerCard = function(event) {
-      event.stopPropagation();
-      let card = document.getElementById('popup-playercard');
-      html2canvas(card, {scale:2, useCORS:true, backgroundColor:"#fff"}).then(canvas => {
-        let link = document.createElement('a');
-        link.download = 'player_card.png';
-        link.href = canvas.toDataURL('image/png');
-        link.click();
-      });
-    };
+    // IST Today util
     function getISTTodayRange() {
       const now = new Date();
       const IST_OFFSET = 330;
@@ -749,19 +731,13 @@
       const istEnd = new Date(Date.UTC(istYear, istMonth, istDay, 23, 59-IST_OFFSET, 59));
       return [istStart, istEnd, ""];
     }
+    // Utility: Curl name to two lines (without breaking inside words if possible)
     function curlText(txt) {
       if (!txt) return '';
       let parts = txt.split(" ");
       if (parts.length <= 1) return txt;
       let mid = Math.ceil(parts.length/2);
       return parts.slice(0,mid).join(" ")+"\n"+parts.slice(mid).join(" ");
-    }
-    window.shareWhatsapp = function(e) {
-      e.preventDefault();
-      const url = encodeURIComponent(window.location.href);
-      const text = encodeURIComponent("Royal Darts Premier League 2025 – Fixtures, Standings, Results, Stats:\n" + window.location.href);
-      window.open("https://wa.me/?text="+text, "_blank");
-      return false;
     }
     loadData();
     setInterval(loadData, 60000);
