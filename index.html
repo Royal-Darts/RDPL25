@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
@@ -14,7 +14,9 @@
   <link rel="icon" href="logo.png" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lucide-static@0.322.0/font/lucide.css"/>
   <meta name="theme-color" content="#171e30">
+
   <style>
+    /* === Root colors and fonts === */
     :root {
       --primary: #171e30;
       --primary2: #22355c;
@@ -28,697 +30,1710 @@
       --glass-bg: rgba(255,255,255,0.23);
       --glass-border: rgba(56,182,255,0.10);
       --nav-bg: rgba(23,30,48,0.85);
-      --nav-glass: rgba(34,53,92,0.72);
+      --nav-glass: rgba(255,255,255,0.68);
       --shadow: 0 4px 32px 0 rgba(56,182,255,0.14);
       --table-border: #e2ecf4;
       --text: #1d253c;
       --wa-green: #25D366;
+      --font-sans: 'Segoe UI', Arial, sans-serif;
+      --font-heading: 'Segoe UI Semibold', Arial, sans-serif;
     }
+
     html, body {
       background: #f7fafd;
       color: var(--text);
-      font-family: 'Segoe UI', Arial, sans-serif;
+      font-family: var(--font-sans);
       margin: 0; padding: 0; min-height: 100%;
-      height:100%;
+      height: 100%;
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
     body {
-      display:flex;
-      flex-direction:column;
-      min-height:100vh;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
       box-sizing: border-box;
+      background-image: linear-gradient(120deg, #e9f3ff 0%, #ffffff 100%);
+      font-size: 16px;
+      line-height: 1.4;
+      color: var(--text);
     }
+
+    /* === HEADER === */
     header {
       background: linear-gradient(120deg, var(--primary2) 80%, var(--accent) 120%);
       color: #fff;
-      padding: 1.08rem 0.5rem 1.08rem 0.5rem;
+      padding: 1.1rem 1.2rem;
       text-align: left;
-      display: flex; align-items: center; gap: 0.8em;
+      display: flex;
+      align-items: center;
+      gap: 0.8em;
       border-bottom: 1.5px solid #b2d9fc;
       box-shadow: 0 3px 30px #22355c0b;
-      position:sticky;
-      top:0; z-index:10;
+      position: sticky;
+      top: 0; z-index: 30;
     }
-    header img { height: 44px; margin-right: 0.65em; border-radius: 9px; box-shadow: 0 2px 8px #38b6ff11; }
-    header .titlebox { flex:1;}
-    header h1 {margin: 0; font-size: 1.15em; font-weight: 800; color: #fff; line-height: 1.09;}
-    main { max-width: 540px; margin: 0 auto 96px auto; padding: 1rem 0.14rem 0.1rem 0.14rem; width:100%; flex:1;}
-    .section { display: none; }
-    .section.active { display: block; }
+    header img {
+      height: 44px;
+      margin-right: 0.65em;
+      border-radius: 9px;
+      box-shadow: 0 2px 8px #38b6ff33;
+      user-select: none;
+    }
+    header .titlebox {
+      flex: 1;
+      user-select: none;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: 0.02em;
+      font-family: var(--font-heading);
+      text-shadow: 0 1px 6px #22355caa;
+    }
+
+    /* === MAIN CONTENT === */
+    main {
+      max-width: 540px;
+      margin: 0 auto 110px auto;
+      padding: 1rem 1rem 0.1rem 1rem;
+      width: 100%;
+      flex: 1;
+      min-height: 0; /* Fix flex container overflow in some browsers */
+      -webkit-overflow-scrolling: touch;
+    }
+
+    /* === SECTIONS === */
+    .section {
+      display: none;
+    }
+    .section.active {
+      display: block;
+      animation: fadeInSection 0.22s ease forwards;
+    }
+    @keyframes fadeInSection {
+      from {opacity: 0; transform: translateY(15px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    /* === CARDS === */
     .card {
       background: var(--card);
       border-radius: 18px;
-      box-shadow: 0 4px 28px #c3e6ff17;
-      margin-bottom: 1.19em;
-      padding: 1.09em 0.85em 1.05em 0.85em;
+      box-shadow: 0 4px 28px #c3e6ff30;
+      margin-bottom: 1.25em;
+      padding: 1.2em 1.1em 1.1em 1.1em;
+      border: 1.5px solid var(--glass-border);
+      transition: box-shadow 0.3s ease;
+    }
+    .card:hover {
+      box-shadow: 0 8px 38px #38b6ff44;
     }
     .card h3 {
-      color: var(--primary2); margin: 0 0 0.32em 0;
-      font-weight: 900; font-size:1.08em; letter-spacing:0.01em;
+      color: var(--primary2);
+      margin: 0 0 0.45em 0;
+      font-weight: 900;
+      font-size: 1.12em;
+      letter-spacing: 0.015em;
+      font-family: var(--font-heading);
+      user-select: none;
     }
+
+    /* === TABLES & SCROLL === */
     .table-scroll {
       overflow-x: auto;
       width: 100%;
       border-radius: 12px;
-      margin-bottom: 0.25em;
+      margin-bottom: 0.4em;
+      scrollbar-width: thin;
+      scrollbar-color: var(--accent) var(--primary-light);
+    }
+    .table-scroll::-webkit-scrollbar {
+      height: 7px;
+    }
+    .table-scroll::-webkit-scrollbar-track {
+      background: var(--primary-light);
+      border-radius: 12px;
+    }
+    .table-scroll::-webkit-scrollbar-thumb {
+      background: var(--accent);
+      border-radius: 12px;
     }
     table {
-      width: 100%; background: transparent;
-      border-collapse: separate; border-spacing: 0; margin: 0;
-      font-size: 1em; border: none;
+      width: 100%;
+      background: transparent;
+      border-collapse: separate;
+      border-spacing: 0;
+      margin: 0;
+      font-size: 1.05em;
+      border: none;
+      user-select: none;
     }
-    th,td {
-      padding: 0.61em 0.25em;
+    th, td {
+      padding: 0.65em 0.35em;
       text-align: center;
-      font-size: 1.08em;
+      font-size: 1.04em;
       border-bottom: 1px solid var(--table-border);
       background: transparent;
       color: var(--text);
-      word-break: break-word; white-space: pre-line; overflow-wrap: anywhere; line-height: 1.18;
+      word-break: break-word;
+      white-space: pre-line;
+      overflow-wrap: anywhere;
+      line-height: 1.18;
     }
-    th { color: var(--primary2); font-weight:800; background:transparent; border-bottom:2px solid #b2d9fc;}
-    .curl { white-space: pre-line; word-break: break-word; }
+    th {
+      color: var(--primary2);
+      font-weight: 800;
+      background: transparent;
+      border-bottom: 2px solid #b2d9fc;
+      cursor: pointer;
+      user-select: none;
+      transition: color 0.22s;
+    }
+    th:hover {
+      color: var(--accent);
+    }
+    /* Sorting arrows */
+    th.sort-asc::after {
+      content: " ▲";
+      font-size: 0.85em;
+      color: var(--accent);
+    }
+    th.sort-desc::after {
+      content: " ▼";
+      font-size: 0.85em;
+      color: var(--accent);
+    }
+
+    /* === Standings Rows === */
     .stand-row {
-      background: #fff; border-radius: 8px; font-weight: 700;
-      font-size: 1.08em; margin-bottom: 0.10em; position:relative; box-shadow: 0 2px 14px #38b6ff09; text-align: center;
-      border-left: 0px solid transparent; transition:box-shadow 0.12s;
+      background: #fff;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 1.08em;
+      margin-bottom: 0.10em;
+      position: relative;
+      box-shadow: 0 2px 14px #38b6ff10;
+      text-align: center;
+      user-select: none;
+      transition: background-color 0.3s ease;
     }
-    .stand-row .pos-cell {font-weight:900;}
-    .stand-row.gold .pos-cell {background:var(--gold)!important;color:#212b36;}
-    .stand-row.silver .pos-cell {background:var(--silver)!important;color:#1a1a1a;}
-    .stand-row.elim .pos-cell {background:var(--eliminated)!important;color:#fff;}
-    .stand-teamlogo { width: 20px; height: 20px; border-radius: 4px; vertical-align: middle; margin-right: 7px;}
-    .stand-points {font-weight:800; font-size:1.03em;}
-    .stand-legend {text-align:center;font-size:0.98em;margin-bottom:0.7em;}
-    .stand-legend span {display:inline-block;border-radius:4px;padding:2px 9px;margin:0 5px;font-weight:700;}
-    .stand-legend .gold {background:var(--gold);color:#2e2e2e;}
-    .stand-legend .silver {background:var(--silver);color:#232323;}
-    .stand-legend .elim {background:#ffdbdb;color:#99111c;}
-    .cup-badge {font-size:0.95em; font-weight:700; border-radius:6px; padding:2px 9px; display:inline-block;}
-    .date-heading { color: var(--primary2); font-size: 1.22em; font-weight: 900; margin: 1.3em 0 0.12em 0; padding-bottom: 0.14em; border-bottom: 3.5px solid var(--accent); letter-spacing: 0.01em;}
-    .result-row { border-left: 0px solid transparent; }
-    .result-row.winner1 { border-left: 5px solid var(--gold); }
-    .result-row.winner2 { border-left: 5px solid #38b6ff; }
-    .winner-cell { font-weight:800; }
-    .winner-icon { font-size:1.05em;vertical-align:middle;margin-left:2px;}
-    .divider-cell { min-width:16px;max-width:16px;padding:0;text-align:center;vertical-align:middle;}
-    .divider-line { width:2px; height:34px; background:var(--accent2); margin:0 auto; border-radius:2px; display:inline-block;}
-    .squad-team-card {margin-bottom:1.25em;padding:0.8em 0.5em;border-radius:14px;background:var(--primary-light);box-shadow:0 2px 7px #38b6ff11;}
-    .squad-logo-frame img {width:42px;height:42px;border-radius:10px;margin-bottom:5px;background:#fff;}
-    .squad-team-name {font-weight:800;font-size:1.09em;color:var(--primary2);margin-bottom:0.19em;}
-    .squad-players {display:flex;flex-wrap:wrap;gap:5px;justify-content:center;}
-    .squad-player-name {background:#fff; padding:0.25em 0.6em;border-radius:7px;font-size:0.98em;box-shadow:0 1px 3px #38b6ff09;margin-bottom:2px;}
-    #stats-tip {font-size:0.97em;color:var(--primary2);margin:0.38em 0 0.81em 0;text-align:center;background:#e9f3ff;border-radius:7px;padding:4px 8px;display:inline-block;}
-    #stats-table th, #stats-table td { min-width: 74px; max-width: 108px;}
-    #stats-table td.stat-player, #stats-table td.stat-team { white-space:pre-line; word-break:break-word; line-height:1.13; cursor:pointer;}
-    #stats-table td.stat-team img {width:12px;height:12px;vertical-align:middle;margin-right:2px;}
-    #player-popup { display:none; position:fixed; left:0; top:0; width:100vw; height:100vh; z-index:250;
-      background:rgba(34,53,92,0.92); justify-content:center; align-items:center;
-      animation:fadeIn 0.14s; }
-    @keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
-    #player-popup .popup-card { background:#fff; border-radius:12px; box-shadow:0 2px 14px #b1e1ff33;
-      padding:1em 1.1em; color:var(--primary-dark); min-width:230px;max-width:93vw; text-align:center; font-weight:700;position:relative;}
-    #player-popup .popup-head {font-size:1.08em; font-weight:800; margin-bottom:0.18em;}
-    #player-popup .popup-team {color:#22355c;font-weight:700;margin-bottom:0.18em;}
-    #player-popup .popup-label {color:#212b36;font-size:0.92em;margin-top:0.11em;}
-    #player-popup .popup-close {color:#222; font-size:1.2em; background:none; border:none; position:absolute;top:1.1em;right:1.1em;cursor:pointer;}
-    .footer-icons {margin-top:0.8rem;text-align:center;display:flex;justify-content:center;align-items:center;gap:1.25rem;}
+    .stand-row.gold .pos-cell {
+      background: var(--gold) !important;
+      color: #212b36;
+    }
+    .stand-row.silver .pos-cell {
+      background: var(--silver) !important;
+      color: #1a1a1a;
+    }
+    .stand-row.elim .pos-cell {
+      background: var(--eliminated) !important;
+      color: #fff;
+    }
+    .stand-teamlogo {
+      width: 20px;
+      height: 20px;
+      border-radius: 4px;
+      vertical-align: middle;
+      margin-right: 7px;
+      user-select: none;
+    }
+    .stand-points {
+      font-weight: 800;
+      font-size: 1.03em;
+    }
+    .stand-legend {
+      text-align: center;
+      font-size: 0.98em;
+      margin-bottom: 0.7em;
+      user-select: none;
+    }
+    .stand-legend span {
+      display: inline-block;
+      border-radius: 4px;
+      padding: 2px 9px;
+      margin: 0 5px;
+      font-weight: 700;
+    }
+    .stand-legend .gold {
+      background: var(--gold);
+      color: #2e2e2e;
+    }
+    .stand-legend .silver {
+      background: var(--silver);
+      color: #232323;
+    }
+    .stand-legend .elim {
+      background: #ffdbdb;
+      color: #99111c;
+    }
+
+    /* === Date heading for results & fixtures */
+    .date-heading {
+      color: var(--primary2);
+      font-size: 1.22em;
+      font-weight: 900;
+      margin: 1.3em 0 0.15em 0;
+      padding-bottom: 0.14em;
+      border-bottom: 3.5px solid var(--accent);
+      letter-spacing: 0.02em;
+      user-select: none;
+    }
+
+    /* === Result rows === */
+    .result-row {
+      border-left: 0px solid transparent;
+      transition: border-color 0.3s ease;
+    }
+    .result-row.winner1 {
+      border-left: 5px solid var(--gold);
+    }
+    .result-row.winner2 {
+      border-left: 5px solid var(--accent);
+    }
+    .winner-cell {
+      font-weight: 800;
+    }
+    .winner-icon {
+      font-size: 1.15em;
+      vertical-align: middle;
+      margin-left: 3px;
+      user-select: none;
+    }
+    .divider-cell {
+      min-width: 16px;
+      max-width: 16px;
+      padding: 0;
+      text-align: center;
+      vertical-align: middle;
+      user-select: none;
+    }
+    .divider-line {
+      width: 2px;
+      height: 34px;
+      background: var(--accent2);
+      margin: 0 auto;
+      border-radius: 2px;
+      display: inline-block;
+    }
+
+    /* === Squads Cards === */
+    .squad-team-card {
+      margin-bottom: 1.3em;
+      padding: 0.9em 0.65em;
+      border-radius: 14px;
+      background: var(--primary-light);
+      box-shadow: 0 2px 7px #38b6ff22;
+      user-select: none;
+      transition: box-shadow 0.3s ease;
+      cursor: default;
+    }
+    .squad-team-card:hover {
+      box-shadow: 0 5px 18px #38b6ff44;
+    }
+    .squad-logo-frame img {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      margin-bottom: 6px;
+      background: #fff;
+      user-select: none;
+      pointer-events: none;
+    }
+    .squad-team-name {
+      font-weight: 800;
+      font-size: 1.1em;
+      color: var(--primary2);
+      margin-bottom: 0.28em;
+      user-select: none;
+    }
+    .squad-players {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      justify-content: center;
+    }
+    .squad-player-name {
+      background: #fff;
+      padding: 0.28em 0.6em;
+      border-radius: 8px;
+      font-size: 1em;
+      box-shadow: 0 1px 4px #38b6ff12;
+      margin-bottom: 2px;
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.15s ease;
+      white-space: nowrap;
+    }
+    .squad-player-name:hover, .squad-player-name:focus {
+      background: var(--accent);
+      color: #fff;
+      outline: none;
+      box-shadow: 0 0 8px var(--accent);
+    }
+
+    /* === Stats Tip === */
+    #stats-tip {
+      font-size: 0.95em;
+      color: var(--primary2);
+      margin: 0.38em 0 0.81em 0;
+      text-align: center;
+      background: #e9f3ff;
+      border-radius: 7px;
+      padding: 5px 9px;
+      user-select: none;
+    }
+    #stats-table th, #stats-table td {
+      min-width: 74px;
+      max-width: 108px;
+      word-wrap: break-word;
+      white-space: pre-line;
+      cursor: default;
+      user-select: text;
+    }
+    #stats-table td.stat-player, #stats-table td.stat-team {
+      white-space: pre-line;
+      word-break: break-word;
+      line-height: 1.15;
+      cursor: pointer;
+      user-select: text;
+    }
+    #stats-table td.stat-team img {
+      width: 12px;
+      height: 12px;
+      vertical-align: middle;
+      margin-right: 2px;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    /* === Player Popup === */
+    #player-popup {
+      display: none;
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 250;
+      background: rgba(34,53,92,0.92);
+      justify-content: center;
+      align-items: center;
+      animation: fadeInPopup 0.18s ease forwards;
+      user-select: none;
+    }
+    @keyframes fadeInPopup {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+    #player-popup .popup-card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 20px #b1e1ff55;
+      padding: 1.25em 1.4em;
+      color: var(--primary-dark);
+      min-width: 280px;
+      max-width: 95vw;
+      text-align: center;
+      font-weight: 700;
+      position: relative;
+      user-select: text;
+    }
+    #player-popup .popup-head {
+      font-size: 1.14em;
+      font-weight: 900;
+      margin-bottom: 0.3em;
+      user-select: text;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5em;
+    }
+    #player-popup .popup-team {
+      color: var(--primary2);
+      font-weight: 700;
+      margin-bottom: 0.25em;
+      user-select: text;
+    }
+    #player-popup .popup-label {
+      color: var(--primary);
+      font-size: 0.93em;
+      margin-top: 0.16em;
+      user-select: text;
+      text-align: left;
+    }
+    #player-popup .popup-close {
+      color: #222;
+      font-size: 1.4em;
+      background: none;
+      border: none;
+      position: absolute;
+      top: 1.05em;
+      right: 1.2em;
+      cursor: pointer;
+      user-select: none;
+      transition: color 0.3s ease;
+    }
+    #player-popup .popup-close:hover {
+      color: var(--accent);
+    }
+    #save-card-btn {
+      margin-top: 1em;
+      background: var(--accent);
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      font-weight: 800;
+      font-size: 1em;
+      padding: 0.5em 1.1em;
+      cursor: pointer;
+      transition: background-color 0.25s ease;
+      user-select: none;
+    }
+    #save-card-btn:hover {
+      background: var(--primary2);
+    }
+
+    /* === Footer === */
+    footer {
+      width: 100%;
+      max-width: 540px;
+      margin: 1.5em auto 3em auto;
+      background: none;
+      position: relative;
+      color: #7a7a7a;
+      font-size: 0.9rem;
+      user-select: none;
+      display: flex;
+      justify-content: flex-start;  /* align left */
+      align-items: center;
+      gap: 1.5rem;
+      padding-left: 10px;
+    }
+    .footer-icons {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 1.25rem;
+      user-select: none;
+    }
     .footer-icons img, .footer-icons .wa-btn {
-      height:22px;width:22px;vertical-align:middle;border-radius:5px;background:#fff;border:1px solid #bfe4fa;
-      box-shadow:0 1px 4px rgba(0,0,0,0.04);object-fit:cover;padding:2px;
-      display:inline-block;
+      height: 24px;
+      width: 24px;
+      vertical-align: middle;
+      border-radius: 6px;
+      background: #fff;
+      border: 1.3px solid #bfe4fa;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+      object-fit: cover;
+      padding: 3px;
+      transition: transform 0.18s ease;
+      cursor: pointer;
+      user-select: none;
+    }
+    .footer-icons img:hover,
+    .footer-icons .wa-btn:hover {
+      transform: scale(1.1);
+      border-color: var(--accent);
+      box-shadow: 0 0 12px var(--accent);
     }
     .wa-btn {
-      background:var(--wa-green);color:#fff!important;
-      border-radius:7px;padding:0px 0px;font-weight:700;font-size:1.12em;
-      vertical-align:middle;box-shadow:0 2px 7px #25d36620;text-decoration:none;margin:0;display:inline-flex;align-items:center;justify-content:center;
-      height:22px;width:22px;
+      background: var(--wa-green);
+      color: #fff !important;
+      border-radius: 9px;
+      padding: 0;
+      font-weight: 700;
+      font-size: 1.24em;
+      vertical-align: middle;
+      box-shadow: 0 3px 10px #25d36640;
+      text-decoration: none;
+      margin: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 24px;
+      width: 24px;
+      user-select: none;
     }
-    .wa-btn .lucide {font-size:1.16em;}
-    .footer-suca {margin-top:0.7rem;text-align:center;color:#bdbdbd;font-size:0.9rem;}
-    footer { width:100%;max-width:540px;margin:auto; background:none; position:fixed; bottom:54px; left:0; right:0; z-index:90; }
-    @media (max-width:540px) {
-      main {padding:0.62rem 0.01rem 3.6rem 0.01rem;}
-      header img {height:22px;}
-      .card {padding:0.52em 0.09em;}
-      .date-heading {font-size: 1em;}
-      .nav-glass-pill {padding: 0.07em 0 0.07em 0;}
-      .nav-glass-pill .nav-label { font-size:0.76em; }
-      th,td {font-size:0.95em;}
-      table {font-size:0.97em;}
+    .wa-btn .lucide {
+      font-size: 1.24em;
+      pointer-events: none;
+      user-select: none;
+    }
+    .footer-suca {
+      margin-left: auto;
+      font-style: italic;
+      color: #aaa;
+      user-select: none;
+    }
+
+    /* === NAVIGATION BAR === */
+    .nav-bar-glass {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100vw;
+      max-width: 540px;
+      z-index: 110;
+      background: var(--nav-glass);
+      backdrop-filter: blur(18px) saturate(1.3);
+      box-shadow: 0 6px 36px #38b6ff10, 0 -1px 18px #22355c0a;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-radius: 18px 18px 0 0;
+      margin: 0 auto;
+      min-height: 58px;
+      height: 58px;
+      overflow: hidden;
+      user-select: none;
+    }
+    .nav-bar-glass .nav-btn {
+      flex: 1 1 0;
+      background: none;
+      border: none;
+      color: #496d8a;
+      font-size: 1.12em;
+      padding: 0.33em 0 0.30em 0;
+      text-align: center;
+      outline: none;
+      position: relative;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-width: 0;
+      transition: color 0.22s ease;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+      will-change: color;
+    }
+    .nav-bar-glass .nav-btn i {
+      font-size: 1.55em;
+      line-height: 1.02;
+      transition: color 0.18s ease;
+      margin-bottom: 0.1em;
+      user-select: none;
+    }
+    .nav-bar-glass .nav-label {
+      display: block;
+      font-size: 0.82em;
+      margin-top: 0.02em;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      line-height: 1.02;
+      opacity: 1;
+      transition: opacity 0.22s ease;
+      user-select: none;
+    }
+    .nav-bar-glass .nav-btn.active,
+    .nav-bar-glass .nav-btn:active {
+      color: var(--primary2);
+      font-weight: 900;
+    }
+    .nav-bar-glass .nav-indicator {
+      display: block;
+      position: absolute;
+      left: 25%;
+      right: 25%;
+      bottom: 6px;
+      height: 5px;
+      border-radius: 5px;
+      background: linear-gradient(90deg, var(--accent2) 0%, var(--accent) 100%);
+      opacity: 0;
+      transform: scaleX(0.7);
+      transition: opacity 0.22s ease, transform 0.25s ease;
+      z-index: 2;
+      user-select: none;
+    }
+    .nav-bar-glass .nav-btn.active .nav-indicator {
+      opacity: 1;
+      transform: scaleX(1);
+    }
+    @media (max-width: 430px) {
+      .nav-bar-glass .nav-label {
+        display: none;
+      }
+      .nav-bar-glass .nav-btn {
+        font-size: 1.15em;
+      }
+    }
+
+    /* === Cursor styles for clickable items === */
+    .curl {
+      white-space: pre-line;
+      word-break: break-word;
+      user-select: text;
+    }
+
+    /* === Stat Highlights Bar === */
+    .stat-high-bar {
+      display: flex;
+      gap: 0.35em;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 0.7em;
+    }
+    .stat-high-card {
+      background: var(--primary-light);
+      border-radius: 10px;
+      padding: 0.6em 0.35em;
+      min-width: 95px;
+      max-width: 120px;
+      text-align: center;
+      box-shadow: 0 1px 6px #b1e1ff50;
+      user-select: none;
+      transition: background-color 0.3s ease;
+    }
+    .stat-high-card:hover {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 2px 14px #38b6ffbb;
+      cursor: default;
+    }
+    .stat-high-label {
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 0.91em;
+      margin-bottom: 0.15em;
+      user-select: none;
+    }
+    .stat-high-main {
+      font-size: 1.25em;
+      font-weight: 900;
+      color: var(--primary);
+      user-select: none;
+    }
+    .stat-high-player {
+      font-size: 0.92em;
+      font-weight: 600;
+      margin-top: 0.1em;
+      color: var(--primary2);
+      user-select: none;
+    }
+    .stat-high-player img {
+      vertical-align: middle;
+      margin-bottom: 3px;
+      margin-right: 4px;
+      user-select: none;
+      pointer-events: none;
+      border-radius: 3px;
+      width: 12px;
+      height: 12px;
+    }
+
+    /* === Team Filter Dropdown === */
+    .team-filter-dropdown {
+      width: 100%;
+      max-width: 210px;
+      padding: 0.3em 0.5em;
+      font-size: 1em;
+      border-radius: 6px;
+      border: 1.5px solid var(--table-border);
+      margin: 0 auto 1.1em auto;
+      display: block;
+      user-select: none;
+      font-family: var(--font-sans);
+      cursor: pointer;
+      transition: border-color 0.22s ease;
+    }
+    .team-filter-dropdown:hover, .team-filter-dropdown:focus {
+      border-color: var(--accent);
+      outline: none;
+    }
+
+    /* === Player Comparison Page === */
+    #compare {
+      padding-top: 0.15em;
+    }
+    #compare .compare-instruction {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.6em;
+      text-align: center;
+      color: var(--primary2);
+      user-select: none;
+    }
+    #compare .player-select-container {
+      max-width: 440px;
+      margin: 0 auto 1em auto;
+      display: flex;
+      gap: 0.8em;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    #compare select {
+      flex: 1 1 140px;
+      padding: 0.4em 0.6em;
+      font-size: 1em;
+      border-radius: 7px;
+      border: 1.5px solid var(--table-border);
+      font-family: var(--font-sans);
+      cursor: pointer;
+      transition: border-color 0.22s ease;
+      user-select: none;
+      min-width: 140px;
+      background: #fff;
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background-image:
+        linear-gradient(45deg, transparent 50%, var(--accent) 50%),
+        linear-gradient(135deg, var(--accent) 50%, transparent 50%),
+        linear-gradient(to right, var(--table-border), var(--table-border));
+      background-position:
+        calc(100% - 20px) calc(1em + 2px),
+        calc(100% - 15px) calc(1em + 2px),
+        calc(100% - 25px) 0.8em;
+      background-size: 5px 5px, 5px 5px, 1px 1.5em;
+      background-repeat: no-repeat;
+    }
+    #compare select:hover, #compare select:focus {
+      border-color: var(--accent);
+      outline: none;
+    }
+    #compare select:disabled {
+      color: #999;
+      background: #f2f4f7;
+      cursor: not-allowed;
+    }
+    #compare .compare-btn {
+      margin-top: 0.6em;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 9px;
+      font-weight: 900;
+      font-size: 1.1em;
+      padding: 0.48em 1.15em;
+      cursor: pointer;
+      transition: background-color 0.28s ease;
+      user-select: none;
+      align-self: center;
+      flex-shrink: 0;
+      min-width: 130px;
+    }
+    #compare .compare-btn:disabled {
+      background: #a3c7ff99;
+      cursor: not-allowed;
+    }
+    #compare .compare-btn:hover:not(:disabled) {
+      background: var(--primary2);
+    }
+
+    /* Compare results container as table */
+    #compare-results {
+      margin-top: 1.4em;
+      overflow-x: auto;
+      user-select: none;
+    }
+    #compare-results table {
+      width: 100%;
+      max-width: 100%;
+      border-collapse: collapse;
+      font-family: var(--font-sans);
+      font-size: 1em;
+      min-width: 320px;
+      box-shadow: 0 4px 15px #38b6ff11;
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    #compare-results th, #compare-results td {
+      border: 1px solid var(--table-border);
+      padding: 0.55em 0.9em;
+      text-align: center;
+      vertical-align: middle;
+      user-select: text;
+    }
+    #compare-results th {
+      background: var(--primary-light);
+      font-weight: 700;
+      color: var(--primary2);
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      white-space: nowrap;
+    }
+    #compare-results th.metric-header {
+      text-align: left;
+      user-select: none;
+      font-weight: 800;
+      background: var(--accent);
+      color: #fff;
+      position: sticky;
+      left: 0;
+      z-index: 6;
+      min-width: 140px;
+    }
+    #compare-results td.player-name-cell {
+      font-weight: 700;
+      color: var(--primary2);
+      white-space: nowrap;
+      min-width: 130px;
+      user-select: text;
+    }
+    #compare-results td.player-name-cell img {
+      width: 20px;
+      height: 20px;
+      vertical-align: middle;
+      margin-right: 6px;
+      border-radius: 5px;
+      pointer-events: none;
+      user-select: none;
+    }
+    /* Zebra stripes */
+    #compare-results tbody tr:nth-child(even) {
+      background: #f8fbff;
+    }
+    /* Responsive */
+    @media (max-width: 480px) {
+      #compare-results table {
+        font-size: 0.9em;
+        min-width: 100%;
+      }
+      #compare-results th.metric-header {
+        min-width: 100px;
+        font-size: 0.9em;
+      }
+      #compare-results td.player-name-cell {
+        min-width: 100px;
+        font-size: 0.9em;
+      }
     }
   </style>
 </head>
 <body>
   <header>
-    <img src="logo.png" alt="Logo"/>
+    <img src="logo.png" alt="Royal Darts Premier League Logo" draggable="false"/>
     <div class="titlebox">
       <h1>Royal Darts Premier League 2025</h1>
     </div>
   </header>
+
   <main>
-    <section id="dashboard" class="section active">
+    <!-- Dashboard -->
+    <section id="dashboard" class="section active" aria-label="Dashboard Home">
       <div class="card">
         <h3>Today's Fixtures</h3>
         <div class="table-scroll">
-          <table class="fixtures-table" id="dashboard-fixtures-table">
+          <table class="fixtures-table" id="dashboard-fixtures-table" role="table" aria-describedby="dashboard-fixtures-desc">
             <thead>
               <tr>
-                <th>Time</th>
-                <th>Team 1</th>
-                <th></th>
-                <th>Team 2</th>
+                <th scope="col">Time</th>
+                <th scope="col">Team 1</th>
+                <th scope="col"></th>
+                <th scope="col">Team 2</th>
               </tr>
             </thead>
-            <tbody id="dashboard-fixtures"></tbody>
+            <tbody id="dashboard-fixtures" aria-live="polite" aria-atomic="true"></tbody>
+          </table>
+          <div id="dashboard-fixtures-desc" class="sr-only">List of today's fixtures</div>
+        </div>
+      </div>
+      <div class="card" style="margin-top:-0.8em;">
+        <h3>Quick Standings</h3>
+        <div class="standings-group-title" aria-hidden="true">Group A</div>
+        <div class="table-scroll" role="table" aria-label="Group A standings">
+          <table class="standings-table" role="grid">
+            <thead>
+              <tr><th scope="col">Pos</th><th scope="col">Team</th><th scope="col">Pts</th></tr>
+            </thead>
+            <tbody id="dashboard-standings-a" aria-live="polite" aria-atomic="true"></tbody>
+          </table>
+        </div>
+        <div class="standings-group-title" aria-hidden="true" style="margin-top:0.8em;">Group B</div>
+        <div class="table-scroll" role="table" aria-label="Group B standings">
+          <table class="standings-table" role="grid">
+            <thead>
+              <tr><th scope="col">Pos</th><th scope="col">Team</th><th scope="col">Pts</th></tr>
+            </thead>
+            <tbody id="dashboard-standings-b" aria-live="polite" aria-atomic="true"></tbody>
           </table>
         </div>
       </div>
-      <div class="card" style="margin-top:-0.7em;">
-        <h3>Quick Standings</h3>
-        <div class="standings-group-title">Group A</div>
-        <div class="table-scroll"><table class="standings-table"><thead>
-          <tr><th>Pos</th><th>Team</th><th>Pts</th></tr>
-        </thead><tbody id="dashboard-standings-a"></tbody></table></div>
-        <div class="standings-group-title">Group B</div>
-        <div class="table-scroll"><table class="standings-table"><thead>
-          <tr><th>Pos</th><th>Team</th><th>Pts</th></tr>
-        </thead><tbody id="dashboard-standings-b"></tbody></table></div>
+    </section>
+
+    <!-- Fixtures -->
+    <section id="fixtures" class="section" aria-label="Fixtures">
+      <div class="card">
+        <h3>Fixtures</h3>
+        <div id="fixturesTableContainer"></div>
       </div>
     </section>
-    <section id="fixtures" class="section"><div class="card"><h3>Fixtures</h3><div id="fixturesTableContainer"></div></div></section>
-    <section id="results" class="section"><div class="card"><h3>Results</h3><div id="resultsContainer"></div></div></section>
-    <section id="standings" class="section">
+
+    <!-- Results -->
+    <section id="results" class="section" aria-label="Results">
+      <div class="card">
+        <h3>Results</h3>
+        <div id="resultsContainer"></div>
+      </div>
+    </section>
+
+    <!-- Standings -->
+    <section id="standings" class="section" aria-label="Standings">
       <div class="card" style="margin-bottom:0.8em;">
-        <div class="stand-legend">
-          <span class="gold"><i class="lucide lucide-trophy" style="font-size:1.09em;vertical-align:middle;margin-right:3px;"></i>Gold Cup (Top 3)</span>
-          <span class="silver"><i class="lucide lucide-award" style="font-size:1.05em;vertical-align:middle;margin-right:3px;"></i>Silver Cup (4-6)</span>
-          <span class="elim"><i class="lucide lucide-x-circle" style="font-size:1.03em;vertical-align:middle;margin-right:3px;"></i>Eliminated (7-8)</span>
+        <div class="stand-legend" aria-hidden="true">
+          <span class="gold" title="Gold Cup (Top 3)">
+            <i class="lucide lucide-trophy" style="font-size:1.09em;vertical-align:middle;margin-right:3px;"></i>Gold Cup (Top 3)
+          </span>
+          <span class="silver" title="Silver Cup (4-6)">
+            <i class="lucide lucide-award" style="font-size:1.05em;vertical-align:middle;margin-right:3px;"></i>Silver Cup (4-6)
+          </span>
+          <span class="elim" title="Eliminated (7-8)">
+            <i class="lucide lucide-x-circle" style="font-size:1.03em;vertical-align:middle;margin-right:3px;"></i>Eliminated (7-8)
+          </span>
           <span style="margin-left:8px;">EF = Events For, EA = Events Against, ED = Events Diff</span>
         </div>
         <h3>Standings</h3>
-        <div class="standings-group-title">Group A</div>
-        <div id="standings-a"></div>
-        <div class="standings-group-title" style="margin-top:1.2em;">Group B</div>
-        <div id="standings-b"></div>
+        <div class="standings-group-title" aria-hidden="true">Group A</div>
+        <div id="standings-a" role="table" aria-live="polite" aria-atomic="true"></div>
+        <div class="standings-group-title" aria-hidden="true" style="margin-top:1.2em;">Group B</div>
+        <div id="standings-b" role="table" aria-live="polite" aria-atomic="true"></div>
       </div>
     </section>
-    <section id="squads" class="section">
+
+    <!-- Squads -->
+    <section id="squads" class="section" aria-label="Squads">
       <div class="card">
         <h3>Squads</h3>
         <div id="squadsContainer" class="squad-grid"></div>
       </div>
     </section>
-    <section id="stats" class="section">
-      <div class="card"><h3>Player Stats</h3>
+
+    <!-- Stats -->
+    <section id="stats" class="section" aria-label="Player Stats">
+      <div class="card">
+        <h3>Player Stats</h3>
         <div id="stats-tip">Tip: Tap any player name in the table below to view and save their full player card.</div>
         <div id="stat-highlights"></div>
         <div class="team-filter-bar" id="team-filter-bar"></div>
-        <input id="stats-search" type="text" placeholder="Search player or team..." style="margin-bottom:0.8em;padding:0.33em 0.49em;font-size:0.96em;width:98vw;max-width:210px;border-radius:5px;border:1px solid #e2ecf4;display:block;margin:auto;">
+        <input id="stats-search" type="text" placeholder="Search player or team..." aria-label="Search player or team" style="margin-bottom:0.8em;padding:0.33em 0.49em;font-size:0.96em;width:98vw;max-width:210px;border-radius:5px;border:1px solid var(--table-border);display:block;margin:auto;">
         <div id="stats-table"></div>
       </div>
     </section>
-    <section id="live" class="section">
+
+    <!-- Live -->
+    <section id="live" class="section" aria-label="Live Stream">
       <div class="card">
         <h3>Watch Live</h3>
-        <iframe src="https://n01darts.com/n01/tournament/comp.php?id=t_NI0o_4352&tab=live" width="100%" height="420" frameborder="0" style="border-radius:12px;border:none;"></iframe>
+        <iframe src="https://n01darts.com/n01/tournament/comp.php?id=t_NI0o_4352&tab=live" width="100%" height="420" frameborder="0" style="border-radius:12px;border:none;" title="Live tournament stream"></iframe>
       </div>
     </section>
+
+    <!-- Compare (NEW PAGE) -->
+    <section id="compare" class="section" aria-label="Player Comparison">
+      <div class="card">
+        <h3>Player Comparison</h3>
+        <p class="compare-instruction" id="compare-instruction">Select two or more players to compare their stats side-by-side.</p>
+        <div class="player-select-container" role="group" aria-labelledby="compare-instruction">
+          <!-- Player selects inserted by JS -->
+        </div>
+        <button id="compare-btn" class="compare-btn" disabled aria-disabled="true" aria-describedby="compare-instruction">Compare Players</button>
+
+        <div id="compare-results" aria-live="polite" aria-atomic="true"></div>
+      </div>
+    </section>
+
   </main>
-  <div class="nav-glass-pill">
-    <button class="nav-item active" onclick="showTab('dashboard')" title="Home"><span class="nav-icon lucide lucide-home"></span><span class="nav-label">Home</span></button>
-    <button class="nav-item" onclick="showTab('fixtures')" title="Fixtures"><span class="nav-icon lucide lucide-calendar-days"></span><span class="nav-label">Fixtures</span></button>
-    <button class="nav-item" onclick="showTab('results')" title="Results"><span class="nav-icon lucide lucide-list-start"></span><span class="nav-label">Results</span></button>
-    <button class="nav-item" onclick="showTab('standings')" title="Standings"><span class="nav-icon lucide lucide-trophy"></span><span class="nav-label">Standings</span></button>
-    <button class="nav-item" onclick="showTab('squads')" title="Squads"><span class="nav-icon lucide lucide-users"></span><span class="nav-label">Squads</span></button>
-    <button class="nav-item" onclick="showTab('stats')" title="Stats"><span class="nav-icon lucide lucide-bar-chart"></span><span class="nav-label">Stats</span></button>
-    <button class="nav-item" onclick="showTab('live')" title="Live"><span class="nav-icon lucide lucide-play-circle"></span><span class="nav-label">Live</span></button>
-  </div>
+
+  <!-- NAVIGATION BAR -->
+  <nav class="nav-bar-glass" role="navigation" aria-label="Main Navigation">
+    <button class="nav-btn active" data-tab="dashboard" title="Home" aria-current="page" aria-label="Go to Home">
+      <i class="lucide lucide-home" aria-hidden="true"></i><span class="nav-label">Home</span>
+      <span class="nav-indicator"></span>
+    </button>
+    <button class="nav-btn" data-tab="fixtures" title="Fixtures" aria-label="Go to Fixtures">
+      <i class="lucide lucide-calendar-days" aria-hidden="true"></i><span class="nav-label">Fixtures</span>
+      <span class="nav-indicator"></span>
+    </button>
+    <button class="nav-btn" data-tab="results" title="Results" aria-label="Go to Results">
+      <i class="lucide lucide-list-start" aria-hidden="true"></i><span class="nav-label">Results</span>
+      <span class="nav-indicator"></span>
+    </button>
+    <button class="nav-btn" data-tab="standings" title="Standings" aria-label="Go to Standings">
+      <i class="lucide lucide-trophy" aria-hidden="true"></i><span class="nav-label">Standings</span>
+      <span class="nav-indicator"></span>
+    </button>
+    <button class="nav-btn" data-tab="squads" title="Squads" aria-label="Go to Squads">
+      <i class="lucide lucide-users" aria-hidden="true"></i><span class="nav-label">Squads</span>
+      <span class="nav-indicator"></span>
+    </button>
+    <button class="nav-btn" data-tab="stats" title="Stats" aria-label="Go to Player Stats">
+      <i class="lucide lucide-bar-chart" aria-hidden="true"></i><span class="nav-label">Stats</span>
+      <span class="nav-indicator"></span>
+    </button>
+    <button class="nav-btn" data-tab="live" title="Live" aria-label="Go to Live Stream">
+      <i class="lucide lucide-play-circle" aria-hidden="true"></i><span class="nav-label">Live</span>
+      <span class="nav-indicator"></span>
+    </button>
+    <button class="nav-btn" data-tab="compare" title="Compare Players" aria-label="Go to Player Comparison">
+      <i class="lucide lucide-columns" aria-hidden="true"></i><span class="nav-label">Compare</span>
+      <span class="nav-indicator"></span>
+    </button>
+  </nav>
+
   <!-- Player popup -->
-  <div id="player-popup" onclick="hidePlayerPopup(event)">
-    <div class="popup-card"></div>
-    <button class="popup-close" onclick="hidePlayerPopup(event)">&times;</button>
+  <div id="player-popup" onclick="hidePlayerPopup(event)" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="player-popup-head" tabindex="-1">
+    <div class="popup-card" role="document">
+      <!-- Popup content injected by JS -->
+    </div>
+    <button class="popup-close" onclick="hidePlayerPopup(event)" aria-label="Close player card">&times;</button>
   </div>
+
+  <!-- Footer -->
   <footer>
     <div class="footer-icons">
-      <a href="https://n01darts.com/n01/tournament/comp.php?id=t_NI0o_4352&tab=live" target="_blank"><img src="https://n01darts.com/favicon.ico" alt="Nakka" title="Watch Live on Nakka" /></a>
-      <a href="https://www.instagram.com/royaldarts_rcgc" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram" title="Follow us on Instagram" /></a>
-      <a href="#" class="wa-btn" id="wa-share-btn" title="Share on WhatsApp">
-        <span class="lucide lucide-message-circle"></span>
+      <a href="https://n01darts.com/n01/tournament/comp.php?id=t_NI0o_4352&tab=live" target="_blank" rel="noopener" aria-label="Watch live on Nakka">
+        <img src="https://n01darts.com/favicon.ico" alt="Nakka" draggable="false" />
+      </a>
+      <a href="https://www.instagram.com/royaldarts_rcgc" target="_blank" rel="noopener" aria-label="Follow Royal Darts on Instagram">
+        <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram" draggable="false" />
+      </a>
+      <a href="#" class="wa-btn" id="wa-share-btn" title="Share on WhatsApp" aria-label="Share on WhatsApp">
+        <span class="lucide lucide-message-circle" aria-hidden="true"></span>
       </a>
     </div>
-    <div class="footer-suca">Built by SUCA Analytics</div>
+    <div class="footer-suca" aria-hidden="true">Built by SUCA Analytics</div>
   </footer>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<script>
-  // --- TEAM LOGOS, API URL ---
-  const TEAM_LOGOS = {
-    "Balaji Darts": "team_logos/Balaji-Darts.avif",
-    "Biscotti Barrels": "team_logos/Biscotti-Barrels.avif",
-    "BLC High Rollers": "team_logos/BLC-High-Rollers.avif",
-    "Bullseye Bandits": "team_logos/Bullseye-Bandits.avif",
-    "City Knights": "team_logos/City-Knights.avif",
-    "Hugo & Finn": "team_logos/Hugo-&-Finn.png",
-    "Keventer Eagle Eye": "team_logos/Keventer-Eagle-Eye.avif",
-    "PKS Titans": "team_logos/PKS-Titans.avif",
-    "Purti Forever": "team_logos/Purti-Forever.avif",
-    "Rama Darts": "team_logos/Rama-Darts.png",
-    "Royals Super Knights": "team_logos/Royals-Super-Knights.avif",
-    "RSV Rising Stars": "team_logos/RSV-Rising-Stars.avif",
-    "The Panthers": "team_logos/The-Panthers.avif",
-    "Tons of Bull": "team_logos/Tons-of-Bull.avif",
-    "UGW": "team_logos/UGW.png",
-    "Vyana Warriors": "team_logos/Vyana-Warriors.avif"
-  };
-  const API_URL = 'https://script.google.com/macros/s/AKfycby6BCE5cyBaxpz-Jt-TeRH6k5Jeq-vqelr8S7rt32e7wFjBzEvuBrYi4yPaEBz2Kari/exec';
 
-  // --- Navigation ---
-  function showTab(tabId) {
-    document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
-    document.querySelectorAll('.nav-item').forEach(btn => btn.classList.remove('active'));
-    document.getElementById(tabId).classList.add('active');
-    let navBtns = Array.from(document.querySelectorAll('.nav-glass-pill .nav-item'));
-    navBtns.forEach(btn => {
-      if(btn.innerText.toLowerCase().includes(tabId)) btn.classList.add('active');
-    });
-    window.scrollTo({top:0,behavior:'smooth'});
-  }
+  <!-- External libs -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
 
-  // WhatsApp Share
-  document.addEventListener("DOMContentLoaded", function() {
-    const waBtn = document.getElementById("wa-share-btn");
-    if(waBtn) {
-      waBtn.addEventListener("click", function(e){
-        e.preventDefault();
-        const shareUrl = window.location.href.split('?')[0];
-        const msg = encodeURIComponent("Check out the Royal Darts Premier League 2025 – live results, fixtures, stats and more! " + shareUrl);
-        window.open(`https://wa.me/?text=${msg}`,"_blank");
-      });
-    }
-  });
+  <script defer>
+    // TEAM LOGOS & API URL
+    const TEAM_LOGOS = {
+      "Balaji Darts": "team_logos/Balaji-Darts.avif",
+      "Biscotti Barrels": "team_logos/Biscotti-Barrels.avif",
+      "BLC High Rollers": "team_logos/BLC-High-Rollers.avif",
+      "Bullseye Bandits": "team_logos/Bullseye-Bandits.avif",
+      "City Knights": "team_logos/City-Knights.avif",
+      "Hugo & Finn": "team_logos/Hugo-&-Finn.png",
+      "Keventer Eagle Eye": "team_logos/Keventer-Eagle-Eye.avif",
+      "PKS Titans": "team_logos/PKS-Titans.avif",
+      "Purti Forever": "team_logos/Purti-Forever.avif",
+      "Rama Darts": "team_logos/Rama-Darts.png",
+      "Royals Super Knights": "team_logos/Royals-Super-Knights.avif",
+      "RSV Rising Stars": "team_logos/RSV-Rising-Stars.avif",
+      "The Panthers": "team_logos/The-Panthers.avif",
+      "Tons of Bull": "team_logos/Tons-of-Bull.avif",
+      "UGW": "team_logos/UGW.png",
+      "Vyana Warriors": "team_logos/Vyana-Warriors.avif"
+    };
+    const API_URL = 'https://script.google.com/macros/s/AKfycby6BCE5cyBaxpz-Jt-TeRH6k5Jeq-vqelr8S7rt32e7wFjBzEvuBrYi4yPaEBz2Kari/exec';
 
-  // --- Data ---
-  let fixturesCache = [], standingsCache = [], statsCache = [], bestLegCache = [], squadsCache = [], resultsCache = [];
-  let statsSortKey = null, statsSortDir = 1, statsSearchTerm = "", teamFilter = null;
-  const STATS_HIDE_COLUMNS = new Set([
-    "Keep", "Break", "Second Legs", "Break Legs", "Total Score", "Total Darts", "Group", "Best Leg", "Worst Leg"
-  ]);
+    // GLOBAL DATA CACHES
+    let fixturesCache = [], standingsCache = [], statsCache = [], bestLegCache = [], squadsCache = [], resultsCache = [];
 
-  async function loadData() {
-    try {
-      const res = await fetch(API_URL);
-      const data = await res.json();
-      fixturesCache = data.Fixtures || [];
-      standingsCache = data.Standings || [];
-      statsCache = (data.Stats || []).filter(row => row.Player);
-      bestLegCache = (data["Best Leg"] || []).filter(row => row["Best Leg"]);
-      squadsCache = data.Squads || [];
-      resultsCache = data.Results || [];
-      renderDashboardFixtures();
-      renderDashboardStandingsTables();
-      renderFixtures(fixturesCache);
-      renderResults(resultsCache, fixturesCache);
-      renderStandingsTables();
-      renderSquads(squadsCache);
-      renderStatHighlights(statsCache, bestLegCache, "stat-highlights");
-      renderStats(statsCache, bestLegCache);
-      renderTeamFilter(statsCache);
-    } catch (err) {console.error('Failed to load data:', err);}
-  }
+    // SORT & FILTER STATE
+    let statsSortKey = null, statsSortDir = 1, statsSearchTerm = "", teamFilter = null;
 
-  // --- Dashboard: Today's Fixtures (IST only) ---
-  function renderDashboardFixtures() {
-    const now = new Date();
-    const istNow = new Date(now.toLocaleString("en-US", {timeZone: "Asia/Kolkata"}));
-    const istYear = istNow.getFullYear(), istMonth = istNow.getMonth(), istDate = istNow.getDate();
-    function isISTToday(d) {
-      const istD = new Date(new Date(d).toLocaleString("en-US", {timeZone: "Asia/Kolkata"}));
-      return (istD.getFullYear() === istYear && istD.getMonth() === istMonth && istD.getDate() === istDate);
-    }
-    const todaysFixtures = fixturesCache.filter(fix => isISTToday(fix.Date));
-    let html = '';
-    if (!todaysFixtures.length) {
-      html = `<tr><td colspan="4" style="color:var(--primary);">No fixtures today.</td></tr>`;
-    } else {
-      todaysFixtures.forEach(f => {
-        const timeStr = new Date(f.Time).toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit',hour12:true,timeZone:'Asia/Kolkata'});
-        html += `<tr>
-          <td>${timeStr}</td>
-          <td class="curl">${curlText(f['Team 1']) || ""}</td>
-          <td></td>
-          <td class="curl">${curlText(f['Team 2']) || ""}</td>
-        </tr>`;
-      });
-    }
-    document.getElementById('dashboard-fixtures').innerHTML = html;
-  }
+    // COLUMNS TO HIDE IN STATS TABLE
+    const STATS_HIDE_COLUMNS = new Set([
+      "Keep", "Break", "Second Legs", "Break Legs", "Total Score", "Total Darts", "Group", "Best Leg", "Worst Leg"
+    ]);
 
-  function renderDashboardStandingsTables() {
-    const A = standingsCache.filter(s => s.Group?.toUpperCase() === 'A').sort((a,b)=>b.Points-a.Points || b.LD-a.LD);
-    const B = standingsCache.filter(s => s.Group?.toUpperCase() === 'B').sort((a,b)=>b.Points-a.Points || b.LD-a.LD);
-    document.getElementById('dashboard-standings-a').innerHTML = quickStandingsRows(A);
-    document.getElementById('dashboard-standings-b').innerHTML = quickStandingsRows(B);
-  }
-  function quickStandingsRows(arr) {
-    return arr.map((s,i) => {
-      let groupClass = i < 3 ? "gold" : i < 6 ? "silver" : "elim";
-      return `<tr class="stand-row ${groupClass}">
-        <td class="pos-cell">${i+1}</td>
-        <td class="curl" style="text-align:center;"><img class="stand-teamlogo" src="${TEAM_LOGOS[s.Team]||''}" alt="">${curlText(s.Team)}</td>
-        <td class="stand-points" style="text-align:center;">${s.Points}</td>
-      </tr>`;
-    }).join('');
-  }
-
-  // --- Fixtures Page ---
-  function renderFixtures(fixtures) {
-    const container = document.getElementById('fixturesTableContainer');
-    if (!fixtures.length) {
-      container.innerHTML = '<div class="table-scroll"><table><tbody><tr><td>Loading...</td></tr></tbody></table></div>';
-      return;
-    }
-    const byDate = {};
-    fixtures.forEach(f => {
-      const d = new Date(f.Date).toDateString();
-      if (!byDate[d]) byDate[d] = [];
-      byDate[d].push(f);
-    });
-    let html = '';
-    Object.keys(byDate).sort((a, b) => new Date(a) - new Date(b)).forEach(dateStr => {
-      html += `<div class="date-heading">${dateStr}</div>
-      <div class="table-scroll">
-      <table class="fixtures-table">
-        <thead>
-          <tr><th>Time</th><th>Team 1</th><th></th><th>Team 2</th></tr>
-        </thead>
-        <tbody>`;
-      byDate[dateStr].forEach(f => {
-        html += `<tr>
-            <td>${new Date(f.Time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</td>
-            <td class="curl">${curlText(f['Team 1'] || "")}</td>
-            <td></td>
-            <td class="curl">${curlText(f['Team 2'] || "")}</td>
-          </tr>`;
-      });
-      html += `</tbody></table></div>`;
-    });
-    container.innerHTML = html;
-  }
-
-  // --- Results Page ---
-  function renderResults(results, fixtures) {
-    const fixtureDateMap = {};
-    fixtures.forEach(fix => {
-      const t1 = fix["Team 1"], t2 = fix["Team 2"];
-      const dateStr = new Date(fix.Date).toDateString();
-      fixtureDateMap[`${t1}|${t2}`] = dateStr;
-      fixtureDateMap[`${t2}|${t1}`] = dateStr;
-    });
-    const byDate = {};
-    results.forEach(r => {
-      let dateVal = "";
-      if (r.Date && r.Date !== "null" && r.Date !== "" && r.Date !== undefined) {
-        dateVal = new Date(r.Date).toDateString();
-      } else {
-        const t1 = r["Team 1"], t2 = r["Team 2"];
-        dateVal = fixtureDateMap[`${t1}|${t2}`] || fixtureDateMap[`${t2}|${t1}`] || "Unknown Date";
-      }
-      if (!byDate[dateVal]) byDate[dateVal] = [];
-      byDate[dateVal].push(r);
-    });
-    let html = '';
-    Object.keys(byDate).sort((a, b) => new Date(a) - new Date(b)).forEach(dateStr => {
-      html += `<div class="date-heading">${dateStr}</div>
-      <div class="table-scroll">
-        <table class="results-table">
-          <thead>
-            <tr>
-              <th>Avg 1</th>
-              <th>Team 1</th>
-              <th>Score</th>
-              <th class="divider-cell"></th>
-              <th>Score</th>
-              <th>Team 2</th>
-              <th>Avg 2</th>
-            </tr>
-          </thead>
-          <tbody>`;
-      byDate[dateStr].forEach(r => {
-        const win1 = +r['Legs 1'] > +r['Legs 2'];
-        const win2 = +r['Legs 2'] > +r['Legs 1'];
-        let rowClass = win1 ? "winner1" : win2 ? "winner2" : "";
-        html += `<tr class="result-row ${rowClass}">
-          <td>${r['Avg 1']||""}</td>
-          <td class="curl${win1?" winner-cell":""}" style="text-align:center;">${curlText(r['Team 1']||"")}${win1?' <span class="winner-icon">🏆</span>':''}</td>
-          <td style="text-align:center;"${win1?' class="winner-cell"':''}>${r['Legs 1']==0?"0":r['Legs 1']||"0"}</td>
-          <td class="divider-cell"><div class="divider-line"></div></td>
-          <td style="text-align:center;"${win2?' class="winner-cell"':''}>${r['Legs 2']==0?"0":r['Legs 2']||"0"}</td>
-          <td class="curl${win2?" winner-cell":""}" style="text-align:center;">${curlText(r['Team 2']||"")}${win2?' <span class="winner-icon">🏆</span>':''}</td>
-          <td>${r['Avg 2']||""}</td>
-        </tr>`;
-      });
-      html += `</tbody></table></div>`;
-    });
-    document.getElementById('resultsContainer').innerHTML = html || '';
-  }
-
-  // --- Standings Page ---
-  function renderStandingsTables() {
-    const A = standingsCache.filter(s => s.Group?.toUpperCase() === 'A').sort((a,b)=>b.Points-a.Points || b.LD-a.LD);
-    const B = standingsCache.filter(s => s.Group?.toUpperCase() === 'B').sort((a,b)=>b.Points-a.Points || b.LD-a.LD);
-    document.getElementById('standings-a').innerHTML = standingsTable(A);
-    document.getElementById('standings-b').innerHTML = standingsTable(B);
-  }
-  function standingsTable(arr) {
-    let html = `<div class="table-scroll"><table class="standings-table"><thead>
-      <tr>
-        <th>Pos</th>
-        <th>Team</th>
-        <th>P</th>
-        <th>W</th>
-        <th>L</th>
-        <th>EF</th>
-        <th>EA</th>
-        <th>ED</th>
-        <th>Pts</th>
-        <th>Avg</th>
-      </tr>
-    </thead><tbody>`;
-    arr.forEach((s,i) => {
-      let groupClass = i < 3 ? "gold" : i < 6 ? "silver" : "elim";
-      html += `<tr class="stand-row ${groupClass}">
-        <td class="pos-cell">${i+1}</td>
-        <td class="curl" style="text-align:center;"><img class="stand-teamlogo" src="${TEAM_LOGOS[s.Team]||''}" alt="">${curlText(s.Team)}</td>
-        <td style="text-align:center;">${s.P}</td>
-        <td style="text-align:center;">${s.W}</td>
-        <td style="text-align:center;">${s.L}</td>
-        <td style="text-align:center;">${s.LF||0}</td>
-        <td style="text-align:center;">${s.LA||0}</td>
-        <td style="text-align:center;">${s.LD||0}</td>
-        <td class="stand-points" style="text-align:center;">${s.Points}</td>
-        <td style="text-align:center;">${s.Avg}</td>
-      </tr>`;
-    });
-    html += "</tbody></table></div>";
-    return html;
-  }
-
-  // --- Squads Page ---
-  function renderSquads(squads) {
-    const container = document.getElementById('squadsContainer');
-    if (!squads.length) { container.innerHTML = 'Loading...'; return; }
-    const teams = [...new Set(squads.map(s => s.Team))];
-    let html = '';
-    teams.forEach(team => {
-      const logo = TEAM_LOGOS[team] || "";
-      const players = squads.filter(s => s.Team === team).map(p =>
-        `<div class="squad-player-name curl" tabindex="0">${curlText(p.Player)}</div>`
-      ).join('');
-      html += `<div class="squad-team-card">
-        <div class="squad-logo-frame"><img src="${logo}" alt="${team}"></div>
-        <div class="squad-team-name curl">${curlText(team)}</div>
-        <div class="squad-players">${players}</div>
-      </div>`;
-    });
-    container.innerHTML = html;
-  }
-
-  // --- Stats Highlights ---
-  function renderStatHighlights(stats, bestLegsSheet, id="stat-highlights") {
-    const defs = [
-      {key:"3 Dart Avg", label:"Best 3-Dart Avg"},
-      {key:"First 9 Avg", label:"Best First 9 Avg"},
-      {key:"Legs Won", label:"Most Legs Won"},
-      {key:"High Finish", label:"Highest Finish"}
-    ];
-    const eligible = stats.filter(p => Number(p["Match Played"]) >= 2);
-    let html = `<div class="stat-high-bar" style="display:flex;gap:0.27em;flex-wrap:wrap;justify-content:center;">`;
-    defs.forEach(def => {
-      const sorted = [...eligible].sort((a,b) => +b[def.key] - +a[def.key]);
-      const player = sorted[0];
-      if (!player) return;
-      const team = player.Team || "";
-      const logo = TEAM_LOGOS[team] || "";
-      let val = player[def.key] ?? "—";
-      html += `<div class="stat-high-card" style="background:var(--background);border-radius:10px;padding:0.43em 0.19em;min-width:88px;max-width:110px;text-align:center;box-shadow:0 1px 4px #b1e1ff18;">
-        <div class="stat-high-label" style="color:var(--accent);font-weight:700;">${def.label}</div>
-        <div class="stat-high-main" style="font-size:1.12em;font-weight:700;color:var(--primary);">${val}</div>
-        <div class="stat-high-player" style="font-size:0.91em;">
-          ${logo?`<img src="${logo}" style="width:10px;height:10px;vertical-align:middle;margin-bottom:2px;"> `:""}
-          ${player.Player} <br> <span style="color:#496d8a;font-weight:600;">${player.Team}</span>
-        </div>
-      </div>`;
-    });
-    if (bestLegsSheet && bestLegsSheet.length) {
-      let best = bestLegsSheet.sort((a,b)=>Number(a["Best Leg"])-Number(b["Best Leg"]))[0];
-      const logo = TEAM_LOGOS[best.Team] || "";
-      html += `<div class="stat-high-card" style="background:var(--background);border-radius:10px;padding:0.43em 0.19em;min-width:88px;max-width:110px;text-align:center;box-shadow:0 1px 4px #b1e1ff18;">
-        <div class="stat-high-label" style="color:var(--accent);font-weight:700;">Best Leg</div>
-        <div class="stat-high-main" style="font-size:1.12em;font-weight:700;color:var(--primary);">${best["Best Leg"]}</div>
-        <div class="stat-high-player" style="font-size:0.91em;">
-          ${logo?`<img src="${logo}" style="width:10px;height:10px;vertical-align:middle;margin-bottom:2px;"> `:""}
-          ${best.Players} <br> <span style="color:#496d8a;font-weight:600;">${best.Team}</span>
-        </div>
-      </div>`;
-    }
-    html += "</div>";
-    document.getElementById(id).innerHTML = html;
-  }
-
-  // --- Stats: Team Filter Dropdown ---
-  function renderTeamFilter(stats) {
-    const bar = document.getElementById('team-filter-bar');
-    if (!stats || !stats.length) { bar.innerHTML = ''; return;}
-    const allTeams = Array.from(new Set(stats.map(p => p.Team).filter(Boolean))).sort();
-    let html = `<select class="team-filter-dropdown" onchange="setTeamFilter(this.value)">
-      <option value="">All Teams</option>`;
-    allTeams.forEach(team => {
-      html += `<option value="${team.replace(/"/g, "&quot;")}"${teamFilter===team?" selected":""}>${team}</option>`;
-    });
-    html += `</select>`;
-    bar.innerHTML = html;
-  }
-  window.setTeamFilter = function(team) {
-    teamFilter = team || null;
-    renderStats(statsCache, bestLegCache);
-  };
-
-  // --- Stats Table ---
-  function renderStats(stats, bestLegsSheet) {
-    const searchInput = document.getElementById('stats-search');
-    if (searchInput && !searchInput._listenerAdded) {
-      searchInput.addEventListener("input", () => {
-        statsSearchTerm = searchInput.value.trim().toLowerCase();
-        renderStats(statsCache, bestLegCache);
-      });
-      searchInput._listenerAdded = true;
-    }
-    let filteredStats = stats;
-    if (teamFilter) filteredStats = filteredStats.filter(p => p.Team === teamFilter);
-    if (statsSearchTerm) {
-      filteredStats = filteredStats.filter(
-        p => (p.Player && p.Player.toLowerCase().includes(statsSearchTerm)) ||
-             (p.Team && p.Team.toLowerCase().includes(statsSearchTerm))
-      );
-    }
-    if (statsSortKey) {
-      filteredStats = [...filteredStats].sort((a, b) => {
-        let v1 = a[statsSortKey], v2 = b[statsSortKey];
-        let n1 = parseFloat(v1), n2 = parseFloat(v2);
-        if (!isNaN(n1) && !isNaN(n2)) {
-          return statsSortDir * (n1 - n2);
+    // --- NAVIGATION FUNCTION ---
+    function showTab(tabId) {
+      // Hide all sections
+      document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+      // Remove active from all nav buttons
+      document.querySelectorAll('.nav-bar-glass .nav-btn').forEach(btn => btn.classList.remove('active'));
+      // Show selected section
+      const activeSection = document.getElementById(tabId);
+      if (activeSection) activeSection.classList.add('active');
+      // Add active class to matching nav button
+      document.querySelectorAll('.nav-bar-glass .nav-btn').forEach(btn => {
+        if (btn.getAttribute('data-tab') === tabId) {
+          btn.classList.add('active');
+          btn.setAttribute('aria-current', 'page');
         } else {
-          return statsSortDir * (String(v1).localeCompare(String(v2)));
+          btn.removeAttribute('aria-current');
         }
       });
+      window.scrollTo({top:0,behavior:'smooth'});
     }
-    if (filteredStats.length) {
-      const wantedHeaders = Object.keys(filteredStats[0]).filter(
-        h => h && h !== "" && h !== undefined && h !== null && !STATS_HIDE_COLUMNS.has(h)
-      );
-      let table = "<div class='table-scroll'><table><thead><tr>";
-      wantedHeaders.forEach(h => {
-        let dirArrow = "";
-        if (statsSortKey === h) dirArrow = statsSortDir > 0 ? " ▲" : " ▼";
-        table += `<th onclick="setStatsSort('${h}')">${h}${dirArrow}</th>`;
-      });
-      table += "</tr></thead><tbody>";
-      filteredStats.forEach(row => {
-        table += "<tr>" + wantedHeaders.map(h => {
-          let val = row[h] ?? "";
-          if (h === "Win Rate (Sets)" || h === "Win Rate (Legs)") {
-            val = isNaN(parseFloat(val)) ? "" : `${Math.round(parseFloat(val) * 100)}%`;
-          }
-          if (h === "Player") {
-            return `<td class="stat-player curl" title="${val}" onclick="showPlayerPopup('${row.Player.replace(/'/g,"\\'")}')">${curlText(val)}</td>`;
-          }
-          if (h === "Team" && TEAM_LOGOS[val]) {
-            return `<td class="stat-team curl" title="${val}"><img src="${TEAM_LOGOS[val]}" alt="${val}" style="width:10px;height:10px;vertical-align:middle;margin-right:2px;">${curlText(val)}</td>`;
-          }
-          return `<td>${val}</td>`;
-        }).join("") + "</tr>";
-      });
-      table += "</tbody></table></div>";
-      document.getElementById("stats-table").innerHTML = table;
-    } else {
-      document.getElementById("stats-table").innerHTML = "<p>No player stats available.</p>";
-    }
-  }
-  window.setStatsSort = function(h) {
-    if (statsSortKey === h) {
-      statsSortDir = -statsSortDir;
-    } else {
-      statsSortKey = h;
-      statsSortDir = 1;
-    }
-    renderStats(statsCache, bestLegCache);
-  };
 
-  // --- Player popup card ---
-  function showPlayerPopup(playerName) {
-    let p = statsCache.find(s => s.Player === playerName);
-    if (!p) return;
-    let logo = p.Team && TEAM_LOGOS[p.Team] ? `<img src="${TEAM_LOGOS[p.Team]}" style="width:18px;height:18px;border-radius:5px;vertical-align:middle;margin-bottom:0.13em;"><br>` : "";
-    let card = `<div class="popup-card" id="player-popup-card-content">
-      <div class="popup-head">${logo}${curlText(p.Player)}</div>
-      <div class="popup-team">${curlText(p.Team||"")}</div>
-      <div style="color:var(--primary);font-size:1em;font-weight:700;">Stats</div>
-      ${Object.keys(p).map(h => {
-        if (["Player", "Team"].includes(h) || STATS_HIDE_COLUMNS.has(h) || !p[h]) return "";
-        return `<div class="popup-label"><span style="color:var(--accent);font-weight:600;">${h}:</span> ${p[h]}</div>`;
-      }).join("")}
-      <button id="save-card-btn" onclick="savePlayerCard(event)">Save Card as Image</button>
-    </div>`;
-    document.querySelector("#player-popup .popup-card").innerHTML = card;
-    document.getElementById("player-popup").style.display = "flex";
-  }
-  window.savePlayerCard = function(e) {
-    e.stopPropagation();
-    let cardNode = document.getElementById("player-popup-card-content");
-    html2canvas(cardNode, {backgroundColor: "#fff", scale: 3}).then(function(canvas){
-      let link = document.createElement("a");
-      link.download = "Player-Card.png";
-      link.href = canvas.toDataURL("image/png");
-      link.click();
+    // --- CURL TEXT UTILITY ---
+    function curlText(txt) {
+      if (!txt) return '';
+      let parts = txt.split(" ");
+      if (parts.length <= 1) return txt;
+      let mid = Math.ceil(parts.length/2);
+      return parts.slice(0,mid).join(" ") + "\n" + parts.slice(mid).join(" ");
+    }
+
+    // --- WHATSAPP SHARE ---
+    function setupWhatsAppShare() {
+      const waBtn = document.getElementById("wa-share-btn");
+      if (waBtn) {
+        waBtn.addEventListener("click", function(e) {
+          e.preventDefault();
+          const shareUrl = window.location.href.split('?')[0];
+          const msg = encodeURIComponent("Check out the Royal Darts Premier League 2025 – live results, fixtures, stats and more! " + shareUrl);
+          window.open(`https://wa.me/?text=${msg}`, "_blank");
+        });
+      }
+    }
+
+    // --- DATA LOADING ---
+    async function loadData() {
+      try {
+        const res = await fetch(API_URL);
+        const data = await res.json();
+
+        fixturesCache = data.Fixtures || [];
+        standingsCache = data.Standings || [];
+        statsCache = (data.Stats || []).filter(row => row.Player);
+        bestLegCache = (data["Best Leg"] || []).filter(row => row["Best Leg"]);
+        squadsCache = data.Squads || [];
+        resultsCache = data.Results || [];
+
+        renderDashboardFixtures();
+        renderDashboardStandingsTables();
+        renderFixtures(fixturesCache);
+        renderResults(resultsCache, fixturesCache);
+        renderStandingsTables();
+        renderSquads(squadsCache);
+        renderStatHighlights(statsCache, bestLegCache, "stat-highlights");
+        renderStats(statsCache, bestLegCache);
+        renderTeamFilter(statsCache);
+
+        renderPlayerComparisonSelectors(); // NEW: populate player compare selects
+
+      } catch (err) {
+        console.error('Failed to load data:', err);
+      }
+    }
+
+    // --- DASHBOARD: Today's Fixtures (IST) ---
+    function renderDashboardFixtures() {
+      const now = new Date();
+      const istNow = new Date(now.toLocaleString("en-US", {timeZone: "Asia/Kolkata"}));
+      const istYear = istNow.getFullYear(), istMonth = istNow.getMonth(), istDate = istNow.getDate();
+
+      function isISTToday(d) {
+        const istD = new Date(new Date(d).toLocaleString("en-US", {timeZone: "Asia/Kolkata"}));
+        return (istD.getFullYear() === istYear && istD.getMonth() === istMonth && istD.getDate() === istDate);
+      }
+      const todaysFixtures = fixturesCache.filter(fix => isISTToday(fix.Date));
+
+      let html = '';
+      if (!todaysFixtures.length) {
+        html = `<tr><td colspan="4" style="color:var(--primary);">No fixtures today.</td></tr>`;
+      } else {
+        todaysFixtures.forEach(f => {
+          const timeStr = new Date(f.Time).toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit',hour12:true,timeZone:'Asia/Kolkata'});
+          html += `<tr>
+            <td>${timeStr}</td>
+            <td class="curl">${curlText(f['Team 1']) || ""}</td>
+            <td></td>
+            <td class="curl">${curlText(f['Team 2']) || ""}</td>
+          </tr>`;
+        });
+      }
+      document.getElementById('dashboard-fixtures').innerHTML = html;
+    }
+
+    function renderDashboardStandingsTables() {
+      const A = standingsCache.filter(s => s.Group?.toUpperCase() === 'A').sort((a,b)=>b.Points - a.Points || b.LD - a.LD);
+      const B = standingsCache.filter(s => s.Group?.toUpperCase() === 'B').sort((a,b)=>b.Points - a.Points || b.LD - a.LD);
+      document.getElementById('dashboard-standings-a').innerHTML = quickStandingsRows(A);
+      document.getElementById('dashboard-standings-b').innerHTML = quickStandingsRows(B);
+    }
+
+    function quickStandingsRows(arr) {
+      return arr.map((s,i) => {
+        let groupClass = i < 3 ? "gold" : i < 6 ? "silver" : "elim";
+        return `<tr class="stand-row ${groupClass}">
+          <td class="pos-cell">${i+1}</td>
+          <td class="curl" style="text-align:center;"><img class="stand-teamlogo" src="${TEAM_LOGOS[s.Team]||''}" alt="">${curlText(s.Team)}</td>
+          <td class="stand-points" style="text-align:center;">${s.Points}</td>
+        </tr>`;
+      }).join('');
+    }
+
+    // --- FIXTURES PAGE ---
+    function renderFixtures(fixtures) {
+      const container = document.getElementById('fixturesTableContainer');
+      if (!fixtures.length) {
+        container.innerHTML = '<div class="table-scroll"><table><tbody><tr><td>Loading...</td></tr></tbody></table></div>';
+        return;
+      }
+      const byDate = {};
+      fixtures.forEach(f => {
+        const d = new Date(f.Date).toDateString();
+        if (!byDate[d]) byDate[d] = [];
+        byDate[d].push(f);
+      });
+      let html = '';
+      Object.keys(byDate).sort((a, b) => new Date(a) - new Date(b)).forEach(dateStr => {
+        html += `<div class="date-heading">${dateStr}</div>
+        <div class="table-scroll">
+        <table class="fixtures-table" role="table" aria-label="Fixtures for ${dateStr}">
+          <thead>
+            <tr><th scope="col">Time</th><th scope="col">Team 1</th><th scope="col"></th><th scope="col">Team 2</th></tr>
+          </thead>
+          <tbody>`;
+        byDate[dateStr].forEach(f => {
+          html += `<tr>
+              <td>${new Date(f.Time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</td>
+              <td class="curl">${curlText(f['Team 1'] || "")}</td>
+              <td></td>
+              <td class="curl">${curlText(f['Team 2'] || "")}</td>
+            </tr>`;
+        });
+        html += `</tbody></table></div>`;
+      });
+      container.innerHTML = html;
+    }
+
+    // --- RESULTS PAGE (preserved, no layout changes) ---
+    function renderResults(results, fixtures) {
+      const fixtureDateMap = {};
+      fixtures.forEach(fix => {
+        const t1 = fix["Team 1"], t2 = fix["Team 2"];
+        const dateStr = new Date(fix.Date).toDateString();
+        fixtureDateMap[`${t1}|${t2}`] = dateStr;
+        fixtureDateMap[`${t2}|${t1}`] = dateStr;
+      });
+      const byDate = {};
+      results.forEach(r => {
+        let dateVal = "";
+        if (r.Date && r.Date !== "null" && r.Date !== "" && r.Date !== undefined) {
+          dateVal = new Date(r.Date).toDateString();
+        } else {
+          const t1 = r["Team 1"], t2 = r["Team 2"];
+          dateVal = fixtureDateMap[`${t1}|${t2}`] || fixtureDateMap[`${t2}|${t1}`] || "Unknown Date";
+        }
+        if (!byDate[dateVal]) byDate[dateVal] = [];
+        byDate[dateVal].push(r);
+      });
+      let html = '';
+      Object.keys(byDate).sort((a, b) => new Date(a) - new Date(b)).forEach(dateStr => {
+        html += `<div class="date-heading">${dateStr}</div>
+        <div class="table-scroll" role="table" aria-label="Results for ${dateStr}">
+          <table class="results-table" role="grid">
+            <thead>
+              <tr>
+                <th scope="col">Avg 1</th>
+                <th scope="col">Team 1</th>
+                <th scope="col">Score</th>
+                <th scope="col" class="divider-cell" aria-hidden="true"></th>
+                <th scope="col">Score</th>
+                <th scope="col">Team 2</th>
+                <th scope="col">Avg 2</th>
+              </tr>
+            </thead>
+            <tbody>`;
+        byDate[dateStr].forEach(r => {
+          const win1 = +r['Legs 1'] > +r['Legs 2'];
+          const win2 = +r['Legs 2'] > +r['Legs 1'];
+          let rowClass = win1 ? "winner1" : win2 ? "winner2" : "";
+          html += `<tr class="result-row ${rowClass}">
+            <td>${r['Avg 1']||""}</td>
+            <td class="curl${win1?" winner-cell":""}" style="text-align:center;">${curlText(r['Team 1']||"")}${win1?' <span class="winner-icon" aria-label="Winner">🏆</span>':''}</td>
+            <td style="text-align:center;"${win1?' class="winner-cell"':''}>${r['Legs 1']==0?"0":r['Legs 1']||"0"}</td>
+            <td class="divider-cell" aria-hidden="true"><div class="divider-line"></div></td>
+            <td style="text-align:center;"${win2?' class="winner-cell"':''}>${r['Legs 2']==0?"0":r['Legs 2']||"0"}</td>
+            <td class="curl${win2?" winner-cell":""}" style="text-align:center;">${curlText(r['Team 2']||"")}${win2?' <span class="winner-icon" aria-label="Winner">🏆</span>':''}</td>
+            <td>${r['Avg 2']||""}</td>
+          </tr>`;
+        });
+        html += `</tbody></table></div>`;
+      });
+      document.getElementById('resultsContainer').innerHTML = html || '';
+    }
+
+    // --- STANDINGS PAGE ---
+    function renderStandingsTables() {
+      const A = standingsCache.filter(s => s.Group?.toUpperCase() === 'A').sort((a,b)=>b.Points - a.Points || b.LD - a.LD);
+      const B = standingsCache.filter(s => s.Group?.toUpperCase() === 'B').sort((a,b)=>b.Points - a.Points || b.LD - a.LD);
+      document.getElementById('standings-a').innerHTML = standingsTable(A);
+      document.getElementById('standings-b').innerHTML = standingsTable(B);
+    }
+    function standingsTable(arr) {
+      let html = `<div class="table-scroll"><table class="standings-table" role="grid"><thead>
+        <tr>
+          <th scope="col">Pos</th>
+          <th scope="col">Team</th>
+          <th scope="col">P</th>
+          <th scope="col">W</th>
+          <th scope="col">L</th>
+          <th scope="col">EF</th>
+          <th scope="col">EA</th>
+          <th scope="col">ED</th>
+          <th scope="col">Pts</th>
+          <th scope="col">Avg</th>
+        </tr>
+      </thead><tbody>`;
+      arr.forEach((s,i) => {
+        let groupClass = i < 3 ? "gold" : i < 6 ? "silver" : "elim";
+        html += `<tr class="stand-row ${groupClass}">
+          <td class="pos-cell">${i+1}</td>
+          <td class="curl" style="text-align:center;"><img class="stand-teamlogo" src="${TEAM_LOGOS[s.Team]||''}" alt="">${curlText(s.Team)}</td>
+          <td style="text-align:center;">${s.P}</td>
+          <td style="text-align:center;">${s.W}</td>
+          <td style="text-align:center;">${s.L}</td>
+          <td style="text-align:center;">${s.LF||0}</td>
+          <td style="text-align:center;">${s.LA||0}</td>
+          <td style="text-align:center;">${s.LD||0}</td>
+          <td class="stand-points" style="text-align:center;">${s.Points}</td>
+          <td style="text-align:center;">${s.Avg}</td>
+        </tr>`;
+      });
+      html += "</tbody></table></div>";
+      return html;
+    }
+
+    // --- SQUADS PAGE ---
+    function renderSquads(squads) {
+      const container = document.getElementById('squadsContainer');
+      if (!squads.length) { container.innerHTML = 'Loading...'; return; }
+      const teams = [...new Set(squads.map(s => s.Team))];
+      let html = '';
+      teams.forEach(team => {
+        const logo = TEAM_LOGOS[team] || "";
+        const players = squads.filter(s => s.Team === team).map(p =>
+          `<div class="squad-player-name curl" tabindex="0" role="button" aria-pressed="false" onclick="showPlayerPopup('${p.Player.replace(/'/g,"\\'")}')" onkeydown="if(event.key==='Enter'||event.key===' ') {event.preventDefault(); showPlayerPopup('${p.Player.replace(/'/g,"\\'")}');}">
+            ${curlText(p.Player)}
+          </div>`
+        ).join('');
+        html += `<div class="squad-team-card" role="region" aria-label="Team ${team}">
+          <div class="squad-logo-frame"><img src="${logo}" alt="${team} logo"></div>
+          <div class="squad-team-name curl">${curlText(team)}</div>
+          <div class="squad-players">${players}</div>
+        </div>`;
+      });
+      container.innerHTML = html;
+    }
+
+    // --- STATS HIGHLIGHTS ---
+    function renderStatHighlights(stats, bestLegsSheet, id="stat-highlights") {
+      const defs = [
+        {key:"3 Dart Avg", label:"Best 3-Dart Avg"},
+        {key:"First 9 Avg", label:"Best First 9 Avg"},
+        {key:"Legs Won", label:"Most Legs Won"},
+        {key:"High Finish", label:"Highest Finish"}
+      ];
+      const eligible = stats.filter(p => Number(p["Match Played"]) >= 2);
+      let html = `<div class="stat-high-bar">`;
+      defs.forEach(def => {
+        const sorted = [...eligible].sort((a,b) => +b[def.key] - +a[def.key]);
+        const player = sorted[0];
+        if (!player) return;
+        const team = player.Team || "";
+        const logo = TEAM_LOGOS[team] || "";
+        let val = player[def.key] ?? "—";
+        html += `<div class="stat-high-card">
+          <div class="stat-high-label">${def.label}</div>
+          <div class="stat-high-main">${val}</div>
+          <div class="stat-high-player">
+            ${logo?`<img src="${logo}" alt="${team} logo">`:""}
+            ${player.Player} <br> <span>${player.Team}</span>
+          </div>
+        </div>`;
+      });
+      if (bestLegsSheet && bestLegsSheet.length) {
+        let best = bestLegsSheet.sort((a,b)=>Number(a["Best Leg"])-Number(b["Best Leg"]))[0];
+        const logo = TEAM_LOGOS[best.Team] || "";
+        html += `<div class="stat-high-card">
+          <div class="stat-high-label">Best Leg</div>
+          <div class="stat-high-main">${best["Best Leg"]}</div>
+          <div class="stat-high-player">
+            ${logo?`<img src="${logo}" alt="${best.Team} logo">`:""}
+            ${best.Players} <br> <span>${best.Team}</span>
+          </div>
+        </div>`;
+      }
+      html += "</div>";
+      document.getElementById(id).innerHTML = html;
+    }
+
+    // --- TEAM FILTER ---
+    function renderTeamFilter(stats) {
+      const bar = document.getElementById('team-filter-bar');
+      if (!stats || !stats.length) { bar.innerHTML = ''; return;}
+      const allTeams = Array.from(new Set(stats.map(p => p.Team).filter(Boolean))).sort();
+      let html = `<select class="team-filter-dropdown" onchange="setTeamFilter(this.value)" aria-label="Filter stats by team">
+        <option value="">All Teams</option>`;
+      allTeams.forEach(team => {
+        html += `<option value="${team.replace(/"/g, "&quot;")}"${teamFilter===team?" selected":""}>${team}</option>`;
+      });
+      html += `</select>`;
+      bar.innerHTML = html;
+    }
+    window.setTeamFilter = function(team) {
+      teamFilter = team || null;
+      renderStats(statsCache, bestLegCache);
+    };
+
+    // --- STATS TABLE ---
+    function renderStats(stats, bestLegsSheet) {
+      const searchInput = document.getElementById('stats-search');
+      if (searchInput && !searchInput._listenerAdded) {
+        searchInput.addEventListener("input", () => {
+          statsSearchTerm = searchInput.value.trim().toLowerCase();
+          renderStats(statsCache, bestLegCache);
+        });
+        searchInput._listenerAdded = true;
+      }
+      let filteredStats = stats;
+      if (teamFilter) filteredStats = filteredStats.filter(p => p.Team === teamFilter);
+      if (statsSearchTerm) {
+        filteredStats = filteredStats.filter(
+          p => (p.Player && p.Player.toLowerCase().includes(statsSearchTerm)) ||
+               (p.Team && p.Team.toLowerCase().includes(statsSearchTerm))
+        );
+      }
+      if (statsSortKey) {
+        filteredStats = [...filteredStats].sort((a, b) => {
+          let v1 = a[statsSortKey], v2 = b[statsSortKey];
+          let n1 = parseFloat(v1), n2 = parseFloat(v2);
+          if (!isNaN(n1) && !isNaN(n2)) {
+            return statsSortDir * (n1 - n2);
+          } else {
+            return statsSortDir * (String(v1).localeCompare(String(v2)));
+          }
+        });
+      }
+      if (filteredStats.length) {
+        const wantedHeaders = Object.keys(filteredStats[0]).filter(
+          h => h && h !== "" && h !== undefined && h !== null && !STATS_HIDE_COLUMNS.has(h)
+        );
+        let table = "<div class='table-scroll'><table role='grid'><thead><tr>";
+        wantedHeaders.forEach(h => {
+          let dirArrow = "";
+          if (statsSortKey === h) dirArrow = statsSortDir > 0 ? " ▲" : " ▼";
+          table += `<th onclick="setStatsSort('${h}')" role="columnheader" tabindex="0" aria-sort="${statsSortKey === h ? (statsSortDir > 0 ? 'ascending' : 'descending') : 'none'}">${h}${dirArrow}</th>`;
+        });
+        table += "</tr></thead><tbody>";
+        filteredStats.forEach(row => {
+          table += "<tr>" + wantedHeaders.map(h => {
+            let val = row[h] ?? "";
+            if (h === "Win Rate (Sets)" || h === "Win Rate (Legs)") {
+              val = isNaN(parseFloat(val)) ? "" : `${Math.round(parseFloat(val) * 100)}%`;
+            }
+            if (h === "Player") {
+              return `<td class="stat-player curl" title="${val}" onclick="showPlayerPopup('${row.Player.replace(/'/g,"\\'")}')" tabindex="0" role="button" aria-pressed="false">${curlText(val)}</td>`;
+            }
+            if (h === "Team" && TEAM_LOGOS[val]) {
+              return `<td class="stat-team curl" title="${val}"><img src="${TEAM_LOGOS[val]}" alt="${val}" style="width:12px;height:12px;vertical-align:middle;margin-right:2px;">${curlText(val)}</td>`;
+            }
+            return `<td>${val}</td>`;
+          }).join("") + "</tr>";
+        });
+        table += "</tbody></table></div>";
+        document.getElementById("stats-table").innerHTML = table;
+      } else {
+        document.getElementById("stats-table").innerHTML = "<p>No player stats available.</p>";
+      }
+    }
+    window.setStatsSort = function(h) {
+      if (statsSortKey === h) {
+        statsSortDir = -statsSortDir;
+      } else {
+        statsSortKey = h;
+        statsSortDir = 1;
+      }
+      renderStats(statsCache, bestLegCache);
+    };
+
+    // --- PLAYER POPUP & SAVE CARD ---
+    function showPlayerPopup(playerName) {
+      let p = statsCache.find(s => s.Player === playerName);
+      if (!p) return;
+      let logo = p.Team && TEAM_LOGOS[p.Team] ? `<img src="${TEAM_LOGOS[p.Team]}" alt="${p.Team} logo" style="width:18px;height:18px;border-radius:5px;vertical-align:middle;margin-bottom:0.15em;">` : "";
+      let card = `<div id="player-popup-head" class="popup-head">${logo}${curlText(p.Player)}</div>
+        <div class="popup-team">${curlText(p.Team||"")}</div>
+        <div style="color:var(--primary);font-size:1em;font-weight:700;margin-bottom:0.3em;">Stats</div>
+        ${Object.keys(p).map(h => {
+          if (["Player", "Team"].includes(h) || STATS_HIDE_COLUMNS.has(h) || !p[h]) return "";
+          return `<div class="popup-label"><span style="color:var(--accent);font-weight:600;">${h}:</span> ${p[h]}</div>`;
+        }).join("")}
+        <button id="save-card-btn" onclick="savePlayerCard(event)" aria-label="Save player card as image">Save Card as Image</button>`;
+      document.querySelector("#player-popup .popup-card").innerHTML = card;
+      const popup = document.getElementById("player-popup");
+      popup.style.display = "flex";
+      popup.setAttribute("aria-hidden", "false");
+      popup.focus();
+    }
+    window.savePlayerCard = function(e) {
+      e.stopPropagation();
+      let cardNode = document.querySelector("#player-popup .popup-card");
+      html2canvas(cardNode, {backgroundColor: "#fff", scale: 3}).then(function(canvas){
+        let link = document.createElement("a");
+        link.download = "Player-Card.png";
+        link.href = canvas.toDataURL("image/png");
+        link.click();
+      });
+    };
+    function hidePlayerPopup(e) {
+      if (!e || !e.target || e.target.id === "player-popup" || e.target.classList.contains("popup-close")) {
+        const popup = document.getElementById("player-popup");
+        popup.style.display = "none";
+        popup.setAttribute("aria-hidden", "true");
+      }
+    }
+
+    // --- PLAYER & TEAM COMPARISON PAGE ---
+
+    // We'll let users select 2 to 4 players to compare side-by-side.
+
+    // Build the select dropdowns with all players in statsCache
+    function renderPlayerComparisonSelectors() {
+      const container = document.querySelector("#compare .player-select-container");
+      if (!container || !statsCache.length) return;
+
+      // Clear container
+      container.innerHTML = "";
+
+      // Number of selects - let's do 4
+      const NUM_SELECTS = 4;
+
+      // Prepare sorted unique player names
+      const uniquePlayers = Array.from(new Set(statsCache.map(p => p.Player))).sort((a,b) => a.localeCompare(b));
+
+      for(let i=0; i<NUM_SELECTS; i++) {
+        const select = document.createElement("select");
+        select.setAttribute("aria-label", `Select player ${i+1}`);
+        select.dataset.idx = i;
+
+        // Add default option
+        const optionDefault = document.createElement("option");
+        optionDefault.value = "";
+        optionDefault.textContent = i < 2 ? `Select player ${i+1} (required)` : `Select player ${i+1} (optional)`;
+        optionDefault.disabled = (i < 2);
+        optionDefault.selected = true;
+        select.appendChild(optionDefault);
+
+        // Add players options
+        uniquePlayers.forEach(player => {
+          const opt = document.createElement("option");
+          opt.value = player;
+          opt.textContent = player;
+          select.appendChild(opt);
+        });
+
+        container.appendChild(select);
+      }
+
+      // Setup event listeners
+      container.querySelectorAll("select").forEach(sel => {
+        sel.addEventListener("change", updateCompareButtonState);
+      });
+
+      // Reset compare results
+      document.getElementById("compare-results").innerHTML = "";
+      updateCompareButtonState();
+    }
+
+    function updateCompareButtonState() {
+      const selects = document.querySelectorAll("#compare .player-select-container select");
+      const selectedValues = Array.from(selects).map(s => s.value).filter(v => v);
+      const compareBtn = document.getElementById("compare-btn");
+
+      // Require at least two unique players selected to enable button
+      const uniquePlayers = [...new Set(selectedValues)];
+
+      if (uniquePlayers.length >= 2) {
+        compareBtn.disabled = false;
+        compareBtn.setAttribute("aria-disabled", "false");
+      } else {
+        compareBtn.disabled = true;
+        compareBtn.setAttribute("aria-disabled", "true");
+      }
+    }
+
+    // Render comparison results in a table format with metrics as rows and players as columns
+    function renderPlayerComparison() {
+      const selects = document.querySelectorAll("#compare .player-select-container select");
+      const selectedPlayers = Array.from(selects).map(s => s.value).filter(v => v);
+      const uniquePlayers = [...new Set(selectedPlayers)];
+
+      if (uniquePlayers.length < 2) {
+        alert("Please select at least two different players to compare.");
+        return;
+      }
+
+      const container = document.getElementById("compare-results");
+      container.innerHTML = ""; // Clear previous
+
+      // Stats keys to show in comparison
+      const keysToShow = [
+        "Match Played", "Sets Played", "Sets Won", "Sets Lost", "Win Rate (Sets)",
+        "Legs Played", "Legs Won", "Legs Lost", "Win Rate (Legs)",
+        "3 Dart Avg", "First 9 Avg", "High Finish", "Checkout %",
+        "180s", "100+ Scores", "Best Leg", "High Checkout"
+      ];
+
+      // Build table header row with player names + logos
+      let thead = "<tr><th class='metric-header' scope='col'>Metric</th>";
+      uniquePlayers.forEach(playerName => {
+        const playerData = statsCache.find(p => p.Player === playerName);
+        if (!playerData) return;
+        const teamLogo = playerData.Team && TEAM_LOGOS[playerData.Team]
+          ? `<img src="${TEAM_LOGOS[playerData.Team]}" alt="${playerData.Team} logo" draggable="false"> `
+          : "";
+        thead += `<th class="player-name-cell" scope="col" title="${playerName}">${teamLogo}${playerName}</th>`;
+      });
+      thead += "</tr>";
+
+      // Build table body rows with metric and player values
+      let tbody = "";
+      keysToShow.forEach(metric => {
+        tbody += `<tr><th class="metric-header" scope="row">${metric}</th>`;
+        uniquePlayers.forEach(playerName => {
+          const playerData = statsCache.find(p => p.Player === playerName);
+          let val = playerData && metric in playerData ? playerData[metric] : "—";
+          if (metric.includes("Win Rate") && val !== "—") {
+            val = isNaN(parseFloat(val)) ? "—" : `${Math.round(parseFloat(val)*100)}%`;
+          }
+          if (val === "" || val === undefined || val === null) val = "—";
+          tbody += `<td>${val}</td>`;
+        });
+        tbody += "</tr>";
+      });
+
+      const tableHtml = `<table aria-label="Player comparison table">
+        <thead>${thead}</thead>
+        <tbody>${tbody}</tbody>
+      </table>`;
+
+      container.innerHTML = tableHtml;
+      window.scrollTo({top:0, behavior:'smooth'});
+    }
+
+    // --- Event Listeners ---
+    document.addEventListener("DOMContentLoaded", function() {
+      // Navigation tab buttons
+      document.querySelectorAll('.nav-bar-glass .nav-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const tab = this.getAttribute('data-tab');
+          showTab(tab);
+        });
+      });
+
+      // WhatsApp share
+      setupWhatsAppShare();
+
+      // Compare button click
+      document.getElementById("compare-btn").addEventListener("click", renderPlayerComparison);
+
+      // Load initial data
+      loadData();
+
+      // Auto-refresh every 60 seconds
+      setInterval(loadData, 60000);
     });
-  };
-  function hidePlayerPopup(e) {
-    if (!e || !e.target || e.target.id === "player-popup" || e.target.classList.contains("popup-close"))
-      document.getElementById("player-popup").style.display = "none";
-  }
 
-  // --- Utility: Curl name to two lines (without breaking inside words if possible)
-  function curlText(txt) {
-    if (!txt) return '';
-    let parts = txt.split(" ");
-    if (parts.length <= 1) return txt;
-    let mid = Math.ceil(parts.length/2);
-    return parts.slice(0,mid).join(" ")+"\n"+parts.slice(mid).join(" ");
-  }
-
-  // --- Auto Load & Refresh ---
-  loadData();
-  setInterval(loadData, 60000);
-
-</script>
+  </script>
 </body>
 </html>
