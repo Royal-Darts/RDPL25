@@ -11,18 +11,20 @@
     :root {
       --primary: #ffe066;
       --primary-dark: #d5b800;
-      --bg: #181b22;
-      --nav: #1a1c22;
-      --card: #20232c;
+      --bg: #f7f8fa;
+      --nav: #23243a;
+      --card: #fff;
       --grey: #bcbcbc;
-      --win: #fffbe6;
       --gold: #ffe066;
       --silver: #e5e6ec;
       --elim: #ffd8d8;
+      --border: #e8e8e8;
+      --font-dark: #23244c;
+      --font: #23243a;
     }
     html, body {
       background: var(--bg);
-      color: #f6f6f6;
+      color: var(--font);
       font-family: 'Segoe UI', Arial, sans-serif;
       margin: 0; padding: 0;
       min-height: 100%;
@@ -33,42 +35,37 @@
       color: var(--primary);
       padding: 1.2rem 0.7rem 1.2rem 0.7rem;
       text-align: left;
-      letter-spacing: 0.01em;
       display: flex; align-items: center; gap: 0.8em;
-      border-bottom: 2px solid #242634;
+      border-bottom: 2px solid #e9e9e9;
     }
-    header img { height: 56px; margin-right: 0.6em; }
+    header img { height: 52px; margin-right: 0.6em; }
     header .titlebox { flex:1;}
     header h1 {
       margin: 0 0 0 0;
-      font-size: 1.65em;
+      font-size: 1.37em;
       font-weight: 800;
       color: var(--primary);
-      line-height: 1.08;
-      text-shadow: 0 2px 12px #0007;
+      line-height: 1.09;
+      text-shadow: 0 2px 12px #0005;
       letter-spacing: 0.01em;
     }
-    /* Nav Bar - Bottom Fixed */
     nav {
       position: fixed;
       bottom: 0; left: 0; right: 0;
       width: 100vw; background: var(--nav); z-index: 200;
       box-shadow: 0 -1px 18px #0002;
       display: flex; justify-content: space-between; align-items: center;
-      border-top: 2px solid #222330;
-      min-height: 60px;
+      border-top: 2px solid #ececec;
+      min-height: 62px;
     }
     nav .tab-btn {
       flex: 1 1 0; border: none; outline: none;
       background: none; color: #ccc;
-      padding: 0.5em 0 0.3em 0;
-      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.1em;
+      padding: 0.5em 0 0.35em 0;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.09em;
       font-size: 0.97em; font-weight: 600;
-      letter-spacing: 0.01em;
       cursor: pointer;
       transition: color 0.12s, background 0.14s;
-      position:relative;
-      user-select: none;
       min-width: 0;
     }
     nav .tab-btn.active, nav .tab-btn:active {
@@ -77,92 +74,102 @@
       font-weight: 700;
     }
     nav .tab-icon { font-size: 1.32em; margin-bottom: 0.06em;}
-    /* Responsive nav labels */
     @media (max-width: 440px) {
-      nav .tab-label { font-size:0.97em;}
-      header h1 { font-size: 1.17em;}
-      header img {height:38px;}
+      nav .tab-label { font-size:0.98em;}
+      header h1 { font-size: 1em;}
+      header img {height:34px;}
     }
-    main { max-width: 490px; margin: 0 auto 75px auto; padding: 1rem 0.3rem 0.2rem 0.3rem; }
+    main { max-width: 490px; margin: 0 auto 78px auto; padding: 1rem 0.17rem 0.2rem 0.17rem; }
     .section { display: none; }
     .section.active { display: block; }
-    h2 { color: var(--primary); margin:1.4em 0 0.7em 0.14em;font-size:1.17em;}
-    /* Card Style Containers */
+    h2 { color: var(--primary); margin:1.2em 0 0.7em 0.14em;font-size:1.08em;}
     .card {
       background: var(--card);
       border-radius: 17px;
-      box-shadow: 0 4px 22px #0002;
-      margin-bottom: 1.12em;
-      padding: 1.2em 1em 1.1em 1em;
+      box-shadow: 0 2px 18px #0001;
+      margin-bottom: 1.08em;
+      padding: 1.1em 1em 1em 1em;
     }
     .card h3 {
       color: var(--primary);
-      margin: 0 0 0.35em 0;
-      font-weight: 700; font-size:1.15em;
+      margin: 0 0 0.27em 0;
+      font-weight: 800; font-size:1.1em;
       letter-spacing:0.01em;
     }
-    /* Today's Fixtures Table */
     .table-scroll {
       overflow-x: auto;
       width: 100%;
       -webkit-overflow-scrolling: touch;
       border-radius: 8px;
+      margin-bottom: 0.4em;
     }
     table {
       width: 100%;
-      min-width: 300px;
+      min-width: 330px;
       background: transparent;
       border-collapse: separate;
       border-spacing: 0;
       margin: 0;
-      font-size: 0.98em;
+      font-size: 1em;
     }
     th,td {
-      padding: 0.41em 0.34em;
+      padding: 0.57em 0.39em;
       text-align: center;
-      font-size: 0.97em;
-      border-bottom: 1px solid #292942;
+      font-size: 1.01em;
+      border-bottom: 1px solid var(--border);
       background: transparent;
-      color: #e8e8e8;
-      max-width: 110px;
-      word-break: break-all;
+      color: var(--font-dark);
+      word-break: break-word;
+      white-space: normal;
       overflow-wrap: anywhere;
-      text-overflow: ellipsis;
+      text-overflow: unset;
+      line-height: 1.21;
     }
     th { color: var(--primary); font-weight:700; background:transparent; border-bottom:2px solid var(--primary-dark);}
-    .fixtures-table th, .fixtures-table td { width: 32vw; max-width: 110px; min-width:70px;}
-    .team-cell { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-    /* Standings Card */
-    .standings-table {
-      width:100%; border-collapse:separate; border-spacing:0 0.2em;
+    .curl { white-space: pre-line; word-break: break-word; overflow-wrap: anywhere;}
+    .fixtures-table th, .fixtures-table td,
+    .results-table th, .results-table td,
+    .standings-table th, .standings-table td,
+    #stats-table th, #stats-table td {
+      min-width: 70px;
+      max-width: 115px;
+      word-break: break-word;
+      white-space: pre-line;
+    }
+    /* Results Divider */
+    .divider-cell {
+      min-width:14px;max-width:14px;padding:0;
+      text-align:center;vertical-align:middle;
+    }
+    .divider-line {
+      width:2px; height:30px; background:#ffe066; margin:0 auto; border-radius:2px;
+      display:inline-block;
+    }
+    /* Standings Group Card */
+    .standings-group-title {
+      font-weight:800;font-size:1.09em;color:var(--primary);margin-bottom:0.36em;text-align:center;letter-spacing:0.01em;
     }
     .stand-row {
-      background: #202336;
-      border-radius: 10px;
-      color: #fff;
-      font-size: 1.02em;
-      font-weight: 600;
-      box-shadow: 0 2px 10px #0001;
-      margin-bottom: 0.17em;
-      transition:box-shadow 0.12s;
+      background: #fff;
+      border-radius: 8px;
+      color: #23243a;
+      font-size: 1.03em;
+      font-weight: 700;
+      margin-bottom: 0.13em;
       position:relative;
+      transition:box-shadow 0.12s;
     }
-    .stand-row.gold { background: #fff9cc; color: #755c00;}
-    .stand-row.silver { background: #ececec; color: #232323;}
-    .stand-row.elim { background: #ffd8d8; color: #ba2323;}
+    .stand-medal { font-size:1.08em; margin-right:2.5px; vertical-align: middle;}
+    .stand-elim {background:#e22a2a; color:#fff; font-size:0.85em; padding:2px 7px;border-radius:7px; margin-left:5px;}
     .stand-teamlogo { width: 20px; height: 20px; border-radius: 4px; vertical-align: middle; margin-right: 7px;}
-    .stand-medal { font-size:1.18em; margin-right:4px; vertical-align: middle;}
-    .stand-elim {background:#ba2323; color:#fff; font-size:0.9em; padding:2px 6px;border-radius:7px; margin-left:5px;}
     .stand-points {font-weight:800; font-size:1.01em;}
-    /* Results Table */
-    .results-table th, .results-table td { min-width: 74px; max-width: 112px;}
-    .result-winner { background: #262b2c; color: #ffe066; font-weight:700; }
-    .result-teamname { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:92px; display:inline-block; vertical-align:middle;}
-    /* Stats Table */
-    #stats-table th, #stats-table td { min-width: 78px; max-width: 124px;}
-    #stats-table td.stat-player, #stats-table td.stat-team {white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:90px;cursor:pointer;}
-    #stats-table td.stat-team img {width:13px;height:13px;vertical-align:middle;margin-right:5px;}
-    /* Pop-up card for stats */
+    .stand-row.gold {border-left:5px solid #ffe066;}
+    .stand-row.silver {border-left:5px solid #d7d7de;}
+    .stand-row.elim {border-left:5px solid #e76c6c;}
+    /* Stats Table & Popup */
+    #stats-table th, #stats-table td { min-width: 74px; max-width: 120px;}
+    #stats-table td.stat-player, #stats-table td.stat-team { white-space:pre-line; word-break:break-word; line-height:1.19; cursor:pointer;}
+    #stats-table td.stat-team img {width:13px;height:13px;vertical-align:middle;margin-right:4px;}
     #player-popup {
       display:none; position:fixed; left:0; top:0; width:100vw; height:100vh; z-index:250;
       background:rgba(10,12,22,0.93); justify-content:center; align-items:center;
@@ -170,27 +177,28 @@
     }
     @keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
     #player-popup .popup-card {
-      background:#22243a; border-radius:18px; box-shadow:0 3px 28px #0007; padding:1.4em 1.1em; color:#ffe066;
-      min-width:210px;max-width:96vw; text-align:center;
+      background:#fff; border-radius:14px; box-shadow:0 3px 28px #0007; padding:1.22em 1.1em; color:#1b203c;
+      min-width:220px;max-width:96vw; text-align:center; font-weight:700;
     }
-    #player-popup .popup-head {font-size:1.23em; font-weight:800; margin-bottom:0.3em;}
-    #player-popup .popup-team {color:#a0f3fa;font-weight:700;margin-bottom:0.35em;}
-    #player-popup .popup-label {color:#e6e6e6;font-size:1em;margin-top:0.45em;}
-    #player-popup .popup-close {color:#fff; font-size:1.23em; background:none; border:none; position:absolute;top:1.1em;right:1.1em;cursor:pointer;}
+    #player-popup .popup-head {font-size:1.13em; font-weight:800; margin-bottom:0.24em;}
+    #player-popup .popup-team {color:#23243a;font-weight:700;margin-bottom:0.35em;}
+    #player-popup .popup-label {color:#23243a;font-size:1em;margin-top:0.36em;}
+    #player-popup .popup-close {color:#222; font-size:1.3em; background:none; border:none; position:absolute;top:1.1em;right:1.1em;cursor:pointer;}
     /* Misc UI */
     .team-filter-bar {text-align:center; margin-bottom:1.1em;}
     .team-filter-dropdown {
-      width:97vw;max-width:270px;margin:0 auto 1em auto;padding:0.38em;font-size:1em;border-radius:7px;border:1.4px solid #282828;background:#1e1e23;color:var(--primary);font-weight:700;outline:none;
+      width:97vw;max-width:250px;margin:0 auto 1em auto;padding:0.34em;font-size:1em;border-radius:6px;border:1.4px solid #eee;background:#fff;color:var(--primary);font-weight:700;outline:none;
     }
     .footer-icons {margin-top:1.3rem;text-align:center;display:flex;justify-content:center;align-items:center;gap:1.2rem;}
-    .footer-icons img {height:20px;width:20px;vertical-align:middle;border-radius:3px;background:#222;border:1px solid #292939;box-shadow:0 1px 4px rgba(0,0,0,0.04);}
+    .footer-icons img {height:18px;width:18px;vertical-align:middle;border-radius:3px;background:#fff;border:1px solid #efefef;box-shadow:0 1px 4px rgba(0,0,0,0.04);}
     .footer-suca {margin-top:0.7rem;text-align:center;color:#bdbdbd;font-size:0.92rem;}
-    @media (max-width:520px) {
-      main {padding:0.7rem 0.07rem 2.2rem 0.07rem;}
-      header img {height:36px;}
-      .card {padding:0.85em 0.4em;}
-      h2 {font-size:1.05em;}
-      .standings-table th, .standings-table td, .fixtures-table th, .fixtures-table td, .results-table th, .results-table td {font-size:0.96em;}
+    @media (max-width:540px) {
+      main {padding:0.6rem 0.03rem 2.2rem 0.03rem;}
+      header img {height:30px;}
+      .card {padding:0.77em 0.3em;}
+      h2 {font-size:1.02em;}
+      .standings-table th, .standings-table td, .fixtures-table th, .fixtures-table td, .results-table th, .results-table td {font-size:0.98em;}
+      #player-popup .popup-card {min-width:175px;}
     }
   </style>
 </head>
@@ -212,7 +220,7 @@
               <tr>
                 <th>Time</th>
                 <th>Team 1</th>
-                <th>vs</th>
+                <th></th>
                 <th>Team 2</th>
               </tr>
             </thead>
@@ -221,15 +229,15 @@
         </div>
       </div>
       <div class="card" style="margin-top:-0.7em;">
-        <h3>Quick Standings (Top 3)</h3>
-        <div class="table-scroll">
-          <table class="standings-table">
-            <thead>
-              <tr><th>Pos</th><th>Team</th><th>Pts</th></tr>
-            </thead>
-            <tbody id="dashboard-quick-standings"></tbody>
-          </table>
-        </div>
+        <h3>Quick Standings (All Teams)</h3>
+        <div class="standings-group-title">Group A</div>
+        <div class="table-scroll"><table class="standings-table"><thead>
+          <tr><th>Pos</th><th>Team</th><th>Pts</th></tr>
+        </thead><tbody id="dashboard-standings-a"></tbody></table></div>
+        <div class="standings-group-title">Group B</div>
+        <div class="table-scroll"><table class="standings-table"><thead>
+          <tr><th>Pos</th><th>Team</th><th>Pts</th></tr>
+        </thead><tbody id="dashboard-standings-b"></tbody></table></div>
       </div>
     </section>
     <!-- FIXTURES -->
@@ -239,7 +247,10 @@
     <!-- STANDINGS -->
     <section id="standings" class="section">
       <div class="card" style="margin-bottom:0.8em;"><h3>Standings</h3>
-        <div id="standings-cards"></div>
+        <div class="standings-group-title">Group A</div>
+        <div id="standings-a"></div>
+        <div class="standings-group-title" style="margin-top:1.2em;">Group B</div>
+        <div id="standings-b"></div>
       </div>
     </section>
     <!-- SQUADS -->
@@ -249,7 +260,7 @@
       <div class="card"><h3>Player Stats</h3>
         <div id="stat-highlights"></div>
         <div class="team-filter-bar" id="team-filter-bar"></div>
-        <input id="stats-search" type="text" placeholder="Search player or team..." style="margin-bottom:0.8em;padding:0.39em 0.6em;font-size:0.97em;width:98vw;max-width:225px;border-radius:6px;border:1px solid #2a2a2a;display:block;margin:auto;">
+        <input id="stats-search" type="text" placeholder="Search player or team..." style="margin-bottom:0.8em;padding:0.37em 0.58em;font-size:0.97em;width:98vw;max-width:220px;border-radius:5px;border:1px solid #ececec;display:block;margin:auto;">
         <div id="stats-table"></div>
       </div>
     </section>
@@ -323,18 +334,17 @@
         squadsCache = data.Squads || [];
         resultsCache = data.Results || [];
         renderDashboardFixtures();
-        renderDashboardQuickStandings();
+        renderDashboardStandingsTables();
         renderFixtures(fixturesCache);
         renderResults(resultsCache, fixturesCache);
-        renderStandings();
+        renderStandingsTables();
         renderSquads(squadsCache);
         renderStatHighlights(statsCache, bestLegCache);
         renderStats(statsCache, bestLegCache);
         renderTeamFilter(statsCache);
       } catch (err) {console.error('Failed to load data:', err);}
     }
-
-    // --- DASHBOARD: Today's Fixtures (Time only, uniform width) ---
+    // --- DASHBOARD: Today's Fixtures ---
     function renderDashboardFixtures() {
       const [istStart, istEnd] = getISTTodayRange();
       const todaysFixtures = fixturesCache.filter(fix => {
@@ -348,26 +358,31 @@
         todaysFixtures.forEach(f => {
           html += `<tr>
             <td>${new Date(f.Time).toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit',hour12:true,timeZone:'Asia/Kolkata'})}</td>
-            <td class="team-cell">${f['Team 1'] || ""}</td>
-            <td>vs</td>
-            <td class="team-cell">${f['Team 2'] || ""}</td>
+            <td class="curl">${curlText(f['Team 1']) || ""}</td>
+            <td></td>
+            <td class="curl">${curlText(f['Team 2']) || ""}</td>
           </tr>`;
         });
       }
       document.getElementById('dashboard-fixtures').innerHTML = html;
     }
-    // --- Dashboard: Quick Standings (Top 3) ---
-    function renderDashboardQuickStandings() {
-      const standings = standingsCache.sort((a,b)=>b.Points-a.Points || b.LD-a.LD).slice(0,3);
-      let html = '';
-      standings.forEach((s,i) => {
-        html += `<tr>
+    // --- DASHBOARD: Standings (2 Tables, all teams, curl names) ---
+    function renderDashboardStandingsTables() {
+      const A = standingsCache.filter(s => s.Group?.toUpperCase() === 'A').sort((a,b)=>b.Points-a.Points || b.LD-a.LD);
+      const B = standingsCache.filter(s => s.Group?.toUpperCase() === 'B').sort((a,b)=>b.Points-a.Points || b.LD-a.LD);
+      document.getElementById('dashboard-standings-a').innerHTML = quickStandingsRows(A);
+      document.getElementById('dashboard-standings-b').innerHTML = quickStandingsRows(B);
+    }
+    function quickStandingsRows(arr) {
+      return arr.map((s,i) => {
+        let medal = i==0?`<span class="stand-medal">&#129351;</span>`:i==1?`<span class="stand-medal">&#129352;</span>`:i==2?`<span class="stand-medal">&#129353;</span>`:"";
+        let elim = i>5?`<span class="stand-elim">Elim</span>`:"";
+        return `<tr class="stand-row ${i<3?"gold":i<6?"silver":"elim"}">
           <td>${i+1}</td>
-          <td class="team-cell">${s.Team}</td>
+          <td class="curl"><img class="stand-teamlogo" src="${TEAM_LOGOS[s.Team]||''}" alt="">${medal}${curlText(s.Team)}${elim}</td>
           <td class="stand-points">${s.Points}</td>
         </tr>`;
-      });
-      document.getElementById('dashboard-quick-standings').innerHTML = html;
+      }).join('');
     }
     // --- FIXTURES ---
     function renderFixtures(fixtures) {
@@ -394,16 +409,16 @@
         byDate[dateStr].forEach(f => {
           html += `<tr>
               <td>${new Date(f.Time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</td>
-              <td class="team-cell">${f['Team 1'] || ""}</td>
-              <td>vs</td>
-              <td class="team-cell">${f['Team 2'] || ""}</td>
+              <td class="curl">${curlText(f['Team 1'] || "")}</td>
+              <td></td>
+              <td class="curl">${curlText(f['Team 2'] || "")}</td>
             </tr>`;
         });
         html += `</tbody></table></div>`;
       });
       container.innerHTML = html;
     }
-    // --- RESULTS (Mobile-friendly, curl team names, highlight winner) ---
+    // --- RESULTS (Vertical divider, curl names, highlight winner) ---
     function renderResults(results, fixtures) {
       const fixtureDateMap = {};
       fixtures.forEach(fix => {
@@ -434,7 +449,7 @@
                 <th>Avg 1</th>
                 <th>Team 1</th>
                 <th>Score</th>
-                <th>vs</th>
+                <th class="divider-cell"></th>
                 <th>Score</th>
                 <th>Team 2</th>
                 <th>Avg 2</th>
@@ -446,11 +461,11 @@
           const win2 = +r['Legs 2'] > +r['Legs 1'];
           html += `<tr>
             <td>${r['Avg 1']||""}</td>
-            <td class="result-teamname${win1?" result-winner":""}">${r['Team 1']||""}</td>
+            <td class="curl${win1?" result-winner":""}">${curlText(r['Team 1']||"")}</td>
             <td${win1?' class="result-winner"':''}>${r['Legs 1']||""}</td>
-            <td>vs</td>
+            <td class="divider-cell"><div class="divider-line"></div></td>
             <td${win2?' class="result-winner"':''}>${r['Legs 2']||""}</td>
-            <td class="result-teamname${win2?" result-winner":""}">${r['Team 2']||""}</td>
+            <td class="curl${win2?" result-winner":""}">${curlText(r['Team 2']||"")}</td>
             <td>${r['Avg 2']||""}</td>
           </tr>`;
         });
@@ -458,32 +473,29 @@
       });
       document.getElementById('resultsContainer').innerHTML = html || '';
     }
-    // --- PREMIUM STANDINGS TABLE ---
-    function renderStandings() {
-      const groupA = standingsCache.filter(s => s.Group?.toUpperCase() === 'A');
-      const groupB = standingsCache.filter(s => s.Group?.toUpperCase() === 'B');
-      document.getElementById('standings-cards').innerHTML =
-        standingsGroupCard('Group A', groupA) + standingsGroupCard('Group B', groupB);
+    // --- Standings Page: White, medal/elim badge, curl ---
+    function renderStandingsTables() {
+      const A = standingsCache.filter(s => s.Group?.toUpperCase() === 'A').sort((a,b)=>b.Points-a.Points || b.LD-a.LD);
+      const B = standingsCache.filter(s => s.Group?.toUpperCase() === 'B').sort((a,b)=>b.Points-a.Points || b.LD-a.LD);
+      document.getElementById('standings-a').innerHTML = standingsTable(A);
+      document.getElementById('standings-b').innerHTML = standingsTable(B);
     }
-    function standingsGroupCard(title, arr) {
-      arr = arr.sort((a, b) => b.Points - a.Points || b.LD - a.LD);
-      let html = `<div style="font-weight:800;font-size:1.08em;color:#ffe066;margin-bottom:0.36em;">${title}</div>
-      <table class="standings-table"><thead>
+    function standingsTable(arr) {
+      let html = `<div class="table-scroll"><table class="standings-table"><thead>
         <tr><th>Pos</th><th>Team</th><th>P</th><th>W</th><th>L</th><th>Pts</th><th>Avg</th></tr>
       </thead><tbody>`;
       arr.forEach((s,i) => {
-        let rowClass = i<3?"gold":i<6?"silver":"elim";
         let medal = i==0?`<span class="stand-medal">&#129351;</span>`:i==1?`<span class="stand-medal">&#129352;</span>`:i==2?`<span class="stand-medal">&#129353;</span>`:"";
         let elim = i>5?`<span class="stand-elim">Elim</span>`:"";
-        html += `<tr class="stand-row ${rowClass}">
+        html += `<tr class="stand-row ${i<3?"gold":i<6?"silver":"elim"}">
           <td>${i+1}</td>
-          <td class="team-cell"><img class="stand-teamlogo" src="${TEAM_LOGOS[s.Team]||''}" alt="">${medal}${s.Team}${elim}</td>
+          <td class="curl"><img class="stand-teamlogo" src="${TEAM_LOGOS[s.Team]||''}" alt="">${medal}${curlText(s.Team)}${elim}</td>
           <td>${s.P}</td><td>${s.W}</td><td>${s.L}</td>
           <td class="stand-points">${s.Points}</td>
           <td>${s.Avg}</td>
         </tr>`;
       });
-      html += "</tbody></table>";
+      html += "</tbody></table></div>";
       return html;
     }
     // --- SQUADS ---
@@ -494,17 +506,17 @@
       let html = '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1.1em;">';
       teams.forEach(team => {
         const logo = TEAM_LOGOS[team] || "";
-        const players = squads.filter(s => s.Team === team).map(p => `<div style="font-size:0.95em;">${p.Player}</div>`).join('');
-        html += `<div style="background:#22243a;border-radius:10px;padding:0.7em;text-align:center;">
-          <img src="${logo}" alt="${team}" style="width:30px;height:30px;border-radius:7px;object-fit:contain;">
-          <div style="font-weight:700;color:#ffe066;margin:0.27em 0 0.07em 0;">${team}</div>
-          <div style="font-size:0.94em;color:#eee;">${players}</div>
+        const players = squads.filter(s => s.Team === team).map(p => `<div style="font-size:0.96em;" class="curl">${curlText(p.Player)}</div>`).join('');
+        html += `<div style="background:#fff;border-radius:10px;padding:0.7em;text-align:center;box-shadow:0 2px 14px #0001;">
+          <img src="${logo}" alt="${team}" style="width:29px;height:29px;border-radius:6px;object-fit:contain;">
+          <div style="font-weight:700;color:#ffe066;margin:0.23em 0 0.07em 0;" class="curl">${curlText(team)}</div>
+          <div style="font-size:0.94em;color:#323232;">${players}</div>
         </div>`;
       });
       html += '</div>';
       container.innerHTML = html;
     }
-    // --- STATS HIGHLIGHTS & TABLE ---
+    // --- STATS ---
     function renderStatHighlights(stats, bestLegsSheet) {
       const defs = [
         {key:"3 Dart Avg", label:"Best 3-Dart Avg"},
@@ -513,7 +525,7 @@
         {key:"High Finish", label:"Highest Finish"}
       ];
       const eligible = stats.filter(p => Number(p["Match Played"]) >= 2);
-      let html = `<div class="stat-high-bar" style="display:flex;gap:0.55em;flex-wrap:wrap;justify-content:center;">`;
+      let html = `<div class="stat-high-bar" style="display:flex;gap:0.45em;flex-wrap:wrap;justify-content:center;">`;
       defs.forEach(def => {
         const sorted = [...eligible].sort((a,b) => +b[def.key] - +a[def.key]);
         const player = sorted[0];
@@ -521,20 +533,26 @@
         const team = player.Team || "";
         const logo = TEAM_LOGOS[team] || "";
         let val = player[def.key] ?? "—";
-        html += `<div class="stat-high-card" style="background:#242545;">
-          <div class="stat-high-label">${def.label}</div>
-          <div class="stat-high-main">${val}</div>
-          <div class="stat-high-player">${logo?`<img src="${logo}">`:''}${player.Player} (${team})</div>
+        html += `<div class="stat-high-card" style="background:#f8f7fd;border-radius:10px;padding:0.69em 0.37em;min-width:108px;max-width:132px;text-align:center;">
+          <div class="stat-high-label" style="color:#9f8413;">${def.label}</div>
+          <div class="stat-high-main" style="font-size:1.22em;font-weight:700;color:#ffbc1e;">${val}</div>
+          <div class="stat-high-player" style="font-size:0.94em;">
+            ${logo?`<img src="${logo}" style="width:14px;height:14px;vertical-align:middle;margin-bottom:2px;"> `:""}
+            ${player.Player} <br> <span style="color:#696c7b;font-weight:600;">${player.Team}</span>
+          </div>
         </div>`;
       });
       // Best Leg (from sheet)
       if (bestLegsSheet && bestLegsSheet.length) {
         let best = bestLegsSheet.sort((a,b)=>Number(a["Best Leg"])-Number(b["Best Leg"]))[0];
         const logo = TEAM_LOGOS[best.Team] || "";
-        html += `<div class="stat-high-card" style="background:#242545;">
-          <div class="stat-high-label">Best Leg</div>
-          <div class="stat-high-main">${best["Best Leg"]}</div>
-          <div class="stat-high-player">${logo?`<img src="${logo}">`:''}${best.Players} (${best.Team})</div>
+        html += `<div class="stat-high-card" style="background:#f8f7fd;border-radius:10px;padding:0.69em 0.37em;min-width:108px;max-width:132px;text-align:center;">
+          <div class="stat-high-label" style="color:#9f8413;">Best Leg</div>
+          <div class="stat-high-main" style="font-size:1.22em;font-weight:700;color:#ffbc1e;">${best["Best Leg"]}</div>
+          <div class="stat-high-player" style="font-size:0.94em;">
+            ${logo?`<img src="${logo}" style="width:14px;height:14px;vertical-align:middle;margin-bottom:2px;"> `:""}
+            ${best.Players} <br> <span style="color:#696c7b;font-weight:600;">${best.Team}</span>
+          </div>
         </div>`;
       }
       html += "</div>";
@@ -556,7 +574,6 @@
       teamFilter = team || null;
       renderStats(statsCache, bestLegCache);
     };
-    // --- Stats Table, with player pop-up on name click ---
     function renderStats(stats, bestLegsSheet) {
       const searchInput = document.getElementById('stats-search');
       if (searchInput && !searchInput._listenerAdded) {
@@ -603,10 +620,10 @@
               val = isNaN(parseFloat(val)) ? "" : `${Math.round(parseFloat(val) * 100)}%`;
             }
             if (h === "Player") {
-              return `<td class="stat-player" title="${val}" onclick="showPlayerPopup('${row.Player.replace(/'/g,"\\'")}')">${val}</td>`;
+              return `<td class="stat-player curl" title="${val}" onclick="showPlayerPopup('${row.Player.replace(/'/g,"\\'")}')">${curlText(val)}</td>`;
             }
             if (h === "Team" && TEAM_LOGOS[val]) {
-              return `<td class="stat-team" title="${val}"><img src="${TEAM_LOGOS[val]}" alt="${val}">${val}</td>`;
+              return `<td class="stat-team curl" title="${val}"><img src="${TEAM_LOGOS[val]}" alt="${val}" style="width:12px;height:12px;vertical-align:middle;margin-right:3px;">${curlText(val)}</td>`;
             }
             return `<td>${val}</td>`;
           }).join("") + "</tr>";
@@ -630,14 +647,14 @@
     function showPlayerPopup(playerName) {
       let p = statsCache.find(s => s.Player === playerName);
       if (!p) return;
-      let logo = p.Team && TEAM_LOGOS[p.Team] ? `<img src="${TEAM_LOGOS[p.Team]}" style="width:33px;height:33px;border-radius:6px;vertical-align:middle;margin-bottom:0.24em;"><br>` : "";
+      let logo = p.Team && TEAM_LOGOS[p.Team] ? `<img src="${TEAM_LOGOS[p.Team]}" style="width:26px;height:26px;border-radius:6px;vertical-align:middle;margin-bottom:0.2em;"><br>` : "";
       let card = `<div class="popup-card">
-        <div class="popup-head">${logo}${p.Player}</div>
-        <div class="popup-team">${p.Team||""}</div>
-        <div style="color:#ffe066;font-size:1em;font-weight:700;">Stats</div>
+        <div class="popup-head">${logo}${curlText(p.Player)}</div>
+        <div class="popup-team">${curlText(p.Team||"")}</div>
+        <div style="color:#ccab14;font-size:1em;font-weight:700;">Stats</div>
         ${Object.keys(p).map(h => {
           if (["Player", "Team"].includes(h) || STATS_HIDE_COLUMNS.has(h) || !p[h]) return "";
-          return `<div class="popup-label"><span style="color:#a0f3fa;font-weight:600;">${h}:</span> ${p[h]}</div>`;
+          return `<div class="popup-label"><span style="color:#b3b3b3;font-weight:600;">${h}:</span> ${p[h]}</div>`;
         }).join("")}
       </div>`;
       document.querySelector("#player-popup .popup-card").innerHTML = card;
@@ -656,6 +673,14 @@
       const istStart = new Date(Date.UTC(istYear, istMonth, istDay, 0, -IST_OFFSET, 0));
       const istEnd = new Date(Date.UTC(istYear, istMonth, istDay, 23, 59-IST_OFFSET, 59));
       return [istStart, istEnd, ""];
+    }
+    // Utility: Curl name to two lines (without breaking inside words if possible)
+    function curlText(txt) {
+      if (!txt) return '';
+      let parts = txt.split(" ");
+      if (parts.length <= 1) return txt;
+      let mid = Math.ceil(parts.length/2);
+      return parts.slice(0,mid).join(" ")+"\n"+parts.slice(mid).join(" ");
     }
     loadData();
     setInterval(loadData, 60000);
