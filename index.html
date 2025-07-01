@@ -243,6 +243,60 @@
       .stats-table-modern th, .stats-table-modern td { font-size: 0.91em; }
       .stats-table-modern td.stats-player { max-width: 68px; }
     }
+    /* Stat Highlights Bar */
+    .stat-high-bar {
+      display: flex;
+      gap: 0.8em;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      align-items: stretch;
+      margin: 0.3em 0 1em 0;
+      width: 100%;
+    }
+    .stat-high-card {
+      background: #fff;
+      border: 1.5px solid #e2ecf4;
+      border-radius: 10px;
+      min-width: 120px;
+      flex: 1 1 120px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0.65em 0.6em 0.72em 0.6em;
+      box-shadow: 0 1px 7px #70d5ff09;
+      font-size: 0.98em;
+      font-weight: 700;
+    }
+    .stat-high-label {
+      color: #388cff;
+      font-weight: 700;
+      font-size: 0.96em;
+      margin-bottom: 0.16em;
+    }
+    .stat-high-main {
+      color: #222;
+      font-size: 1.17em;
+      font-weight: 900;
+      margin-bottom: 0.12em;
+      letter-spacing: 0.01em;
+    }
+    .stat-high-player {
+      font-size: 0.97em;
+      color: #284f86;
+      text-align: center;
+      line-height: 1.11;
+    }
+    .stat-high-player span {
+      font-size: 0.93em;
+      color: #5ba1ed;
+      font-weight: 600;
+    }
+    @media (max-width: 520px) {
+      .stat-high-bar { gap: 0.3em;}
+      .stat-high-card { min-width: 112px; font-size: 0.95em;}
+      .stat-high-label { font-size: 0.92em;}
+      .stat-high-main { font-size: 1.09em;}
+    }
     /* Footer */
     footer {
       width: 100%; max-width: 530px;
@@ -309,9 +363,7 @@
         <h3>Today's Fixtures</h3>
         <div class="table-scroll">
           <table class="fixtures-table" role="table" aria-live="polite" aria-atomic="true">
-            <thead>
-              <tr><th>Time</th><th>Team 1</th><th></th><th>Team 2</th></tr>
-            </thead>
+            <thead><tr><th>Time</th><th>Team 1</th><th></th><th>Team 2</th></tr></thead>
             <tbody id="dashboard-fixtures"></tbody>
           </table>
         </div>
@@ -333,13 +385,12 @@
           </table>
         </div>
       </div>
+      <!-- Stat Highlights Bar Below Standings -->
+      <div id="home-stat-highlights"></div>
     </section>
-    <section id="fixtures" class="section" aria-label="Fixtures">
-      <div class="card"><h3>Fixtures</h3><div id="fixturesTableContainer"></div></div>
-    </section>
-    <section id="results" class="section" aria-label="Results">
-      <div class="card"><h3>Results</h3><div id="resultsContainer"></div></div>
-    </section>
+    <!-- Other sections unchanged: fixtures, results, standings, squads, stats, live, compare -->
+    <section id="fixtures" class="section" aria-label="Fixtures"><div class="card"><h3>Fixtures</h3><div id="fixturesTableContainer"></div></div></section>
+    <section id="results" class="section" aria-label="Results"><div class="card"><h3>Results</h3><div id="resultsContainer"></div></div></section>
     <section id="standings" class="section" aria-label="Standings">
       <div class="card" style="margin-bottom:0.6em;">
         <div class="stand-legend" aria-hidden="true">
@@ -354,9 +405,7 @@
         <div id="standings-b" role="table" aria-live="polite" aria-atomic="true"></div>
       </div>
     </section>
-    <section id="squads" class="section" aria-label="Squads">
-      <div class="card"><h3>Squads</h3><div id="squadsContainer" class="squad-grid"></div></div>
-    </section>
+    <section id="squads" class="section" aria-label="Squads"><div class="card"><h3>Squads</h3><div id="squadsContainer" class="squad-grid"></div></div></section>
     <section id="stats" class="section" aria-label="Player Stats">
       <div class="card">
         <h3>Player Stats</h3>
@@ -367,9 +416,7 @@
         <div id="stats-table"></div>
       </div>
     </section>
-    <section id="live" class="section" aria-label="Live Stream">
-      <div class="card"><h3>Watch Live</h3><iframe src="https://n01darts.com/n01/tournament/comp.php?id=t_NI0o_4352&tab=live" width="100%" height="320" frameborder="0" style="border-radius:9px;border:none;" title="Live tournament stream"></iframe></div>
-    </section>
+    <section id="live" class="section" aria-label="Live Stream"><div class="card"><h3>Watch Live</h3><iframe src="https://n01darts.com/n01/tournament/comp.php?id=t_NI0o_4352&tab=live" width="100%" height="320" frameborder="0" style="border-radius:9px;border:none;" title="Live tournament stream"></iframe></div></section>
     <section id="compare" class="section" aria-label="Player Comparison">
       <div class="card">
         <h3>Player Comparison</h3>
@@ -413,6 +460,7 @@
     let compareSelections = [];
     let compareTableHtml = "";
     const STATS_HIDE_COLUMNS = new Set(["Keep", "Break", "Second Legs", "Break Legs", "Total Score", "Total Darts", "Group", "Best Leg", "Worst Leg"]);
+
     function curlText(txt) {
       if (!txt) return '';
       if (txt.length <= 15) return txt;
@@ -454,13 +502,17 @@
         bestLegCache = (data["Best Leg"] || []).filter(row => row["Best Leg"]);
         squadsCache = data.Squads || [];
         resultsCache = data.Results || [];
-        renderDashboardFixtures(); renderDashboardStandingsTables();
-        renderFixtures(fixturesCache); renderResults(resultsCache, fixturesCache);
-        renderStandingsTables(); renderSquads(squadsCache);
+        renderDashboardFixtures();
+        renderDashboardStandingsTables();
+        renderFixtures(fixturesCache);
+        renderResults(resultsCache, fixturesCache);
+        renderStandingsTables();
+        renderSquads(squadsCache);
         renderStatHighlights(statsCache, bestLegCache, "stat-highlights");
-        renderStats(statsCache, bestLegCache); renderTeamFilter(statsCache);
+        renderStats(statsCache, bestLegCache);
+        renderTeamFilter(statsCache);
         renderPlayerComparisonSelectors();
-        // Restore compare state if on compare tab
+        renderHomeStatHighlights(statsCache, bestLegCache, "home-stat-highlights");
         if (
           document.querySelector('.nav-btn.active[data-tab="compare"]') &&
           compareTableHtml &&
@@ -533,10 +585,7 @@
         html += `<div class="date-heading">${dateStr}</div>
         <div class="table-scroll">
         <table class="fixtures-table" role="table" aria-label="Fixtures for ${dateStr}">
-          <thead>
-            <tr><th>Time</th><th>Team 1</th><th></th><th>Team 2</th></tr>
-          </thead>
-          <tbody>`;
+          <thead><tr><th>Time</th><th>Team 1</th><th></th><th>Team 2</th></tr></thead><tbody>`;
         byDate[dateStr].forEach(f => {
           html += `<tr>
               <td>${new Date(f.Time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</td>
@@ -575,17 +624,8 @@
         <div class="table-scroll" role="table">
           <table class="results-table" role="grid">
             <thead>
-              <tr>
-                <th>Avg 1</th>
-                <th>Team 1</th>
-                <th>Score</th>
-                <th class="divider-cell"></th>
-                <th>Score</th>
-                <th>Team 2</th>
-                <th>Avg 2</th>
-              </tr>
-            </thead>
-            <tbody>`;
+              <tr><th>Avg 1</th><th>Team 1</th><th>Score</th><th class="divider-cell"></th><th>Score</th><th>Team 2</th><th>Avg 2</th></tr>
+            </thead><tbody>`;
         byDate[dateStr].forEach(r => {
           const win1 = +r['Legs 1'] > +r['Legs 2'];
           const win2 = +r['Legs 2'] > +r['Legs 1'];
@@ -612,9 +652,7 @@
     }
     function standingsTable(arr) {
       let html = `<div class="table-scroll"><table class="standings-table" role="grid"><thead>
-        <tr>
-          <th>Pos</th><th>Team</th><th>P</th><th>W</th><th>L</th><th>EF</th><th>EA</th><th>ED</th><th>Pts</th><th>Avg</th>
-        </tr>
+        <tr><th>Pos</th><th>Team</th><th>P</th><th>W</th><th>L</th><th>EF</th><th>EA</th><th>ED</th><th>Pts</th><th>Avg</th></tr>
       </thead><tbody>`;
       arr.forEach((s,i) => {
         let groupClass = i < 3 ? "gold" : i < 6 ? "silver" : "elim";
@@ -805,7 +843,6 @@
         });
         container.appendChild(select);
       }
-      // Restore previous compare selections if any
       if (compareSelections.length) {
         setTimeout(() => {
           const selects = container.querySelectorAll("select");
@@ -873,6 +910,41 @@
       compareSelections = Array.from(selects).map(s => s.value);
       compareTableHtml = tableHtml;
       window.scrollTo({top:0, behavior:'smooth'});
+    }
+    function renderHomeStatHighlights(stats, bestLegsSheet, id = "home-stat-highlights") {
+      const defs = [
+        { key: "3 Dart Avg", label: "Best 3DA", icon: "★" },
+        { key: "Legs Won", label: "Most Legs", icon: "🏆" },
+        { key: "High Finish", label: "High Finish", icon: "🎯" },
+        { key: "First 9 Avg", label: "Best F9", icon: "🚀" }
+      ];
+      const eligible = stats.filter(p => Number(p["Match Played"]) >= 2);
+      let html = `<div class="stat-high-bar">`;
+      defs.forEach(def => {
+        const sorted = [...eligible].sort((a, b) => +b[def.key] - +a[def.key]);
+        const player = sorted[0];
+        if (!player) return;
+        let val = player[def.key] ?? "—";
+        html += `<div class="stat-high-card">
+          <div class="stat-high-label">${def.icon} ${def.label}</div>
+          <div class="stat-high-main">${val}</div>
+          <div class="stat-high-player">
+            ${player.Player}<br><span>${player.Team || ""}</span>
+          </div>
+        </div>`;
+      });
+      if (bestLegsSheet && bestLegsSheet.length) {
+        let best = bestLegsSheet.sort((a, b) => Number(a["Best Leg"]) - Number(b["Best Leg"]))[0];
+        html += `<div class="stat-high-card">
+          <div class="stat-high-label">⏱️ Best Leg</div>
+          <div class="stat-high-main">${best["Best Leg"]}</div>
+          <div class="stat-high-player">
+            ${best.Players} <br><span>${best.Team}</span>
+          </div>
+        </div>`;
+      }
+      html += "</div>";
+      document.getElementById(id).innerHTML = html;
     }
     document.addEventListener("DOMContentLoaded", function() {
       document.querySelectorAll('.nav-bar-glass .nav-btn').forEach(btn => {
