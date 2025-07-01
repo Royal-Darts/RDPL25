@@ -30,6 +30,7 @@
       --glass-bg: rgba(255,255,255,0.23);
       --glass-border: rgba(56,182,255,0.10);
       --nav-bg: #1b2a50;
+      --nav-glass: rgba(34,53,92,0.95);
       --shadow: 0 4px 32px 0 rgba(56,182,255,0.14);
       --table-border: #e2ecf4;
       --text: #1d253c;
@@ -38,38 +39,25 @@
       --font-heading: 'Segoe UI Semibold', Arial, sans-serif;
     }
 
-    /* --- Layout fixes --- */
     html, body {
-      height: 100%;
-      margin: 0; padding: 0;
-      display: flex;
-      flex-direction: column;
       background: #f7fafd;
       color: var(--text);
       font-family: var(--font-sans);
+      margin: 0; padding: 0; min-height: 100%;
+      height: 100%;
       scroll-behavior: smooth;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
-
     body {
-      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
       min-height: 100vh;
       box-sizing: border-box;
       background-image: linear-gradient(120deg, #e9f3ff 0%, #ffffff 100%);
       font-size: 16px;
       line-height: 1.4;
       color: var(--text);
-    }
-
-    main {
-      flex-grow: 1;
-      max-width: 540px;
-      margin: 0 auto;
-      padding: 1rem 1rem 1rem 1rem;
-      width: 100%;
-      min-height: 0;
-      overflow-anchor: none;
     }
 
     /* === HEADER === */
@@ -107,6 +95,18 @@
       text-shadow: 0 1px 6px #22355caa;
     }
 
+    /* === MAIN CONTENT === */
+    main {
+      flex-grow: 1;
+      max-width: 540px;
+      margin: 0 auto;
+      padding: 1rem 1rem 1rem 1rem;
+      width: 100%;
+      min-height: 0;
+      -webkit-overflow-scrolling: touch;
+      overflow-anchor: none;
+    }
+
     /* === SECTIONS === */
     .section {
       display: none;
@@ -127,7 +127,7 @@
       box-shadow: 0 4px 28px #c3e6ff30;
       margin-bottom: 1.25em;
       padding: 1.2em 1.1em 1.1em 1.1em;
-      border: 1.5px solid rgba(56,182,255,0.10);
+      border: 1.5px solid var(--glass-border);
       transition: box-shadow 0.3s ease;
     }
     .card:hover {
@@ -502,9 +502,9 @@
     footer {
       width: 100%;
       max-width: 540px;
-      margin: 0 auto 1.5em auto;
-      padding: 1em 1em 1em 1em;
-      background: transparent;
+      margin: 0 auto 2em auto;
+      background: none;
+      position: relative;
       color: #7a7a7a;
       font-size: 0.9rem;
       user-select: none;
@@ -514,7 +514,7 @@
       gap: 1.5rem;
       flex-shrink: 0;
       box-sizing: border-box;
-      position: relative;
+      padding: 0 1rem;
     }
     .footer-icons {
       display: flex;
@@ -584,7 +584,7 @@
       max-width: 540px;
       z-index: 110;
       background: var(--nav-bg);
-      box-shadow: 0 6px 30px #22355ccc;
+      box-shadow: 0 6px 36px #22355ccc;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -595,15 +595,15 @@
       overflow: hidden;
       user-select: none;
       font-family: var(--font-heading);
-      padding: 0 8px;
+      padding: 0 10px;
     }
     .nav-bar-glass .nav-btn {
       flex: 1 1 0;
       background: none;
       border: none;
       color: #e2eaf5;
-      font-size: 1.3em;
-      padding: 0.2em 8px 0.15em 8px;
+      font-size: 1.18em;
+      padding: 0.25em 8px 0.15em 8px;
       text-align: center;
       outline: none;
       position: relative;
@@ -615,18 +615,19 @@
       min-width: 0;
       transition: color 0.25s ease;
       font-weight: 700;
-      letter-spacing: 0.02em;
-      text-shadow: 0 0 2px #0009;
+      letter-spacing: 0.015em;
+      text-shadow: 0 0 2px #000a;
+      white-space: nowrap;
     }
     .nav-bar-glass .nav-btn i {
-      font-size: 1.65em;
+      font-size: 1.55em;
       line-height: 1.02;
       transition: color 0.2s ease;
       margin-bottom: 0.1em;
     }
     .nav-bar-glass .nav-label {
       display: block;
-      font-size: 0.92em;
+      font-size: 0.8em;
       margin-top: 0.03em;
       font-weight: 700;
       letter-spacing: 0.02em;
@@ -634,28 +635,41 @@
       opacity: 1;
       transition: opacity 0.25s ease;
       white-space: nowrap;
-      text-shadow: 0 0 3px #000b;
+      text-shadow: 0 0 3px #000c;
     }
     .nav-bar-glass .nav-btn.active,
     .nav-bar-glass .nav-btn:active {
       color: var(--accent2);
       font-weight: 900;
-      text-shadow: 0 0 6px var(--accent2);
+      text-shadow: 0 0 5px var(--accent2);
     }
-    /* Add margin-right between nav buttons */
-    .nav-bar-glass .nav-btn:not(:last-child) {
-      margin-right: 2px;
+    .nav-bar-glass .nav-indicator {
+      display: block;
+      position: absolute;
+      left: 22%;
+      right: 22%;
+      bottom: 8px;
+      height: 6px;
+      border-radius: 6px;
+      background: linear-gradient(90deg, var(--accent2) 0%, var(--accent) 100%);
+      opacity: 0;
+      transform: scaleX(0.7);
+      transition: opacity 0.25s ease, transform 0.3s ease;
+      z-index: 2;
     }
-    /* Responsive tweaks */
+    .nav-bar-glass .nav-btn.active .nav-indicator {
+      opacity: 1;
+      transform: scaleX(1);
+    }
     @media (max-width: 430px) {
       .nav-bar-glass .nav-label {
-        font-size: 0.85em;
+        font-size: 0.75em;
       }
       .nav-bar-glass .nav-btn {
-        font-size: 1.1em;
+        font-size: 1.05em;
       }
       .nav-bar-glass .nav-btn i {
-        font-size: 1.45em;
+        font-size: 1.35em;
       }
     }
 
@@ -889,18 +903,30 @@
       background: #f8fbff;
     }
     /* Responsive */
-    @media (max-width: 480px) {
+    @media (max-width: 430px) {
       #compare-results table {
-        font-size: 0.9em;
+        font-size: 0.88em;
         min-width: 100%;
       }
       #compare-results th.metric-header {
         min-width: 100px;
-        font-size: 0.9em;
+        font-size: 0.88em;
       }
       #compare-results td.player-name-cell {
         min-width: 100px;
-        font-size: 0.9em;
+        font-size: 0.88em;
+      }
+      .nav-bar-glass .nav-label {
+        font-size: 0.65em !important;
+        white-space: nowrap;
+        letter-spacing: 0.01em;
+      }
+      .nav-bar-glass .nav-btn {
+        font-size: 0.95em !important;
+        padding: 0.25em 6px 0.15em 6px !important;
+      }
+      .nav-bar-glass .nav-btn i {
+        font-size: 1.25em !important;
       }
     }
   </style>
