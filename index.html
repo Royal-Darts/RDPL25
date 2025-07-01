@@ -101,17 +101,16 @@
     .stand-legend .gold {background:var(--gold);color:#2e2e2e;}
     .stand-legend .silver {background:var(--silver);color:#232323;}
     .stand-legend .elim {background:#ffdbdb;color:#99111c;}
-    /* Results */
-    .result-winner {
-      background: var(--primary-light) !important;
-      font-weight: 800 !important;
-      border-radius: 5px;
-      color: var(--accent2) !important;
-      box-shadow: 0 1px 5px #ffc93a22;
-      position: relative;
-      z-index: 2;
-    }
-    tr.result-row { box-shadow: 0 3px 19px #38b6ff10;}
+    .cup-badge {font-size:0.95em; font-weight:700; border-radius:6px; padding:2px 9px; display:inline-block;}
+    .cup-gold {background:var(--gold);color:#2e2e2e;}
+    .cup-silver {background:var(--silver);color:#232323;}
+    .cup-elim {background:#e6e6e6;color:#b4312a;}
+    /* Results: winner left border, icon, bold */
+    .result-row { border-left: 0px solid transparent; }
+    .result-row.winner1 { border-left: 5px solid var(--gold); }
+    .result-row.winner2 { border-left: 5px solid #38b6ff; }
+    .winner-cell { font-weight:800; }
+    .winner-icon { font-size:1.05em;vertical-align:middle;margin-left:2px;}
     /* Fixtures */
     .date-heading {
       color: var(--primary2);
@@ -468,7 +467,7 @@
       });
       container.innerHTML = html;
     }
-    // --- RESULTS (winner highlighted) ---
+    // --- RESULTS (winner: left border, trophy icon, bold) ---
     function renderResults(results, fixtures) {
       const fixtureDateMap = {};
       fixtures.forEach(fix => {
@@ -509,13 +508,14 @@
         byDate[dateStr].forEach(r => {
           const win1 = +r['Legs 1'] > +r['Legs 2'];
           const win2 = +r['Legs 2'] > +r['Legs 1'];
-          html += `<tr class="result-row">
+          let rowClass = win1 ? "winner1" : win2 ? "winner2" : "";
+          html += `<tr class="result-row ${rowClass}">
             <td>${r['Avg 1']||""}</td>
-            <td class="curl${win1?" result-winner":""}" style="text-align:center;">${curlText(r['Team 1']||"")}</td>
-            <td style="text-align:center;"${win1?' class="result-winner"':''}>${r['Legs 1']===0?"0":r['Legs 1']||"0"}</td>
+            <td class="curl${win1?" winner-cell":""}" style="text-align:center;">${curlText(r['Team 1']||"")}${win1?' <span class="winner-icon">🏆</span>':''}</td>
+            <td style="text-align:center;"${win1?' class="winner-cell"':''}>${r['Legs 1']==0?"0":r['Legs 1']||"0"}</td>
             <td class="divider-cell"><div class="divider-line"></div></td>
-            <td style="text-align:center;"${win2?' class="result-winner"':''}>${r['Legs 2']===0?"0":r['Legs 2']||"0"}</td>
-            <td class="curl${win2?" result-winner":""}" style="text-align:center;">${curlText(r['Team 2']||"")}</td>
+            <td style="text-align:center;"${win2?' class="winner-cell"':''}>${r['Legs 2']==0?"0":r['Legs 2']||"0"}</td>
+            <td class="curl${win2?" winner-cell":""}" style="text-align:center;">${curlText(r['Team 2']||"")}${win2?' <span class="winner-icon">🏆</span>':''}</td>
             <td>${r['Avg 2']||""}</td>
           </tr>`;
         });
@@ -523,7 +523,7 @@
       });
       document.getElementById('resultsContainer').innerHTML = html || '';
     }
-    // --- Standings Page ---
+    // --- Standings Page (Cup Badge Column) ---
     function renderStandingsTables() {
       const A = standingsCache.filter(s => s.Group?.toUpperCase() === 'A').sort((a,b)=>b.Points-a.Points || b.LD-a.LD);
       const B = standingsCache.filter(s => s.Group?.toUpperCase() === 'B').sort((a,b)=>b.Points-a.Points || b.LD-a.LD);
@@ -532,9 +532,13 @@
     }
     function standingsTable(arr) {
       let html = `<div class="table-scroll"><table class="standings-table"><thead>
-        <tr><th>Pos</th><th>Team</th><th>P</th><th>W</th><th>L</th><th>Pts</th><th>Avg</th></tr>
+        <tr><th>Pos</th><th>Team</th><th>P</th><th>W</th><th>L</th><th>Pts</th><th>Avg</th><th>Cup</th></tr>
       </thead><tbody>`;
       arr.forEach((s,i) => {
+        let cup, cupClass;
+        if (i < 3) {cup = "🏆 Gold"; cupClass = "cup-badge cup-gold";}
+        else if (i < 6) {cup = "🥈 Silver"; cupClass = "cup-badge cup-silver";}
+        else {cup = "🚫 Out"; cupClass = "cup-badge cup-elim";}
         let groupClass = i < 3 ? "gold" : i < 6 ? "silver" : "elim";
         html += `<tr class="stand-row ${groupClass}">
           <td>${i+1}</td>
@@ -544,6 +548,7 @@
           <td style="text-align:center;">${s.L}</td>
           <td class="stand-points" style="text-align:center;">${s.Points}</td>
           <td style="text-align:center;">${s.Avg}</td>
+          <td style="text-align:center;"><span class="${cupClass}">${cup}</span></td>
         </tr>`;
       });
       html += "</tbody></table></div>";
