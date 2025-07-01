@@ -4,120 +4,71 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
   <title>Royal Darts Premier League 2025</title>
-  <meta name="theme-color" content="#F4F7FA">
+  <meta name="theme-color" content="#171e30">
   <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/174/174855.png" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lucide-static@0.322.0/font/lucide.css"/>
   <style>
     :root {
-      --primary: #1b375c;
-      --primary-dark: #1c2541;
+      --primary: #171e30;
+      --primary2: #22355c;
+      --primary-light: #e9f3ff;
       --accent: #38b6ff;
-      --accent2: #23d160;
-      --background: #f4f7fa;
+      --accent2: #ffc93a;
+      --gold: #ffc93a;
+      --silver: #bfc9da;
+      --eliminated: #f55353;
       --card: #fff;
-      --nav: #212b36;
-      --text: #212b36;
-      --gold: #38b6ff;
-      --silver: #23d160;
-      --elim: #bcc2d0;
-      --divider: #b1e1ff;
+      --glass-bg: rgba(255,255,255,0.23);
+      --glass-border: rgba(56,182,255,0.10);
+      --nav-bg: rgba(23,30,48,0.85);
+      --nav-glass: rgba(34,53,92,0.72);
+      --shadow: 0 4px 32px 0 rgba(56,182,255,0.14);
       --table-border: #e2ecf4;
-      --header-shadow: 0 2px 20px #1b375c0c;
+      --text: #1d253c;
     }
     html, body {
-      background: var(--background);
+      background: #f7fafd;
       color: var(--text);
       font-family: 'Segoe UI', Arial, sans-serif;
-      margin: 0; padding: 0;
-      min-height: 100%;
+      margin: 0; padding: 0; min-height: 100%;
       overscroll-behavior-y: none;
     }
     header {
-      background: var(--primary);
+      background: linear-gradient(120deg, var(--primary2) 80%, var(--accent) 120%);
       color: #fff;
       padding: 1.08rem 0.5rem 1.08rem 0.5rem;
       text-align: left;
       display: flex; align-items: center; gap: 0.8em;
-      border-bottom: 1.5px solid var(--divider);
-      box-shadow: var(--header-shadow);
+      border-bottom: 1.5px solid #b2d9fc;
+      box-shadow: 0 3px 30px #22355c0b;
     }
-    header img { height: 45px; margin-right: 0.6em; }
+    header img { height: 44px; margin-right: 0.65em; border-radius: 9px; box-shadow: 0 2px 8px #38b6ff11; }
     header .titlebox { flex:1;}
-    header h1 {
-      margin: 0 0 0 0;
-      font-size: 1.13em;
-      font-weight: 800;
-      color: #fff;
-      line-height: 1.09;
-      letter-spacing: 0.01em;
-    }
-    nav {
-      position: fixed;
-      bottom: 0; left: 0; right: 0;
-      width: 100vw; background: var(--nav); z-index: 200;
-      box-shadow: 0 -1px 18px #0002;
-      display: flex; justify-content: space-between; align-items: center;
-      border-top: 2px solid var(--divider);
-      min-height: 59px;
-      font-size: 0.98em;
-    }
-    nav .tab-btn {
-      flex: 1 1 0; border: none; outline: none;
-      background: none; color: #8bb2d9;
-      padding: 0.57em 0 0.14em 0;
-      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.04em;
-      font-size: 1em; font-weight: 600;
-      cursor: pointer;
-      min-width: 0;
-      transition: color 0.18s, background 0.16s;
-      position: relative;
-    }
-    nav .tab-btn.active, nav .tab-btn:active {
-      color: var(--accent);
-      font-weight: 700;
-    }
-    nav .tab-btn.active::after {
-      content: "";
-      position: absolute;
-      bottom: 0; left: 19%; right: 19%;
-      height: 3px;
-      background: var(--accent);
-      border-radius: 3px 3px 0 0;
-    }
-    nav .tab-icon { font-size: 1.23em; margin-bottom: 0.01em;}
-    nav .tab-label { font-size: 0.91em; letter-spacing: 0.01em;}
-    main { max-width: 510px; margin: 0 auto 72px auto; padding: 1rem 0.08rem 0.1rem 0.08rem; }
+    header h1 {margin: 0; font-size: 1.15em; font-weight: 800; color: #fff; line-height: 1.09;}
+    main { max-width: 540px; margin: 0 auto 88px auto; padding: 1rem 0.14rem 0.1rem 0.14rem; }
     .section { display: none; }
     .section.active { display: block; }
     .card {
       background: var(--card);
-      border-radius: 15px;
-      box-shadow: 0 2px 18px #b1e1ff10;
-      margin-bottom: 1.13em;
-      padding: 1.01em 0.8em 1em 0.8em;
+      border-radius: 18px;
+      box-shadow: 0 4px 28px #c3e6ff17;
+      margin-bottom: 1.19em;
+      padding: 1.09em 0.85em 1.05em 0.85em;
     }
     .card h3 {
-      color: var(--primary);
-      margin: 0 0 0.32em 0;
-      font-weight: 800; font-size:1.08em;
-      letter-spacing:0.01em;
+      color: var(--primary2); margin: 0 0 0.32em 0;
+      font-weight: 900; font-size:1.08em; letter-spacing:0.01em;
     }
     .table-scroll {
       overflow-x: auto;
       width: 100%;
-      -webkit-overflow-scrolling: touch;
-      border-radius: 8px;
-      margin-bottom: 0.26em;
+      border-radius: 12px;
+      margin-bottom: 0.25em;
     }
     table {
-      width: 100%;
-      min-width: 340px;
-      background: transparent;
-      border-collapse: separate;
-      border-spacing: 0;
-      margin: 0;
-      font-size: 1em;
-      border: none;
+      width: 100%; background: transparent;
+      border-collapse: separate; border-spacing: 0; margin: 0;
+      font-size: 1em; border: none;
     }
     th,td {
       padding: 0.61em 0.25em;
@@ -126,91 +77,151 @@
       border-bottom: 1px solid var(--table-border);
       background: transparent;
       color: var(--text);
-      word-break: break-word;
-      white-space: pre-line;
-      overflow-wrap: anywhere;
-      text-overflow: unset;
-      line-height: 1.18;
-      vertical-align: middle;
+      word-break: break-word; white-space: pre-line; overflow-wrap: anywhere; line-height: 1.18;
     }
-    th { color: var(--primary); font-weight:700; background:transparent; border-bottom:2px solid var(--divider);}
-    .curl { white-space: pre-line; word-break: break-word; overflow-wrap: anywhere;}
-    .fixtures-table th, .fixtures-table td,
-    .results-table th, .results-table td,
-    .standings-table th, .standings-table td,
-    #stats-table th, #stats-table td {
-      min-width: 68px;
-      max-width: 115px;
-      word-break: break-word;
-      white-space: pre-line;
-    }
+    th { color: var(--primary2); font-weight:800; background:transparent; border-bottom:2px solid #b2d9fc;}
+    .curl { white-space: pre-line; word-break: break-word; }
     .divider-cell { min-width:16px;max-width:16px;padding:0;text-align:center;vertical-align:middle;}
-    .divider-line { width:2px; height:34px; background:var(--accent); margin:0 auto; border-radius:2px; display:inline-block;}
-    /* Fixtures date heading */
+    .divider-line { width:2px; height:34px; background:var(--accent2); margin:0 auto; border-radius:2px; display:inline-block;}
+    /* Standings */
+    .stand-row {
+      background: #fff; border-radius: 8px; font-weight: 700;
+      font-size: 1.08em; margin-bottom: 0.10em; position:relative; box-shadow: 0 2px 14px #38b6ff09; text-align: center;
+      border-left: 7px solid transparent; transition:box-shadow 0.12s;
+    }
+    .stand-row.gold {border-left: 7px solid var(--gold);}
+    .stand-row.silver {border-left: 7px solid var(--silver);}
+    .stand-row.elim {border-left: 7px solid var(--eliminated);}
+    .stand-badge { font-size: 0.93em; vertical-align: middle; margin-left: 6px;}
+    .stand-teamlogo { width: 20px; height: 20px; border-radius: 4px; vertical-align: middle; margin-right: 7px;}
+    .stand-points {font-weight:800; font-size:1.03em;}
+    /* Standings legend */
+    .stand-legend {text-align:center;font-size:0.95em;margin-bottom:0.7em;}
+    .stand-legend span {display:inline-block;border-radius:4px;padding:2px 9px;margin:0 5px;font-weight:700;}
+    .stand-legend .gold {background:var(--gold);color:#2e2e2e;}
+    .stand-legend .silver {background:var(--silver);color:#232323;}
+    .stand-legend .elim {background:#ffdbdb;color:#99111c;}
+    /* Results */
+    .result-winner {
+      background: var(--primary-light) !important;
+      font-weight: 800 !important;
+      border-radius: 5px;
+      color: var(--accent2) !important;
+      box-shadow: 0 1px 5px #ffc93a22;
+      position: relative;
+      z-index: 2;
+    }
+    tr.result-row { box-shadow: 0 3px 19px #38b6ff10;}
+    /* Fixtures */
     .date-heading {
-      color: var(--primary);
-      font-size: 1.13em;
-      font-weight: 700;
-      margin: 1.2em 0 0.12em 0;
-      padding-bottom: 0.17em;
+      color: var(--primary2);
+      font-size: 1.22em;
+      font-weight: 900;
+      margin: 1.3em 0 0.12em 0;
+      padding-bottom: 0.14em;
       border-bottom: 3.5px solid var(--accent);
       letter-spacing: 0.01em;
     }
-    /* Standings Group Card */
-    .standings-group-title {
-      font-weight:800;font-size:1.06em;color:var(--primary);margin-bottom:0.34em;text-align:center;letter-spacing:0.01em;
-    }
-    .stand-row {
-      background: #fff;
-      border-radius: 7px;
-      color: var(--primary);
-      font-size: 1.09em;
-      font-weight: 700;
-      margin-bottom: 0.12em;
-      position:relative;
-      transition:box-shadow 0.12s;
-      box-shadow: 0 1px 3px #bbe7ff11;
-      text-align: center;
-    }
-    .stand-teamlogo { width: 17px; height: 17px; border-radius: 4px; vertical-align: middle; margin-right: 6px;}
-    .stand-points {font-weight:800; font-size:1.02em;}
-    /* Subtle group coloring: blue/green/grey left border */
-    .stand-row.gold {border-left: 6px solid var(--gold);}
-    .stand-row.silver {border-left: 6px solid var(--silver);}
-    .stand-row.elim {border-left: 6px solid var(--elim);}
-    /* Stats Table & Popup */
+    /* Stats */
     #stats-table th, #stats-table td { min-width: 74px; max-width: 108px;}
-    #stats-table td.stat-player, #stats-table td.stat-team { white-space:pre-line; word-break:break-word; line-height:1.12; cursor:pointer;}
-    #stats-table td.stat-team img {width:10px;height:10px;vertical-align:middle;margin-right:2px;}
-    #player-popup {
-      display:none; position:fixed; left:0; top:0; width:100vw; height:100vh; z-index:250;
-      background:rgba(44,58,71,0.93); justify-content:center; align-items:center;
-      animation:fadeIn 0.14s;
-    }
+    #stats-table td.stat-player, #stats-table td.stat-team { white-space:pre-line; word-break:break-word; line-height:1.13; cursor:pointer;}
+    #stats-table td.stat-team img {width:12px;height:12px;vertical-align:middle;margin-right:2px;}
+    /* Player popup */
+    #player-popup { display:none; position:fixed; left:0; top:0; width:100vw; height:100vh; z-index:250;
+      background:rgba(34,53,92,0.92); justify-content:center; align-items:center;
+      animation:fadeIn 0.14s; }
     @keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
-    #player-popup .popup-card {
-      background:#fff; border-radius:12px; box-shadow:0 2px 14px #b1e1ff33; padding:1em 1.1em; color:var(--primary-dark);
-      min-width:130px;max-width:93vw; text-align:center; font-weight:700;
-    }
+    #player-popup .popup-card { background:#fff; border-radius:12px; box-shadow:0 2px 14px #b1e1ff33;
+      padding:1em 1.1em; color:var(--primary-dark); min-width:130px;max-width:93vw; text-align:center; font-weight:700;}
     #player-popup .popup-head {font-size:1.08em; font-weight:800; margin-bottom:0.18em;}
     #player-popup .popup-team {color:var(--primary-dark);font-weight:700;margin-bottom:0.18em;}
     #player-popup .popup-label {color:#212b36;font-size:0.92em;margin-top:0.11em;}
     #player-popup .popup-close {color:#222; font-size:1.2em; background:none; border:none; position:absolute;top:1.1em;right:1.1em;cursor:pointer;}
-    /* Misc UI */
-    .stat-high-bar {margin-bottom:0.5em;}
-    .team-filter-bar {text-align:center; margin-bottom:1.09em;}
-    .team-filter-dropdown {
-      width:97vw;max-width:220px;margin:0 auto 1em auto;padding:0.23em;font-size:0.98em;border-radius:6px;border:1.3px solid var(--divider);background:#fff;color:var(--primary);font-weight:700;outline:none;
+    /* Squads premium card grid */
+    .squad-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(168px,1fr)); gap:1.13em; }
+    .squad-team-card {
+      background: var(--glass-bg); backdrop-filter: blur(11px);
+      border: 2px solid var(--glass-border);
+      border-radius: 19px;
+      padding: 1.09em 0.6em 0.86em 0.6em;
+      text-align: center;
+      box-shadow: var(--shadow);
+      transition: transform 0.15s, box-shadow 0.15s;
+      position: relative;
     }
+    .squad-team-card:hover { transform: translateY(-2px) scale(1.025); box-shadow: 0 6px 22px #38b6ff23; }
+    .squad-logo-frame {
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(120deg,var(--accent) 50%,var(--primary2) 100%);
+      border-radius: 50%; width: 56px; height: 56px; margin: 0 auto 0.44em auto;
+      box-shadow: 0 2px 14px #38b6ff22;
+      border: 4px solid #fff;
+    }
+    .squad-logo-frame img { width: 37px; height: 37px; object-fit: contain; border-radius: 50%; background: #fff;}
+    .squad-team-name { font-size: 1.1em; font-weight: 900; color: var(--primary2); margin-bottom: 0.44em; }
+    .squad-players { display: flex; flex-direction: column; gap: 0.21em; }
+    .squad-player-name {
+      background: rgba(56,182,255,0.06);
+      color: var(--text);
+      border-radius: 6px; padding: 3px 0;
+      margin: 0 0 0 0;
+      font-size: 1em;
+      transition: background 0.16s;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .squad-player-name:active, .squad-player-name:focus { background: var(--accent); color: #fff;}
+    /* Stat highlights */
+    .stat-high-bar {margin-bottom:0.5em;}
+    /* Premium NavBar Pill */
+    .nav-glass-pill {
+      width: 100vw;
+      max-width: 99vw;
+      position: fixed; bottom: 11px; left: 0; z-index:500;
+      display: flex; justify-content: space-evenly; align-items: flex-end;
+      background: var(--nav-glass);
+      border-radius: 19px; box-shadow: 0 6px 40px #38b6ff17;
+      padding: 0.27em 0 0.15em 0; margin: 0 auto;
+      backdrop-filter: blur(13px);
+      border: 1.5px solid #b2d9fc44;
+      margin-left: 50%; transform: translateX(-50%);
+    }
+    .nav-glass-pill .nav-item {
+      flex:1 1 0; position:relative; z-index:2;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      font-size: 0.92em; font-weight: 700;
+      color: #bcc9e9; min-width: 0;
+      border: none; outline: none; background: none; cursor: pointer;
+      transition: color 0.18s, font-size 0.18s;
+      padding: 0.07em 0 0.13em 0;
+      margin: 0;
+    }
+    .nav-glass-pill .nav-item.active {
+      color: var(--accent2); font-size:1.13em; font-weight: 800;
+    }
+    .nav-glass-pill .nav-icon {
+      font-size: 1.43em;
+      margin-bottom: 0.08em;
+      background: none;
+      transition: transform 0.18s;
+    }
+    .nav-glass-pill .nav-item.active .nav-icon {
+      transform: translateY(-4px) scale(1.17);
+      color: var(--accent2);
+      text-shadow: 0 2px 8px #ffc93a17;
+    }
+    .nav-glass-pill .nav-label { font-size:0.81em; }
     .footer-icons {margin-top:1.15rem;text-align:center;display:flex;justify-content:center;align-items:center;gap:1.2rem;}
     .footer-icons img {height:17px;width:17px;vertical-align:middle;border-radius:3px;background:#fff;border:1px solid #bfe4fa;box-shadow:0 1px 4px rgba(0,0,0,0.02);}
     .footer-suca {margin-top:0.6rem;text-align:center;color:#bdbdbd;font-size:0.88rem;}
     @media (max-width:540px) {
-      main {padding:0.6rem 0.01rem 2.2rem 0.01rem;}
-      header img {height:23px;}
-      .card {padding:0.59em 0.12em;}
-      #player-popup .popup-card {min-width:80px;}
+      main {padding:0.62rem 0.01rem 3.6rem 0.01rem;}
+      header img {height:22px;}
+      .card {padding:0.52em 0.09em;}
       .date-heading {font-size: 1em;}
+      .squad-grid {grid-template-columns:1fr 1fr;}
+      .nav-glass-pill {padding: 0.07em 0 0.07em 0;}
+      .nav-glass-pill .nav-label { font-size:0.76em; }
     }
   </style>
 </head>
@@ -262,7 +273,13 @@
     <section id="results" class="section"><div class="card"><h3>Results</h3><div id="resultsContainer"></div></div></section>
     <!-- STANDINGS -->
     <section id="standings" class="section">
-      <div class="card" style="margin-bottom:0.8em;"><h3>Standings</h3>
+      <div class="card" style="margin-bottom:0.8em;">
+        <div class="stand-legend">
+          <span class="gold"><i class="lucide lucide-trophy" style="font-size:1.09em;vertical-align:middle;margin-right:3px;"></i>Gold Cup</span>
+          <span class="silver"><i class="lucide lucide-award" style="font-size:1.05em;vertical-align:middle;margin-right:3px;"></i>Silver Cup</span>
+          <span class="elim"><i class="lucide lucide-x-circle" style="font-size:1.03em;vertical-align:middle;margin-right:3px;"></i>Eliminated</span>
+        </div>
+        <h3>Standings</h3>
         <div class="standings-group-title">Group A</div>
         <div id="standings-a"></div>
         <div class="standings-group-title" style="margin-top:1.2em;">Group B</div>
@@ -270,7 +287,12 @@
       </div>
     </section>
     <!-- SQUADS -->
-    <section id="squads" class="section"><div class="card"><h3>Squads</h3><div id="squadsContainer">Loading...</div></div></section>
+    <section id="squads" class="section">
+      <div class="card">
+        <h3>Squads</h3>
+        <div id="squadsContainer" class="squad-grid"></div>
+      </div>
+    </section>
     <!-- STATS -->
     <section id="stats" class="section">
       <div class="card"><h3>Player Stats</h3>
@@ -288,15 +310,16 @@
       </div>
     </section>
   </main>
-  <nav>
-    <button class="tab-btn active" onclick="showTab('dashboard')" title="Home"><span class="tab-icon lucide lucide-home"></span><span class="tab-label">Home</span></button>
-    <button class="tab-btn" onclick="showTab('fixtures')" title="Fixtures"><span class="tab-icon lucide lucide-calendar-days"></span><span class="tab-label">Fixtures</span></button>
-    <button class="tab-btn" onclick="showTab('results')" title="Results"><span class="tab-icon lucide lucide-list-start"></span><span class="tab-label">Results</span></button>
-    <button class="tab-btn" onclick="showTab('standings')" title="Standings"><span class="tab-icon lucide lucide-trophy"></span><span class="tab-label">Standings</span></button>
-    <button class="tab-btn" onclick="showTab('squads')" title="Squads"><span class="tab-icon lucide lucide-users"></span><span class="tab-label">Squads</span></button>
-    <button class="tab-btn" onclick="showTab('stats')" title="Stats"><span class="tab-icon lucide lucide-bar-chart"></span><span class="tab-label">Stats</span></button>
-    <button class="tab-btn" onclick="showTab('live')" title="Live"><span class="tab-icon lucide lucide-play-circle"></span><span class="tab-label">Live</span></button>
-  </nav>
+  <!-- Modern Glass Pill Navigation -->
+  <div class="nav-glass-pill">
+    <button class="nav-item active" onclick="showTab('dashboard')" title="Home"><span class="nav-icon lucide lucide-home"></span><span class="nav-label">Home</span></button>
+    <button class="nav-item" onclick="showTab('fixtures')" title="Fixtures"><span class="nav-icon lucide lucide-calendar-days"></span><span class="nav-label">Fixtures</span></button>
+    <button class="nav-item" onclick="showTab('results')" title="Results"><span class="nav-icon lucide lucide-list-start"></span><span class="nav-label">Results</span></button>
+    <button class="nav-item" onclick="showTab('standings')" title="Standings"><span class="nav-icon lucide lucide-trophy"></span><span class="nav-label">Standings</span></button>
+    <button class="nav-item" onclick="showTab('squads')" title="Squads"><span class="nav-icon lucide lucide-users"></span><span class="nav-label">Squads</span></button>
+    <button class="nav-item" onclick="showTab('stats')" title="Stats"><span class="nav-icon lucide lucide-bar-chart"></span><span class="nav-label">Stats</span></button>
+    <button class="nav-item" onclick="showTab('live')" title="Live"><span class="nav-icon lucide lucide-play-circle"></span><span class="nav-label">Live</span></button>
+  </div>
   <!-- Player popup -->
   <div id="player-popup" onclick="hidePlayerPopup(event)">
     <div class="popup-card"></div>
@@ -334,10 +357,12 @@
     // Nav functionality
     function showTab(tabId) {
       document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
-      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.nav-item').forEach(btn => btn.classList.remove('active'));
       document.getElementById(tabId).classList.add('active');
-      let navBtn = Array.from(document.querySelectorAll('nav .tab-btn')).find(b => b.innerText.toLowerCase().includes(tabId));
-      if(navBtn) navBtn.classList.add('active');
+      let navBtns = Array.from(document.querySelectorAll('.nav-glass-pill .nav-item'));
+      navBtns.forEach(btn => {
+        if(btn.innerText.toLowerCase().includes(tabId)) btn.classList.add('active');
+      });
       window.scrollTo({top:0,behavior:'smooth'});
     }
     // Data cache
@@ -443,7 +468,7 @@
       });
       container.innerHTML = html;
     }
-    // --- RESULTS (show 0 for zero score, all readable, centered) ---
+    // --- RESULTS (winner highlighted) ---
     function renderResults(results, fixtures) {
       const fixtureDateMap = {};
       fixtures.forEach(fix => {
@@ -484,7 +509,7 @@
         byDate[dateStr].forEach(r => {
           const win1 = +r['Legs 1'] > +r['Legs 2'];
           const win2 = +r['Legs 2'] > +r['Legs 1'];
-          html += `<tr>
+          html += `<tr class="result-row">
             <td>${r['Avg 1']||""}</td>
             <td class="curl${win1?" result-winner":""}" style="text-align:center;">${curlText(r['Team 1']||"")}</td>
             <td style="text-align:center;"${win1?' class="result-winner"':''}>${r['Legs 1']===0?"0":r['Legs 1']||"0"}</td>
@@ -498,7 +523,7 @@
       });
       document.getElementById('resultsContainer').innerHTML = html || '';
     }
-    // --- Standings Page: No badges/medals, subtle color left bar, centered ---
+    // --- Standings Page ---
     function renderStandingsTables() {
       const A = standingsCache.filter(s => s.Group?.toUpperCase() === 'A').sort((a,b)=>b.Points-a.Points || b.LD-a.LD);
       const B = standingsCache.filter(s => s.Group?.toUpperCase() === 'B').sort((a,b)=>b.Points-a.Points || b.LD-a.LD);
@@ -524,22 +549,23 @@
       html += "</tbody></table></div>";
       return html;
     }
-    // --- SQUADS ---
+    // --- SQUADS (premium card grid) ---
     function renderSquads(squads) {
       const container = document.getElementById('squadsContainer');
       if (!squads.length) { container.innerHTML = 'Loading...'; return; }
       const teams = [...new Set(squads.map(s => s.Team))];
-      let html = '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(146px,1fr));gap:1.02em;">';
+      let html = '';
       teams.forEach(team => {
         const logo = TEAM_LOGOS[team] || "";
-        const players = squads.filter(s => s.Team === team).map(p => `<div style="font-size:0.96em;" class="curl">${curlText(p.Player)}</div>`).join('');
-        html += `<div style="background:#fff;border-radius:10px;padding:0.63em;text-align:center;box-shadow:0 2px 14px #b1e1ff09;">
-          <img src="${logo}" alt="${team}" style="width:22px;height:22px;border-radius:6px;object-fit:contain;">
-          <div style="font-weight:700;color:var(--primary);margin:0.17em 0 0.04em 0;" class="curl">${curlText(team)}</div>
-          <div style="font-size:0.93em;color:#32455a;">${players}</div>
+        const players = squads.filter(s => s.Team === team).map(p =>
+          `<div class="squad-player-name curl" tabindex="0">${curlText(p.Player)}</div>`
+        ).join('');
+        html += `<div class="squad-team-card">
+          <div class="squad-logo-frame"><img src="${logo}" alt="${team}"></div>
+          <div class="squad-team-name curl">${curlText(team)}</div>
+          <div class="squad-players">${players}</div>
         </div>`;
       });
-      html += '</div>';
       container.innerHTML = html;
     }
     // --- STATS ---
