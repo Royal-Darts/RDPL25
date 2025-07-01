@@ -4,17 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
   <title>Royal Darts Premier League 2025</title>
-  <meta property="og:title" content="Royal Darts Premier League 2025" />
-  <meta property="og:description" content="Live results, fixtures, standings, and stats for the Royal Darts Premier League." />
-  <meta property="og:image" content="logo.png" />
-  <meta name="twitter:card" content="summary_large_image"/>
-  <meta name="twitter:title" content="Royal Darts Premier League 2025"/>
-  <meta name="twitter:description" content="Live results, fixtures, standings, and stats for India's premier darts league."/>
-  <meta name="twitter:image" content="logo.png"/>
   <link rel="icon" href="logo.png" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lucide-static@0.322.0/font/lucide.css"/>
-  <meta name="theme-color" content="#171e30">
-
   <style>
     :root {
       --primary: #171e30;
@@ -35,7 +26,6 @@
       --table-font: 0.90em;
       --min-font: 13px;
     }
-
     html, body {
       background: #f7fafd;
       color: #1d253c;
@@ -98,7 +88,7 @@
       max-width: 530px;
       margin: 0 auto;
       width: 100%;
-      padding: 10px var(--page-padding) 80px var(--page-padding); /* bottom for nav */
+      padding: 10px var(--page-padding) 80px var(--page-padding);
       min-height: 0;
       box-sizing: border-box;
       background: none;
@@ -125,8 +115,7 @@
       font-family: var(--font-heading);
       user-select: none;
     }
-
-    /* === TABLES & SCROLL === */
+    /* Tables & scroll */
     .table-scroll {
       overflow-x: auto;
       width: 100%;
@@ -150,7 +139,7 @@
       letter-spacing: 0.01em;
     }
     th, td {
-      padding: 0.5em 0.24em;
+      padding: 0.5em 0.35em;
       text-align: center;
       font-size: 0.99em;
       border-bottom: 1px solid var(--table-border);
@@ -184,8 +173,7 @@
     .stand-row.gold .pos-cell { background: var(--accent2);}
     .stand-row.silver .pos-cell { background: #bfc9da;}
     .stand-row.elim .pos-cell { background: #f55353; color: #fff;}
-    .stand-teamlogo { display:none;} /* Remove team logos */
-
+    .stand-teamlogo { display:none;} /* No logos */
     /* Squads */
     .squad-team-card {
       margin-bottom: 0.6em;
@@ -196,7 +184,7 @@
       user-select: none;
       cursor: default;
     }
-    .squad-logo-frame {display:none;} /* Hide team logos */
+    .squad-logo-frame {display:none;}
     .squad-team-name { font-weight: 800; font-size: 0.99em; color: var(--primary2);}
     .squad-players { display: flex; flex-wrap: wrap; gap: 6px; justify-content: flex-start;}
     .squad-player-name {
@@ -227,8 +215,7 @@
       padding: 3px 7px;
       user-select: none;
     }
-
-    /* --- Player popup --- */
+    /* Player popup */
     #player-popup {
       display: none;
       position: fixed; left: 0; top: 0;
@@ -264,8 +251,7 @@
       color: #fff; font-weight: 800; font-size: 0.95em; padding: 0.36em 0.9em; cursor: pointer;
     }
     #save-card-btn:hover { background: var(--primary2);}
-
-    /* === Footer (ALWAYS at bottom, never floats or overlays) === */
+    /* Footer always at bottom */
     footer {
       width: 100%;
       max-width: 530px;
@@ -306,8 +292,7 @@
     }
     .wa-btn { background: var(--wa-green); color: #fff !important; border-radius: 8px; font-size: 1.12em; }
     .footer-suca { margin-left: auto; font-style: italic; color: #aaa;}
-
-    /* === NAVIGATION BAR: compact, legible, always visible, no overflow === */
+    /* Navigation bar redesigned mobile-first */
     .nav-bar-glass {
       position: fixed;
       left: 0;
@@ -402,7 +387,6 @@
       .nav-bar-glass .nav-label { font-size: 0.68em; }
       .nav-bar-glass .nav-btn { font-size: 0.88em;}
     }
-
     /* Comparison selects */
     #compare .player-select-container {
       max-width: 420px;
@@ -443,7 +427,6 @@
     #compare .compare-btn:disabled {background: #b2d9fc99; color: #fff;}
     #compare .compare-btn:hover:not(:disabled) {background: var(--primary2);}
     #compare-results {margin-top: 1em; overflow-x: auto;}
-
     #compare-results table {
       width: 100%;
       min-width: 340px;
@@ -481,8 +464,7 @@
       main { padding-bottom: 80px; }
       #compare-results table { font-size: 0.9em;}
     }
-
-    /* Bottom page padding to always show last row above nav */
+    /* Bottom page padding so last row visible */
     .pad-for-nav { height: 58px; min-height: 58px; display: block; width: 100%;}
   </style>
 </head>
@@ -499,7 +481,7 @@
       <div class="card">
         <h3>Today's Fixtures</h3>
         <div class="table-scroll">
-          <table class="fixtures-table" id="dashboard-fixtures-table" role="table">
+          <table class="fixtures-table" id="dashboard-fixtures-table" role="table" aria-live="polite" aria-atomic="true">
             <thead>
               <tr>
                 <th scope="col">Time</th>
@@ -515,7 +497,7 @@
       <div class="card" style="margin-top:-0.6em;">
         <h3>Quick Standings</h3>
         <div class="standings-group-title" aria-hidden="true">Group A</div>
-        <div class="table-scroll" role="table">
+        <div class="table-scroll" role="table" aria-live="polite" aria-atomic="true">
           <table class="standings-table" role="grid">
             <thead>
               <tr><th scope="col">Pos</th><th scope="col">Team</th><th scope="col">Pts</th></tr>
@@ -524,7 +506,7 @@
           </table>
         </div>
         <div class="standings-group-title" aria-hidden="true" style="margin-top:0.4em;">Group B</div>
-        <div class="table-scroll" role="table">
+        <div class="table-scroll" role="table" aria-live="polite" aria-atomic="true">
           <table class="standings-table" role="grid">
             <thead>
               <tr><th scope="col">Pos</th><th scope="col">Team</th><th scope="col">Pts</th></tr>
@@ -558,9 +540,9 @@
         </div>
         <h3>Standings</h3>
         <div class="standings-group-title" aria-hidden="true">Group A</div>
-        <div id="standings-a" role="table"></div>
+        <div id="standings-a" role="table" aria-live="polite" aria-atomic="true"></div>
         <div class="standings-group-title" aria-hidden="true" style="margin-top:1em;">Group B</div>
-        <div id="standings-b" role="table"></div>
+        <div id="standings-b" role="table" aria-live="polite" aria-atomic="true"></div>
       </div>
     </section>
     <!-- Squads -->
@@ -632,7 +614,7 @@
     <div class="popup-card" role="document"></div>
     <button class="popup-close" onclick="hidePlayerPopup(event)" aria-label="Close player card">&times;</button>
   </div>
-  <!-- Footer always at the bottom -->
+  <!-- Footer always at bottom -->
   <footer>
     <div class="footer-icons">
       <a href="https://n01darts.com/n01/tournament/comp.php?id=t_NI0o_4352&tab=live" target="_blank" rel="noopener" aria-label="Watch live on Nakka">
@@ -649,20 +631,17 @@
   </footer>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
   <script defer>
-    // API and caches
     const API_URL = 'https://script.google.com/macros/s/AKfycby6BCE5cyBaxpz-Jt-TeRH6k5Jeq-vqelr8S7rt32e7wFjBzEvuBrYi4yPaEBz2Kari/exec';
     let fixturesCache = [], standingsCache = [], statsCache = [], bestLegCache = [], squadsCache = [], resultsCache = [];
     let statsSortKey = null, statsSortDir = 1, statsSearchTerm = "", teamFilter = null;
     const STATS_HIDE_COLUMNS = new Set(["Keep", "Break", "Second Legs", "Break Legs", "Total Score", "Total Darts", "Group", "Best Leg", "Worst Leg"]);
     function curlText(txt) {
       if (!txt) return '';
-      // Only break at spaces, don't break words, but only if text > 15 chars
       if (txt.length <= 15) return txt;
       let lastSpace = txt.lastIndexOf(' ', 15);
       if (lastSpace < 0 || lastSpace > txt.length-4) return txt;
       return txt.slice(0, lastSpace) + "\n" + txt.slice(lastSpace+1);
     }
-    // --- NAVIGATION ---
     function showTab(tabId) {
       document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
       document.querySelectorAll('.nav-bar-glass .nav-btn').forEach(btn => btn.classList.remove('active'));
@@ -676,7 +655,6 @@
       });
       window.scrollTo({top:0,behavior:'smooth'});
     }
-    // --- WHATSAPP SHARE ---
     function setupWhatsAppShare() {
       const waBtn = document.getElementById("wa-share-btn");
       if (waBtn) {
@@ -688,7 +666,6 @@
         });
       }
     }
-    // --- DATA LOADING ---
     async function loadData() {
       try {
         const res = await fetch(API_URL);
@@ -707,7 +684,6 @@
         renderPlayerComparisonSelectors();
       } catch (err) { console.error('Failed to load data:', err);}
     }
-    // --- DASHBOARD: Today's Fixtures (IST) ---
     function renderDashboardFixtures() {
       const now = new Date();
       const istNow = new Date(now.toLocaleString("en-US", {timeZone: "Asia/Kolkata"}));
@@ -749,7 +725,6 @@
         </tr>`;
       }).join('');
     }
-    // --- FIXTURES PAGE ---
     function renderFixtures(fixtures) {
       const container = document.getElementById('fixturesTableContainer');
       if (!fixtures.length) {
@@ -783,7 +758,6 @@
       });
       container.innerHTML = html;
     }
-    // --- RESULTS PAGE ---
     function renderResults(results, fixtures) {
       const fixtureDateMap = {};
       fixtures.forEach(fix => {
@@ -839,7 +813,6 @@
       });
       document.getElementById('resultsContainer').innerHTML = html || '';
     }
-    // --- STANDINGS PAGE ---
     function renderStandingsTables() {
       const A = standingsCache.filter(s => s.Group?.toUpperCase() === 'A').sort((a,b)=>b.Points - a.Points || b.LD - a.LD);
       const B = standingsCache.filter(s => s.Group?.toUpperCase() === 'B').sort((a,b)=>b.Points - a.Points || b.LD - a.LD);
@@ -879,7 +852,6 @@
       html += "</tbody></table></div>";
       return html;
     }
-    // --- SQUADS PAGE ---
     function renderSquads(squads) {
       const container = document.getElementById('squadsContainer');
       if (!squads.length) { container.innerHTML = 'Loading...'; return; }
@@ -898,11 +870,9 @@
       });
       container.innerHTML = html;
     }
-    // --- STATS HIGHLIGHTS ---
     function renderStatHighlights(stats, bestLegsSheet, id="stat-highlights") {
       document.getElementById(id).innerHTML = "";
     }
-    // --- TEAM FILTER ---
     function renderTeamFilter(stats) {
       const bar = document.getElementById('team-filter-bar');
       if (!stats || !stats.length) { bar.innerHTML = ''; return;}
@@ -919,73 +889,83 @@
       teamFilter = team || null;
       renderStats(statsCache, bestLegCache);
     };
-    // --- STATS TABLE ---
-    function renderStats(stats, bestLegsSheet) {
-      const searchInput = document.getElementById('stats-search');
-      if (searchInput && !searchInput._listenerAdded) {
-        searchInput.addEventListener("input", () => {
-          statsSearchTerm = searchInput.value.trim().toLowerCase();
-          renderStats(statsCache, bestLegCache);
-        });
-        searchInput._listenerAdded = true;
-      }
-      let filteredStats = stats;
-      if (teamFilter) filteredStats = filteredStats.filter(p => p.Team === teamFilter);
-      if (statsSearchTerm) {
-        filteredStats = filteredStats.filter(
-          p => (p.Player && p.Player.toLowerCase().includes(statsSearchTerm)) ||
-               (p.Team && p.Team.toLowerCase().includes(statsSearchTerm))
-        );
-      }
-      if (statsSortKey) {
-        filteredStats = [...filteredStats].sort((a, b) => {
-          let v1 = a[statsSortKey], v2 = b[statsSortKey];
-          let n1 = parseFloat(v1), n2 = parseFloat(v2);
-          if (!isNaN(n1) && !isNaN(n2)) {
-            return statsSortDir * (n1 - n2);
-          } else {
-            return statsSortDir * (String(v1).localeCompare(String(v2)));
-          }
-        });
-      }
-      if (filteredStats.length) {
-        const wantedHeaders = Object.keys(filteredStats[0]).filter(
-          h => h && h !== "" && h !== undefined && h !== null && !STATS_HIDE_COLUMNS.has(h)
-        );
-        let table = "<div class='table-scroll'><table role='grid'><thead><tr>";
-        wantedHeaders.forEach(h => {
-          let dirArrow = "";
-          if (statsSortKey === h) dirArrow = statsSortDir > 0 ? " ▲" : " ▼";
-          table += `<th onclick="setStatsSort('${h}')" role="columnheader" tabindex="0" aria-sort="${statsSortKey === h ? (statsSortDir > 0 ? 'ascending' : 'descending') : 'none'}">${h}${dirArrow}</th>`;
-        });
-        table += "</tr></thead><tbody>";
-        filteredStats.forEach(row => {
-          table += "<tr>" + wantedHeaders.map(h => {
-            let val = row[h] ?? "";
-            if (h === "Win Rate (Sets)" || h === "Win Rate (Legs)") {
-              val = isNaN(parseFloat(val)) ? "" : `${Math.round(parseFloat(val) * 100)}%`;
-            }
-            if (h === "Player") {
-              return `<td class="stat-player curl" title="${val}" onclick="showPlayerPopup('${row.Player.replace(/'/g,"\\'")}')" tabindex="0" role="button" aria-pressed="false">${curlText(val)}</td>`;
-            }
-            if (h === "Team") {
-              return `<td class="stat-team curl" title="${val}">${curlText(val)}</td>`;
-            }
-            return `<td>${val}</td>`;
-          }).join("") + "</tr>";
-        });
-        table += "</tbody></table></div>";
-        document.getElementById("stats-table").innerHTML = table;
-      } else {
-        document.getElementById("stats-table").innerHTML = "<p>No player stats available.</p>";
-      }
+    // --- New mobile-first Stats Table ---
+    function getBestStats(stats, keys) {
+      let bests = {};
+      keys.forEach(key => {
+        let valArr = stats.map(p => Number(p[key])).filter(x => !isNaN(x));
+        if (!valArr.length) return;
+        let max = Math.max(...valArr);
+        bests[key] = max;
+      });
+      return bests;
     }
-    window.setStatsSort = function(h) {
-      if (statsSortKey === h) { statsSortDir = -statsSortDir; }
-      else { statsSortKey = h; statsSortDir = 1; }
-      renderStats(statsCache, bestLegCache);
+    function renderStats(stats, bestLegsSheet) {
+      const mainStats = ["Player", "Team", "3 Dart Avg", "Legs Won", "Match Played"];
+      const extraStats = [
+        "First 9 Avg", "Sets Played", "Sets Won", "Sets Lost", "Legs Played",
+        "Legs Lost", "Win Rate (Sets)", "Win Rate (Legs)", "High Finish",
+        "Checkout %", "180s", "100+", "Best Leg", "High Checkout"
+      ];
+      const bests = getBestStats(stats, ["3 Dart Avg", "Legs Won"]);
+      let html = `<table class="stats-table-modern" role="grid">
+        <thead>
+          <tr>
+            <th>Player</th>
+            <th>Team</th>
+            <th title="3 Dart Average">3DA</th>
+            <th title="Legs Won">Legs</th>
+            <th title="Matches Played">M</th>
+            <th style="text-align:center;">More</th>
+          </tr>
+        </thead>
+        <tbody>
+      `;
+      stats.forEach((row, i) => {
+        const isAlt = i%2!==0 ? "alt-row" : "";
+        const best3DA = Number(row["3 Dart Avg"]) === bests["3 Dart Avg"] && bests["3 Dart Avg"] > 0;
+        const bestLegs = Number(row["Legs Won"]) === bests["Legs Won"] && bests["Legs Won"] > 0;
+        html += `<tr class="${isAlt}">
+          <td class="stats-player${best3DA ? ' stats-best' : ''}">
+            ${best3DA ? '<span class="star" title="Best 3DA">★</span>':''}
+            ${row.Player ? row.Player : ""}
+          </td>
+          <td class="stats-team">${row.Team ? row.Team : ""}</td>
+          <td${best3DA ? ' class="stats-best"' : ''}>${row["3 Dart Avg"] ?? "-"}</td>
+          <td${bestLegs ? ' class="stats-best"' : ''}>${bestLegs ? '<span class="trophy" title="Most Legs Won">🏆</span>' : ''}${row["Legs Won"] ?? "-"}</td>
+          <td>${row["Match Played"] ?? "-"}</td>
+          <td style="text-align:center;">
+            <button class="show-more-btn" onclick="toggleExtraStats(this, ${i})" tabindex="0" aria-label="Show more stats for ${row.Player}">More</button>
+          </td>
+        </tr>
+        <tr class="extra-stats-row" id="extra-stats-${i}" style="display:none;">
+          <td colspan="6">
+            <div style="display:flex;flex-wrap:wrap;gap:0.5em 1.3em;align-items:flex-start;">
+              ${extraStats.map(k => row[k] !== undefined && row[k] !== "" ?
+                `<span>
+                  <span class="extra-stats-label">${k}:</span>
+                  <span class="extra-stats-value">${k.includes("Win Rate") ? (!isNaN(row[k]) ? Math.round(parseFloat(row[k])*100)+'%' : '-') : row[k]}</span>
+                </span>` : ''
+              ).join("")}
+            </div>
+          </td>
+        </tr>
+        `;
+      });
+      html += `</tbody></table>`;
+      document.getElementById("stats-table").innerHTML = html;
+    }
+    window.toggleExtraStats = function(btn, idx) {
+      const row = document.getElementById("extra-stats-"+idx);
+      if (!row) return;
+      if (row.style.display === "none") {
+        row.style.display = "";
+        btn.innerText = "Less";
+      } else {
+        row.style.display = "none";
+        btn.innerText = "More";
+      }
     };
-    // --- PLAYER POPUP & SAVE CARD ---
     function showPlayerPopup(playerName) {
       let p = statsCache.find(s => s.Player === playerName);
       if (!p) return;
@@ -1020,7 +1000,6 @@
         popup.setAttribute("aria-hidden", "true");
       }
     }
-    // --- PLAYER COMPARISON PAGE ---
     function renderPlayerComparisonSelectors() {
       const container = document.querySelector("#compare .player-select-container");
       if (!container || !statsCache.length) return;
