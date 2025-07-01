@@ -4,307 +4,269 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
   <title>Royal Darts Premier League 2025</title>
+  <meta name="theme-color" content="#191d26">
   <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/174/174855.png" />
-  <meta name="theme-color" content="#232323">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lucide-static@0.322.0/font/lucide.css"/>
   <style>
-    html,body {
-      background: #f7f9fc;
-      margin: 0;
-      color: #21243a;
+    :root {
+      --primary: #ffe066;
+      --primary-dark: #d5b800;
+      --bg: #181b22;
+      --nav: #1a1c22;
+      --card: #20232c;
+      --grey: #bcbcbc;
+      --win: #fffbe6;
+      --gold: #ffe066;
+      --silver: #e5e6ec;
+      --elim: #ffd8d8;
+    }
+    html, body {
+      background: var(--bg);
+      color: #f6f6f6;
       font-family: 'Segoe UI', Arial, sans-serif;
-      min-height:100%;
+      margin: 0; padding: 0;
+      min-height: 100%;
       overscroll-behavior-y: none;
     }
     header {
-      background: #181f2b;
-      color: #fff;
-      padding: 1.1rem 0.6rem 1rem 0.6rem;
-      text-align: center;
-    }
-    header img {max-height:45px;}
-    header h1 {
-      margin: 0.25rem 0 0 0;
-      font-size: 1.45em;
+      background: #17191f;
+      color: var(--primary);
+      padding: 1.2rem 0.7rem 1.2rem 0.7rem;
+      text-align: left;
       letter-spacing: 0.01em;
+      display: flex; align-items: center; gap: 0.8em;
+      border-bottom: 2px solid #242634;
+    }
+    header img { height: 56px; margin-right: 0.6em; }
+    header .titlebox { flex:1;}
+    header h1 {
+      margin: 0 0 0 0;
+      font-size: 1.65em;
       font-weight: 800;
+      color: var(--primary);
+      line-height: 1.08;
+      text-shadow: 0 2px 12px #0007;
+      letter-spacing: 0.01em;
     }
-    /* Responsive NAV BAR */
+    /* Nav Bar - Bottom Fixed */
     nav {
-      background: #232323;
-      width: 100vw;
-      z-index: 50;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-bottom: 1px solid #222;
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      width: 100vw; background: var(--nav); z-index: 200;
+      box-shadow: 0 -1px 18px #0002;
+      display: flex; justify-content: space-between; align-items: center;
+      border-top: 2px solid #222330;
+      min-height: 60px;
     }
-    nav .tab-button {
-      flex: 1 1 0;
-      border: none;
-      background: none;
-      color: #eee;
-      font-size: 1.05em;
-      font-weight: 600;
-      padding: 0.87em 0;
-      text-align: center;
-      outline: none;
+    nav .tab-btn {
+      flex: 1 1 0; border: none; outline: none;
+      background: none; color: #ccc;
+      padding: 0.5em 0 0.3em 0;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.1em;
+      font-size: 0.97em; font-weight: 600;
+      letter-spacing: 0.01em;
       cursor: pointer;
-      transition: background 0.16s, color 0.14s;
+      transition: color 0.12s, background 0.14s;
       position:relative;
-      display: flex; flex-direction: column; align-items: center; gap: 0.13em;
+      user-select: none;
+      min-width: 0;
     }
-    nav .tab-button.active, nav .tab-button:active {
-      background: #232b44;
-      color: #ffd100;
+    nav .tab-btn.active, nav .tab-btn:active {
+      color: var(--primary);
+      background: #232439;
+      font-weight: 700;
     }
-    nav .tab-icon { font-size: 1.29em; display: block; margin-bottom: 0.08em; }
-
-    main { max-width: 970px; margin: auto; padding: 0.7rem 0.2rem 1.2rem 0.2rem; }
+    nav .tab-icon { font-size: 1.32em; margin-bottom: 0.06em;}
+    /* Responsive nav labels */
+    @media (max-width: 440px) {
+      nav .tab-label { font-size:0.97em;}
+      header h1 { font-size: 1.17em;}
+      header img {height:38px;}
+    }
+    main { max-width: 490px; margin: 0 auto 75px auto; padding: 1rem 0.3rem 0.2rem 0.3rem; }
     .section { display: none; }
     .section.active { display: block; }
-
-    /* Tables & Scrolls */
+    h2 { color: var(--primary); margin:1.4em 0 0.7em 0.14em;font-size:1.17em;}
+    /* Card Style Containers */
+    .card {
+      background: var(--card);
+      border-radius: 17px;
+      box-shadow: 0 4px 22px #0002;
+      margin-bottom: 1.12em;
+      padding: 1.2em 1em 1.1em 1em;
+    }
+    .card h3 {
+      color: var(--primary);
+      margin: 0 0 0.35em 0;
+      font-weight: 700; font-size:1.15em;
+      letter-spacing:0.01em;
+    }
+    /* Today's Fixtures Table */
     .table-scroll {
       overflow-x: auto;
       width: 100%;
-      margin-bottom: 1.7em;
       -webkit-overflow-scrolling: touch;
-      scroll-snap-type: x proximity;
-      border-radius: 10px;
+      border-radius: 8px;
     }
     table {
       width: 100%;
-      border-collapse: collapse;
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px #0001;
-      min-width: 450px;
+      min-width: 300px;
+      background: transparent;
+      border-collapse: separate;
+      border-spacing: 0;
+      margin: 0;
+      font-size: 0.98em;
     }
     th,td {
-      padding: 0.47em 0.3em;
-      border: 1px solid #e6e6e6;
+      padding: 0.41em 0.34em;
       text-align: center;
-      font-size: 0.96em;
-      white-space: nowrap;
-      scroll-snap-align: start;
-    }
-    th {
-      background: #f6f7fa;
-      font-weight: 700;
-    }
-    .gold-row { background: #fff5d2; }
-    .silver-row { background: #ebecf1; }
-    .elim-row { background: #ffd7d7; }
-    .date-heading {
-      margin: 1.2em 0 0.7em 0.1em;
-      font-size: 1.09em;
-      font-weight: 800;
-      color: #18449e;
-      background: #fff8e4;
-      padding: 0.22em 1em 0.22em 1.0em;
-      border-radius: 5px;
-      display: inline-block;
-    }
-    .group-title {
-      margin: 0.6em 0 0.3em 0;
-      font-size: 1.07em;
-      font-weight: 700;
-      color: #18449e;
-    }
-    /* Compact Standings, Squads, Stats */
-    .standings-legend {
-      margin: 0.18em 0 0.8em 0;
       font-size: 0.97em;
-      display: flex; gap: 1.1em;
-      flex-wrap: wrap;
-      color: #232323;
+      border-bottom: 1px solid #292942;
+      background: transparent;
+      color: #e8e8e8;
+      max-width: 110px;
+      word-break: break-all;
+      overflow-wrap: anywhere;
+      text-overflow: ellipsis;
     }
-    .gold-legend { color: #a58400; }
-    .silver-legend { color: #888; }
-    .elim-legend { color: #cc2222; }
-
-    /* Fixtures/Results Cards (Dashboard) */
-    .dashboard-fixtures-list {
-      margin: 0 0 1.2em 0;
+    th { color: var(--primary); font-weight:700; background:transparent; border-bottom:2px solid var(--primary-dark);}
+    .fixtures-table th, .fixtures-table td { width: 32vw; max-width: 110px; min-width:70px;}
+    .team-cell { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    /* Standings Card */
+    .standings-table {
+      width:100%; border-collapse:separate; border-spacing:0 0.2em;
     }
-    .dashboard-fixture-row {
-      background: #fff;
-      border-radius: 9px;
-      box-shadow: 0 1px 4px #0001;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0.5em 0.55em;
-      margin-bottom: 0.55em;
-      gap: 0.23em;
-      font-size: 1em;
-    }
-    .dash-fixt-time {color: #1856e7; font-weight: 700; font-size: 0.95em; min-width: 57px;}
-    .dash-fixt-team {display: flex; align-items: center; gap: 0.29em; font-weight: 600; min-width: 0; max-width: 40vw; overflow: hidden; font-size: 0.98em;}
-    .dash-fixt-logo {width: 18px; height: 18px; border-radius: 4px; background: #fff; border: 1px solid #eee; object-fit: contain;}
-    .dash-fixt-vs {font-size: 1.02em; font-weight: 700; color: #232323;}
-    .show-all-btn {
-      border: none;
-      background: #ececec;
-      color: #1856e7;
-      padding: 5px 20px;
-      border-radius: 7px;
-      cursor: pointer;
-      font-size: 1em;
-      margin: 0 auto 1em auto;
-      display: block;
+    .stand-row {
+      background: #202336;
+      border-radius: 10px;
+      color: #fff;
+      font-size: 1.02em;
       font-weight: 600;
-      transition: background 0.13s;
+      box-shadow: 0 2px 10px #0001;
+      margin-bottom: 0.17em;
+      transition:box-shadow 0.12s;
+      position:relative;
     }
-    .show-all-btn:hover { background: #d6e6ff; }
-
-    /* Stats Highlights, Cards, Dropdown */
-    .stat-high-bar, .dash-high-bar {
-      display: flex;
-      gap: 0.85em;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-bottom: 1.5em;
-      margin-top: 1.1em;
+    .stand-row.gold { background: #fff9cc; color: #755c00;}
+    .stand-row.silver { background: #ececec; color: #232323;}
+    .stand-row.elim { background: #ffd8d8; color: #ba2323;}
+    .stand-teamlogo { width: 20px; height: 20px; border-radius: 4px; vertical-align: middle; margin-right: 7px;}
+    .stand-medal { font-size:1.18em; margin-right:4px; vertical-align: middle;}
+    .stand-elim {background:#ba2323; color:#fff; font-size:0.9em; padding:2px 6px;border-radius:7px; margin-left:5px;}
+    .stand-points {font-weight:800; font-size:1.01em;}
+    /* Results Table */
+    .results-table th, .results-table td { min-width: 74px; max-width: 112px;}
+    .result-winner { background: #262b2c; color: #ffe066; font-weight:700; }
+    .result-teamname { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:92px; display:inline-block; vertical-align:middle;}
+    /* Stats Table */
+    #stats-table th, #stats-table td { min-width: 78px; max-width: 124px;}
+    #stats-table td.stat-player, #stats-table td.stat-team {white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:90px;cursor:pointer;}
+    #stats-table td.stat-team img {width:13px;height:13px;vertical-align:middle;margin-right:5px;}
+    /* Pop-up card for stats */
+    #player-popup {
+      display:none; position:fixed; left:0; top:0; width:100vw; height:100vh; z-index:250;
+      background:rgba(10,12,22,0.93); justify-content:center; align-items:center;
+      animation:fadeIn 0.16s;
     }
-    .stat-high-card, .dash-high-card {
-      background: #fff;
-      border-radius: 7px;
-      box-shadow: 0 1px 6px #0001;
-      min-width: 120px;
-      max-width: 150px;
-      padding: 0.7em 0.5em;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+    @keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
+    #player-popup .popup-card {
+      background:#22243a; border-radius:18px; box-shadow:0 3px 28px #0007; padding:1.4em 1.1em; color:#ffe066;
+      min-width:210px;max-width:96vw; text-align:center;
     }
-    .stat-high-label, .dash-high-label { color: #18449e; font-size: 0.99em; font-weight: 700; }
-    .stat-high-main, .dash-high-main { font-size: 1.34em; font-weight: 800; color: #eab403; }
-    .stat-high-player, .dash-high-player { font-size: 0.95em; text-align: center; margin-top: 0.12em;}
-    .stat-high-player img, .dash-high-player img {width: 15px; height: 15px; border-radius: 3px; vertical-align: middle; margin-right: 4px;}
-    .team-filter-bar {text-align: center; margin-bottom: 1.2em;}
+    #player-popup .popup-head {font-size:1.23em; font-weight:800; margin-bottom:0.3em;}
+    #player-popup .popup-team {color:#a0f3fa;font-weight:700;margin-bottom:0.35em;}
+    #player-popup .popup-label {color:#e6e6e6;font-size:1em;margin-top:0.45em;}
+    #player-popup .popup-close {color:#fff; font-size:1.23em; background:none; border:none; position:absolute;top:1.1em;right:1.1em;cursor:pointer;}
+    /* Misc UI */
+    .team-filter-bar {text-align:center; margin-bottom:1.1em;}
     .team-filter-dropdown {
-      width: 99vw;
-      max-width: 320px;
-      margin: 0 auto 1.2em auto;
-      padding: 0.5em;
-      font-size: 1.03em;
-      border-radius: 6px;
-      border: 1px solid #d6d6d6;
-      background: #fff;
-      color: #18449e;
-      font-weight: 600;
-      outline: none;
+      width:97vw;max-width:270px;margin:0 auto 1em auto;padding:0.38em;font-size:1em;border-radius:7px;border:1.4px solid #282828;background:#1e1e23;color:var(--primary);font-weight:700;outline:none;
     }
-    /* Squads Grid */
-    .squad-grid {display: grid; grid-template-columns: repeat(auto-fit,minmax(175px,1fr)); gap: 1.1em;}
-    .squad-card {
-      background: #fff;
-      border-radius: 9px;
-      box-shadow: 0 2px 8px #0001;
-      padding: 0.8em 0.7em;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .squad-card img {width: 38px; height: 38px; border-radius: 9px; margin-bottom: 0.5em; object-fit: contain;}
-    .squad-card h3 {font-weight: 800; color: #18449e; margin: 0 0 0.25em 0; text-align: center; font-size: 1em;}
-    .squad-players {display: grid; grid-template-columns: 1fr; gap: 0px 11px; width: 100%;}
-    .squad-player {font-size: 0.95em; margin: 1.5px 0;}
-    /* Misc */
-    .footer-icons {margin-top: 1.3rem;text-align: center;display: flex;justify-content: center;align-items: center;gap: 1.2rem;}
-    .footer-icons img {height: 22px;width: 22px;vertical-align: middle;border-radius: 4px;background: #fff;border: 1px solid #eee;box-shadow: 0 1px 4px rgba(0,0,0,0.04);}
-    .footer-suca {margin-top: 0.7rem;text-align: center;color: #bdbdbd;font-size: 0.93rem;}
-    @media (max-width: 670px) {
-      main { padding: 0.5rem 0.1rem 1.5rem 0.1rem; }
-      .table-scroll {border-radius: 6px;}
-      table {min-width: 360px;}
-      .squad-card img {width: 32px;height: 32px;}
-      .dashboard-row {flex-direction: column; gap: 0.9em;}
-      .stat-high-card, .dash-high-card {min-width: 90px;max-width: 99vw;padding:0.5em 0.2em;}
-    }
-    @media (max-width: 570px) {
-      nav {
-        position: fixed; bottom: 0; left: 0; right: 0;
-        top: auto; z-index: 99;
-        border-top: 1.5px solid #1d1e24;
-        border-bottom: none;
-        box-shadow: 0 -2px 18px #0002;
-      }
-      nav .tab-button {
-        padding: 0.47em 0 0.37em 0;
-        font-size: 0.93em;
-      }
-      nav .tab-icon { font-size: 1.18em; }
-      main { padding-bottom: 65px; }
-      header { padding-bottom: 0.7em;}
-      .squad-card img {width: 28px;height: 28px;}
+    .footer-icons {margin-top:1.3rem;text-align:center;display:flex;justify-content:center;align-items:center;gap:1.2rem;}
+    .footer-icons img {height:20px;width:20px;vertical-align:middle;border-radius:3px;background:#222;border:1px solid #292939;box-shadow:0 1px 4px rgba(0,0,0,0.04);}
+    .footer-suca {margin-top:0.7rem;text-align:center;color:#bdbdbd;font-size:0.92rem;}
+    @media (max-width:520px) {
+      main {padding:0.7rem 0.07rem 2.2rem 0.07rem;}
+      header img {height:36px;}
+      .card {padding:0.85em 0.4em;}
+      h2 {font-size:1.05em;}
+      .standings-table th, .standings-table td, .fixtures-table th, .fixtures-table td, .results-table th, .results-table td {font-size:0.96em;}
     }
   </style>
-  <!-- Icons for nav bar -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lucide-static@0.322.0/font/lucide.css"/>
 </head>
 <body>
   <header>
-    <img src="logo.png" alt="Tournament Logo" />
-    <h1>Royal Darts Premier League 2025</h1>
+    <img src="logo.png" alt="Logo"/>
+    <div class="titlebox">
+      <h1>Royal Darts Premier League 2025</h1>
+    </div>
   </header>
-  <nav>
-    <button class="tab-button active" onclick="showTab('dashboard')"><span class="tab-icon lucide lucide-home"></span>Dashboard</button>
-    <button class="tab-button" onclick="showTab('fixtures')"><span class="tab-icon lucide lucide-calendar-days"></span>Fixtures</button>
-    <button class="tab-button" onclick="showTab('results')"><span class="tab-icon lucide lucide-list-start"></span>Results</button>
-    <button class="tab-button" onclick="showTab('standings')"><span class="tab-icon lucide lucide-trophy"></span>Standings</button>
-    <button class="tab-button" onclick="showTab('squads')"><span class="tab-icon lucide lucide-users"></span>Squads</button>
-    <button class="tab-button" onclick="showTab('stats')"><span class="tab-icon lucide lucide-bar-chart"></span>Stats</button>
-    <button class="tab-button" onclick="window.open('https://n01darts.com/n01/tournament/comp.php?id=t_NI0o_4352&tab=live','_blank')"><span class="tab-icon lucide lucide-radio"></span>Live</button>
-  </nav>
   <main>
     <!-- DASHBOARD -->
     <section id="dashboard" class="section active">
-      <h2 style="margin-bottom:0.7em;font-size:1.14em;">Today's Fixtures</h2>
-      <div id="dashboard-fixtures"></div>
-      <div class="dashboard-row" style="display:flex;gap:1.1em;flex-wrap:wrap;">
-        <div style="flex:1;min-width:175px;max-width:440px;">
-          <div class="standings-title">Group A Standings</div>
-          <div id="dashboard-standingsA"></div>
-        </div>
-        <div style="flex:1;min-width:175px;max-width:440px;">
-          <div class="standings-title">Group B Standings</div>
-          <div id="dashboard-standingsB"></div>
+      <div class="card">
+        <h3>Today's Fixtures</h3>
+        <div class="table-scroll">
+          <table class="fixtures-table" id="dashboard-fixtures-table">
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Team 1</th>
+                <th>vs</th>
+                <th>Team 2</th>
+              </tr>
+            </thead>
+            <tbody id="dashboard-fixtures"></tbody>
+          </table>
         </div>
       </div>
-      <div class="dash-high-bar" id="dashboard-highlights"></div>
-      <div id="dashboard-teamday" style="margin:1.8em 0 1.2em 0;display:flex;justify-content:center;"></div>
-      <div>
-        <div class="latestres-title" style="margin:0.5em 0 0.5em 0;font-weight:700;font-size:1.02em;">Latest Results</div>
-        <div id="dashboard-latestres"></div>
-      </div>
-      <div class="dashboard-navstrip" style="margin-bottom:0;">
-        <button class="dashboard-navcard" onclick="showTab('fixtures')">Fixtures</button>
-        <button class="dashboard-navcard" onclick="showTab('results')">Results</button>
-        <button class="dashboard-navcard" onclick="showTab('standings')">Standings</button>
-        <button class="dashboard-navcard" onclick="showTab('squads')">Squads</button>
-        <button class="dashboard-navcard" onclick="showTab('stats')">Stats</button>
-        <button class="dashboard-navcard" onclick="window.open('https://n01darts.com/n01/tournament/comp.php?id=t_NI0o_4352&tab=live','_blank')">Watch Live</button>
+      <div class="card" style="margin-top:-0.7em;">
+        <h3>Quick Standings (Top 3)</h3>
+        <div class="table-scroll">
+          <table class="standings-table">
+            <thead>
+              <tr><th>Pos</th><th>Team</th><th>Pts</th></tr>
+            </thead>
+            <tbody id="dashboard-quick-standings"></tbody>
+          </table>
+        </div>
       </div>
     </section>
     <!-- FIXTURES -->
-    <section id="fixtures" class="section"><div id="fixturesTableContainer"></div></section>
+    <section id="fixtures" class="section"><div class="card"><h3>Fixtures</h3><div id="fixturesTableContainer"></div></div></section>
     <!-- RESULTS -->
-    <section id="results" class="section"><div id="resultsContainer"></div></section>
+    <section id="results" class="section"><div class="card"><h3>Results</h3><div id="resultsContainer"></div></div></section>
     <!-- STANDINGS -->
-    <section id="standings" class="section"><div id="standingsGroupA"></div><div id="standingsGroupB"></div></section>
+    <section id="standings" class="section">
+      <div class="card" style="margin-bottom:0.8em;"><h3>Standings</h3>
+        <div id="standings-cards"></div>
+      </div>
+    </section>
     <!-- SQUADS -->
-    <section id="squads" class="section"><div id="squadsContainer">Loading...</div></section>
+    <section id="squads" class="section"><div class="card"><h3>Squads</h3><div id="squadsContainer">Loading...</div></div></section>
     <!-- STATS -->
     <section id="stats" class="section">
-      <div id="stat-highlights"></div>
-      <div class="team-filter-bar" id="team-filter-bar"></div>
-      <input id="stats-search" type="text" placeholder="Search player or team..." style="margin-bottom:0.8em;padding:0.39em 0.6em;font-size:0.96em;width:98vw;max-width:260px;border-radius:6px;border:1px solid #ccc;display:block;margin:auto;">
-      <div id="stats-table"></div>
+      <div class="card"><h3>Player Stats</h3>
+        <div id="stat-highlights"></div>
+        <div class="team-filter-bar" id="team-filter-bar"></div>
+        <input id="stats-search" type="text" placeholder="Search player or team..." style="margin-bottom:0.8em;padding:0.39em 0.6em;font-size:0.97em;width:98vw;max-width:225px;border-radius:6px;border:1px solid #2a2a2a;display:block;margin:auto;">
+        <div id="stats-table"></div>
+      </div>
     </section>
   </main>
-  <footer>
+  <nav>
+    <button class="tab-btn active" onclick="showTab('dashboard')"><span class="tab-icon lucide lucide-home"></span><span class="tab-label">Home</span></button>
+    <button class="tab-btn" onclick="showTab('fixtures')"><span class="tab-icon lucide lucide-calendar-days"></span><span class="tab-label">Fixtures</span></button>
+    <button class="tab-btn" onclick="showTab('results')"><span class="tab-icon lucide lucide-list-start"></span><span class="tab-label">Results</span></button>
+    <button class="tab-btn" onclick="showTab('standings')"><span class="tab-icon lucide lucide-trophy"></span><span class="tab-label">Standings</span></button>
+    <button class="tab-btn" onclick="showTab('stats')"><span class="tab-icon lucide lucide-bar-chart"></span><span class="tab-label">Stats</span></button>
+  </nav>
+  <!-- Player popup -->
+  <div id="player-popup" onclick="hidePlayerPopup(event)">
+    <div class="popup-card"></div>
+    <button class="popup-close" onclick="hidePlayerPopup(event)">&times;</button>
+  </div>
+  <footer style="margin-bottom:80px">
     <div class="footer-icons">
       <a href="https://n01darts.com/n01/tournament/comp.php?id=t_NI0o_4352&tab=live" target="_blank"><img src="https://n01darts.com/favicon.ico" alt="Nakka" title="Watch Live on Nakka" /></a>
       <a href="https://www.instagram.com/royaldarts_rcgc" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram" title="Follow us on Instagram" /></a>
@@ -312,7 +274,7 @@
     <div class="footer-suca">Built by SUCA Analytics</div>
   </footer>
   <script>
-    // LOGOS, API
+    // TEAM LOGOS, API URL
     const TEAM_LOGOS = {
       "Balaji Darts": "team_logos/Balaji-Darts.avif",
       "Biscotti Barrels": "team_logos/Biscotti-Barrels.avif",
@@ -333,57 +295,46 @@
     };
     const API_URL = 'https://script.google.com/macros/s/AKfycby6BCE5cyBaxpz-Jt-TeRH6k5Jeq-vqelr8S7rt32e7wFjBzEvuBrYi4yPaEBz2Kari/exec';
 
+    // Nav functionality
     function showTab(tabId) {
       document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
-      document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
-      document.querySelectorAll('.dashboard-navcard').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
       document.getElementById(tabId).classList.add('active');
-      let navBtn = Array.from(document.querySelectorAll('nav button')).find(b => b.innerText.replace(/\s+/g,"").toLowerCase() === tabId);
+      let navBtn = Array.from(document.querySelectorAll('nav .tab-btn')).find(b => b.innerText.toLowerCase().includes(tabId));
       if(navBtn) navBtn.classList.add('active');
       window.scrollTo({top:0,behavior:'smooth'});
     }
-    let fixturesCache = [], resultsCache = [], standingsCache = [], squadsCache = [], statsCache = [], bestLegCache = [];
+    // Data cache
+    let fixturesCache = [], standingsCache = [], statsCache = [], bestLegCache = [], squadsCache = [], resultsCache = [];
     let statsSortKey = null, statsSortDir = 1, statsSearchTerm = "", teamFilter = null;
     const STATS_HIDE_COLUMNS = new Set([
       "Keep", "Break", "Second Legs", "Break Legs", "Total Score", "Total Darts", "Group", "Best Leg", "Worst Leg"
     ]);
+
+    // API Fetch & Render all
     async function loadData() {
       try {
         const res = await fetch(API_URL);
         const data = await res.json();
         fixturesCache = data.Fixtures || [];
-        resultsCache = data.Results || [];
         standingsCache = data.Standings || [];
-        squadsCache = data.Squads || [];
         statsCache = (data.Stats || []).filter(row => row.Player);
         bestLegCache = (data["Best Leg"] || []).filter(row => row["Best Leg"]);
-        renderDashboard();
+        squadsCache = data.Squads || [];
+        resultsCache = data.Results || [];
+        renderDashboardFixtures();
+        renderDashboardQuickStandings();
         renderFixtures(fixturesCache);
         renderResults(resultsCache, fixturesCache);
-        renderStandings(standingsCache);
+        renderStandings();
         renderSquads(squadsCache);
         renderStatHighlights(statsCache, bestLegCache);
         renderStats(statsCache, bestLegCache);
         renderTeamFilter(statsCache);
       } catch (err) {console.error('Failed to load data:', err);}
     }
-    // === Dashboard (unchanged from earlier except fixture row card) ===
-    function renderDashboard() {
-      renderDashboardFixtures();
-      renderDashboardStandings();
-      renderDashboardHighlights();
-      renderDashboardTeamOfDay();
-      renderDashboardLatestResults();
-    }
-    function getISTTodayRange() {
-      const now = new Date();
-      const IST_OFFSET = 330;
-      const local = new Date(now.getTime() + ((IST_OFFSET - now.getTimezoneOffset())*60*1000));
-      const istYear = local.getFullYear(), istMonth = local.getMonth(), istDay = local.getDate();
-      const istStart = new Date(Date.UTC(istYear, istMonth, istDay, 0, -IST_OFFSET, 0));
-      const istEnd = new Date(Date.UTC(istYear, istMonth, istDay, 23, 59-IST_OFFSET, 59));
-      return [istStart, istEnd, ""];
-    }
+
+    // --- DASHBOARD: Today's Fixtures (Time only, uniform width) ---
     function renderDashboardFixtures() {
       const [istStart, istEnd] = getISTTodayRange();
       const todaysFixtures = fixturesCache.filter(fix => {
@@ -391,145 +342,34 @@
         return d >= istStart && d <= istEnd;
       });
       let html = '';
-      let limit = 5;
-      let showingAll = false;
-      function showAllFixtures() {
-        showingAll = true;
-        renderDashboardFixtures();
+      if (!todaysFixtures.length) {
+        html = `<tr><td colspan="4" style="color:#ffec8a;">No fixtures today.</td></tr>`;
+      } else {
+        todaysFixtures.forEach(f => {
+          html += `<tr>
+            <td>${new Date(f.Time).toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit',hour12:true,timeZone:'Asia/Kolkata'})}</td>
+            <td class="team-cell">${f['Team 1'] || ""}</td>
+            <td>vs</td>
+            <td class="team-cell">${f['Team 2'] || ""}</td>
+          </tr>`;
+        });
       }
-      html += `<div class="dashboard-fixtures-list">`;
-      const showList = showingAll ? todaysFixtures : todaysFixtures.slice(0, limit);
-      showList.forEach(f => {
-        html += `<div class="dashboard-fixture-row">
-          <span class="dash-fixt-time">${f.Day}, ${new Date(f.Time).toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit',hour12:true,timeZone:'Asia/Kolkata'})}</span>
-          <span class="dash-fixt-team"><img src="${TEAM_LOGOS[f['Team 1']]||''}" class="dash-fixt-logo">${f['Team 1']}</span>
-          <span class="dash-fixt-vs">vs</span>
-          <span class="dash-fixt-team">${f['Team 2']}<img src="${TEAM_LOGOS[f['Team 2']]||''}" class="dash-fixt-logo"></span>
-        </div>`;
-      });
-      if (!showingAll && todaysFixtures.length > limit)
-        html += `<button class="show-all-btn" onclick="window.showAllFixtures()">Show All</button>`;
-      html += `</div>`;
-      if (!todaysFixtures.length)
-        html = `<div style="color:#888;font-size:1.12em;padding:1.3em 0 0.6em 0;">No fixtures today.</div>`;
       document.getElementById('dashboard-fixtures').innerHTML = html;
-      window.showAllFixtures = showAllFixtures; // So button can call it
     }
-    function renderDashboardStandings() {
-      let groupHTML = group => {
-        let arr = standingsCache.filter(s => s.Group && s.Group.toUpperCase() === group)
-          .sort((a,b)=>b.Points-a.Points || b.LD-a.LD)
-          .map((s,i)=>{
-            let badge = i<3 ? `<span class="cup-badge gold">Gold</span>` :
-                        i<6 ? `<span class="cup-badge silver">Silver</span>` :
-                              `<span class="cup-badge elim">Elim</span>`;
-            let band = i<3?'cup-gold':i<6?'cup-silver':'cup-elim';
-            return `<div class="standings-row ${band}">
-              <span style="font-weight:600;"><img src="${TEAM_LOGOS[s.Team]||''}" style="width:18px;height:18px;border-radius:4px;vertical-align:middle;margin-right:8px;">${s.Team}${badge}</span>
-              <span style="font-weight:700;">${s.Points} pts</span>
-            </div>`;
-          }).join('');
-        return arr;
-      };
-      document.getElementById('dashboard-standingsA').innerHTML = groupHTML('A');
-      document.getElementById('dashboard-standingsB').innerHTML = groupHTML('B');
-    }
-    function renderDashboardHighlights() {
-      const defs = [
-        {key:"3 Dart Avg", label:"Best 3-Dart Avg"},
-        {key:"Legs Won", label:"Most Legs Won"},
-        {key:"High Finish", label:"Highest Finish"},
-        {key:"Best Leg", label:"Best Leg", sheet:true}
-      ];
+    // --- Dashboard: Quick Standings (Top 3) ---
+    function renderDashboardQuickStandings() {
+      const standings = standingsCache.sort((a,b)=>b.Points-a.Points || b.LD-a.LD).slice(0,3);
       let html = '';
-      defs.forEach(def=>{
-        let val = '', player = '', team = '', logo = '';
-        if (def.sheet) {
-          let best = bestLegCache && bestLegCache.length ? bestLegCache.sort((a,b)=>a["Best Leg"]-b["Best Leg"])[0] : null;
-          if (best) {
-            val = best["Best Leg"];
-            player = best.Players;
-            team = best.Team; logo = TEAM_LOGOS[team]||'';
-          }
-        } else {
-          const eligible = statsCache.filter(p=>Number(p["Match Played"])>=2);
-          const sorted = eligible.sort((a,b)=> +b[def.key]-(+a[def.key]) );
-          if (sorted[0]) {
-            val = sorted[0][def.key];
-            player = sorted[0].Player;
-            team = sorted[0].Team;
-            logo = TEAM_LOGOS[team]||'';
-          }
-        }
-        html += `<div class="dash-high-card">
-          <div class="dash-high-label">${def.label}</div>
-          <div class="dash-high-main">${val||'-'}</div>
-          <div class="dash-high-player">${logo?`<img src="${logo}">`:''}${player ? player+'<br>':''}${team ? `<span style="font-size:0.94em;font-weight:600;color:#18449e;">${team}</span>`:''}</div>
-        </div>`;
+      standings.forEach((s,i) => {
+        html += `<tr>
+          <td>${i+1}</td>
+          <td class="team-cell">${s.Team}</td>
+          <td class="stand-points">${s.Points}</td>
+        </tr>`;
       });
-      document.getElementById('dashboard-highlights').innerHTML = html;
+      document.getElementById('dashboard-quick-standings').innerHTML = html;
     }
-    function renderDashboardTeamOfDay() {
-      if (!resultsCache.length) {document.getElementById('dashboard-teamday').innerHTML=''; return;}
-      const groupByDate = {};
-      resultsCache.forEach(r => {
-        let d = r.Date && r.Date !== "null" && r.Date !== "" && r.Date !== undefined ? new Date(r.Date).toISOString().slice(0,10) : "";
-        if (!d) return;
-        if (!groupByDate[d]) groupByDate[d] = [];
-        groupByDate[d].push(r);
-      });
-      let allDates = Object.keys(groupByDate).sort();
-      if (!allDates.length) {document.getElementById('dashboard-teamday').innerHTML=''; return;}
-      let lastDate = allDates[allDates.length-1];
-      let matches = groupByDate[lastDate] || [];
-      let best = null, bestAvg = -1;
-      matches.forEach(m => {
-        let win = +m["Legs 1"] > +m["Legs 2"] ? {team:m["Team 1"], avg:+m["Avg 1"]} :
-                  +m["Legs 2"] > +m["Legs 1"] ? {team:m["Team 2"], avg:+m["Avg 2"]} : null;
-        if (win && win.avg > bestAvg) { bestAvg = win.avg; best = win; }
-      });
-      if (!best) {document.getElementById('dashboard-teamday').innerHTML=''; return;}
-      let logo = TEAM_LOGOS[best.team]||'';
-      let html = `<div class="dash-teamday-card">
-        <div class="dash-teamday-title">Team of the Day</div>
-        <img src="${logo}" class="dash-teamday-logo" alt="">
-        <div class="dash-teamday-main">${best.team}</div>
-        <div style="color:#333;font-size:1.03em;margin-top:0.18em;">Winning Avg: <span style="font-weight:700;">${bestAvg}</span></div>
-        <div style="font-size:0.93em;color:#4a6b92;margin-top:0.09em;">(Best average by a winner in the last match day)</div>
-      </div>`;
-      document.getElementById('dashboard-teamday').innerHTML = html;
-    }
-    function renderDashboardLatestResults() {
-      if (!resultsCache.length) {document.getElementById('dashboard-latestres').innerHTML=''; return;}
-      const groupByDate = {};
-      resultsCache.forEach(r => {
-        let d = r.Date && r.Date !== "null" && r.Date !== "" && r.Date !== undefined ? new Date(r.Date).toISOString().slice(0,10) : "";
-        if (!d) return;
-        if (!groupByDate[d]) groupByDate[d] = [];
-        groupByDate[d].push(r);
-      });
-      let allDates = Object.keys(groupByDate).sort();
-      if (!allDates.length) {document.getElementById('dashboard-latestres').innerHTML=''; return;}
-      let lastDate = allDates[allDates.length-1];
-      let matches = groupByDate[lastDate] || [];
-      matches = matches.slice(-3);
-      let html = '';
-      matches.forEach(m => {
-        let t1 = m["Team 1"], t2 = m["Team 2"], l1=+m["Legs 1"], l2=+m["Legs 2"];
-        let winner = l1 > l2 ? t1 : l2 > l1 ? t2 : "";
-        let t1logo = TEAM_LOGOS[t1]||'', t2logo = TEAM_LOGOS[t2]||'';
-        html += `<div class="latestres-row">
-          <div class="latestres-team">${t1logo?`<img src="${t1logo}" class="latestres-logo">`:''}${t1}${winner===t1?'<span class="latestres-winner">Winner</span>':''}</div>
-          <div class="latestres-score" style="${winner===t1?'color:#1ca311;':''}">${m["Legs 1"]}</div>
-          <div style="font-weight:600;margin:0 6px;">vs</div>
-          <div class="latestres-score" style="${winner===t2?'color:#1ca311;':''}">${m["Legs 2"]}</div>
-          <div class="latestres-team">${t2logo?`<img src="${t2logo}" class="latestres-logo">`:''}${t2}${winner===t2?'<span class="latestres-winner">Winner</span>':''}</div>
-        </div>`;
-      });
-      document.getElementById('dashboard-latestres').innerHTML = html;
-    }
-    // Fixtures, Results, Standings, Squads (unchanged except logo sizes and table cell padding/font-size are all optimized)
-    // ... (full functions from earlier, already fully mobile-optimized, are pasted above)
+    // --- FIXTURES ---
     function renderFixtures(fixtures) {
       const container = document.getElementById('fixturesTableContainer');
       if (!fixtures.length) {
@@ -544,9 +384,9 @@
       });
       let html = '';
       Object.keys(byDate).sort((a, b) => new Date(a) - new Date(b)).forEach(dateStr => {
-        html += `<div class="date-heading">${dateStr}</div>
+        html += `<div class="date-heading" style="color:#ffe066;">${dateStr}</div>
         <div class="table-scroll">
-        <table>
+        <table class="fixtures-table">
           <thead>
             <tr><th>Time</th><th>Team 1</th><th></th><th>Team 2</th></tr>
           </thead>
@@ -554,15 +394,16 @@
         byDate[dateStr].forEach(f => {
           html += `<tr>
               <td>${new Date(f.Time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</td>
-              <td>${f['Team 1']}</td>
+              <td class="team-cell">${f['Team 1'] || ""}</td>
               <td>vs</td>
-              <td>${f['Team 2']}</td>
+              <td class="team-cell">${f['Team 2'] || ""}</td>
             </tr>`;
         });
         html += `</tbody></table></div>`;
       });
       container.innerHTML = html;
     }
+    // --- RESULTS (Mobile-friendly, curl team names, highlight winner) ---
     function renderResults(results, fixtures) {
       const fixtureDateMap = {};
       fixtures.forEach(fix => {
@@ -585,19 +426,9 @@
       });
       let html = '';
       Object.keys(byDate).sort((a, b) => new Date(a) - new Date(b)).forEach(dateStr => {
-        html += `<div class="date-heading">${dateStr}</div>`;
-        const groupA = byDate[dateStr].filter(r => r.Group?.toUpperCase() === 'A');
-        if (groupA.length) html += resultsTable(groupA, 'A');
-        const groupB = byDate[dateStr].filter(r => r.Group?.toUpperCase() === 'B');
-        if (groupB.length) html += resultsTable(groupB, 'B');
-      });
-      document.getElementById('resultsContainer').innerHTML = html || '';
-    }
-    function resultsTable(arr, group) {
-      return `
-        <div class="group-title">Group ${group}</div>
+        html += `<div class="date-heading" style="color:#ffe066;">${dateStr}</div>
         <div class="table-scroll">
-          <table>
+          <table class="results-table">
             <thead>
               <tr>
                 <th>Avg 1</th>
@@ -609,71 +440,71 @@
                 <th>Avg 2</th>
               </tr>
             </thead>
-            <tbody>
-              ${arr.map(r => {
-                const win1 = +r['Legs 1'] > +r['Legs 2'];
-                const win2 = +r['Legs 2'] > +r['Legs 1'];
-                return `<tr>
-                  <td>${r['Avg 1']}</td>
-                  <td${win1?' style="background: #fffdc2;font-weight:700;"':''}>${r['Team 1']}${win1?' 🏆':''}</td>
-                  <td${win1?' style="font-weight:700;"':''}>${r['Legs 1']}</td>
-                  <td>vs</td>
-                  <td${win2?' style="font-weight:700;"':''}>${r['Legs 2']}</td>
-                  <td${win2?' style="background: #fffdc2;font-weight:700;"':''}>${r['Team 2']}${win2?' 🏆':''}</td>
-                  <td>${r['Avg 2']}</td>
-                </tr>`;
-              }).join('')}
-            </tbody>
-          </table>
-        </div>`;
+            <tbody>`;
+        byDate[dateStr].forEach(r => {
+          const win1 = +r['Legs 1'] > +r['Legs 2'];
+          const win2 = +r['Legs 2'] > +r['Legs 1'];
+          html += `<tr>
+            <td>${r['Avg 1']||""}</td>
+            <td class="result-teamname${win1?" result-winner":""}">${r['Team 1']||""}</td>
+            <td${win1?' class="result-winner"':''}>${r['Legs 1']||""}</td>
+            <td>vs</td>
+            <td${win2?' class="result-winner"':''}>${r['Legs 2']||""}</td>
+            <td class="result-teamname${win2?" result-winner":""}">${r['Team 2']||""}</td>
+            <td>${r['Avg 2']||""}</td>
+          </tr>`;
+        });
+        html += `</tbody></table></div>`;
+      });
+      document.getElementById('resultsContainer').innerHTML = html || '';
     }
-    function renderStandings(standings) {
-      const A = standings.filter(s => s.Group?.toUpperCase() === 'A');
-      const B = standings.filter(s => s.Group?.toUpperCase() === 'B');
-      const legend = `<div class="standings-legend">
-        <span class="gold-legend">Gold Cup (Top 3)</span>
-        <span class="silver-legend">Silver Cup (4-6)</span>
-        <span class="elim-legend">Eliminated (7-8)</span>
-        </div>`;
-      function tableHTML(arr, group) {
-        return `<div class="group-title">Group ${group}</div>
-          <div class="table-scroll"><table>
-            <thead><tr>
-              <th>Team</th><th>P</th><th>W</th><th>L</th><th>EF</th><th>EA</th><th>ED</th><th>Pts</th><th>Avg</th>
-            </tr></thead>
-            <tbody>
-            ${arr.sort((a, b) => b.Points - a.Points || b.LD - a.LD).map((s, i) => {
-              let rowClass = i<3?"gold-row":i<6?"silver-row":"elim-row";
-              return `<tr class="${rowClass}">
-                <td><img src="${TEAM_LOGOS[s.Team]||''}" alt="${s.Team}" style="width:15px;height:15px;vertical-align:middle;margin-right:5px;">${s.Team}</td>
-                <td>${s.P}</td><td>${s.W}</td><td>${s.L}</td>
-                <td>${s.LF}</td><td>${s.LA}</td><td>${s.LD}</td>
-                <td>${s.Points}</td><td>${s.Avg}</td>
-              </tr>`;
-            }).join('')}
-            </tbody></table></div>`;
-      }
-      document.getElementById('standingsGroupA').innerHTML = legend + tableHTML(A, 'A');
-      document.getElementById('standingsGroupB').innerHTML = tableHTML(B, 'B');
+    // --- PREMIUM STANDINGS TABLE ---
+    function renderStandings() {
+      const groupA = standingsCache.filter(s => s.Group?.toUpperCase() === 'A');
+      const groupB = standingsCache.filter(s => s.Group?.toUpperCase() === 'B');
+      document.getElementById('standings-cards').innerHTML =
+        standingsGroupCard('Group A', groupA) + standingsGroupCard('Group B', groupB);
     }
+    function standingsGroupCard(title, arr) {
+      arr = arr.sort((a, b) => b.Points - a.Points || b.LD - a.LD);
+      let html = `<div style="font-weight:800;font-size:1.08em;color:#ffe066;margin-bottom:0.36em;">${title}</div>
+      <table class="standings-table"><thead>
+        <tr><th>Pos</th><th>Team</th><th>P</th><th>W</th><th>L</th><th>Pts</th><th>Avg</th></tr>
+      </thead><tbody>`;
+      arr.forEach((s,i) => {
+        let rowClass = i<3?"gold":i<6?"silver":"elim";
+        let medal = i==0?`<span class="stand-medal">&#129351;</span>`:i==1?`<span class="stand-medal">&#129352;</span>`:i==2?`<span class="stand-medal">&#129353;</span>`:"";
+        let elim = i>5?`<span class="stand-elim">Elim</span>`:"";
+        html += `<tr class="stand-row ${rowClass}">
+          <td>${i+1}</td>
+          <td class="team-cell"><img class="stand-teamlogo" src="${TEAM_LOGOS[s.Team]||''}" alt="">${medal}${s.Team}${elim}</td>
+          <td>${s.P}</td><td>${s.W}</td><td>${s.L}</td>
+          <td class="stand-points">${s.Points}</td>
+          <td>${s.Avg}</td>
+        </tr>`;
+      });
+      html += "</tbody></table>";
+      return html;
+    }
+    // --- SQUADS ---
     function renderSquads(squads) {
       const container = document.getElementById('squadsContainer');
       if (!squads.length) { container.innerHTML = 'Loading...'; return; }
       const teams = [...new Set(squads.map(s => s.Team))];
-      let html = '<div class="squad-grid">';
+      let html = '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1.1em;">';
       teams.forEach(team => {
         const logo = TEAM_LOGOS[team] || "";
-        const players = squads.filter(s => s.Team === team).map(p => `<div class="squad-player">${p.Player}</div>`).join('');
-        html += `<div class="squad-card">
-          <img src="${logo}" alt="${team} logo"/>
-          <h3>${team}</h3>
-          <div class="squad-players">${players}</div>
+        const players = squads.filter(s => s.Team === team).map(p => `<div style="font-size:0.95em;">${p.Player}</div>`).join('');
+        html += `<div style="background:#22243a;border-radius:10px;padding:0.7em;text-align:center;">
+          <img src="${logo}" alt="${team}" style="width:30px;height:30px;border-radius:7px;object-fit:contain;">
+          <div style="font-weight:700;color:#ffe066;margin:0.27em 0 0.07em 0;">${team}</div>
+          <div style="font-size:0.94em;color:#eee;">${players}</div>
         </div>`;
       });
       html += '</div>';
       container.innerHTML = html;
     }
-    // --- Stats Tab ---
+    // --- STATS HIGHLIGHTS & TABLE ---
     function renderStatHighlights(stats, bestLegsSheet) {
       const defs = [
         {key:"3 Dart Avg", label:"Best 3-Dart Avg"},
@@ -682,7 +513,7 @@
         {key:"High Finish", label:"Highest Finish"}
       ];
       const eligible = stats.filter(p => Number(p["Match Played"]) >= 2);
-      let html = `<div class="stat-high-bar">`;
+      let html = `<div class="stat-high-bar" style="display:flex;gap:0.55em;flex-wrap:wrap;justify-content:center;">`;
       defs.forEach(def => {
         const sorted = [...eligible].sort((a,b) => +b[def.key] - +a[def.key]);
         const player = sorted[0];
@@ -690,7 +521,7 @@
         const team = player.Team || "";
         const logo = TEAM_LOGOS[team] || "";
         let val = player[def.key] ?? "—";
-        html += `<div class="stat-high-card">
+        html += `<div class="stat-high-card" style="background:#242545;">
           <div class="stat-high-label">${def.label}</div>
           <div class="stat-high-main">${val}</div>
           <div class="stat-high-player">${logo?`<img src="${logo}">`:''}${player.Player} (${team})</div>
@@ -700,7 +531,7 @@
       if (bestLegsSheet && bestLegsSheet.length) {
         let best = bestLegsSheet.sort((a,b)=>Number(a["Best Leg"])-Number(b["Best Leg"]))[0];
         const logo = TEAM_LOGOS[best.Team] || "";
-        html += `<div class="stat-high-card">
+        html += `<div class="stat-high-card" style="background:#242545;">
           <div class="stat-high-label">Best Leg</div>
           <div class="stat-high-main">${best["Best Leg"]}</div>
           <div class="stat-high-player">${logo?`<img src="${logo}">`:''}${best.Players} (${best.Team})</div>
@@ -725,6 +556,7 @@
       teamFilter = team || null;
       renderStats(statsCache, bestLegCache);
     };
+    // --- Stats Table, with player pop-up on name click ---
     function renderStats(stats, bestLegsSheet) {
       const searchInput = document.getElementById('stats-search');
       if (searchInput && !searchInput._listenerAdded) {
@@ -770,8 +602,11 @@
             if (h === "Win Rate (Sets)" || h === "Win Rate (Legs)") {
               val = isNaN(parseFloat(val)) ? "" : `${Math.round(parseFloat(val) * 100)}%`;
             }
+            if (h === "Player") {
+              return `<td class="stat-player" title="${val}" onclick="showPlayerPopup('${row.Player.replace(/'/g,"\\'")}')">${val}</td>`;
+            }
             if (h === "Team" && TEAM_LOGOS[val]) {
-              return `<td><img src="${TEAM_LOGOS[val]}" alt="${val}" style="width:14px;height:14px;vertical-align:middle;margin-right:5px;">${val}</td>`;
+              return `<td class="stat-team" title="${val}"><img src="${TEAM_LOGOS[val]}" alt="${val}">${val}</td>`;
             }
             return `<td>${val}</td>`;
           }).join("") + "</tr>";
@@ -791,11 +626,39 @@
       }
       renderStats(statsCache, bestLegCache);
     };
+    // Player pop-up functionality
+    function showPlayerPopup(playerName) {
+      let p = statsCache.find(s => s.Player === playerName);
+      if (!p) return;
+      let logo = p.Team && TEAM_LOGOS[p.Team] ? `<img src="${TEAM_LOGOS[p.Team]}" style="width:33px;height:33px;border-radius:6px;vertical-align:middle;margin-bottom:0.24em;"><br>` : "";
+      let card = `<div class="popup-card">
+        <div class="popup-head">${logo}${p.Player}</div>
+        <div class="popup-team">${p.Team||""}</div>
+        <div style="color:#ffe066;font-size:1em;font-weight:700;">Stats</div>
+        ${Object.keys(p).map(h => {
+          if (["Player", "Team"].includes(h) || STATS_HIDE_COLUMNS.has(h) || !p[h]) return "";
+          return `<div class="popup-label"><span style="color:#a0f3fa;font-weight:600;">${h}:</span> ${p[h]}</div>`;
+        }).join("")}
+      </div>`;
+      document.querySelector("#player-popup .popup-card").innerHTML = card;
+      document.getElementById("player-popup").style.display = "flex";
+    }
+    function hidePlayerPopup(e) {
+      if (!e || !e.target || e.target.id === "player-popup" || e.target.classList.contains("popup-close"))
+        document.getElementById("player-popup").style.display = "none";
+    }
+    // IST Today util
+    function getISTTodayRange() {
+      const now = new Date();
+      const IST_OFFSET = 330;
+      const local = new Date(now.getTime() + ((IST_OFFSET - now.getTimezoneOffset())*60*1000));
+      const istYear = local.getFullYear(), istMonth = local.getMonth(), istDay = local.getDate();
+      const istStart = new Date(Date.UTC(istYear, istMonth, istDay, 0, -IST_OFFSET, 0));
+      const istEnd = new Date(Date.UTC(istYear, istMonth, istDay, 23, 59-IST_OFFSET, 59));
+      return [istStart, istEnd, ""];
+    }
     loadData();
     setInterval(loadData, 60000);
-    window.addEventListener('resize', function() {
-      if(document.getElementById('dashboard').classList.contains('active')) renderDashboardFixtures();
-    });
   </script>
 </body>
 </html>
