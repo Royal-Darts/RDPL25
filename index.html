@@ -29,8 +29,8 @@
       --card: #fff;
       --glass-bg: rgba(255,255,255,0.23);
       --glass-border: rgba(56,182,255,0.10);
-      --nav-bg: rgba(23,30,48,0.85);
-      --nav-glass: rgba(255,255,255,0.68);
+      --nav-bg: #22355c;
+      --nav-glass: rgba(34,53,92,0.95);
       --shadow: 0 4px 32px 0 rgba(56,182,255,0.14);
       --table-border: #e2ecf4;
       --text: #1d253c;
@@ -58,17 +58,6 @@
       font-size: 16px;
       line-height: 1.4;
       color: var(--text);
-    }
-
-    /* === MAIN padding to avoid nav overlap === */
-    main {
-      max-width: 540px;
-      margin: 0 auto 110px auto;
-      padding: 1rem 1rem 110px 1rem; /* bottom padding for nav */
-      width: 100%;
-      flex: 1;
-      min-height: 0; /* Fix flex container overflow in some browsers */
-      -webkit-overflow-scrolling: touch;
     }
 
     /* === HEADER === */
@@ -104,6 +93,17 @@
       letter-spacing: 0.02em;
       font-family: var(--font-heading);
       text-shadow: 0 1px 6px #22355caa;
+    }
+
+    /* === MAIN CONTENT === */
+    main {
+      max-width: 540px;
+      margin: 0 auto 110px auto;
+      padding: 1rem 1rem 0.1rem 1rem;
+      width: 100%;
+      flex: 1;
+      min-height: 0;
+      -webkit-overflow-scrolling: touch;
     }
 
     /* === SECTIONS === */
@@ -501,17 +501,18 @@
     footer {
       width: 100%;
       max-width: 540px;
-      margin: 1.5em auto 3em auto;
+      margin: 2em auto 2em auto;
       background: none;
       position: relative;
       color: #7a7a7a;
       font-size: 0.9rem;
       user-select: none;
       display: flex;
-      justify-content: flex-start;  /* align left */
+      justify-content: flex-start;
       align-items: center;
       gap: 1.5rem;
       padding-left: 10px;
+      flex-shrink: 0;
     }
     .footer-icons {
       display: flex;
@@ -519,6 +520,7 @@
       align-items: center;
       gap: 1.25rem;
       user-select: none;
+      flex-shrink: 0;
     }
     .footer-icons img, .footer-icons .wa-btn {
       height: 24px;
@@ -579,28 +581,26 @@
       width: 100vw;
       max-width: 540px;
       z-index: 110;
-      background: rgba(255 255 255 / 0.9);
-      backdrop-filter: saturate(180%) blur(14px);
-      box-shadow: 0 6px 40px #38b6ff30, 0 -1px 18px #22355c0f;
+      background: var(--nav-bg);
+      box-shadow: 0 6px 36px #22355ccc;
       display: flex;
       justify-content: space-between;
       align-items: center;
       border-radius: 18px 18px 0 0;
       margin: 0 auto;
-      min-height: 64px !important;
-      height: 64px !important;
-      padding-bottom: 6px;
+      min-height: 64px;
+      height: 64px;
       overflow: hidden;
       user-select: none;
+      font-family: var(--font-heading);
     }
     .nav-bar-glass .nav-btn {
       flex: 1 1 0;
       background: none;
       border: none;
-      color: #496d8a;
-      font-size: 1.25em !important;
-      padding: 0.2em 0 0.15em 0 !important;
-      line-height: 1.1 !important;
+      color: #e2eaf5;
+      font-size: 1.3em;
+      padding: 0.3em 0 0.15em 0;
       text-align: center;
       outline: none;
       position: relative;
@@ -610,55 +610,46 @@
       align-items: center;
       justify-content: center;
       min-width: 0;
-      transition: color 0.22s ease;
-      font-family: var(--font-heading);
+      transition: color 0.25s ease;
       font-weight: 700;
-      letter-spacing: 0.03em;
-      user-select: none;
-      -webkit-tap-highlight-color: transparent;
-      will-change: color;
+      letter-spacing: 0.04em;
     }
     .nav-bar-glass .nav-btn i {
-      font-size: 1.55em;
+      font-size: 1.75em;
       line-height: 1.02;
-      transition: color 0.18s ease;
+      transition: color 0.2s ease;
       margin-bottom: 0.1em;
-      user-select: none;
     }
     .nav-bar-glass .nav-label {
       display: block;
-      font-size: 0.9em !important;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      overflow: hidden;
-      max-width: 80px;
-      margin-top: 0.02em;
+      font-size: 0.9em;
+      margin-top: 0.03em;
       font-weight: 700;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.06em;
       line-height: 1.02;
       opacity: 1;
-      transition: opacity 0.22s ease;
-      user-select: none;
+      transition: opacity 0.25s ease;
+      white-space: nowrap;
     }
     .nav-bar-glass .nav-btn.active,
     .nav-bar-glass .nav-btn:active {
-      color: var(--primary2);
+      color: var(--accent2);
       font-weight: 900;
+      text-shadow: 0 0 5px var(--accent2);
     }
     .nav-bar-glass .nav-indicator {
       display: block;
       position: absolute;
-      left: 25%;
-      right: 25%;
-      bottom: 6px;
-      height: 5px;
-      border-radius: 5px;
+      left: 22%;
+      right: 22%;
+      bottom: 8px;
+      height: 6px;
+      border-radius: 6px;
       background: linear-gradient(90deg, var(--accent2) 0%, var(--accent) 100%);
       opacity: 0;
       transform: scaleX(0.7);
-      transition: opacity 0.22s ease, transform 0.25s ease;
+      transition: opacity 0.25s ease, transform 0.3s ease;
       z-index: 2;
-      user-select: none;
     }
     .nav-bar-glass .nav-btn.active .nav-indicator {
       opacity: 1;
@@ -666,10 +657,13 @@
     }
     @media (max-width: 430px) {
       .nav-bar-glass .nav-label {
-        display: none;
+        font-size: 0.85em;
       }
       .nav-bar-glass .nav-btn {
-        font-size: 1.15em;
+        font-size: 1.1em;
+      }
+      .nav-bar-glass .nav-btn i {
+        font-size: 1.55em;
       }
     }
 
@@ -777,29 +771,33 @@
       justify-content: center;
     }
     #compare select {
-      white-space: nowrap !important;
-      text-overflow: ellipsis !important;
-      overflow: hidden !important;
-      padding-right: 2.5em !important; /* extra space for dropdown arrow */
-      min-width: 140px;
-      max-width: 100%;
-      font-size: 1em;
-      background-position:
-        calc(100% - 20px) center,
-        calc(100% - 15px) center,
-        calc(100% - 25px) center;
       flex: 1 1 140px;
       padding: 0.4em 0.6em;
+      font-size: 1em;
       border-radius: 7px;
       border: 1.5px solid var(--table-border);
       font-family: var(--font-sans);
       cursor: pointer;
       transition: border-color 0.22s ease;
       user-select: none;
+      min-width: 140px;
       background: #fff;
       appearance: none;
       -webkit-appearance: none;
       -moz-appearance: none;
+      background-image:
+        linear-gradient(45deg, transparent 50%, var(--accent) 50%),
+        linear-gradient(135deg, var(--accent) 50%, transparent 50%),
+        linear-gradient(to right, var(--table-border), var(--table-border));
+      background-position:
+        calc(100% - 20px) calc(1em + 2px),
+        calc(100% - 15px) calc(1em + 2px),
+        calc(100% - 25px) 0.8em;
+      background-size: 5px 5px, 5px 5px, 1px 1.5em;
+      background-repeat: no-repeat;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
     }
     #compare select:hover, #compare select:focus {
       border-color: var(--accent);
@@ -911,17 +909,6 @@
       #compare-results td.player-name-cell {
         min-width: 100px;
         font-size: 0.9em;
-      }
-    }
-    /* For very narrow mobile: stack selects vertically */
-    @media (max-width: 400px) {
-      #compare .player-select-container {
-        flex-direction: column;
-        gap: 0.75em;
-      }
-      #compare .player-select-container select {
-        width: 100% !important;
-        min-width: unset;
       }
     }
   </style>
@@ -1600,21 +1587,13 @@
     }
 
     // --- PLAYER & TEAM COMPARISON PAGE ---
-
-    // We'll let users select 2 to 4 players to compare side-by-side.
-
-    // Build the select dropdowns with all players in statsCache
     function renderPlayerComparisonSelectors() {
       const container = document.querySelector("#compare .player-select-container");
       if (!container || !statsCache.length) return;
 
-      // Clear container
       container.innerHTML = "";
 
-      // Number of selects - let's do 4
       const NUM_SELECTS = 4;
-
-      // Prepare sorted unique player names
       const uniquePlayers = Array.from(new Set(statsCache.map(p => p.Player))).sort((a,b) => a.localeCompare(b));
 
       for(let i=0; i<NUM_SELECTS; i++) {
@@ -1622,7 +1601,6 @@
         select.setAttribute("aria-label", `Select player ${i+1}`);
         select.dataset.idx = i;
 
-        // Add default option
         const optionDefault = document.createElement("option");
         optionDefault.value = "";
         optionDefault.textContent = i < 2 ? `Select player ${i+1} (required)` : `Select player ${i+1} (optional)`;
@@ -1630,7 +1608,6 @@
         optionDefault.selected = true;
         select.appendChild(optionDefault);
 
-        // Add players options
         uniquePlayers.forEach(player => {
           const opt = document.createElement("option");
           opt.value = player;
@@ -1641,12 +1618,10 @@
         container.appendChild(select);
       }
 
-      // Setup event listeners
       container.querySelectorAll("select").forEach(sel => {
         sel.addEventListener("change", updateCompareButtonState);
       });
 
-      // Reset compare results
       document.getElementById("compare-results").innerHTML = "";
       updateCompareButtonState();
     }
@@ -1656,7 +1631,6 @@
       const selectedValues = Array.from(selects).map(s => s.value).filter(v => v);
       const compareBtn = document.getElementById("compare-btn");
 
-      // Require at least two unique players selected to enable button
       const uniquePlayers = [...new Set(selectedValues)];
 
       if (uniquePlayers.length >= 2) {
@@ -1668,7 +1642,6 @@
       }
     }
 
-    // Render comparison results in a table format with metrics as rows and players as columns
     function renderPlayerComparison() {
       const selects = document.querySelectorAll("#compare .player-select-container select");
       const selectedPlayers = Array.from(selects).map(s => s.value).filter(v => v);
@@ -1680,9 +1653,8 @@
       }
 
       const container = document.getElementById("compare-results");
-      container.innerHTML = ""; // Clear previous
+      container.innerHTML = "";
 
-      // Stats keys to show in comparison
       const keysToShow = [
         "Match Played", "Sets Played", "Sets Won", "Sets Lost", "Win Rate (Sets)",
         "Legs Played", "Legs Won", "Legs Lost", "Win Rate (Legs)",
@@ -1690,7 +1662,6 @@
         "180s", "100+ Scores", "Best Leg", "High Checkout"
       ];
 
-      // Build table header row with player names + logos
       let thead = "<tr><th class='metric-header' scope='col'>Metric</th>";
       uniquePlayers.forEach(playerName => {
         const playerData = statsCache.find(p => p.Player === playerName);
@@ -1702,7 +1673,6 @@
       });
       thead += "</tr>";
 
-      // Build table body rows with metric and player values
       let tbody = "";
       keysToShow.forEach(metric => {
         tbody += `<tr><th class="metric-header" scope="row">${metric}</th>`;
@@ -1727,9 +1697,7 @@
       window.scrollTo({top:0, behavior:'smooth'});
     }
 
-    // --- Event Listeners ---
     document.addEventListener("DOMContentLoaded", function() {
-      // Navigation tab buttons
       document.querySelectorAll('.nav-bar-glass .nav-btn').forEach(btn => {
         btn.addEventListener('click', function() {
           const tab = this.getAttribute('data-tab');
@@ -1737,19 +1705,14 @@
         });
       });
 
-      // WhatsApp share
       setupWhatsAppShare();
 
-      // Compare button click
       document.getElementById("compare-btn").addEventListener("click", renderPlayerComparison);
 
-      // Load initial data
       loadData();
 
-      // Auto-refresh every 60 seconds
       setInterval(loadData, 60000);
     });
-
   </script>
 </body>
 </html>
