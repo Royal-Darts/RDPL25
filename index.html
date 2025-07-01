@@ -17,12 +17,10 @@
       --nav-bg: #1b2a50;
       --nav-text: #e2eaf5;
       --nav-active: #ffc93a;
-      --nav-shadow: 0 2px 18px #22355c80;
       --table-border: #e2ecf4;
       --wa-green: #25D366;
       --font-sans: 'Segoe UI', Arial, sans-serif;
       --font-heading: 'Segoe UI Semibold', Arial, sans-serif;
-      --page-padding: 12px;
       --table-font: 0.90em;
       --min-font: 13px;
     }
@@ -42,22 +40,19 @@
       flex-direction: column;
       min-height: 100vh;
       height: 100vh;
-      box-sizing: border-box;
       background-image: linear-gradient(120deg, #e9f3ff 0%, #ffffff 100%);
       font-size: var(--min-font);
-      letter-spacing: 0.01em;
     }
     header {
       background: linear-gradient(120deg, var(--primary2) 80%, var(--accent) 120%);
       color: #fff;
-      padding: 0.5rem var(--page-padding) 0.45rem var(--page-padding);
+      padding: 0.5rem 12px 0.45rem 12px;
       display: flex;
       align-items: center;
       gap: 0.6em;
       border-bottom: 1px solid #b2d9fc;
       box-shadow: 0 2px 8px #22355c20;
-      position: sticky;
-      top: 0; z-index: 10;
+      position: sticky; top: 0; z-index: 10;
     }
     header img {
       height: 30px;
@@ -67,9 +62,7 @@
       user-select: none;
     }
     header .titlebox {
-      flex: 1;
-      min-width: 0;
-      user-select: none;
+      flex: 1; min-width: 0; user-select: none;
     }
     header h1 {
       margin: 0;
@@ -88,22 +81,18 @@
       max-width: 530px;
       margin: 0 auto;
       width: 100%;
-      padding: 10px var(--page-padding) 80px var(--page-padding);
+      padding: 10px 12px 80px 12px;
       min-height: 0;
       box-sizing: border-box;
-      background: none;
     }
-    .section {
-      display: none;
-    }
-    .section.active { display: block; animation: fadeInSection 0.18s ease forwards;}
-    @keyframes fadeInSection {from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+    .section { display: none; }
+    .section.active { display: block; }
     .card {
       background: var(--card);
       border-radius: 14px;
       box-shadow: 0 2px 9px #c3e6ff17;
       margin-bottom: 0.85em;
-      padding: 1em 0.8em 1em 0.8em;
+      padding: 1em 0.8em;
       border: 1px solid #d8eafd;
     }
     .card h3 {
@@ -111,32 +100,19 @@
       margin: 0 0 0.36em 0;
       font-weight: 800;
       font-size: 1.08em;
-      letter-spacing: 0.01em;
       font-family: var(--font-heading);
-      user-select: none;
     }
-    /* Tables & scroll */
     .table-scroll {
       overflow-x: auto;
       width: 100%;
       border-radius: 7px;
       margin-bottom: 0.15em;
-      scrollbar-width: thin;
-      scrollbar-color: var(--accent) var(--primary-light);
     }
-    .table-scroll::-webkit-scrollbar { height: 6px; }
-    .table-scroll::-webkit-scrollbar-track { background: var(--primary-light);}
-    .table-scroll::-webkit-scrollbar-thumb { background: var(--accent);}
     table {
       width: 100%;
-      background: transparent;
       border-collapse: separate;
       border-spacing: 0;
-      margin: 0;
       font-size: var(--table-font);
-      border: none;
-      user-select: none;
-      letter-spacing: 0.01em;
     }
     th, td {
       padding: 0.5em 0.35em;
@@ -144,13 +120,9 @@
       font-size: 0.99em;
       border-bottom: 1px solid var(--table-border);
       color: #19223c;
-      word-break: break-word;
-      white-space: pre-line;
-      overflow-wrap: anywhere;
       line-height: 1.13;
     }
-    th {color: var(--primary2); font-weight: 800; background: transparent;}
-    th:hover {color: var(--accent);}
+    th { color: var(--primary2); font-weight: 800; }
     .date-heading {
       color: var(--primary2);
       font-size: 0.98em;
@@ -158,48 +130,29 @@
       margin: 1em 0 0.13em 0;
       padding-bottom: 0.11em;
       border-bottom: 2.5px solid var(--accent);
-      letter-spacing: 0.01em;
-      user-select: none;
     }
-    /* Results winner style */
-    .result-row.winner1 {border-left: 3px solid var(--accent2);}
-    .result-row.winner2 {border-left: 3px solid var(--accent);}
-    .winner-cell { font-weight: 800;}
-    .winner-icon {font-size: 1.05em;vertical-align:middle;}
-    .divider-cell { min-width: 10px; max-width: 10px; padding: 0;}
-    .divider-line { width: 2px; height: 24px; background: var(--accent2); border-radius: 1px;}
-    /* Standings */
-    .stand-row { background: #fff; font-weight: 700; font-size: 0.97em;}
     .stand-row.gold .pos-cell { background: var(--accent2);}
     .stand-row.silver .pos-cell { background: #bfc9da;}
     .stand-row.elim .pos-cell { background: #f55353; color: #fff;}
-    .stand-teamlogo { display:none;} /* No logos */
-    /* Squads */
     .squad-team-card {
       margin-bottom: 0.6em;
       padding: 0.48em 0.37em;
       border-radius: 10px;
       background: var(--primary-light);
       box-shadow: 0 2px 4px #38b6ff08;
-      user-select: none;
-      cursor: default;
     }
-    .squad-logo-frame {display:none;}
     .squad-team-name { font-weight: 800; font-size: 0.99em; color: var(--primary2);}
-    .squad-players { display: flex; flex-wrap: wrap; gap: 6px; justify-content: flex-start;}
+    .squad-players { display: flex; flex-wrap: wrap; gap: 6px;}
     .squad-player-name {
       background: #fff;
       padding: 0.13em 0.36em;
       border-radius: 6px;
       font-size: 0.94em;
-      box-shadow: 0 1px 2px #38b6ff08;
-      margin-bottom: 1px;
+      min-width: 67px;
+      line-height: 1.08;
       cursor: pointer;
       user-select: none;
-      white-space: nowrap;
-      min-width: 67px;
-      transition: background-color 0.15s;
-      line-height: 1.08;
+      margin-bottom: 1px;
     }
     .squad-player-name:hover, .squad-player-name:focus {
       background: var(--accent);
@@ -215,280 +168,149 @@
       padding: 3px 7px;
       user-select: none;
     }
-    /* Player popup */
-    #player-popup {
-      display: none;
-      position: fixed; left: 0; top: 0;
-      width: 100vw; height: 100vh;
-      z-index: 250;
-      background: rgba(34,53,92,0.92);
-      justify-content: center;
-      align-items: center;
-    }
-    #player-popup .popup-card {
-      background: #fff;
-      border-radius: 8px;
-      box-shadow: 0 2px 10px #b1e1ff25;
-      padding: 0.95em 1em;
-      color: var(--primary-dark);
-      min-width: 230px;
-      max-width: 95vw;
-      text-align: center;
-      font-weight: 700;
-      font-size: 0.97em;
-    }
-    #player-popup .popup-head { font-size: 1em; font-weight: 900;}
-    #player-popup .popup-team { color: var(--primary2);}
-    #player-popup .popup-label { color: var(--primary); font-size: 0.91em; margin-top: 0.11em; text-align: left;}
-    #player-popup .popup-close {
-      color: #222; font-size: 1.2em;
-      background: none; border: none;
-      position: absolute; top: 0.6em; right: 0.8em;
-      cursor: pointer;
-    }
-    #save-card-btn {
-      margin-top: 0.7em; background: var(--accent); border: none; border-radius: 7px;
-      color: #fff; font-weight: 800; font-size: 0.95em; padding: 0.36em 0.9em; cursor: pointer;
-    }
-    #save-card-btn:hover { background: var(--primary2);}
-    /* Footer always at bottom */
-    footer {
+    /* Modern, mobile-first Stats Table */
+    .stats-table-modern {
       width: 100%;
-      max-width: 530px;
+      border-collapse: separate;
+      border-spacing: 0;
+      background: #fafdff;
+      font-size: 1em;
+    }
+    .stats-table-modern th, .stats-table-modern td {
+      padding: 0.57em 0.35em;
+      text-align: left;
+      border-bottom: 1px solid #e4eef7;
+      font-size: 0.98em;
+      vertical-align: middle;
+      white-space: normal;
+      word-break: break-word;
+    }
+    .stats-table-modern th {
+      color: #15406d;
+      font-weight: 900;
+      background: #e9f3ff;
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      font-size: 0.99em;
+    }
+    .stats-table-modern tr { background: #fff;}
+    .stats-table-modern tr.alt-row { background: #f5fafd;}
+    .stats-table-modern .stats-best {
+      background: #eaffdc !important;
+      color: #227f1d !important;
+      font-weight: 800;
+      border-radius: 6px;
+    }
+    .stats-table-modern td.stats-player {
+      font-weight: 900;
+      color: #162f4d;
+      font-size: 1.02em;
+      max-width: 120px;
+    }
+    .stats-table-modern td.stats-team {
+      font-weight: 600;
+      color: #487eea;
+      font-size: 0.96em;
+    }
+    .stats-table-modern .show-more-btn {
+      background: #f2f5fa;
+      border: 1px solid #c2d9f8;
+      border-radius: 6px;
+      font-size: 0.92em;
+      font-weight: 600;
+      color: #2360b7;
+      cursor: pointer;
+      padding: 0.32em 1.0em;
+      margin: 0.1em 0 0.05em 0;
+      width: 99%;
+    }
+    .stats-table-modern .extra-stats-row td {
+      background: #f8fcff;
+      border-bottom: none;
+      padding: 0.41em 0.7em 0.51em 0.7em;
+      font-size: 0.95em;
+    }
+    .stats-table-modern .extra-stats-label { color: #55709a; font-weight: 600;}
+    .stats-table-modern .extra-stats-value { color: #144a7b; font-weight: 700;}
+    .stats-table-modern .trophy { color: #b9a019; font-size: 1.19em; vertical-align: middle;}
+    .stats-table-modern .star { color: #f8ad1e; font-size: 1.1em; vertical-align: middle;}
+    @media (max-width: 720px) {
+      .stats-table-modern th, .stats-table-modern td { font-size: 0.93em; }
+      .stats-table-modern td.stats-player { max-width: 90px; font-size: 1em;}
+    }
+    @media (max-width: 520px) {
+      .stats-table-modern th, .stats-table-modern td { font-size: 0.91em; }
+      .stats-table-modern td.stats-player { max-width: 68px; }
+    }
+    /* Footer */
+    footer {
+      width: 100%; max-width: 530px;
       margin: 0 auto 0 auto;
       padding: 0.85em 0.7em 0.95em 0.7em;
       background: none;
       color: #7a7a7a;
       font-size: 0.88rem;
-      user-select: none;
       display: flex;
       justify-content: flex-start;
       align-items: center;
       gap: 1.0rem;
-      box-sizing: border-box;
       flex-shrink: 0;
       position: relative;
     }
     .footer-icons {
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      gap: 1.0rem;
-      user-select: none;
-      flex-shrink: 0;
+      display: flex; gap: 1.0rem; flex-shrink: 0;
     }
     .footer-icons img, .footer-icons .wa-btn {
-      height: 22px; width: 22px; vertical-align: middle;
-      border-radius: 5px; background: #fff; border: 1px solid #bfe4fa;
+      height: 22px; width: 22px; border-radius: 5px; background: #fff; border: 1px solid #bfe4fa;
       object-fit: cover; padding: 2px;
       box-shadow: 0 1px 2px #0002;
-      transition: transform 0.14s;
       cursor: pointer;
-    }
-    .footer-icons img:hover, .footer-icons .wa-btn:hover {
-      transform: scale(1.08);
-      border-color: var(--accent);
-      box-shadow: 0 0 7px var(--accent);
     }
     .wa-btn { background: var(--wa-green); color: #fff !important; border-radius: 8px; font-size: 1.12em; }
     .footer-suca { margin-left: auto; font-style: italic; color: #aaa;}
-    /* Navigation bar redesigned mobile-first */
+    /* Nav bar */
     .nav-bar-glass {
-      position: fixed;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      width: 100vw;
-      max-width: 530px;
-      z-index: 200;
-      background: var(--nav-bg);
-      box-shadow: var(--nav-shadow);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      position: fixed; left: 0; right: 0; bottom: 0;
+      width: 100vw; max-width: 530px;
+      z-index: 200; background: var(--nav-bg);
+      display: flex; justify-content: space-between; align-items: center;
       border-radius: 16px 16px 0 0;
-      margin: 0 auto;
-      min-height: 50px;
-      height: 50px;
-      overflow-x: auto;
-      overflow-y: hidden;
-      user-select: none;
-      padding: 0 3px;
-      font-family: var(--font-heading);
+      margin: 0 auto; min-height: 50px; height: 50px;
+      padding: 0 3px; font-family: var(--font-heading);
       border-top: 1px solid #30446f;
     }
     .nav-bar-glass .nav-btn {
-      flex: 1 1 0;
-      background: none; border: none;
-      color: var(--nav-text);
-      font-size: 0.98em;
-      min-width: 56px; max-width: 70px;
-      padding: 0.1em 2px 0.15em 2px;
-      text-align: center;
-      outline: none;
-      position: relative;
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      letter-spacing: 0.00em;
-      line-height: 1.0;
-      transition: color 0.2s;
-      border-radius: 10px;
+      flex: 1 1 0; background: none; border: none;
+      color: var(--nav-text); font-size: 0.98em;
+      min-width: 56px; max-width: 70px; padding: 0.1em 2px 0.15em 2px;
+      text-align: center; cursor: pointer; display: flex;
+      flex-direction: column; align-items: center; justify-content: center;
+      font-weight: 700; border-radius: 10px;
     }
-    .nav-bar-glass .nav-btn i {
-      font-size: 1.16em;
-      margin-bottom: 0.02em;
-      transition: color 0.15s;
-      line-height: 1.01;
-      display: block;
-    }
+    .nav-bar-glass .nav-btn i { font-size: 1.16em; margin-bottom: 0.02em;}
     .nav-bar-glass .nav-label {
-      display: block;
-      font-size: 0.81em;
-      font-weight: 700;
-      letter-spacing: 0.00em;
-      line-height: 1.08;
-      margin-top: -2px;
-      opacity: 1;
-      white-space: nowrap;
-      text-shadow: 0 0 2px #000c;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      width: 100%;
-      max-width: 63px;
-      pointer-events: none;
+      display: block; font-size: 0.81em; font-weight: 700;
+      margin-top: -2px; opacity: 1; white-space: nowrap;
+      text-shadow: 0 0 2px #000c; max-width: 63px;
     }
-    .nav-bar-glass .nav-btn.active,
-    .nav-bar-glass .nav-btn:active {
-      color: var(--nav-active);
-      font-weight: 800;
-      background: #24315e9e;
-      text-shadow: 0 0 5px var(--nav-active), 0 0 1px #fff8;
-    }
-    .nav-bar-glass .nav-btn:focus { outline: 2px solid var(--accent);}
-    .nav-bar-glass .nav-indicator {
-      display: none;
-    }
-    @media (max-width: 600px) {
-      .nav-bar-glass .nav-label { font-size: 0.79em;}
-      .nav-bar-glass .nav-btn { font-size: 0.94em;}
-      .nav-bar-glass { min-height: 46px; height: 46px;}
-    }
-    @media (max-width: 480px) {
-      .nav-bar-glass { font-size: 0.95em; }
-      .nav-bar-glass .nav-label { font-size: 0.75em;}
-      .nav-bar-glass .nav-btn { font-size: 0.91em; min-width: 47px;}
-    }
-    @media (max-width: 380px) {
-      .nav-bar-glass { font-size: 0.91em;}
-      .nav-bar-glass .nav-label { font-size: 0.68em; }
-      .nav-bar-glass .nav-btn { font-size: 0.88em;}
-    }
-    /* Comparison selects */
-    #compare .player-select-container {
-      max-width: 420px;
-      margin: 0 auto 0.8em auto;
-      display: flex;
-      gap: 0.36em;
-      flex-wrap: wrap;
-      justify-content: flex-start;
-    }
-    #compare select {
-      flex: 1 1 110px;
-      padding: 0.30em 0.37em;
-      font-size: 0.97em;
-      border-radius: 6px;
-      border: 1px solid var(--table-border);
-      min-width: 100px;
-      max-width: 100%;
-      background: #fff;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      overflow: hidden;
-      box-sizing: border-box;
-    }
-    #compare select:disabled { color: #aaa;}
-    #compare .compare-btn {
-      margin-top: 0.38em;
-      background: var(--accent);
-      color: #fff;
-      border: none;
-      border-radius: 7px;
-      font-weight: 800;
-      font-size: 0.98em;
-      padding: 0.33em 0.75em;
-      cursor: pointer;
-      min-width: 105px;
-      transition: background-color 0.18s;
-    }
-    #compare .compare-btn:disabled {background: #b2d9fc99; color: #fff;}
-    #compare .compare-btn:hover:not(:disabled) {background: var(--primary2);}
-    #compare-results {margin-top: 1em; overflow-x: auto;}
-    #compare-results table {
-      width: 100%;
-      min-width: 340px;
-      border-collapse: collapse;
-      font-size: 0.94em;
-      margin-bottom: 0.4em;
-    }
-    #compare-results th, #compare-results td {
-      border: 1px solid var(--table-border);
-      padding: 0.35em 0.45em;
-      text-align: center;
-      vertical-align: middle;
-      user-select: text;
-      font-size: 0.95em;
-    }
-    #compare-results th.metric-header {
-      background: var(--accent);
-      color: #fff;
-      text-align: left;
-      font-weight: 800;
-      min-width: 80px;
-      font-size: 0.96em;
-    }
-    #compare-results td.player-name-cell {
-      font-weight: 700;
-      color: var(--primary2);
-      background: #e9f3ff;
-      min-width: 90px;
-      font-size: 0.96em;
-    }
-    #compare-results td.player-logo {display: none;}
-    #compare-results tbody tr:nth-child(even) {background: #f7fbff;}
-    /* Responsive bottom spacing */
-    @media (max-width: 520px) {
-      main { padding-bottom: 80px; }
-      #compare-results table { font-size: 0.9em;}
-    }
-    /* Bottom page padding so last row visible */
-    .pad-for-nav { height: 58px; min-height: 58px; display: block; width: 100%;}
+    .nav-bar-glass .nav-btn.active { color: var(--nav-active); font-weight: 800; background: #24315e9e;}
+    .pad-for-nav { height: 58px; min-height: 58px; width: 100%;}
   </style>
 </head>
 <body>
   <header>
     <img src="logo.png" alt="Royal Darts Premier League Logo" draggable="false"/>
-    <div class="titlebox">
-      <h1>Royal Darts Premier League 2025</h1>
-    </div>
+    <div class="titlebox"><h1>Royal Darts Premier League 2025</h1></div>
   </header>
   <main>
-    <!-- Dashboard -->
     <section id="dashboard" class="section active" aria-label="Dashboard Home">
       <div class="card">
         <h3>Today's Fixtures</h3>
         <div class="table-scroll">
-          <table class="fixtures-table" id="dashboard-fixtures-table" role="table" aria-live="polite" aria-atomic="true">
+          <table class="fixtures-table" role="table" aria-live="polite" aria-atomic="true">
             <thead>
-              <tr>
-                <th scope="col">Time</th>
-                <th scope="col">Team 1</th>
-                <th scope="col"></th>
-                <th scope="col">Team 2</th>
-              </tr>
+              <tr><th>Time</th><th>Team 1</th><th></th><th>Team 2</th></tr>
             </thead>
             <tbody id="dashboard-fixtures"></tbody>
           </table>
@@ -499,38 +321,25 @@
         <div class="standings-group-title" aria-hidden="true">Group A</div>
         <div class="table-scroll" role="table" aria-live="polite" aria-atomic="true">
           <table class="standings-table" role="grid">
-            <thead>
-              <tr><th scope="col">Pos</th><th scope="col">Team</th><th scope="col">Pts</th></tr>
-            </thead>
+            <thead><tr><th>Pos</th><th>Team</th><th>Pts</th></tr></thead>
             <tbody id="dashboard-standings-a"></tbody>
           </table>
         </div>
         <div class="standings-group-title" aria-hidden="true" style="margin-top:0.4em;">Group B</div>
         <div class="table-scroll" role="table" aria-live="polite" aria-atomic="true">
           <table class="standings-table" role="grid">
-            <thead>
-              <tr><th scope="col">Pos</th><th scope="col">Team</th><th scope="col">Pts</th></tr>
-            </thead>
+            <thead><tr><th>Pos</th><th>Team</th><th>Pts</th></tr></thead>
             <tbody id="dashboard-standings-b"></tbody>
           </table>
         </div>
       </div>
     </section>
-    <!-- Fixtures -->
     <section id="fixtures" class="section" aria-label="Fixtures">
-      <div class="card">
-        <h3>Fixtures</h3>
-        <div id="fixturesTableContainer"></div>
-      </div>
+      <div class="card"><h3>Fixtures</h3><div id="fixturesTableContainer"></div></div>
     </section>
-    <!-- Results -->
     <section id="results" class="section" aria-label="Results">
-      <div class="card">
-        <h3>Results</h3>
-        <div id="resultsContainer"></div>
-      </div>
+      <div class="card"><h3>Results</h3><div id="resultsContainer"></div></div>
     </section>
-    <!-- Standings -->
     <section id="standings" class="section" aria-label="Standings">
       <div class="card" style="margin-bottom:0.6em;">
         <div class="stand-legend" aria-hidden="true">
@@ -545,32 +354,22 @@
         <div id="standings-b" role="table" aria-live="polite" aria-atomic="true"></div>
       </div>
     </section>
-    <!-- Squads -->
     <section id="squads" class="section" aria-label="Squads">
-      <div class="card">
-        <h3>Squads</h3>
-        <div id="squadsContainer" class="squad-grid"></div>
-      </div>
+      <div class="card"><h3>Squads</h3><div id="squadsContainer" class="squad-grid"></div></div>
     </section>
-    <!-- Stats -->
     <section id="stats" class="section" aria-label="Player Stats">
       <div class="card">
         <h3>Player Stats</h3>
         <div id="stats-tip">Tip: Tap any player name in the table below to view and save their full player card.</div>
         <div id="stat-highlights"></div>
         <div class="team-filter-bar" id="team-filter-bar"></div>
-        <input id="stats-search" type="text" placeholder="Search player or team..." aria-label="Search player or team" style="margin-bottom:0.4em;padding:0.18em 0.35em;font-size:0.93em;width:96vw;max-width:140px;border-radius:5px;border:1px solid var(--table-border);display:block;margin:auto;">
+        <input id="stats-search" type="text" placeholder="Search player or team..." aria-label="Search player or team" style="margin-bottom:0.4em;padding:0.18em 0.35em;font-size:0.93em;width:96vw;max-width:140px;border-radius:5px;border:1px solid #e2ecf4;display:block;margin:auto;">
         <div id="stats-table"></div>
       </div>
     </section>
-    <!-- Live -->
     <section id="live" class="section" aria-label="Live Stream">
-      <div class="card">
-        <h3>Watch Live</h3>
-        <iframe src="https://n01darts.com/n01/tournament/comp.php?id=t_NI0o_4352&tab=live" width="100%" height="320" frameborder="0" style="border-radius:9px;border:none;" title="Live tournament stream"></iframe>
-      </div>
+      <div class="card"><h3>Watch Live</h3><iframe src="https://n01darts.com/n01/tournament/comp.php?id=t_NI0o_4352&tab=live" width="100%" height="320" frameborder="0" style="border-radius:9px;border:none;" title="Live tournament stream"></iframe></div>
     </section>
-    <!-- Compare -->
     <section id="compare" class="section" aria-label="Player Comparison">
       <div class="card">
         <h3>Player Comparison</h3>
@@ -582,39 +381,16 @@
     </section>
     <div class="pad-for-nav"></div>
   </main>
-  <!-- NAVIGATION BAR -->
   <nav class="nav-bar-glass" role="navigation" aria-label="Main Navigation">
-    <button class="nav-btn active" data-tab="dashboard" title="Home" aria-current="page" aria-label="Go to Home">
-      <i class="lucide lucide-home" aria-hidden="true"></i><span class="nav-label">Home</span>
-    </button>
-    <button class="nav-btn" data-tab="fixtures" title="Fixtures" aria-label="Go to Fixtures">
-      <i class="lucide lucide-calendar-days" aria-hidden="true"></i><span class="nav-label">Fixtures</span>
-    </button>
-    <button class="nav-btn" data-tab="results" title="Results" aria-label="Go to Results">
-      <i class="lucide lucide-list-start" aria-hidden="true"></i><span class="nav-label">Results</span>
-    </button>
-    <button class="nav-btn" data-tab="standings" title="Standings" aria-label="Go to Standings">
-      <i class="lucide lucide-trophy" aria-hidden="true"></i><span class="nav-label">Standings</span>
-    </button>
-    <button class="nav-btn" data-tab="squads" title="Squads" aria-label="Go to Squads">
-      <i class="lucide lucide-users" aria-hidden="true"></i><span class="nav-label">Squads</span>
-    </button>
-    <button class="nav-btn" data-tab="stats" title="Stats" aria-label="Go to Player Stats">
-      <i class="lucide lucide-bar-chart" aria-hidden="true"></i><span class="nav-label">Stats</span>
-    </button>
-    <button class="nav-btn" data-tab="live" title="Live" aria-label="Go to Live Stream">
-      <i class="lucide lucide-play-circle" aria-hidden="true"></i><span class="nav-label">Live</span>
-    </button>
-    <button class="nav-btn" data-tab="compare" title="Compare Players" aria-label="Go to Player Comparison">
-      <i class="lucide lucide-columns" aria-hidden="true"></i><span class="nav-label">Compare</span>
-    </button>
+    <button class="nav-btn active" data-tab="dashboard" title="Home" aria-current="page"><i class="lucide lucide-home"></i><span class="nav-label">Home</span></button>
+    <button class="nav-btn" data-tab="fixtures" title="Fixtures"><i class="lucide lucide-calendar-days"></i><span class="nav-label">Fixtures</span></button>
+    <button class="nav-btn" data-tab="results" title="Results"><i class="lucide lucide-list-start"></i><span class="nav-label">Results</span></button>
+    <button class="nav-btn" data-tab="standings" title="Standings"><i class="lucide lucide-trophy"></i><span class="nav-label">Standings</span></button>
+    <button class="nav-btn" data-tab="squads" title="Squads"><i class="lucide lucide-users"></i><span class="nav-label">Squads</span></button>
+    <button class="nav-btn" data-tab="stats" title="Stats"><i class="lucide lucide-bar-chart"></i><span class="nav-label">Stats</span></button>
+    <button class="nav-btn" data-tab="live" title="Live"><i class="lucide lucide-play-circle"></i><span class="nav-label">Live</span></button>
+    <button class="nav-btn" data-tab="compare" title="Compare Players"><i class="lucide lucide-columns"></i><span class="nav-label">Compare</span></button>
   </nav>
-  <!-- Player popup -->
-  <div id="player-popup" onclick="hidePlayerPopup(event)" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="player-popup-head" tabindex="-1">
-    <div class="popup-card" role="document"></div>
-    <button class="popup-close" onclick="hidePlayerPopup(event)" aria-label="Close player card">&times;</button>
-  </div>
-  <!-- Footer always at bottom -->
   <footer>
     <div class="footer-icons">
       <a href="https://n01darts.com/n01/tournament/comp.php?id=t_NI0o_4352&tab=live" target="_blank" rel="noopener" aria-label="Watch live on Nakka">
@@ -627,13 +403,15 @@
         <span class="lucide lucide-message-circle" aria-hidden="true"></span>
       </a>
     </div>
-    <div class="footer-suca" aria-hidden="true">Built by SUCA Analytics</div>
+    <div class="footer-suca">Built by SUCA Analytics</div>
   </footer>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
   <script defer>
     const API_URL = 'https://script.google.com/macros/s/AKfycby6BCE5cyBaxpz-Jt-TeRH6k5Jeq-vqelr8S7rt32e7wFjBzEvuBrYi4yPaEBz2Kari/exec';
     let fixturesCache = [], standingsCache = [], statsCache = [], bestLegCache = [], squadsCache = [], resultsCache = [];
     let statsSortKey = null, statsSortDir = 1, statsSearchTerm = "", teamFilter = null;
+    let compareSelections = [];
+    let compareTableHtml = "";
     const STATS_HIDE_COLUMNS = new Set(["Keep", "Break", "Second Legs", "Break Legs", "Total Score", "Total Darts", "Group", "Best Leg", "Worst Leg"]);
     function curlText(txt) {
       if (!txt) return '';
@@ -682,6 +460,19 @@
         renderStatHighlights(statsCache, bestLegCache, "stat-highlights");
         renderStats(statsCache, bestLegCache); renderTeamFilter(statsCache);
         renderPlayerComparisonSelectors();
+        // Restore compare state if on compare tab
+        if (
+          document.querySelector('.nav-btn.active[data-tab="compare"]') &&
+          compareTableHtml &&
+          document.getElementById("compare-results")
+        ) {
+          document.getElementById("compare-results").innerHTML = compareTableHtml;
+          const selects = document.querySelectorAll("#compare .player-select-container select");
+          compareSelections.forEach((val, idx) => {
+            if (selects[idx] && val) selects[idx].value = val;
+          });
+          updateCompareButtonState();
+        }
       } catch (err) { console.error('Failed to load data:', err);}
     }
     function renderDashboardFixtures() {
@@ -743,7 +534,7 @@
         <div class="table-scroll">
         <table class="fixtures-table" role="table" aria-label="Fixtures for ${dateStr}">
           <thead>
-            <tr><th scope="col">Time</th><th scope="col">Team 1</th><th scope="col"></th><th scope="col">Team 2</th></tr>
+            <tr><th>Time</th><th>Team 1</th><th></th><th>Team 2</th></tr>
           </thead>
           <tbody>`;
         byDate[dateStr].forEach(f => {
@@ -785,13 +576,13 @@
           <table class="results-table" role="grid">
             <thead>
               <tr>
-                <th scope="col">Avg 1</th>
-                <th scope="col">Team 1</th>
-                <th scope="col">Score</th>
-                <th scope="col" class="divider-cell"></th>
-                <th scope="col">Score</th>
-                <th scope="col">Team 2</th>
-                <th scope="col">Avg 2</th>
+                <th>Avg 1</th>
+                <th>Team 1</th>
+                <th>Score</th>
+                <th class="divider-cell"></th>
+                <th>Score</th>
+                <th>Team 2</th>
+                <th>Avg 2</th>
               </tr>
             </thead>
             <tbody>`;
@@ -822,16 +613,7 @@
     function standingsTable(arr) {
       let html = `<div class="table-scroll"><table class="standings-table" role="grid"><thead>
         <tr>
-          <th scope="col">Pos</th>
-          <th scope="col">Team</th>
-          <th scope="col">P</th>
-          <th scope="col">W</th>
-          <th scope="col">L</th>
-          <th scope="col">EF</th>
-          <th scope="col">EA</th>
-          <th scope="col">ED</th>
-          <th scope="col">Pts</th>
-          <th scope="col">Avg</th>
+          <th>Pos</th><th>Team</th><th>P</th><th>W</th><th>L</th><th>EF</th><th>EA</th><th>ED</th><th>Pts</th><th>Avg</th>
         </tr>
       </thead><tbody>`;
       arr.forEach((s,i) => {
@@ -889,7 +671,6 @@
       teamFilter = team || null;
       renderStats(statsCache, bestLegCache);
     };
-    // --- New mobile-first Stats Table ---
     function getBestStats(stats, keys) {
       let bests = {};
       keys.forEach(key => {
@@ -1024,10 +805,22 @@
         });
         container.appendChild(select);
       }
+      // Restore previous compare selections if any
+      if (compareSelections.length) {
+        setTimeout(() => {
+          const selects = container.querySelectorAll("select");
+          compareSelections.forEach((val, idx) => {
+            if (selects[idx] && val) {
+              selects[idx].value = val;
+            }
+          });
+          updateCompareButtonState();
+        }, 50);
+      }
       container.querySelectorAll("select").forEach(sel => {
         sel.addEventListener("change", updateCompareButtonState);
       });
-      document.getElementById("compare-results").innerHTML = "";
+      document.getElementById("compare-results").innerHTML = compareTableHtml || "";
       updateCompareButtonState();
     }
     function updateCompareButtonState() {
@@ -1035,13 +828,8 @@
       const selectedValues = Array.from(selects).map(s => s.value).filter(v => v);
       const compareBtn = document.getElementById("compare-btn");
       const uniquePlayers = [...new Set(selectedValues)];
-      if (uniquePlayers.length >= 2) {
-        compareBtn.disabled = false;
-        compareBtn.setAttribute("aria-disabled", "false");
-      } else {
-        compareBtn.disabled = true;
-        compareBtn.setAttribute("aria-disabled", "true");
-      }
+      compareBtn.disabled = uniquePlayers.length < 2;
+      compareBtn.setAttribute("aria-disabled", compareBtn.disabled ? "true" : "false");
     }
     function renderPlayerComparison() {
       const selects = document.querySelectorAll("#compare .player-select-container select");
@@ -1052,7 +840,6 @@
         return;
       }
       const container = document.getElementById("compare-results");
-      container.innerHTML = "";
       const keysToShow = [
         "Match Played", "Sets Played", "Sets Won", "Sets Lost", "Win Rate (Sets)",
         "Legs Played", "Legs Won", "Legs Lost", "Win Rate (Legs)",
@@ -1069,7 +856,7 @@
         tbody += `<tr><th class="metric-header" scope="row">${metric}</th>`;
         uniquePlayers.forEach(playerName => {
           const playerData = statsCache.find(p => p.Player === playerName);
-          let val = (playerData && (playerData[metric]!==undefined && playerData[metric]!==null && playerData[metric]!=='')) ? playerData[metric] : "0";
+          let val = (playerData && (playerData[metric] !== undefined && playerData[metric] !== null && playerData[metric] !== '')) ? playerData[metric] : "0";
           if (metric.includes("Win Rate") && val !== "—") {
             val = isNaN(parseFloat(val)) ? "—" : `${Math.round(parseFloat(val)*100)}%`;
           }
@@ -1083,6 +870,8 @@
         <tbody>${tbody}</tbody>
       </table>`;
       container.innerHTML = tableHtml;
+      compareSelections = Array.from(selects).map(s => s.value);
+      compareTableHtml = tableHtml;
       window.scrollTo({top:0, behavior:'smooth'});
     }
     document.addEventListener("DOMContentLoaded", function() {
