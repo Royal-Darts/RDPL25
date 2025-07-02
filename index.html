@@ -210,6 +210,7 @@
       color: #162f4d;
       font-size: 1.02em;
       max-width: 120px;
+      cursor: pointer;
     }
     .stats-table-modern td.stats-team {
       font-weight: 600;
@@ -276,6 +277,7 @@
       box-shadow: 0 1px 7px #70d5ff09;
       font-size: 0.98em;
       font-weight: 700;
+      user-select: none;
     }
     .stat-high-label {
       color: #388cff;
@@ -321,6 +323,7 @@
       gap: 1.0rem;
       flex-shrink: 0;
       position: relative;
+      user-select:none;
     }
     .footer-icons {
       display: flex; gap: 1.0rem; flex-shrink: 0;
@@ -344,6 +347,7 @@
       padding: 0 1px; font-family: var(--font-heading);
       border-top: 1px solid #30446f;
       overflow-x: auto;
+      user-select:none;
     }
     .nav-bar-glass .nav-btn {
       flex: 1 1 0; background: none; border: none;
@@ -353,6 +357,7 @@
       flex-direction: column; align-items: center; justify-content: center;
       font-weight: 700; border-radius: 10px; margin: 0 0.5px;
       transition: color 0.2s;
+      white-space: nowrap;
     }
     .nav-bar-glass .nav-btn i { font-size: 1.10em; margin-bottom: 0.03em;}
     .nav-bar-glass .nav-label {
@@ -363,6 +368,62 @@
     }
     .nav-bar-glass .nav-btn.active { color: var(--nav-active); font-weight: 800; background: #24315e9e;}
     .pad-for-nav { height: 58px; min-height: 58px; width: 100%;}
+    /* Top10 tabs */
+    #top10-tabs {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 1em;
+      flex-wrap: wrap;
+      gap: 0.3em;
+      user-select:none;
+    }
+    #top10-tabs button {
+      background: var(--primary-light);
+      border: none;
+      border-radius: 10px;
+      padding: 0.45em 0.95em;
+      font-weight: 700;
+      cursor: pointer;
+      color: var(--primary2);
+      flex: 1 1 110px;
+      max-width: 160px;
+      transition: background 0.2s, color 0.2s;
+    }
+    #top10-tabs button.active,
+    #top10-tabs button:hover {
+      background: var(--accent);
+      color: #fff;
+    }
+    #top10-table-container {
+      overflow-x: auto;
+      border-radius: 8px;
+    }
+    #top10-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.92em;
+      text-align: left;
+      min-width: 320px;
+    }
+    #top10-table th, #top10-table td {
+      padding: 0.45em 0.75em;
+      border-bottom: 1px solid var(--table-border);
+      vertical-align: middle;
+    }
+    #top10-table th {
+      background: var(--primary-light);
+      color: var(--primary2);
+      font-weight: 700;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+    #top10-table tbody tr:nth-child(even) {
+      background: #f5fbff;
+    }
+    #top10-table tbody tr:hover {
+      background: #d9ebff;
+    }
   </style>
 </head>
 <body>
@@ -371,6 +432,7 @@
     <div class="titlebox"><h1>Royal Darts Premier League 2025</h1></div>
   </header>
   <main>
+    <!-- DASHBOARD -->
     <section id="dashboard" class="section active" aria-label="Dashboard Home">
       <div class="card">
         <h3>Today's Fixtures</h3>
@@ -402,12 +464,15 @@
       </div>
       <div id="home-stat-highlights"></div>
     </section>
+    <!-- FIXTURES -->
     <section id="fixtures" class="section" aria-label="Fixtures">
       <div class="card"><h3>Fixtures</h3><div id="fixturesTableContainer"></div></div>
     </section>
+    <!-- RESULTS -->
     <section id="results" class="section" aria-label="Results">
       <div class="card"><h3>Results</h3><div id="resultsContainer"></div></div>
     </section>
+    <!-- STANDINGS -->
     <section id="standings" class="section" aria-label="Standings">
       <div class="card" style="margin-bottom:0.6em;">
         <div class="stand-legend" aria-hidden="true">
@@ -422,9 +487,11 @@
         <div id="standings-b" role="table" aria-live="polite" aria-atomic="true"></div>
       </div>
     </section>
+    <!-- SQUADS -->
     <section id="squads" class="section" aria-label="Squads">
       <div class="card"><h3>Squads</h3><div id="squadsContainer" class="squad-grid"></div></div>
     </section>
+    <!-- STATS -->
     <section id="stats" class="section" aria-label="Player Stats">
       <div class="card">
         <h3>Player Stats</h3>
@@ -435,20 +502,30 @@
         <div id="stats-table"></div>
       </div>
     </section>
+    <!-- LIVE -->
     <section id="live" class="section" aria-label="Live Stream">
       <div class="card"><h3>Watch Live</h3><iframe src="https://n01darts.com/n01/tournament/comp.php?id=t_NI0o_4352&tab=live" width="100%" height="320" frameborder="0" style="border-radius:9px;border:none;" title="Live tournament stream"></iframe></div>
     </section>
-    <section id="compare" class="section" aria-label="Player Comparison">
+    <!-- TOP 10 -->
+    <section id="top10" class="section" aria-label="Top 10 Stats">
       <div class="card">
-        <h3>Player Comparison</h3>
-        <p class="compare-instruction" id="compare-instruction" style="font-size:0.98em;margin-bottom:0.45em;">Select two or more players to compare their stats side-by-side.</p>
-        <div class="player-select-container" role="group" aria-labelledby="compare-instruction"></div>
-        <button id="compare-btn" class="compare-btn" disabled aria-disabled="true" aria-describedby="compare-instruction">Compare Players</button>
-        <div id="compare-results"></div>
+        <h3>Top 10 Players</h3>
+        <div id="top10-tabs" role="tablist" aria-label="Top 10 Stat Categories">
+          <button role="tab" id="tab-3da" aria-selected="true" tabindex="0">3 Dart Avg</button>
+          <button role="tab" id="tab-f9" aria-selected="false" tabindex="-1">First 9 Darts</button>
+          <button role="tab" id="tab-100plus" aria-selected="false" tabindex="-1">100+ Scores</button>
+          <button role="tab" id="tab-highfinish" aria-selected="false" tabindex="-1">High Finish</button>
+        </div>
+        <div id="top10-table-container" role="tabpanel" tabindex="0" aria-labelledby="tab-3da">
+          <table id="top10-table" role="table" aria-live="polite" aria-atomic="true" aria-describedby="top10-desc">
+            <!-- Populated by JS -->
+          </table>
+        </div>
       </div>
     </section>
     <div class="pad-for-nav"></div>
   </main>
+  <!-- NAVIGATION -->
   <nav class="nav-bar-glass" role="navigation" aria-label="Main Navigation">
     <button class="nav-btn active" data-tab="dashboard" title="Home" aria-current="page"><i class="lucide lucide-home"></i><span class="nav-label">Home</span></button>
     <button class="nav-btn" data-tab="fixtures" title="Fixtures"><i class="lucide lucide-calendar-days"></i><span class="nav-label">Fixtures</span></button>
@@ -457,8 +534,10 @@
     <button class="nav-btn" data-tab="squads" title="Squads"><i class="lucide lucide-users"></i><span class="nav-label">Squads</span></button>
     <button class="nav-btn" data-tab="stats" title="Stats"><i class="lucide lucide-bar-chart"></i><span class="nav-label">Stats</span></button>
     <button class="nav-btn" data-tab="live" title="Live"><i class="lucide lucide-play-circle"></i><span class="nav-label">Live</span></button>
+    <button class="nav-btn" data-tab="top10" title="Top 10 Stats"><i class="lucide lucide-award"></i><span class="nav-label">Top 10</span></button>
     <button class="nav-btn" data-tab="compare" title="Compare Players"><i class="lucide lucide-columns"></i><span class="nav-label">Compare</span></button>
   </nav>
+  <!-- FOOTER -->
   <footer>
     <div class="footer-icons">
       <a href="https://n01darts.com/n01/tournament/comp.php?id=t_NI0o_4352&tab=live" target="_blank" rel="noopener" aria-label="Watch live on Nakka">
@@ -473,10 +552,12 @@
     </div>
     <div class="footer-suca">Built by SUCA Analytics</div>
   </footer>
+  <!-- PLAYER POPUP -->
   <div id="player-popup" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:250;background:rgba(34,53,92,0.92);justify-content:center;align-items:center;">
     <div class="popup-card" role="document" style="background:#fff;border-radius:8px;box-shadow:0 2px 10px #b1e1ff25;padding:0.95em 1em;color:#171e30;min-width:230px;max-width:95vw;text-align:center;font-weight:700;font-size:0.97em;position:relative;"></div>
     <button class="popup-close" onclick="hidePlayerPopup(event)" aria-label="Close player card" style="color:#222;font-size:1.2em;background:none;border:none;position:absolute;top:0.6em;right:0.8em;cursor:pointer;">&times;</button>
   </div>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
   <script defer>
     const API_URL = 'https://script.google.com/macros/s/AKfycby6BCE5cyBaxpz-Jt-TeRH6k5Jeq-vqelr8S7rt32e7wFjBzEvuBrYi4yPaEBz2Kari/exec';
@@ -485,6 +566,7 @@
     let compareSelections = [];
     let compareTableHtml = "";
     const STATS_HIDE_COLUMNS = new Set(["Keep", "Break", "Second Legs", "Break Legs", "Total Score", "Total Darts", "Group", "Best Leg", "Worst Leg"]);
+    // Tab and UI functions
     function showTab(tabId) {
       document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
       document.querySelectorAll('.nav-bar-glass .nav-btn').forEach(btn => btn.classList.remove('active'));
@@ -509,6 +591,7 @@
         });
       }
     }
+    // DATA LOADING & RENDERING
     async function loadData() {
       try {
         const res = await fetch(API_URL);
@@ -526,6 +609,7 @@
         renderStats(statsCache, bestLegCache); renderTeamFilter(statsCache);
         renderHomeStatHighlights(statsCache, bestLegCache, "home-stat-highlights");
         renderPlayerComparisonSelectors();
+        renderTop10Tabs();
         if (
           document.querySelector('.nav-btn.active[data-tab="compare"]') &&
           compareTableHtml &&
@@ -540,6 +624,13 @@
         }
       } catch (err) { console.error('Failed to load data:', err);}
     }
+    // Utility
+    function sortDescNum(a,b, key) {
+      const A = Number(a[key])||0;
+      const B = Number(b[key])||0;
+      return B - A;
+    }
+    // --- Renders ---
     function renderDashboardFixtures() {
       const now = new Date();
       const istNow = new Date(now.toLocaleString("en-US", {timeZone: "Asia/Kolkata"}));
@@ -723,14 +814,16 @@
     function renderHomeStatHighlights(stats, bestLegsSheet, id = "home-stat-highlights") {
       const defs = [
         { key: "3 Dart Avg", label: "Best 3DA", icon: "★" },
-        { key: "Legs Won", label: "Most Legs", icon: "🏆" },
+        { key: "Win Rate (Legs)", label: "Best Win Rate", icon: "🏆", filter: p => (Number(p["Legs Played"]) >= 5) },
         { key: "High Finish", label: "High Finish", icon: "🎯" },
         { key: "First 9 Avg", label: "Best F9", icon: "🚀" }
       ];
-      const eligible = stats.filter(p => Number(p["Match Played"]) >= 2);
+      const eligible = stats.filter(p => !p.filter || (p.filter ? p.filter : true)); // placeholder
       let html = `<div class="stat-high-bar">`;
       defs.forEach(def => {
-        const sorted = [...eligible].sort((a, b) => +b[def.key] - +a[def.key]);
+        let filtered = stats;
+        if(def.filter) filtered = stats.filter(def.filter);
+        const sorted = [...filtered].sort((a, b) => (Number(b[def.key])||0) - (Number(a[def.key])||0));
         const player = sorted[0];
         if (!player) return;
         let val = player[def.key] ?? "—";
@@ -987,6 +1080,55 @@
       compareTableHtml = tableHtml;
       window.scrollTo({top:0, behavior:'smooth'});
     }
+    // --- Top 10 Page ---
+    let top10CurrentTab = "3 Dart Avg";
+    function renderTop10Tabs() {
+      const tabs = document.querySelectorAll("#top10-tabs button");
+      tabs.forEach(btn => {
+        btn.onclick = () => {
+          if(btn.id === `tab-${top10CurrentTab.toLowerCase().replace(/ /g,"")}`) return;
+          tabs.forEach(b => {b.classList.remove("active"); b.setAttribute("aria-selected", "false"); b.tabIndex = -1;});
+          btn.classList.add("active");
+          btn.setAttribute("aria-selected", "true");
+          btn.tabIndex = 0;
+          top10CurrentTab = btn.textContent.trim();
+          document.getElementById("top10-table-container").setAttribute("aria-labelledby", btn.id);
+          renderTop10Table(top10CurrentTab);
+        };
+      });
+      // Initialize default active tab
+      const firstBtn = document.querySelector("#top10-tabs button");
+      firstBtn.classList.add("active");
+      firstBtn.setAttribute("aria-selected", "true");
+      firstBtn.tabIndex = 0;
+      renderTop10Table(top10CurrentTab);
+    }
+    function renderTop10Table(stat) {
+      let arr = [...statsCache];
+      let key;
+      switch(stat) {
+        case "3 Dart Avg": key = "3 Dart Avg"; break;
+        case "First 9 Darts": key = "First 9 Avg"; break;
+        case "100+ Scores": key = "100+"; break;
+        case "High Finish": key = "High Finish"; break;
+        default: key = "3 Dart Avg";
+      }
+      arr = arr.filter(p => p[key] !== undefined && p[key] !== null && p[key] !== "" && !isNaN(p[key]) && Number(p[key]) > 0);
+      arr.sort((a,b) => Number(b[key]) - Number(a[key]));
+      const top10 = arr.slice(0,10);
+      let html = `<thead><tr><th>Rank</th><th>Player</th><th>Team</th><th>${stat}</th></tr></thead><tbody>`;
+      top10.forEach((p,i) => {
+        html += `<tr>
+          <td>${i+1}</td>
+          <td>${p.Player}</td>
+          <td>${p.Team || ""}</td>
+          <td>${p[key]}</td>
+        </tr>`;
+      });
+      html += "</tbody>";
+      document.getElementById("top10-table").innerHTML = html;
+    }
+    // Player popup save
     document.addEventListener("DOMContentLoaded", function() {
       document.querySelectorAll('.nav-bar-glass .nav-btn').forEach(btn => {
         btn.addEventListener('click', function() {
