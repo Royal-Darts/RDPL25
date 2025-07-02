@@ -121,7 +121,6 @@
       border-bottom: 1px solid var(--table-border);
       color: #19223c;
       line-height: 1.13;
-      white-space: nowrap;
     }
     th { color: var(--primary2); font-weight: 800; }
     .date-heading {
@@ -131,7 +130,6 @@
       margin: 1em 0 0.13em 0;
       padding-bottom: 0.11em;
       border-bottom: 2.5px solid var(--accent);
-      user-select: none;
     }
     .stand-row.gold .pos-cell { background: var(--accent2);}
     .stand-row.silver .pos-cell { background: #bfc9da;}
@@ -158,9 +156,6 @@
       color: #1d253c;
       font-weight: 600;
       transition: background 0.14s;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
     }
     .squad-player-name:hover, .squad-player-name:focus {
       background: var(--accent);
@@ -190,9 +185,8 @@
       border-bottom: 1px solid #e4eef7;
       font-size: 0.98em;
       vertical-align: middle;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      white-space: normal;
+      word-break: break-word;
     }
     .stats-table-modern th {
       color: #15406d;
@@ -222,10 +216,6 @@
       font-weight: 600;
       color: #487eea;
       font-size: 0.96em;
-      max-width: 110px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
     }
     .stats-table-modern .show-more-btn {
       background: #f2f5fa;
@@ -287,7 +277,6 @@
       box-shadow: 0 1px 7px #70d5ff09;
       font-size: 0.98em;
       font-weight: 700;
-      user-select: none;
     }
     .stat-high-label {
       color: #388cff;
@@ -333,7 +322,6 @@
       gap: 1.0rem;
       flex-shrink: 0;
       position: relative;
-      user-select: none;
     }
     .footer-icons {
       display: flex; gap: 1.0rem; flex-shrink: 0;
@@ -357,7 +345,6 @@
       padding: 0 1px; font-family: var(--font-heading);
       border-top: 1px solid #30446f;
       overflow-x: auto;
-      user-select: none;
     }
     .nav-bar-glass .nav-btn {
       flex: 1 1 0; background: none; border: none;
@@ -385,15 +372,12 @@
     <div class="titlebox"><h1>Royal Darts Premier League 2025</h1></div>
   </header>
   <main>
-    <!-- DASHBOARD -->
     <section id="dashboard" class="section active" aria-label="Dashboard Home">
       <div class="card">
         <h3>Today's Fixtures</h3>
         <div class="table-scroll">
           <table class="fixtures-table" role="table" aria-live="polite" aria-atomic="true">
-            <thead>
-              <tr><th>Time</th><th>Team 1</th><th></th><th>Team 2</th></tr>
-            </thead>
+            <thead><tr><th>Time</th><th>Team 1</th><th></th><th>Team 2</th></tr></thead>
             <tbody id="dashboard-fixtures"></tbody>
           </table>
         </div>
@@ -417,15 +401,12 @@
       </div>
       <div id="home-stat-highlights"></div>
     </section>
-    <!-- FIXTURES -->
     <section id="fixtures" class="section" aria-label="Fixtures">
       <div class="card"><h3>Fixtures</h3><div id="fixturesTableContainer"></div></div>
     </section>
-    <!-- RESULTS -->
     <section id="results" class="section" aria-label="Results">
       <div class="card"><h3>Results</h3><div id="resultsContainer"></div></div>
     </section>
-    <!-- STANDINGS -->
     <section id="standings" class="section" aria-label="Standings">
       <div class="card" style="margin-bottom:0.6em;">
         <div class="stand-legend" aria-hidden="true">
@@ -440,11 +421,9 @@
         <div id="standings-b" role="table" aria-live="polite" aria-atomic="true"></div>
       </div>
     </section>
-    <!-- SQUADS -->
     <section id="squads" class="section" aria-label="Squads">
       <div class="card"><h3>Squads</h3><div id="squadsContainer" class="squad-grid"></div></div>
     </section>
-    <!-- STATS -->
     <section id="stats" class="section" aria-label="Player Stats">
       <div class="card">
         <h3>Player Stats</h3>
@@ -455,46 +434,29 @@
         <div id="stats-table"></div>
       </div>
     </section>
-    <!-- LIVE -->
+    <section id="top10" class="section" aria-label="Top 10 Stats">
+      <div class="card">
+        <h3>Top 10 Player Stats</h3>
+        <div id="top10-3da" style="margin-bottom:1em;"></div>
+        <div id="top10-f9" style="margin-bottom:1em;"></div>
+        <div id="top10-100p" style="margin-bottom:1em;"></div>
+        <div id="top10-hf" style="margin-bottom:1em;"></div>
+      </div>
+    </section>
     <section id="live" class="section" aria-label="Live Stream">
       <div class="card"><h3>Watch Live</h3><iframe src="https://n01darts.com/n01/tournament/comp.php?id=t_NI0o_4352&tab=live" width="100%" height="320" frameborder="0" style="border-radius:9px;border:none;" title="Live tournament stream"></iframe></div>
     </section>
-    <!-- COMPARE -->
     <section id="compare" class="section" aria-label="Player Comparison">
       <div class="card">
         <h3>Player Comparison</h3>
         <p class="compare-instruction" id="compare-instruction" style="font-size:0.98em;margin-bottom:0.45em;">Select two or more players to compare their stats side-by-side.</p>
         <div class="player-select-container" role="group" aria-labelledby="compare-instruction"></div>
         <button id="compare-btn" class="compare-btn" disabled aria-disabled="true" aria-describedby="compare-instruction">Compare Players</button>
-        <div id="compare-results" style="overflow-x:auto;"></div>
-      </div>
-    </section>
-    <!-- TOP 10 PAGE -->
-    <section id="top10" class="section" aria-label="Top 10 Players">
-      <div class="card">
-        <h3>Top 10 MVPs</h3>
-        <div id="top10-mvp" class="table-scroll"></div>
-      </div>
-      <div class="card">
-        <h3>Top 10 3 Dart Average</h3>
-        <div id="top10-3da" class="table-scroll"></div>
-      </div>
-      <div class="card">
-        <h3>Top 10 First 9 Dart Average</h3>
-        <div id="top10-f9" class="table-scroll"></div>
-      </div>
-      <div class="card">
-        <h3>Top 10 100+ Scores</h3>
-        <div id="top10-100plus" class="table-scroll"></div>
-      </div>
-      <div class="card">
-        <h3>Top 10 High Finish</h3>
-        <div id="top10-highfinish" class="table-scroll"></div>
+        <div id="compare-results"></div>
       </div>
     </section>
     <div class="pad-for-nav"></div>
   </main>
-  <!-- NAV BAR -->
   <nav class="nav-bar-glass" role="navigation" aria-label="Main Navigation">
     <button class="nav-btn active" data-tab="dashboard" title="Home" aria-current="page"><i class="lucide lucide-home"></i><span class="nav-label">Home</span></button>
     <button class="nav-btn" data-tab="fixtures" title="Fixtures"><i class="lucide lucide-calendar-days"></i><span class="nav-label">Fixtures</span></button>
@@ -502,9 +464,9 @@
     <button class="nav-btn" data-tab="standings" title="Standings"><i class="lucide lucide-trophy"></i><span class="nav-label">Standings</span></button>
     <button class="nav-btn" data-tab="squads" title="Squads"><i class="lucide lucide-users"></i><span class="nav-label">Squads</span></button>
     <button class="nav-btn" data-tab="stats" title="Stats"><i class="lucide lucide-bar-chart"></i><span class="nav-label">Stats</span></button>
+    <button class="nav-btn" data-tab="top10" title="Top 10"><i class="lucide lucide-award"></i><span class="nav-label">Top 10</span></button>
     <button class="nav-btn" data-tab="live" title="Live"><i class="lucide lucide-play-circle"></i><span class="nav-label">Live</span></button>
     <button class="nav-btn" data-tab="compare" title="Compare Players"><i class="lucide lucide-columns"></i><span class="nav-label">Compare</span></button>
-    <button class="nav-btn" data-tab="top10" title="Top 10 Players"><i class="lucide lucide-award"></i><span class="nav-label">Top 10</span></button>
   </nav>
   <footer>
     <div class="footer-icons">
@@ -526,8 +488,6 @@
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
   <script defer>
-    // ---------------------------
-    // Globals & Setup
     const API_URL = 'https://script.google.com/macros/s/AKfycby6BCE5cyBaxpz-Jt-TeRH6k5Jeq-vqelr8S7rt32e7wFjBzEvuBrYi4yPaEBz2Kari/exec';
     let fixturesCache = [], standingsCache = [], statsCache = [], bestLegCache = [], squadsCache = [], resultsCache = [];
     let statsSortKey = null, statsSortDir = 1, statsSearchTerm = "", teamFilter = null;
@@ -574,8 +534,8 @@
         renderStatHighlights(statsCache, bestLegCache, "stat-highlights");
         renderStats(statsCache, bestLegCache); renderTeamFilter(statsCache);
         renderHomeStatHighlights(statsCache, bestLegCache, "home-stat-highlights");
+        renderTop10(statsCache);
         renderPlayerComparisonSelectors();
-        renderTop10Pages();
         if (
           document.querySelector('.nav-btn.active[data-tab="compare"]') &&
           compareTableHtml &&
@@ -590,29 +550,209 @@
         }
       } catch (err) { console.error('Failed to load data:', err);}
     }
-
-    // ... [Same renderDashboardFixtures, renderDashboardStandingsTables, quickStandingsRows, renderFixtures, renderResults, renderStandingsTables, standingsTable, renderSquads, renderStatHighlights (empty), renderTeamFilter, setTeamFilter, getBestStats are unchanged and included here for brevity] ...
-
-    // -- Stat Highlights updated --
+    function renderDashboardFixtures() {
+      const now = new Date();
+      const istNow = new Date(now.toLocaleString("en-US", {timeZone: "Asia/Kolkata"}));
+      const istYear = istNow.getFullYear(), istMonth = istNow.getMonth(), istDate = istNow.getDate();
+      function isISTToday(d) {
+        const istD = new Date(new Date(d).toLocaleString("en-US", {timeZone: "Asia/Kolkata"}));
+        return (istD.getFullYear() === istYear && istD.getMonth() === istMonth && istD.getDate() === istDate);
+      }
+      const todaysFixtures = fixturesCache.filter(fix => isISTToday(fix.Date));
+      let html = '';
+      if (!todaysFixtures.length) {
+        html = `<tr><td colspan="4" style="color:var(--primary);">No fixtures today.</td></tr>`;
+      } else {
+        todaysFixtures.forEach(f => {
+          const timeStr = new Date(f.Time).toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit',hour12:true,timeZone:'Asia/Kolkata'});
+          html += `<tr>
+            <td>${timeStr}</td>
+            <td>${f['Team 1'] || ""}</td>
+            <td></td>
+            <td>${f['Team 2'] || ""}</td>
+          </tr>`;
+        });
+      }
+      document.getElementById('dashboard-fixtures').innerHTML = html;
+    }
+    function renderDashboardStandingsTables() {
+      const A = standingsCache.filter(s => s.Group?.toUpperCase() === 'A').sort((a,b)=>b.Points - a.Points || b.LD - a.LD);
+      const B = standingsCache.filter(s => s.Group?.toUpperCase() === 'B').sort((a,b)=>b.Points - a.Points || b.LD - a.LD);
+      document.getElementById('dashboard-standings-a').innerHTML = quickStandingsRows(A);
+      document.getElementById('dashboard-standings-b').innerHTML = quickStandingsRows(B);
+    }
+    function quickStandingsRows(arr) {
+      return arr.map((s,i) => {
+        let groupClass = i < 3 ? "gold" : i < 6 ? "silver" : "elim";
+        return `<tr class="stand-row ${groupClass}">
+          <td class="pos-cell">${i+1}</td>
+          <td style="text-align:center;">${s.Team}</td>
+          <td class="stand-points" style="text-align:center;">${s.Points}</td>
+        </tr>`;
+      }).join('');
+    }
+    function renderFixtures(fixtures) {
+      const container = document.getElementById('fixturesTableContainer');
+      if (!fixtures.length) {
+        container.innerHTML = '<div class="table-scroll"><table><tbody><tr><td>Loading...</td></tr></tbody></table></div>';
+        return;
+      }
+      const byDate = {};
+      fixtures.forEach(f => {
+        const d = new Date(f.Date).toDateString();
+        if (!byDate[d]) byDate[d] = [];
+        byDate[d].push(f);
+      });
+      let html = '';
+      Object.keys(byDate).sort((a, b) => new Date(a) - new Date(b)).forEach(dateStr => {
+        html += `<div class="date-heading">${dateStr}</div>
+        <div class="table-scroll">
+        <table class="fixtures-table" role="table" aria-label="Fixtures for ${dateStr}">
+          <thead>
+            <tr><th>Time</th><th>Team 1</th><th></th><th>Team 2</th></tr>
+          </thead>
+          <tbody>`;
+        byDate[dateStr].forEach(f => {
+          html += `<tr>
+              <td>${new Date(f.Time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</td>
+              <td>${f['Team 1'] || ""}</td>
+              <td></td>
+              <td>${f['Team 2'] || ""}</td>
+            </tr>`;
+        });
+        html += `</tbody></table></div>`;
+      });
+      container.innerHTML = html;
+    }
+    function renderResults(results, fixtures) {
+      const fixtureDateMap = {};
+      fixtures.forEach(fix => {
+        const t1 = fix["Team 1"], t2 = fix["Team 2"];
+        const dateStr = new Date(fix.Date).toDateString();
+        fixtureDateMap[`${t1}|${t2}`] = dateStr;
+        fixtureDateMap[`${t2}|${t1}`] = dateStr;
+      });
+      const byDate = {};
+      results.forEach(r => {
+        let dateVal = "";
+        if (r.Date && r.Date !== "null" && r.Date !== "" && r.Date !== undefined) {
+          dateVal = new Date(r.Date).toDateString();
+        } else {
+          const t1 = r["Team 1"], t2 = r["Team 2"];
+          dateVal = fixtureDateMap[`${t1}|${t2}`] || fixtureDateMap[`${t2}|${t1}`] || "Unknown Date";
+        }
+        if (!byDate[dateVal]) byDate[dateVal] = [];
+        byDate[dateVal].push(r);
+      });
+      let html = '';
+      Object.keys(byDate).sort((a, b) => new Date(a) - new Date(b)).forEach(dateStr => {
+        html += `<div class="date-heading">${dateStr}</div>
+        <div class="table-scroll" role="table">
+          <table class="results-table" role="grid">
+            <thead>
+              <tr>
+                <th>Avg 1</th>
+                <th>Team 1</th>
+                <th>Score</th>
+                <th class="divider-cell"></th>
+                <th>Score</th>
+                <th>Team 2</th>
+                <th>Avg 2</th>
+              </tr>
+            </thead>
+            <tbody>`;
+        byDate[dateStr].forEach(r => {
+          const win1 = +r['Legs 1'] > +r['Legs 2'];
+          const win2 = +r['Legs 2'] > +r['Legs 1'];
+          let rowClass = win1 ? "winner1" : win2 ? "winner2" : "";
+          html += `<tr class="result-row ${rowClass}">
+            <td>${r['Avg 1']||""}</td>
+            <td class="${win1?"winner-cell":""}" style="text-align:center;">${r['Team 1']||""}${win1?' <span class="winner-icon">🏆</span>':''}</td>
+            <td style="text-align:center;"${win1?' class="winner-cell"':''}>${r['Legs 1']==0?"0":r['Legs 1']||"0"}</td>
+            <td class="divider-cell"><div class="divider-line"></div></td>
+            <td style="text-align:center;"${win2?' class="winner-cell"':''}>${r['Legs 2']==0?"0":r['Legs 2']||"0"}</td>
+            <td class="${win2?"winner-cell":""}" style="text-align:center;">${r['Team 2']||""}${win2?' <span class="winner-icon">🏆</span>':''}</td>
+            <td>${r['Avg 2']||""}</td>
+          </tr>`;
+        });
+        html += `</tbody></table></div>`;
+      });
+      document.getElementById('resultsContainer').innerHTML = html || '';
+    }
+    function renderStandingsTables() {
+      const A = standingsCache.filter(s => s.Group?.toUpperCase() === 'A').sort((a,b)=>b.Points - a.Points || b.LD - a.LD);
+      const B = standingsCache.filter(s => s.Group?.toUpperCase() === 'B').sort((a,b)=>b.Points - a.Points || b.LD - a.LD);
+      document.getElementById('standings-a').innerHTML = standingsTable(A);
+      document.getElementById('standings-b').innerHTML = standingsTable(B);
+    }
+    function standingsTable(arr) {
+      let html = `<div class="table-scroll"><table class="standings-table" role="grid"><thead>
+        <tr>
+          <th>Pos</th><th>Team</th><th>P</th><th>W</th><th>L</th><th>EF</th><th>EA</th><th>ED</th><th>Pts</th><th>Avg</th>
+        </tr>
+      </thead><tbody>`;
+      arr.forEach((s,i) => {
+        let groupClass = i < 3 ? "gold" : i < 6 ? "silver" : "elim";
+        html += `<tr class="stand-row ${groupClass}">
+          <td class="pos-cell">${i+1}</td>
+          <td style="text-align:center;">${s.Team}</td>
+          <td style="text-align:center;">${s.P}</td>
+          <td style="text-align:center;">${s.W}</td>
+          <td style="text-align:center;">${s.L}</td>
+          <td style="text-align:center;">${s.LF||0}</td>
+          <td style="text-align:center;">${s.LA||0}</td>
+          <td style="text-align:center;">${s.LD||0}</td>
+          <td class="stand-points" style="text-align:center;">${s.Points}</td>
+          <td style="text-align:center;">${s.Avg}</td>
+        </tr>`;
+      });
+      html += "</tbody></table></div>";
+      return html;
+    }
+    function renderSquads(squads) {
+      const container = document.getElementById('squadsContainer');
+      if (!squads.length) { container.innerHTML = 'Loading...'; return; }
+      const teams = [...new Set(squads.map(s => s.Team))];
+      let html = '';
+      teams.forEach(team => {
+        const players = squads.filter(s => s.Team === team).map(p =>
+          `<div class="squad-player-name" tabindex="0" role="button" aria-pressed="false" onclick="showPlayerPopup('${p.Player.replace(/'/g,"\\'")}')" onkeydown="if(event.key==='Enter'||event.key===' ') {event.preventDefault(); showPlayerPopup('${p.Player.replace(/'/g,"\\'")}');}">
+            ${p.Player}
+          </div>`
+        ).join('');
+        html += `<div class="squad-team-card" role="region" aria-label="Team ${team}">
+          <div class="squad-team-name">${team}</div>
+          <div class="squad-players">${players}</div>
+        </div>`;
+      });
+      container.innerHTML = html;
+    }
+    function renderStatHighlights(stats, bestLegsSheet, id="stat-highlights") {
+      document.getElementById(id).innerHTML = "";
+    }
     function renderHomeStatHighlights(stats, bestLegsSheet, id = "home-stat-highlights") {
       const defs = [
-        { key: "3 Dart Avg", label: "Best 3DA", icon: "★" },
-        { key: "Win Rate (Legs)", label: "Win Rate (Legs)", icon: "🏆", minLegs: 5 },
-        { key: "High Finish", label: "High Finish", icon: "🎯" },
-        { key: "First 9 Avg", label: "Best F9", icon: "🚀" }
+        { key: "3 Dart Avg", label: "Best 3DA", icon: "★", minMatches: 0 },
+        { key: "Win Rate (Legs)", label: "Best Win Rate (Legs)", icon: "🏆", minLegs: 5 },
+        { key: "High Finish", label: "High Finish", icon: "🎯", minMatches: 0 },
+        { key: "First 9 Avg", label: "Best F9", icon: "🚀", minMatches: 0 }
       ];
-      const eligible = stats.filter(p => Number(p["Match Played"]) >= 2);
+      // Filter players by minMatches/minLegs
       let html = `<div class="stat-high-bar">`;
       defs.forEach(def => {
-        let filtered = eligible;
-        if (def.minLegs) filtered = filtered.filter(p => Number(p["Legs Played"]) >= def.minLegs);
-        if (!filtered.length) return;
-        const sorted = [...filtered].sort((a, b) => +b[def.key] - +a[def.key]);
+        let eligible = stats;
+        if (def.minMatches) eligible = eligible.filter(p => Number(p["Match Played"]) >= def.minMatches);
+        if (def.minLegs) eligible = eligible.filter(p => Number(p["Legs Played"]) >= def.minLegs);
+        const sorted = [...eligible].sort((a, b) => {
+          let va = a[def.key], vb = b[def.key];
+          va = (typeof va === 'string') ? parseFloat(va) : va;
+          vb = (typeof vb === 'string') ? parseFloat(vb) : vb;
+          return (vb||0) - (va||0);
+        });
         const player = sorted[0];
+        if (!player) return;
         let val = player[def.key] ?? "—";
-        if (def.key.includes("Win Rate") && !isNaN(val)) {
-          val = Math.round(val * 100) + "%";
-        }
+        if (def.key === "Win Rate (Legs)" && val !== "—" && !isNaN(val)) val = Math.round(parseFloat(val)*100) + "%";
         html += `<div class="stat-high-card">
           <div class="stat-high-label">${def.icon} ${def.label}</div>
           <div class="stat-high-main">${val}</div>
@@ -634,8 +774,32 @@
       html += "</div>";
       document.getElementById(id).innerHTML = html;
     }
-
-    // -- Stats Page render --
+    function renderTeamFilter(stats) {
+      const bar = document.getElementById('team-filter-bar');
+      if (!stats || !stats.length) { bar.innerHTML = ''; return;}
+      const allTeams = Array.from(new Set(stats.map(p => p.Team).filter(Boolean))).sort();
+      let html = `<select class="team-filter-dropdown" onchange="setTeamFilter(this.value)" aria-label="Filter stats by team">
+        <option value="">All Teams</option>`;
+      allTeams.forEach(team => {
+        html += `<option value="${team.replace(/"/g, "&quot;")}"${teamFilter===team?" selected":""}>${team}</option>`;
+      });
+      html += `</select>`;
+      bar.innerHTML = html;
+    }
+    window.setTeamFilter = function(team) {
+      teamFilter = team || null;
+      renderStats(statsCache, bestLegCache);
+    };
+    function getBestStats(stats, keys) {
+      let bests = {};
+      keys.forEach(key => {
+        let valArr = stats.map(p => Number(p[key])).filter(x => !isNaN(x));
+        if (!valArr.length) return;
+        let max = Math.max(...valArr);
+        bests[key] = max;
+      });
+      return bests;
+    }
     function renderStats(stats, bestLegsSheet) {
       const searchInput = document.getElementById('stats-search');
       if (searchInput && !searchInput._listenerAdded) {
@@ -751,7 +915,6 @@
         popup.setAttribute("aria-hidden", "true");
       }
     }
-    // Compare Page
     function renderPlayerComparisonSelectors() {
       const container = document.querySelector("#compare .player-select-container");
       if (!container || !statsCache.length) return;
@@ -810,7 +973,6 @@
         return;
       }
       const container = document.getElementById("compare-results");
-      // Reduced keys per your request:
       const keysToShow = [
         "Match Played", "Sets Played", "Sets Won", "Win Rate (Sets)",
         "Legs Played", "Legs Won", "Win Rate (Legs)",
@@ -844,80 +1006,37 @@
       compareTableHtml = tableHtml;
       window.scrollTo({top:0, behavior:'smooth'});
     }
-    // TOP 10 PAGE RENDER
-    function renderTop10Pages() {
-      if (!statsCache.length) return;
-      const minMatches = 3;
-      const filtered = statsCache.filter(p => Number(p["Match Played"]) >= minMatches);
-      // Calculate MVP score for each player:
-      filtered.forEach(p => {
-        const wrl = Number(p["Win Rate (Legs)"]) || 0;
-        p.mvpScore = (Number(p["3 Dart Avg"])||0)*3
-          + wrl*200
-          + (Number(p["High Finish"])||0)*1.2
-          + (Number(p["100+"])||0)*0.7
-          + (Number(p["Legs Won"])||0)*1.5
-          + (Number(p["First 9 Avg"])||0)*2;
-      });
-      // Sort & limit
-      const topMVP = [...filtered].sort((a,b)=>b.mvpScore - a.mvpScore).slice(0,10);
-      const top3DA = [...filtered].sort((a,b)=>b["3 Dart Avg"]-a["3 Dart Avg"]).slice(0,10);
-      const topF9 = [...filtered].sort((a,b)=>b["First 9 Avg"]-a["First 9 Avg"]).slice(0,10);
-      const top100 = [...filtered].sort((a,b)=>b["100+"]-a["100+"]).slice(0,10);
-      const topHighFinish = [...filtered].sort((a,b)=>b["High Finish"]-a["High Finish"]).slice(0,10);
-
-      document.getElementById("top10-mvp").innerHTML = renderSimpleTable(topMVP, ["Player","Team","mvpScore"], ["Player","Team","MVP Score"]);
-      document.getElementById("top10-3da").innerHTML = renderSimpleTable(top3DA, ["Player","Team","3 Dart Avg"], ["Player","Team","3DA"]);
-      document.getElementById("top10-f9").innerHTML = renderSimpleTable(topF9, ["Player","Team","First 9 Avg"], ["Player","Team","First 9 Avg"]);
-      document.getElementById("top10-100plus").innerHTML = renderSimpleTable(top100, ["Player","Team","100+"], ["Player","Team","100+"]);
-      document.getElementById("top10-highfinish").innerHTML = renderSimpleTable(topHighFinish, ["Player","Team","High Finish"], ["Player","Team","High Finish"]);
-    }
-    function renderSimpleTable(data, keys, headers) {
-      let html = '<div class="table-scroll"><table><thead><tr>';
-      headers.forEach(h => html += `<th>${h}</th>`);
-      html += '</tr></thead><tbody>';
-      data.forEach(row => {
-        html += '<tr>';
-        keys.forEach(k => {
-          let val = row[k];
-          if(k==="mvpScore") val = val.toFixed(1);
-          html += `<td style="text-align:center;">${val ?? "-"}</td>`;
+    function renderTop10(stats) {
+      if (!stats || !stats.length) return;
+      // filter players with at least 3 matches
+      const eligible = stats.filter(p => Number(p["Match Played"]) >= 3);
+      // Helper to generate table for a stat
+      function genTable(title, key, sortDesc = true, formatter = val => val) {
+        let sorted = [...eligible].sort((a,b) => {
+          let va = a[key], vb = b[key];
+          va = (typeof va === 'string') ? parseFloat(va) : va;
+          vb = (typeof vb === 'string') ? parseFloat(vb) : vb;
+          return sortDesc ? (vb||0)-(va||0) : (va||0)-(vb||0);
+        }).slice(0,10);
+        let html = `<h4 style="margin-bottom:0.25em;color:var(--primary2);">${title}</h4>`;
+        html += `<div class="table-scroll"><table class="standings-table" style="font-size:0.92em;">
+          <thead><tr><th>Rank</th><th>Player</th><th>Team</th><th>${title}</th></tr></thead><tbody>`;
+        sorted.forEach((p,i) => {
+          html += `<tr>
+            <td>${i+1}</td>
+            <td>${p.Player}</td>
+            <td>${p.Team || ""}</td>
+            <td>${formatter(p[key])}</td>
+          </tr>`;
         });
-        html += '</tr>';
-      });
-      html += '</tbody></table></div>';
-      return html;
-    }
-    // Save Player Card & Popup functions (unchanged)
-    window.toggleExtraStats = function(btn, idx) {
-      const row = document.getElementById("extra-stats-"+idx);
-      if (!row) return;
-      if (row.style.display === "none") {
-        row.style.display = "";
-        btn.innerText = "Less";
-      } else {
-        row.style.display = "none";
-        btn.innerText = "More";
+        html += "</tbody></table></div>";
+        return html;
       }
-    };
-    window.savePlayerCard = function(e) {
-      e.stopPropagation();
-      let cardNode = document.querySelector("#player-popup .popup-card");
-      html2canvas(cardNode, {backgroundColor: "#fff", scale: 2}).then(function(canvas){
-        let link = document.createElement("a");
-        link.download = "Player-Card.png";
-        link.href = canvas.toDataURL("image/png");
-        link.click();
-      });
-    };
-    function hidePlayerPopup(e) {
-      if (!e || !e.target || e.target.id === "player-popup" || e.target.classList.contains("popup-close")) {
-        const popup = document.getElementById("player-popup");
-        popup.style.display = "none";
-        popup.setAttribute("aria-hidden", "true");
-      }
+      document.getElementById('top10-3da').innerHTML = genTable("3 Dart Average", "3 Dart Avg");
+      document.getElementById('top10-f9').innerHTML = genTable("First 9 Darts Avg", "First 9 Avg");
+      document.getElementById('top10-100p').innerHTML = genTable("100+ Scores", "100+", true, val => val || "0");
+      document.getElementById('top10-hf').innerHTML = genTable("High Finish", "High Finish", true, val => val || "0");
     }
-    // Initial DOM & Event listeners
     document.addEventListener("DOMContentLoaded", function() {
       document.querySelectorAll('.nav-bar-glass .nav-btn').forEach(btn => {
         btn.addEventListener('click', function() {
