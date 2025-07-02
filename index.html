@@ -29,134 +29,221 @@
       color: #1d253c;
       font-family: var(--font-sans);
       margin: 0; padding: 0;
-      min-height: 100vh; height: 100%;
+      min-height: 100vh;
+      height: 100%;
       font-size: 14.5px;
       line-height: 1.35;
       scroll-behavior: smooth;
     }
     body {
-      display: flex; flex-direction: column; min-height: 100vh; height: 100vh;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      height: 100vh;
       background-image: linear-gradient(120deg, #e9f3ff 0%, #ffffff 100%);
       font-size: var(--min-font);
     }
     header {
       background: linear-gradient(120deg, var(--primary2) 80%, var(--accent) 120%);
-      color: #fff; padding: 0.5rem 12px 0.45rem 12px;
-      display: flex; align-items: center; gap: 0.6em;
-      border-bottom: 1px solid #b2d9fc; box-shadow: 0 2px 8px #22355c20;
+      color: #fff;
+      padding: 0.5rem 12px 0.45rem 12px;
+      display: flex;
+      align-items: center;
+      gap: 0.6em;
+      border-bottom: 1px solid #b2d9fc;
+      box-shadow: 0 2px 8px #22355c20;
       position: sticky; top: 0; z-index: 10;
     }
-    header img { height: 30px; margin-right: 0.5em; border-radius: 7px; box-shadow: 0 2px 8px #38b6ff15;}
-    header .titlebox { flex: 1; min-width: 0;}
+    header img {
+      height: 30px;
+      margin-right: 0.5em;
+      border-radius: 7px;
+      box-shadow: 0 2px 8px #38b6ff15;
+      user-select: none;
+    }
+    header .titlebox {
+      flex: 1; min-width: 0; user-select: none;
+    }
     header h1 {
-      margin: 0; font-size: 1.07rem; font-weight: 800; color: #fff;
-      letter-spacing: 0.01em; font-family: var(--font-heading);
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      margin: 0;
+      font-size: 1.07rem;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: 0.01em;
+      font-family: var(--font-heading);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
       text-shadow: 0 1px 3px #22355c40;
     }
     main {
-      flex: 1 0 auto; max-width: 570px; margin: 0 auto;
-      width: 100%; padding: 10px 8px 85px 8px; min-height: 0; box-sizing: border-box;
+      flex: 1 0 auto;
+      max-width: 530px;
+      margin: 0 auto;
+      width: 100%;
+      padding: 10px 12px 80px 12px;
+      min-height: 0;
+      box-sizing: border-box;
     }
     .section { display: none; }
     .section.active { display: block; }
     .card {
-      background: var(--card); border-radius: 14px; box-shadow: 0 2px 9px #c3e6ff17;
-      margin-bottom: 0.85em; padding: 1em 0.8em; border: 1px solid #d8eafd;
+      background: var(--card);
+      border-radius: 14px;
+      box-shadow: 0 2px 9px #c3e6ff17;
+      margin-bottom: 0.85em;
+      padding: 1em 0.8em;
+      border: 1px solid #d8eafd;
     }
     .card h3 {
-      color: var(--primary2); margin: 0 0 0.36em 0;
-      font-weight: 800; font-size: 1.08em; font-family: var(--font-heading);
+      color: var(--primary2);
+      margin: 0 0 0.36em 0;
+      font-weight: 800;
+      font-size: 1.08em;
+      font-family: var(--font-heading);
     }
-    .table-scroll { overflow-x: auto; width: 100%; border-radius: 7px; margin-bottom: 0.15em;}
-    table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: var(--table-font);}
+    .table-scroll {
+      overflow-x: auto;
+      width: 100%;
+      border-radius: 7px;
+      margin-bottom: 0.15em;
+    }
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      font-size: var(--table-font);
+    }
     th, td {
-      padding: 0.5em 0.35em; text-align: center; font-size: 0.99em;
-      border-bottom: 1px solid var(--table-border); color: #19223c;
+      padding: 0.5em 0.35em;
+      text-align: center;
+      font-size: 0.99em;
+      border-bottom: 1px solid var(--table-border);
+      color: #19223c;
       line-height: 1.13;
     }
-    th { color: var(--primary2); font-weight: 800;}
+    th { color: var(--primary2); font-weight: 800; }
     .date-heading {
-      color: var(--primary2); font-size: 0.98em; font-weight: 900;
-      margin: 1em 0 0.13em 0; padding-bottom: 0.11em; border-bottom: 2.5px solid var(--accent);
+      color: var(--primary2);
+      font-size: 0.98em;
+      font-weight: 900;
+      margin: 1em 0 0.13em 0;
+      padding-bottom: 0.11em;
+      border-bottom: 2.5px solid var(--accent);
     }
     .stand-row.gold .pos-cell { background: var(--accent2);}
     .stand-row.silver .pos-cell { background: #bfc9da;}
     .stand-row.elim .pos-cell { background: #f55353; color: #fff;}
     .squad-team-card {
-      margin-bottom: 0.6em; padding: 0.48em 0.37em; border-radius: 10px;
-      background: var(--primary-light); box-shadow: 0 2px 4px #38b6ff08;
+      margin-bottom: 0.6em;
+      padding: 0.48em 0.37em;
+      border-radius: 10px;
+      background: var(--primary-light);
+      box-shadow: 0 2px 4px #38b6ff08;
     }
     .squad-team-name { font-weight: 800; font-size: 0.99em; color: var(--primary2);}
     .squad-players { display: flex; flex-wrap: wrap; gap: 6px;}
     .squad-player-name {
-      background: #fff; padding: 0.13em 0.36em; border-radius: 6px; font-size: 0.94em;
-      min-width: 67px; line-height: 1.08; cursor: pointer; user-select: none; margin-bottom: 1px;
+      background: #fff;
+      padding: 0.13em 0.36em;
+      border-radius: 6px;
+      font-size: 0.94em;
+      min-width: 67px;
+      line-height: 1.08;
+      cursor: pointer;
+      user-select: none;
+      margin-bottom: 1px;
+      color: #1d253c;
+      font-weight: 600;
+      transition: background 0.14s;
     }
-    .squad-player-name:hover, .squad-player-name:focus { background: var(--accent); color: #fff;}
+    .squad-player-name:hover, .squad-player-name:focus {
+      background: var(--accent);
+      color: #fff;
+    }
     #stats-tip {
-      font-size: 0.93em; color: var(--primary2); margin: 0.18em 0 0.5em 0;
-      text-align: center; background: #e9f3ff; border-radius: 7px; padding: 3px 7px;
-    }
-    /* Stat Highlights Bar */
-    .stat-high-bar {
-      display: flex; gap: 0.8em; flex-wrap: wrap;
-      justify-content: flex-start; align-items: stretch; margin: 0.3em 0 1em 0; width: 100%;
-    }
-    .stat-high-card {
-      background: #fff; border: 1.5px solid #e2ecf4; border-radius: 10px; min-width: 120px;
-      flex: 1 1 120px; display: flex; flex-direction: column; align-items: center;
-      padding: 0.65em 0.6em 0.72em 0.6em; box-shadow: 0 1px 7px #70d5ff09;
-      font-size: 0.98em; font-weight: 700;
-    }
-    .stat-high-label { color: #388cff; font-weight: 700; font-size: 0.96em; margin-bottom: 0.16em;}
-    .stat-high-main { color: #222; font-size: 1.17em; font-weight: 900; margin-bottom: 0.12em; letter-spacing: 0.01em;}
-    .stat-high-player { font-size: 0.97em; color: #284f86; text-align: center; line-height: 1.11;}
-    .stat-high-player span { font-size: 0.93em; color: #5ba1ed; font-weight: 600;}
-    @media (max-width: 520px) {
-      .stat-high-bar { gap: 0.3em;}
-      .stat-high-card { min-width: 112px; font-size: 0.95em;}
-      .stat-high-label { font-size: 0.92em;}
-      .stat-high-main { font-size: 1.09em;}
+      font-size: 0.93em;
+      color: var(--primary2);
+      margin: 0.18em 0 0.5em 0;
+      text-align: center;
+      background: #e9f3ff;
+      border-radius: 7px;
+      padding: 3px 7px;
+      user-select: none;
     }
     /* Modern, mobile-first Stats Table */
     .stats-table-modern {
-      width: 100%; border-collapse: separate; border-spacing: 0; background: #fafdff; font-size: 1em;
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      background: #fafdff;
+      font-size: 1em;
     }
     .stats-table-modern th, .stats-table-modern td {
-      padding: 0.57em 0.35em; text-align: left; border-bottom: 1px solid #e4eef7;
-      font-size: 0.98em; vertical-align: middle; white-space: normal; word-break: break-word;
+      padding: 0.57em 0.35em;
+      text-align: left;
+      border-bottom: 1px solid #e4eef7;
+      font-size: 0.98em;
+      vertical-align: middle;
+      white-space: normal;
+      word-break: break-word;
     }
     .stats-table-modern th {
-      color: #15406d; font-weight: 900; background: #e9f3ff; position: sticky;
-      top: 0; z-index: 2; font-size: 0.99em;
+      color: #15406d;
+      font-weight: 900;
+      background: #e9f3ff;
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      font-size: 0.99em;
     }
     .stats-table-modern tr { background: #fff;}
     .stats-table-modern tr.alt-row { background: #f5fafd;}
     .stats-table-modern .stats-best {
-      background: #eaffdc !important; color: #227f1d !important; font-weight: 800; border-radius: 6px;
+      background: #eaffdc !important;
+      color: #227f1d !important;
+      font-weight: 800;
+      border-radius: 6px;
     }
     .stats-table-modern td.stats-player {
-      font-weight: 900; color: #162f4d; font-size: 1.02em; max-width: 120px; cursor:pointer; text-decoration:underline;
+      font-weight: 900;
+      color: #162f4d;
+      font-size: 1.02em;
+      max-width: 120px;
     }
     .stats-table-modern td.stats-team {
-      font-weight: 600; color: #487eea; font-size: 0.96em;
+      font-weight: 600;
+      color: #487eea;
+      font-size: 0.96em;
     }
     .stats-table-modern .show-more-btn {
-      background: #f2f5fa; border: 1px solid #c2d9f8; border-radius: 6px;
-      font-size: 0.92em; font-weight: 600; color: #2360b7; cursor: pointer;
-      padding: 0.32em 1.0em; margin: 0.1em 0 0.05em 0; width: 99%;
+      background: #f2f5fa;
+      border: 1px solid #c2d9f8;
+      border-radius: 6px;
+      font-size: 0.92em;
+      font-weight: 600;
+      color: #2360b7;
+      cursor: pointer;
+      padding: 0.32em 1.0em;
+      margin: 0.1em 0 0.05em 0;
+      width: 99%;
     }
     .stats-table-modern .extra-stats-row td {
-      background: #f8fcff; border-bottom: none; padding: 0.41em 0.7em 0.51em 0.7em; font-size: 0.95em;
+      background: #f8fcff;
+      border-bottom: none;
+      padding: 0.41em 0.7em 0.51em 0.7em;
+      font-size: 0.96em;
     }
-    .stats-table-modern .extra-stats-label { color: #55709a; font-weight: 600;}
+    .stats-table-modern .extra-stats-content {
+      display: flex;
+      flex-direction: column;
+      gap: 0.28em;
+      margin-top: 0.05em;
+    }
+    .stats-table-modern .extra-stats-label { color: #55709a; font-weight: 600; display: inline-block; width: 130px;}
     .stats-table-modern .extra-stats-value { color: #144a7b; font-weight: 700;}
     .stats-table-modern .trophy { color: #b9a019; font-size: 1.19em; vertical-align: middle;}
     .stats-table-modern .star { color: #f8ad1e; font-size: 1.1em; vertical-align: middle;}
-    .extra-stats-list { margin:0.2em 0 0.2em 0; padding:0; }
-    .extra-stats-list li { list-style: none; border-bottom: 1px solid #e4eef7; margin:0; padding:0.17em 0;}
-    .extra-stats-label { display:inline-block; min-width:92px;}
     @media (max-width: 720px) {
       .stats-table-modern th, .stats-table-modern td { font-size: 0.93em; }
       .stats-table-modern td.stats-player { max-width: 90px; font-size: 1em;}
@@ -164,51 +251,118 @@
     @media (max-width: 520px) {
       .stats-table-modern th, .stats-table-modern td { font-size: 0.91em; }
       .stats-table-modern td.stats-player { max-width: 68px; }
+      .stats-table-modern .extra-stats-label { width: 85px;}
+    }
+    /* Stat Highlights Bar */
+    .stat-high-bar {
+      display: flex;
+      gap: 0.8em;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      align-items: stretch;
+      margin: 0.3em 0 1em 0;
+      width: 100%;
+    }
+    .stat-high-card {
+      background: #fff;
+      border: 1.5px solid #e2ecf4;
+      border-radius: 10px;
+      min-width: 120px;
+      flex: 1 1 120px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0.65em 0.6em 0.72em 0.6em;
+      box-shadow: 0 1px 7px #70d5ff09;
+      font-size: 0.98em;
+      font-weight: 700;
+    }
+    .stat-high-label {
+      color: #388cff;
+      font-weight: 700;
+      font-size: 0.96em;
+      margin-bottom: 0.16em;
+    }
+    .stat-high-main {
+      color: #222;
+      font-size: 1.17em;
+      font-weight: 900;
+      margin-bottom: 0.12em;
+      letter-spacing: 0.01em;
+    }
+    .stat-high-player {
+      font-size: 0.97em;
+      color: #284f86;
+      text-align: center;
+      line-height: 1.11;
+    }
+    .stat-high-player span {
+      font-size: 0.93em;
+      color: #5ba1ed;
+      font-weight: 600;
+    }
+    @media (max-width: 520px) {
+      .stat-high-bar { gap: 0.3em;}
+      .stat-high-card { min-width: 112px; font-size: 0.95em;}
+      .stat-high-label { font-size: 0.92em;}
+      .stat-high-main { font-size: 1.09em;}
     }
     /* Footer */
     footer {
-      width: 100%; max-width: 570px;
-      margin: 0 auto 0 auto; padding: 0.85em 0.7em 0.95em 0.7em;
-      background: none; color: #7a7a7a; font-size: 0.88rem;
-      display: flex; justify-content: flex-start; align-items: center;
-      gap: 1.0rem; flex-shrink: 0; position: relative;
+      width: 100%; max-width: 530px;
+      margin: 0 auto 0 auto;
+      padding: 0.85em 0.7em 0.95em 0.7em;
+      background: none;
+      color: #7a7a7a;
+      font-size: 0.88rem;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 1.0rem;
+      flex-shrink: 0;
+      position: relative;
     }
-    .footer-icons { display: flex; gap: 1.0rem; flex-shrink: 0;}
+    .footer-icons {
+      display: flex; gap: 1.0rem; flex-shrink: 0;
+    }
     .footer-icons img, .footer-icons .wa-btn {
       height: 22px; width: 22px; border-radius: 5px; background: #fff; border: 1px solid #bfe4fa;
-      object-fit: cover; padding: 2px; box-shadow: 0 1px 2px #0002; cursor: pointer;
+      object-fit: cover; padding: 2px;
+      box-shadow: 0 1px 2px #0002;
+      cursor: pointer;
     }
-    .wa-btn { background: var(--wa-green); color: #fff !important; border-radius: 8px; font-size: 1.12em;}
+    .wa-btn { background: var(--wa-green); color: #fff !important; border-radius: 8px; font-size: 1.12em; }
     .footer-suca { margin-left: auto; font-style: italic; color: #aaa;}
-    /* Nav bar: always horizontally scrollable if too many tabs */
+    /* Nav bar */
     .nav-bar-glass {
       position: fixed; left: 0; right: 0; bottom: 0;
-      width: 100vw; max-width: 570px;
+      width: 100vw; max-width: 530px;
       z-index: 200; background: var(--nav-bg);
-      display: flex; flex-wrap: nowrap; overflow-x: auto;
-      justify-content: flex-start; align-items: center;
+      display: flex; justify-content: space-between; align-items: center;
       border-radius: 16px 16px 0 0;
-      margin: 0 auto; min-height: 54px; height: 54px;
-      padding: 0 3px; font-family: var(--font-heading); border-top: 1px solid #30446f;
-      scrollbar-width: none;
+      margin: 0 auto; min-height: 50px; height: 50px;
+      padding: 0 1px; font-family: var(--font-heading);
+      border-top: 1px solid #30446f;
+      overflow-x: auto;
     }
-    .nav-bar-glass::-webkit-scrollbar { display:none; }
     .nav-bar-glass .nav-btn {
-      flex: 0 0 auto; background: none; border: none;
-      color: var(--nav-text); font-size: 1.0em;
-      min-width: 65px; max-width: 100px; padding: 0.1em 6px 0.12em 6px;
+      flex: 1 1 0; background: none; border: none;
+      color: var(--nav-text); font-size: 0.98em;
+      min-width: 54px; max-width: 75px; padding: 0.1em 2px 0.1em 2px;
       text-align: center; cursor: pointer; display: flex;
       flex-direction: column; align-items: center; justify-content: center;
-      font-weight: 700; border-radius: 10px;
+      font-weight: 700; border-radius: 10px; margin: 0 0.5px;
+      transition: color 0.2s;
     }
-    .nav-bar-glass .nav-btn i { font-size: 1.19em; margin-bottom: 0.05em;}
+    .nav-bar-glass .nav-btn i { font-size: 1.10em; margin-bottom: 0.03em;}
     .nav-bar-glass .nav-label {
       display: block; font-size: 0.80em; font-weight: 700;
-      margin-top: -1.5px; opacity: 1; white-space: nowrap;
-      text-shadow: 0 0 2px #000c; max-width: 80px; overflow:hidden; text-overflow:ellipsis;
+      margin-top: -2px; opacity: 1; white-space: nowrap;
+      text-shadow: 0 0 2px #000c; max-width: 62px;
+      overflow: hidden; text-overflow: ellipsis;
     }
     .nav-bar-glass .nav-btn.active { color: var(--nav-active); font-weight: 800; background: #24315e9e;}
-    .pad-for-nav { height: 62px; min-height: 62px; width: 100%;}
+    .pad-for-nav { height: 58px; min-height: 58px; width: 100%;}
   </style>
 </head>
 <body>
@@ -222,7 +376,9 @@
         <h3>Today's Fixtures</h3>
         <div class="table-scroll">
           <table class="fixtures-table" role="table" aria-live="polite" aria-atomic="true">
-            <thead><tr><th>Time</th><th>Team 1</th><th></th><th>Team 2</th></tr></thead>
+            <thead>
+              <tr><th>Time</th><th>Team 1</th><th></th><th>Team 2</th></tr>
+            </thead>
             <tbody id="dashboard-fixtures"></tbody>
           </table>
         </div>
@@ -244,7 +400,6 @@
           </table>
         </div>
       </div>
-      <!-- STAT HIGHLIGHTS BAR ON HOME -->
       <div id="home-stat-highlights"></div>
     </section>
     <section id="fixtures" class="section" aria-label="Fixtures">
@@ -304,10 +459,6 @@
     <button class="nav-btn" data-tab="live" title="Live"><i class="lucide lucide-play-circle"></i><span class="nav-label">Live</span></button>
     <button class="nav-btn" data-tab="compare" title="Compare Players"><i class="lucide lucide-columns"></i><span class="nav-label">Compare</span></button>
   </nav>
-  <div id="player-popup" style="display:none;position:fixed;left:0;top:0;width:100vw;height:100vh;z-index:250;background:rgba(34,53,92,0.92);justify-content:center;align-items:center;" onclick="hidePlayerPopup(event)" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="player-popup-head" tabindex="-1">
-    <div class="popup-card" role="document"></div>
-    <button class="popup-close" onclick="hidePlayerPopup(event)" aria-label="Close player card" style="color:#222; font-size:1.2em; background:none; border:none; position:absolute; top:0.6em; right:0.8em; cursor:pointer;">&times;</button>
-  </div>
   <footer>
     <div class="footer-icons">
       <a href="https://n01darts.com/n01/tournament/comp.php?id=t_NI0o_4352&tab=live" target="_blank" rel="noopener" aria-label="Watch live on Nakka">
@@ -322,513 +473,532 @@
     </div>
     <div class="footer-suca">Built by SUCA Analytics</div>
   </footer>
+  <div id="player-popup" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:250;background:rgba(34,53,92,0.92);justify-content:center;align-items:center;">
+    <div class="popup-card" role="document" style="background:#fff;border-radius:8px;box-shadow:0 2px 10px #b1e1ff25;padding:0.95em 1em;color:#171e30;min-width:230px;max-width:95vw;text-align:center;font-weight:700;font-size:0.97em;position:relative;"></div>
+    <button class="popup-close" onclick="hidePlayerPopup(event)" aria-label="Close player card" style="color:#222;font-size:1.2em;background:none;border:none;position:absolute;top:0.6em;right:0.8em;cursor:pointer;">&times;</button>
+  </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
   <script defer>
     const API_URL = 'https://script.google.com/macros/s/AKfycby6BCE5cyBaxpz-Jt-TeRH6k5Jeq-vqelr8S7rt32e7wFjBzEvuBrYi4yPaEBz2Kari/exec';
-let fixturesCache = [], standingsCache = [], statsCache = [], bestLegCache = [], squadsCache = [], resultsCache = [];
-let statsSortKey = null, statsSortDir = 1, statsSearchTerm = "", teamFilter = null;
-let compareSelections = [], compareTableHtml = "";
-const STATS_HIDE_COLUMNS = new Set(["Keep", "Break", "Second Legs", "Break Legs", "Total Score", "Total Darts", "Group", "Best Leg", "Worst Leg"]);
-
-function showTab(tabId) {
-  document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
-  document.querySelectorAll('.nav-bar-glass .nav-btn').forEach(btn => btn.classList.remove('active'));
-  const activeSection = document.getElementById(tabId);
-  if (activeSection) activeSection.classList.add('active');
-  document.querySelectorAll('.nav-bar-glass .nav-btn').forEach(btn => {
-    if (btn.getAttribute('data-tab') === tabId) {
-      btn.classList.add('active');
-      btn.setAttribute('aria-current', 'page');
-    } else { btn.removeAttribute('aria-current'); }
-  });
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-function setupWhatsAppShare() {
-  const waBtn = document.getElementById("wa-share-btn");
-  if (waBtn) {
-    waBtn.addEventListener("click", function(e) {
-      e.preventDefault();
-      const shareUrl = window.location.href.split('?')[0];
-      const msg = encodeURIComponent("Check out the Royal Darts Premier League 2025 – live results, fixtures, stats and more! " + shareUrl);
-      window.open(`https://wa.me/?text=${msg}`, "_blank");
-    });
-  }
-}
-async function loadData() {
-  try {
-    const res = await fetch(API_URL);
-    const data = await res.json();
-    fixturesCache = data.Fixtures || [];
-    standingsCache = data.Standings || [];
-    statsCache = (data.Stats || []).filter(row => row.Player);
-    bestLegCache = (data["Best Leg"] || []).filter(row => row["Best Leg"]);
-    squadsCache = data.Squads || [];
-    resultsCache = data.Results || [];
-    renderDashboardFixtures(); renderDashboardStandingsTables();
-    renderFixtures(fixturesCache); renderResults(resultsCache, fixturesCache);
-    renderStandingsTables(); renderSquads(squadsCache);
-    renderStatHighlights(statsCache, bestLegCache, "stat-highlights");
-    renderHomeStatHighlights(statsCache, bestLegCache, "home-stat-highlights");
-    renderStats(statsCache, bestLegCache); renderTeamFilter(statsCache);
-    renderPlayerComparisonSelectors();
-    if (
-      document.querySelector('.nav-btn.active[data-tab="compare"]') &&
-      compareTableHtml &&
-      document.getElementById("compare-results")
-    ) {
-      document.getElementById("compare-results").innerHTML = compareTableHtml;
-      const selects = document.querySelectorAll("#compare .player-select-container select");
-      compareSelections.forEach((val, idx) => {
-        if (selects[idx] && val) selects[idx].value = val;
+    let fixturesCache = [], standingsCache = [], statsCache = [], bestLegCache = [], squadsCache = [], resultsCache = [];
+    let statsSortKey = null, statsSortDir = 1, statsSearchTerm = "", teamFilter = null;
+    let compareSelections = [];
+    let compareTableHtml = "";
+    const STATS_HIDE_COLUMNS = new Set(["Keep", "Break", "Second Legs", "Break Legs", "Total Score", "Total Darts", "Group", "Best Leg", "Worst Leg"]);
+    function showTab(tabId) {
+      document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+      document.querySelectorAll('.nav-bar-glass .nav-btn').forEach(btn => btn.classList.remove('active'));
+      const activeSection = document.getElementById(tabId);
+      if (activeSection) activeSection.classList.add('active');
+      document.querySelectorAll('.nav-bar-glass .nav-btn').forEach(btn => {
+        if (btn.getAttribute('data-tab') === tabId) {
+          btn.classList.add('active');
+          btn.setAttribute('aria-current', 'page');
+        } else { btn.removeAttribute('aria-current'); }
       });
-      updateCompareButtonState();
+      window.scrollTo({top:0,behavior:'smooth'});
     }
-  } catch (err) { console.error('Failed to load data:', err);}
-}
-function renderDashboardFixtures() {
-  const now = new Date();
-  const istNow = new Date(now.toLocaleString("en-US", {timeZone: "Asia/Kolkata"}));
-  const istYear = istNow.getFullYear(), istMonth = istNow.getMonth(), istDate = istNow.getDate();
-  function isISTToday(d) {
-    const istD = new Date(new Date(d).toLocaleString("en-US", {timeZone: "Asia/Kolkata"}));
-    return (istD.getFullYear() === istYear && istD.getMonth() === istMonth && istD.getDate() === istDate);
-  }
-  const todaysFixtures = fixturesCache.filter(fix => isISTToday(fix.Date));
-  let html = '';
-  if (!todaysFixtures.length) {
-    html = `<tr><td colspan="4" style="color:var(--primary);">No fixtures today.</td></tr>`;
-  } else {
-    todaysFixtures.forEach(f => {
-      const timeStr = new Date(f.Time).toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit',hour12:true,timeZone:'Asia/Kolkata'});
-      html += `<tr>
-        <td>${timeStr}</td>
-        <td>${f['Team 1'] || ""}</td>
-        <td></td>
-        <td>${f['Team 2'] || ""}</td>
-      </tr>`;
-    });
-  }
-  document.getElementById('dashboard-fixtures').innerHTML = html;
-}
-function renderDashboardStandingsTables() {
-  const A = standingsCache.filter(s => s.Group?.toUpperCase() === 'A').sort((a,b)=>b.Points - a.Points || b.LD - a.LD);
-  const B = standingsCache.filter(s => s.Group?.toUpperCase() === 'B').sort((a,b)=>b.Points - a.Points || b.LD - a.LD);
-  document.getElementById('dashboard-standings-a').innerHTML = quickStandingsRows(A);
-  document.getElementById('dashboard-standings-b').innerHTML = quickStandingsRows(B);
-}
-function quickStandingsRows(arr) {
-  return arr.map((s,i) => {
-    let groupClass = i < 3 ? "gold" : i < 6 ? "silver" : "elim";
-    return `<tr class="stand-row ${groupClass}">
-      <td class="pos-cell">${i+1}</td>
-      <td>${s.Team}</td>
-      <td class="stand-points">${s.Points}</td>
-    </tr>`;
-  }).join('');
-}
-function renderFixtures(fixtures) {
-  const container = document.getElementById('fixturesTableContainer');
-  if (!fixtures.length) {
-    container.innerHTML = '<div class="table-scroll"><table><tbody><tr><td>Loading...</td></tr></tbody></table></div>';
-    return;
-  }
-  const byDate = {};
-  fixtures.forEach(f => {
-    const d = new Date(f.Date).toDateString();
-    if (!byDate[d]) byDate[d] = [];
-    byDate[d].push(f);
-  });
-  let html = '';
-  Object.keys(byDate).sort((a, b) => new Date(a) - new Date(b)).forEach(dateStr => {
-    html += `<div class="date-heading">${dateStr}</div>
-    <div class="table-scroll">
-    <table class="fixtures-table" role="table" aria-label="Fixtures for ${dateStr}">
-      <thead><tr><th>Time</th><th>Team 1</th><th></th><th>Team 2</th></tr></thead>
-      <tbody>`;
-    byDate[dateStr].forEach(f => {
-      html += `<tr>
-          <td>${new Date(f.Time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</td>
-          <td>${f['Team 1'] || ""}</td>
-          <td></td>
-          <td>${f['Team 2'] || ""}</td>
+    function setupWhatsAppShare() {
+      const waBtn = document.getElementById("wa-share-btn");
+      if (waBtn) {
+        waBtn.addEventListener("click", function(e) {
+          e.preventDefault();
+          const shareUrl = window.location.href.split('?')[0];
+          const msg = encodeURIComponent("Check out the Royal Darts Premier League 2025 – live results, fixtures, stats and more! " + shareUrl);
+          window.open(`https://wa.me/?text=${msg}`, "_blank");
+        });
+      }
+    }
+    async function loadData() {
+      try {
+        const res = await fetch(API_URL);
+        const data = await res.json();
+        fixturesCache = data.Fixtures || [];
+        standingsCache = data.Standings || [];
+        statsCache = (data.Stats || []).filter(row => row.Player);
+        bestLegCache = (data["Best Leg"] || []).filter(row => row["Best Leg"]);
+        squadsCache = data.Squads || [];
+        resultsCache = data.Results || [];
+        renderDashboardFixtures(); renderDashboardStandingsTables();
+        renderFixtures(fixturesCache); renderResults(resultsCache, fixturesCache);
+        renderStandingsTables(); renderSquads(squadsCache);
+        renderStatHighlights(statsCache, bestLegCache, "stat-highlights");
+        renderStats(statsCache, bestLegCache); renderTeamFilter(statsCache);
+        renderHomeStatHighlights(statsCache, bestLegCache, "home-stat-highlights");
+        renderPlayerComparisonSelectors();
+        if (
+          document.querySelector('.nav-btn.active[data-tab="compare"]') &&
+          compareTableHtml &&
+          document.getElementById("compare-results")
+        ) {
+          document.getElementById("compare-results").innerHTML = compareTableHtml;
+          const selects = document.querySelectorAll("#compare .player-select-container select");
+          compareSelections.forEach((val, idx) => {
+            if (selects[idx] && val) selects[idx].value = val;
+          });
+          updateCompareButtonState();
+        }
+      } catch (err) { console.error('Failed to load data:', err);}
+    }
+    function renderDashboardFixtures() {
+      const now = new Date();
+      const istNow = new Date(now.toLocaleString("en-US", {timeZone: "Asia/Kolkata"}));
+      const istYear = istNow.getFullYear(), istMonth = istNow.getMonth(), istDate = istNow.getDate();
+      function isISTToday(d) {
+        const istD = new Date(new Date(d).toLocaleString("en-US", {timeZone: "Asia/Kolkata"}));
+        return (istD.getFullYear() === istYear && istD.getMonth() === istMonth && istD.getDate() === istDate);
+      }
+      const todaysFixtures = fixturesCache.filter(fix => isISTToday(fix.Date));
+      let html = '';
+      if (!todaysFixtures.length) {
+        html = `<tr><td colspan="4" style="color:var(--primary);">No fixtures today.</td></tr>`;
+      } else {
+        todaysFixtures.forEach(f => {
+          const timeStr = new Date(f.Time).toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit',hour12:true,timeZone:'Asia/Kolkata'});
+          html += `<tr>
+            <td>${timeStr}</td>
+            <td>${f['Team 1'] || ""}</td>
+            <td></td>
+            <td>${f['Team 2'] || ""}</td>
+          </tr>`;
+        });
+      }
+      document.getElementById('dashboard-fixtures').innerHTML = html;
+    }
+    function renderDashboardStandingsTables() {
+      const A = standingsCache.filter(s => s.Group?.toUpperCase() === 'A').sort((a,b)=>b.Points - a.Points || b.LD - a.LD);
+      const B = standingsCache.filter(s => s.Group?.toUpperCase() === 'B').sort((a,b)=>b.Points - a.Points || b.LD - a.LD);
+      document.getElementById('dashboard-standings-a').innerHTML = quickStandingsRows(A);
+      document.getElementById('dashboard-standings-b').innerHTML = quickStandingsRows(B);
+    }
+    function quickStandingsRows(arr) {
+      return arr.map((s,i) => {
+        let groupClass = i < 3 ? "gold" : i < 6 ? "silver" : "elim";
+        return `<tr class="stand-row ${groupClass}">
+          <td class="pos-cell">${i+1}</td>
+          <td style="text-align:center;">${s.Team}</td>
+          <td class="stand-points" style="text-align:center;">${s.Points}</td>
         </tr>`;
-    });
-    html += `</tbody></table></div>`;
-  });
-  container.innerHTML = html;
-}
-function renderResults(results, fixtures) {
-  const fixtureDateMap = {};
-  fixtures.forEach(fix => {
-    const t1 = fix["Team 1"], t2 = fix["Team 2"];
-    const dateStr = new Date(fix.Date).toDateString();
-    fixtureDateMap[`${t1}|${t2}`] = dateStr;
-    fixtureDateMap[`${t2}|${t1}`] = dateStr;
-  });
-  const byDate = {};
-  results.forEach(r => {
-    let dateVal = "";
-    if (r.Date && r.Date !== "null" && r.Date !== "" && r.Date !== undefined) {
-      dateVal = new Date(r.Date).toDateString();
-    } else {
-      const t1 = r["Team 1"], t2 = r["Team 2"];
-      dateVal = fixtureDateMap[`${t1}|${t2}`] || fixtureDateMap[`${t2}|${t1}`] || "Unknown Date";
+      }).join('');
     }
-    if (!byDate[dateVal]) byDate[dateVal] = [];
-    byDate[dateVal].push(r);
-  });
-  let html = '';
-  Object.keys(byDate).sort((a, b) => new Date(a) - new Date(b)).forEach(dateStr => {
-    html += `<div class="date-heading">${dateStr}</div>
-    <div class="table-scroll" role="table">
-      <table class="results-table" role="grid">
+    function renderFixtures(fixtures) {
+      const container = document.getElementById('fixturesTableContainer');
+      if (!fixtures.length) {
+        container.innerHTML = '<div class="table-scroll"><table><tbody><tr><td>Loading...</td></tr></tbody></table></div>';
+        return;
+      }
+      const byDate = {};
+      fixtures.forEach(f => {
+        const d = new Date(f.Date).toDateString();
+        if (!byDate[d]) byDate[d] = [];
+        byDate[d].push(f);
+      });
+      let html = '';
+      Object.keys(byDate).sort((a, b) => new Date(a) - new Date(b)).forEach(dateStr => {
+        html += `<div class="date-heading">${dateStr}</div>
+        <div class="table-scroll">
+        <table class="fixtures-table" role="table" aria-label="Fixtures for ${dateStr}">
+          <thead>
+            <tr><th>Time</th><th>Team 1</th><th></th><th>Team 2</th></tr>
+          </thead>
+          <tbody>`;
+        byDate[dateStr].forEach(f => {
+          html += `<tr>
+              <td>${new Date(f.Time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</td>
+              <td>${f['Team 1'] || ""}</td>
+              <td></td>
+              <td>${f['Team 2'] || ""}</td>
+            </tr>`;
+        });
+        html += `</tbody></table></div>`;
+      });
+      container.innerHTML = html;
+    }
+    function renderResults(results, fixtures) {
+      const fixtureDateMap = {};
+      fixtures.forEach(fix => {
+        const t1 = fix["Team 1"], t2 = fix["Team 2"];
+        const dateStr = new Date(fix.Date).toDateString();
+        fixtureDateMap[`${t1}|${t2}`] = dateStr;
+        fixtureDateMap[`${t2}|${t1}`] = dateStr;
+      });
+      const byDate = {};
+      results.forEach(r => {
+        let dateVal = "";
+        if (r.Date && r.Date !== "null" && r.Date !== "" && r.Date !== undefined) {
+          dateVal = new Date(r.Date).toDateString();
+        } else {
+          const t1 = r["Team 1"], t2 = r["Team 2"];
+          dateVal = fixtureDateMap[`${t1}|${t2}`] || fixtureDateMap[`${t2}|${t1}`] || "Unknown Date";
+        }
+        if (!byDate[dateVal]) byDate[dateVal] = [];
+        byDate[dateVal].push(r);
+      });
+      let html = '';
+      Object.keys(byDate).sort((a, b) => new Date(a) - new Date(b)).forEach(dateStr => {
+        html += `<div class="date-heading">${dateStr}</div>
+        <div class="table-scroll" role="table">
+          <table class="results-table" role="grid">
+            <thead>
+              <tr>
+                <th>Avg 1</th>
+                <th>Team 1</th>
+                <th>Score</th>
+                <th class="divider-cell"></th>
+                <th>Score</th>
+                <th>Team 2</th>
+                <th>Avg 2</th>
+              </tr>
+            </thead>
+            <tbody>`;
+        byDate[dateStr].forEach(r => {
+          const win1 = +r['Legs 1'] > +r['Legs 2'];
+          const win2 = +r['Legs 2'] > +r['Legs 1'];
+          let rowClass = win1 ? "winner1" : win2 ? "winner2" : "";
+          html += `<tr class="result-row ${rowClass}">
+            <td>${r['Avg 1']||""}</td>
+            <td class="${win1?"winner-cell":""}" style="text-align:center;">${r['Team 1']||""}${win1?' <span class="winner-icon">🏆</span>':''}</td>
+            <td style="text-align:center;"${win1?' class="winner-cell"':''}>${r['Legs 1']==0?"0":r['Legs 1']||"0"}</td>
+            <td class="divider-cell"><div class="divider-line"></div></td>
+            <td style="text-align:center;"${win2?' class="winner-cell"':''}>${r['Legs 2']==0?"0":r['Legs 2']||"0"}</td>
+            <td class="${win2?"winner-cell":""}" style="text-align:center;">${r['Team 2']||""}${win2?' <span class="winner-icon">🏆</span>':''}</td>
+            <td>${r['Avg 2']||""}</td>
+          </tr>`;
+        });
+        html += `</tbody></table></div>`;
+      });
+      document.getElementById('resultsContainer').innerHTML = html || '';
+    }
+    function renderStandingsTables() {
+      const A = standingsCache.filter(s => s.Group?.toUpperCase() === 'A').sort((a,b)=>b.Points - a.Points || b.LD - a.LD);
+      const B = standingsCache.filter(s => s.Group?.toUpperCase() === 'B').sort((a,b)=>b.Points - a.Points || b.LD - a.LD);
+      document.getElementById('standings-a').innerHTML = standingsTable(A);
+      document.getElementById('standings-b').innerHTML = standingsTable(B);
+    }
+    function standingsTable(arr) {
+      let html = `<div class="table-scroll"><table class="standings-table" role="grid"><thead>
+        <tr>
+          <th>Pos</th><th>Team</th><th>P</th><th>W</th><th>L</th><th>EF</th><th>EA</th><th>ED</th><th>Pts</th><th>Avg</th>
+        </tr>
+      </thead><tbody>`;
+      arr.forEach((s,i) => {
+        let groupClass = i < 3 ? "gold" : i < 6 ? "silver" : "elim";
+        html += `<tr class="stand-row ${groupClass}">
+          <td class="pos-cell">${i+1}</td>
+          <td style="text-align:center;">${s.Team}</td>
+          <td style="text-align:center;">${s.P}</td>
+          <td style="text-align:center;">${s.W}</td>
+          <td style="text-align:center;">${s.L}</td>
+          <td style="text-align:center;">${s.LF||0}</td>
+          <td style="text-align:center;">${s.LA||0}</td>
+          <td style="text-align:center;">${s.LD||0}</td>
+          <td class="stand-points" style="text-align:center;">${s.Points}</td>
+          <td style="text-align:center;">${s.Avg}</td>
+        </tr>`;
+      });
+      html += "</tbody></table></div>";
+      return html;
+    }
+    function renderSquads(squads) {
+      const container = document.getElementById('squadsContainer');
+      if (!squads.length) { container.innerHTML = 'Loading...'; return; }
+      const teams = [...new Set(squads.map(s => s.Team))];
+      let html = '';
+      teams.forEach(team => {
+        const players = squads.filter(s => s.Team === team).map(p =>
+          `<div class="squad-player-name" tabindex="0" role="button" aria-pressed="false" onclick="showPlayerPopup('${p.Player.replace(/'/g,"\\'")}')" onkeydown="if(event.key==='Enter'||event.key===' ') {event.preventDefault(); showPlayerPopup('${p.Player.replace(/'/g,"\\'")}');}">
+            ${p.Player}
+          </div>`
+        ).join('');
+        html += `<div class="squad-team-card" role="region" aria-label="Team ${team}">
+          <div class="squad-team-name">${team}</div>
+          <div class="squad-players">${players}</div>
+        </div>`;
+      });
+      container.innerHTML = html;
+    }
+    function renderStatHighlights(stats, bestLegsSheet, id="stat-highlights") {
+      document.getElementById(id).innerHTML = "";
+    }
+    function renderHomeStatHighlights(stats, bestLegsSheet, id = "home-stat-highlights") {
+      const defs = [
+        { key: "3 Dart Avg", label: "Best 3DA", icon: "★" },
+        { key: "Legs Won", label: "Most Legs", icon: "🏆" },
+        { key: "High Finish", label: "High Finish", icon: "🎯" },
+        { key: "First 9 Avg", label: "Best F9", icon: "🚀" }
+      ];
+      const eligible = stats.filter(p => Number(p["Match Played"]) >= 2);
+      let html = `<div class="stat-high-bar">`;
+      defs.forEach(def => {
+        const sorted = [...eligible].sort((a, b) => +b[def.key] - +a[def.key]);
+        const player = sorted[0];
+        if (!player) return;
+        let val = player[def.key] ?? "—";
+        html += `<div class="stat-high-card">
+          <div class="stat-high-label">${def.icon} ${def.label}</div>
+          <div class="stat-high-main">${val}</div>
+          <div class="stat-high-player">
+            ${player.Player}<br><span>${player.Team || ""}</span>
+          </div>
+        </div>`;
+      });
+      if (bestLegsSheet && bestLegsSheet.length) {
+        let best = bestLegsSheet.sort((a, b) => Number(a["Best Leg"]) - Number(b["Best Leg"]))[0];
+        html += `<div class="stat-high-card">
+          <div class="stat-high-label">⏱️ Best Leg</div>
+          <div class="stat-high-main">${best["Best Leg"]}</div>
+          <div class="stat-high-player">
+            ${best.Players} <br><span>${best.Team}</span>
+          </div>
+        </div>`;
+      }
+      html += "</div>";
+      document.getElementById(id).innerHTML = html;
+    }
+    function renderTeamFilter(stats) {
+      const bar = document.getElementById('team-filter-bar');
+      if (!stats || !stats.length) { bar.innerHTML = ''; return;}
+      const allTeams = Array.from(new Set(stats.map(p => p.Team).filter(Boolean))).sort();
+      let html = `<select class="team-filter-dropdown" onchange="setTeamFilter(this.value)" aria-label="Filter stats by team">
+        <option value="">All Teams</option>`;
+      allTeams.forEach(team => {
+        html += `<option value="${team.replace(/"/g, "&quot;")}"${teamFilter===team?" selected":""}>${team}</option>`;
+      });
+      html += `</select>`;
+      bar.innerHTML = html;
+    }
+    window.setTeamFilter = function(team) {
+      teamFilter = team || null;
+      renderStats(statsCache, bestLegCache);
+    };
+    function getBestStats(stats, keys) {
+      let bests = {};
+      keys.forEach(key => {
+        let valArr = stats.map(p => Number(p[key])).filter(x => !isNaN(x));
+        if (!valArr.length) return;
+        let max = Math.max(...valArr);
+        bests[key] = max;
+      });
+      return bests;
+    }
+    function renderStats(stats, bestLegsSheet) {
+      const searchInput = document.getElementById('stats-search');
+      if (searchInput && !searchInput._listenerAdded) {
+        searchInput.addEventListener("input", () => {
+          statsSearchTerm = searchInput.value.trim().toLowerCase();
+          renderStats(statsCache, bestLegCache);
+        });
+        searchInput._listenerAdded = true;
+      }
+      let filteredStats = stats;
+      if (teamFilter) filteredStats = filteredStats.filter(p => p.Team === teamFilter);
+      if (statsSearchTerm) {
+        filteredStats = filteredStats.filter(
+          p => (p.Player && p.Player.toLowerCase().includes(statsSearchTerm)) ||
+               (p.Team && p.Team.toLowerCase().includes(statsSearchTerm))
+        );
+      }
+      const mainStats = ["Player", "Team", "3 Dart Avg", "Legs Won", "Match Played"];
+      const extraStats = [
+        "First 9 Avg", "Sets Played", "Sets Won", "Win Rate (Sets)",
+        "Legs Played", "Win Rate (Legs)", "High Finish",
+        "180s", "100+", "High Checkout"
+      ];
+      const bests = getBestStats(filteredStats, ["3 Dart Avg", "Legs Won"]);
+      let html = `<table class="stats-table-modern" role="grid">
         <thead>
           <tr>
-            <th>Avg 1</th><th>Team 1</th><th>Score</th><th class="divider-cell"></th>
-            <th>Score</th><th>Team 2</th><th>Avg 2</th>
+            <th>Player</th>
+            <th>Team</th>
+            <th title="3 Dart Average">3DA</th>
+            <th title="Legs Won">Legs</th>
+            <th title="Matches Played">M</th>
+            <th style="text-align:center;">More</th>
           </tr>
         </thead>
-        <tbody>`;
-    byDate[dateStr].forEach(r => {
-      const win1 = +r['Legs 1'] > +r['Legs 2'];
-      const win2 = +r['Legs 2'] > +r['Legs 1'];
-      let rowClass = win1 ? "winner1" : win2 ? "winner2" : "";
-      html += `<tr class="result-row ${rowClass}">
-        <td>${r['Avg 1']||""}</td>
-        <td class="${win1?"winner-cell":""}" style="text-align:center;">${r['Team 1']||""}${win1?' <span class="winner-icon">🏆</span>':''}</td>
-        <td style="text-align:center;"${win1?' class="winner-cell"':''}>${r['Legs 1']==0?"0":r['Legs 1']||"0"}</td>
-        <td class="divider-cell"><div class="divider-line"></div></td>
-        <td style="text-align:center;"${win2?' class="winner-cell"':''}>${r['Legs 2']==0?"0":r['Legs 2']||"0"}</td>
-        <td class="${win2?"winner-cell":""}" style="text-align:center;">${r['Team 2']||""}${win2?' <span class="winner-icon">🏆</span>':''}</td>
-        <td>${r['Avg 2']||""}</td>
-      </tr>`;
-    });
-    html += `</tbody></table></div>`;
-  });
-  document.getElementById('resultsContainer').innerHTML = html || '';
-}
-function renderStandingsTables() {
-  const A = standingsCache.filter(s => s.Group?.toUpperCase() === 'A').sort((a,b)=>b.Points - a.Points || b.LD - a.LD);
-  const B = standingsCache.filter(s => s.Group?.toUpperCase() === 'B').sort((a,b)=>b.Points - a.Points || b.LD - a.LD);
-  document.getElementById('standings-a').innerHTML = standingsTable(A);
-  document.getElementById('standings-b').innerHTML = standingsTable(B);
-}
-function standingsTable(arr) {
-  let html = `<div class="table-scroll"><table class="standings-table" role="grid"><thead>
-    <tr>
-      <th>Pos</th><th>Team</th><th>P</th><th>W</th><th>L</th><th>EF</th><th>EA</th><th>ED</th><th>Pts</th><th>Avg</th>
-    </tr>
-  </thead><tbody>`;
-  arr.forEach((s,i) => {
-    let groupClass = i < 3 ? "gold" : i < 6 ? "silver" : "elim";
-    html += `<tr class="stand-row ${groupClass}">
-      <td class="pos-cell">${i+1}</td>
-      <td>${s.Team}</td>
-      <td>${s.P}</td>
-      <td>${s.W}</td>
-      <td>${s.L}</td>
-      <td>${s.LF||0}</td>
-      <td>${s.LA||0}</td>
-      <td>${s.LD||0}</td>
-      <td class="stand-points">${s.Points}</td>
-      <td>${s.Avg}</td>
-    </tr>`;
-  });
-  html += "</tbody></table></div>";
-  return html;
-}
-function renderSquads(squads) {
-  const container = document.getElementById('squadsContainer');
-  if (!squads.length) { container.innerHTML = 'Loading...'; return; }
-  const teams = [...new Set(squads.map(s => s.Team))];
-  let html = '';
-  teams.forEach(team => {
-    const players = squads.filter(s => s.Team === team).map(p =>
-      `<div class="squad-player-name" tabindex="0" role="button" aria-pressed="false" onclick="showPlayerPopup('${p.Player.replace(/'/g,"\\'")}')" onkeydown="if(event.key==='Enter'||event.key===' ') {event.preventDefault(); showPlayerPopup('${p.Player.replace(/'/g,"\\'")}');}">
-        ${p.Player}
-      </div>`
-    ).join('');
-    html += `<div class="squad-team-card" role="region" aria-label="Team ${team}">
-      <div class="squad-team-name">${team}</div>
-      <div class="squad-players">${players}</div>
-    </div>`;
-  });
-  container.innerHTML = html;
-}
-function renderStatHighlights(stats, bestLegsSheet, id="stat-highlights") {
-  document.getElementById(id).innerHTML = "";
-}
-function renderHomeStatHighlights(stats, bestLegsSheet, id = "home-stat-highlights") {
-  const defs = [
-    { key: "3 Dart Avg", label: "Best 3DA", icon: "★" },
-    { key: "Legs Won", label: "Most Legs", icon: "🏆" },
-    { key: "High Finish", label: "High Finish", icon: "🎯" },
-    { key: "First 9 Avg", label: "Best F9", icon: "🚀" }
-  ];
-  const eligible = stats.filter(p => Number(p["Match Played"]) >= 2);
-  let html = `<div class="stat-high-bar">`;
-  defs.forEach(def => {
-    const sorted = [...eligible].sort((a, b) => +b[def.key] - +a[def.key]);
-    const player = sorted[0];
-    if (!player) return;
-    let val = player[def.key] ?? "—";
-    html += `<div class="stat-high-card">
-      <div class="stat-high-label">${def.icon} ${def.label}</div>
-      <div class="stat-high-main">${val}</div>
-      <div class="stat-high-player">
-        ${player.Player}<br><span>${player.Team || ""}</span>
-      </div>
-    </div>`;
-  });
-  if (bestLegsSheet && bestLegsSheet.length) {
-    let best = bestLegsSheet.sort((a, b) => Number(a["Best Leg"]) - Number(b["Best Leg"]))[0];
-    html += `<div class="stat-high-card">
-      <div class="stat-high-label">⏱️ Best Leg</div>
-      <div class="stat-high-main">${best["Best Leg"]}</div>
-      <div class="stat-high-player">
-        ${best.Players} <br><span>${best.Team}</span>
-      </div>
-    </div>`;
-  }
-  html += "</div>";
-  document.getElementById(id).innerHTML = html;
-}
-function renderTeamFilter(stats) {
-  const bar = document.getElementById('team-filter-bar');
-  if (!stats || !stats.length) { bar.innerHTML = ''; return;}
-  const allTeams = Array.from(new Set(stats.map(p => p.Team).filter(Boolean))).sort();
-  let html = `<select class="team-filter-dropdown" onchange="setTeamFilter(this.value)" aria-label="Filter stats by team">
-    <option value="">All Teams</option>`;
-  allTeams.forEach(team => {
-    html += `<option value="${team.replace(/"/g, "&quot;")}"${teamFilter===team?" selected":""}>${team}</option>`;
-  });
-  html += `</select>`;
-  bar.innerHTML = html;
-}
-window.setTeamFilter = function(team) {
-  teamFilter = team || null;
-  renderStats(statsCache, bestLegCache);
-};
-function getBestStats(stats, keys) {
-  let bests = {};
-  keys.forEach(key => {
-    let valArr = stats.map(p => Number(p[key])).filter(x => !isNaN(x));
-    if (!valArr.length) return;
-    let max = Math.max(...valArr);
-    bests[key] = max;
-  });
-  return bests;
-}
-function renderStats(stats, bestLegsSheet) {
-  const mainStats = ["Player", "Team", "3 Dart Avg", "Legs Won", "Match Played"];
-  const extraStats = [
-    "First 9 Avg", "Sets Played", "Sets Won", "Sets Lost", "Legs Played",
-    "Legs Lost", "Win Rate (Sets)", "Win Rate (Legs)", "High Finish",
-    "Checkout %", "180s", "100+", "Best Leg", "High Checkout"
-  ];
-  let filteredStats = stats;
-  if (teamFilter) filteredStats = filteredStats.filter(p => p.Team === teamFilter);
-  if (statsSearchTerm) {
-    filteredStats = filteredStats.filter(
-      p => (p.Player && p.Player.toLowerCase().includes(statsSearchTerm)) ||
-           (p.Team && p.Team.toLowerCase().includes(statsSearchTerm))
-    );
-  }
-  const bests = getBestStats(filteredStats, ["3 Dart Avg", "Legs Won"]);
-  let html = `<table class="stats-table-modern" role="grid">
-    <thead>
-      <tr>
-        <th>Player</th>
-        <th>Team</th>
-        <th title="3 Dart Average">3DA</th>
-        <th title="Legs Won">Legs</th>
-        <th title="Matches Played">M</th>
-        <th style="text-align:center;">More</th>
-      </tr>
-    </thead>
-    <tbody>
-  `;
-  filteredStats.forEach((row, i) => {
-    const isAlt = i%2!==0 ? "alt-row" : "";
-    const best3DA = Number(row["3 Dart Avg"]) === bests["3 Dart Avg"] && bests["3 Dart Avg"] > 0;
-    const bestLegs = Number(row["Legs Won"]) === bests["Legs Won"] && bests["Legs Won"] > 0;
-    html += `<tr class="${isAlt}">
-      <td class="stats-player${best3DA ? ' stats-best' : ''}" onclick="showPlayerPopup('${row.Player.replace(/'/g,"\\'")}')" tabindex="0" role="button">${best3DA ? '<span class="star" title="Best 3DA">★</span>':''}${row.Player ? row.Player : ""}</td>
-      <td class="stats-team">${row.Team ? row.Team : ""}</td>
-      <td${best3DA ? ' class="stats-best"' : ''}>${row["3 Dart Avg"] ?? "-"}</td>
-      <td${bestLegs ? ' class="stats-best"' : ''}>${bestLegs ? '<span class="trophy" title="Most Legs Won">🏆</span>' : ''}${row["Legs Won"] ?? "-"}</td>
-      <td>${row["Match Played"] ?? "-"}</td>
-      <td style="text-align:center;">
-        <button class="show-more-btn" onclick="toggleExtraStats(this, ${i})" tabindex="0" aria-label="Show more stats for ${row.Player}">More</button>
-      </td>
-    </tr>
-    <tr class="extra-stats-row" id="extra-stats-${i}" style="display:none;">
-      <td colspan="6">
-        <ul class="extra-stats-list">
-          ${extraStats.map(k => row[k] !== undefined && row[k] !== "" ?
-            `<li><span class="extra-stats-label">${k}:</span> <span class="extra-stats-value">${k.includes("Win Rate") ? (!isNaN(row[k]) ? Math.round(parseFloat(row[k])*100)+'%' : '-') : row[k]}</span></li>`
-          : '').join("")}
-        </ul>
-      </td>
-    </tr>
-    `;
-  });
-  html += `</tbody></table>`;
-  document.getElementById("stats-table").innerHTML = html;
-  document.getElementById("stats-search").addEventListener("input", function() {
-    statsSearchTerm = this.value.trim().toLowerCase();
-    renderStats(statsCache, bestLegCache);
-  });
-}
-window.toggleExtraStats = function(btn, idx) {
-  const row = document.getElementById("extra-stats-"+idx);
-  if (!row) return;
-  if (row.style.display === "none") {
-    row.style.display = "";
-    btn.innerText = "Less";
-  } else {
-    row.style.display = "none";
-    btn.innerText = "More";
-  }
-};
-function showPlayerPopup(playerName) {
-  let p = statsCache.find(s => s.Player === playerName);
-  if (!p) return;
-  let card = `<div id="player-popup-head" class="popup-head">${p.Player}</div>
-    <div class="popup-team">${p.Team||""}</div>
-    <div style="color:var(--primary);font-size:1em;font-weight:700;margin-bottom:0.15em;">Stats</div>
-    ${Object.keys(p).map(h => {
-      if (["Player", "Team"].includes(h) || STATS_HIDE_COLUMNS.has(h) || !p[h]) return "";
-      return `<div class="popup-label"><span style="color:var(--accent);font-weight:600;">${h}:</span> ${p[h]}</div>`;
-    }).join("")}
-    <button id="save-card-btn" onclick="savePlayerCard(event)" aria-label="Save player card as image">Save Card as Image</button>`;
-  document.querySelector("#player-popup .popup-card").innerHTML = card;
-  const popup = document.getElementById("player-popup");
-  popup.style.display = "flex";
-  popup.setAttribute("aria-hidden", "false");
-  popup.focus();
-}
-window.savePlayerCard = function(e) {
-  e.stopPropagation();
-  let cardNode = document.querySelector("#player-popup .popup-card");
-  html2canvas(cardNode, {backgroundColor: "#fff", scale: 2}).then(function(canvas){
-    let link = document.createElement("a");
-    link.download = "Player-Card.png";
-    link.href = canvas.toDataURL("image/png");
-    link.click();
-  });
-};
-function hidePlayerPopup(e) {
-  if (!e || !e.target || e.target.id === "player-popup" || e.target.classList.contains("popup-close")) {
-    const popup = document.getElementById("player-popup");
-    popup.style.display = "none";
-    popup.setAttribute("aria-hidden", "true");
-  }
-}
-function renderPlayerComparisonSelectors() {
-  const container = document.querySelector("#compare .player-select-container");
-  if (!container || !statsCache.length) return;
-  container.innerHTML = "";
-  const NUM_SELECTS = 4;
-  const uniquePlayers = Array.from(new Set(statsCache.map(p => p.Player))).sort((a,b) => a.localeCompare(b));
-  for(let i=0; i<NUM_SELECTS; i++) {
-    const select = document.createElement("select");
-    select.setAttribute("aria-label", `Select player ${i+1}`);
-    select.dataset.idx = i;
-    const optionDefault = document.createElement("option");
-    optionDefault.value = "";
-    optionDefault.textContent = i < 2 ? `Select player ${i+1} (required)` : `Select player ${i+1} (optional)`;
-    optionDefault.disabled = (i < 2);
-    optionDefault.selected = true;
-    select.appendChild(optionDefault);
-    uniquePlayers.forEach(player => {
-      const opt = document.createElement("option");
-      opt.value = player;
-      opt.textContent = player;
-      select.appendChild(opt);
-    });
-    container.appendChild(select);
-  }
-  if (compareSelections.length) {
-    setTimeout(() => {
-      const selects = container.querySelectorAll("select");
-      compareSelections.forEach((val, idx) => {
-        if (selects[idx] && val) {
-          selects[idx].value = val;
-        }
+        <tbody>
+      `;
+      filteredStats.forEach((row, i) => {
+        const isAlt = i%2!==0 ? "alt-row" : "";
+        const best3DA = Number(row["3 Dart Avg"]) === bests["3 Dart Avg"] && bests["3 Dart Avg"] > 0;
+        const bestLegs = Number(row["Legs Won"]) === bests["Legs Won"] && bests["Legs Won"] > 0;
+        html += `<tr class="${isAlt}">
+          <td class="stats-player${best3DA ? ' stats-best' : ''}" onclick="showPlayerPopup('${row.Player.replace(/'/g,"\\'")}')" style="cursor:pointer;">
+            ${best3DA ? '<span class="star" title="Best 3DA">★</span>':''}
+            ${row.Player ? row.Player : ""}
+          </td>
+          <td class="stats-team">${row.Team ? row.Team : ""}</td>
+          <td${best3DA ? ' class="stats-best"' : ''}>${row["3 Dart Avg"] ?? "-"}</td>
+          <td${bestLegs ? ' class="stats-best"' : ''}>${bestLegs ? '<span class="trophy" title="Most Legs Won">🏆</span>' : ''}${row["Legs Won"] ?? "-"}</td>
+          <td>${row["Match Played"] ?? "-"}</td>
+          <td style="text-align:center;">
+            <button class="show-more-btn" onclick="toggleExtraStats(this, ${i})" tabindex="0" aria-label="Show more stats for ${row.Player}">More</button>
+          </td>
+        </tr>
+        <tr class="extra-stats-row" id="extra-stats-${i}" style="display:none;">
+          <td colspan="6">
+            <div class="extra-stats-content">
+              ${extraStats.map(k => row[k] !== undefined && row[k] !== "" ?
+                `<div><span class="extra-stats-label">${k}:</span>
+                  <span class="extra-stats-value">${k.includes("Win Rate") ? (!isNaN(row[k]) ? Math.round(parseFloat(row[k])*100)+'%' : '-') : row[k]}</span>
+                </div>` : ''
+              ).join("")}
+            </div>
+          </td>
+        </tr>
+        `;
       });
-      updateCompareButtonState();
-    }, 50);
-  }
-  container.querySelectorAll("select").forEach(sel => {
-    sel.addEventListener("change", updateCompareButtonState);
-  });
-  document.getElementById("compare-results").innerHTML = compareTableHtml || "";
-  updateCompareButtonState();
-}
-function updateCompareButtonState() {
-  const selects = document.querySelectorAll("#compare .player-select-container select");
-  const selectedValues = Array.from(selects).map(s => s.value).filter(v => v);
-  const compareBtn = document.getElementById("compare-btn");
-  const uniquePlayers = [...new Set(selectedValues)];
-  compareBtn.disabled = uniquePlayers.length < 2;
-  compareBtn.setAttribute("aria-disabled", compareBtn.disabled ? "true" : "false");
-}
-function renderPlayerComparison() {
-  const selects = document.querySelectorAll("#compare .player-select-container select");
-  const selectedPlayers = Array.from(selects).map(s => s.value).filter(v => v);
-  const uniquePlayers = [...new Set(selectedPlayers)];
-  if (uniquePlayers.length < 2) {
-    alert("Please select at least two different players to compare.");
-    return;
-  }
-  const container = document.getElementById("compare-results");
-  const keysToShow = [
-    "Match Played", "Sets Played", "Sets Won", "Sets Lost", "Win Rate (Sets)",
-    "Legs Played", "Legs Won", "Legs Lost", "Win Rate (Legs)",
-    "3 Dart Avg", "First 9 Avg", "High Finish", "Checkout %",
-    "180s", "100+", "Best Leg", "High Checkout"
-  ];
-  let thead = "<tr><th class='metric-header' scope='col'>Metric</th>";
-  uniquePlayers.forEach(playerName => {
-    thead += `<th class="player-name-cell" scope="col" title="${playerName}">${playerName}</th>`;
-  });
-  thead += "</tr>";
-  let tbody = "";
-  keysToShow.forEach(metric => {
-    tbody += `<tr><th class="metric-header" scope="row">${metric}</th>`;
-    uniquePlayers.forEach(playerName => {
-      const playerData = statsCache.find(p => p.Player === playerName);
-      let val = (playerData && (playerData[metric] !== undefined && playerData[metric] !== null && playerData[metric] !== '')) ? playerData[metric] : "0";
-      if (metric.includes("Win Rate") && val !== "—") {
-        val = isNaN(parseFloat(val)) ? "—" : `${Math.round(parseFloat(val)*100)}%`;
+      html += `</tbody></table>`;
+      document.getElementById("stats-table").innerHTML = html;
+    }
+    window.toggleExtraStats = function(btn, idx) {
+      const row = document.getElementById("extra-stats-"+idx);
+      if (!row) return;
+      if (row.style.display === "none") {
+        row.style.display = "";
+        btn.innerText = "Less";
+      } else {
+        row.style.display = "none";
+        btn.innerText = "More";
       }
-      if (val === "" || val === undefined || val === null) val = "0";
-      tbody += `<td>${val}</td>`;
+    };
+    function showPlayerPopup(playerName) {
+      let p = statsCache.find(s => s.Player === playerName);
+      if (!p) return;
+      let card = `<div id="player-popup-head" class="popup-head" style="font-size:1.11em;font-weight:900;">${p.Player}</div>
+        <div class="popup-team" style="color:#22355c;font-size:0.99em;font-weight:700;margin-bottom:0.12em;">${p.Team||""}</div>
+        <div style="color:#38b6ff;font-size:1em;font-weight:700;margin-bottom:0.2em;">Stats</div>
+        ${Object.keys(p).map(h => {
+          if (["Player", "Team"].includes(h) || STATS_HIDE_COLUMNS.has(h) || !p[h]) return "";
+          return `<div class="popup-label" style="color:#384c7c;font-size:0.93em;margin-bottom:0.07em;"><span style="color:#38b6ff;font-weight:700;">${h}:</span> ${p[h]}</div>`;
+        }).join("")}
+        <button id="save-card-btn" onclick="savePlayerCard(event)" aria-label="Save player card as image" style="margin-top:0.7em;background:#38b6ff;border:none;border-radius:7px;color:#fff;font-weight:800;font-size:0.95em;padding:0.36em 0.9em;cursor:pointer;">Save Card as Image</button>`;
+      document.querySelector("#player-popup .popup-card").innerHTML = card;
+      const popup = document.getElementById("player-popup");
+      popup.style.display = "flex";
+      popup.setAttribute("aria-hidden", "false");
+      popup.focus();
+    }
+    window.savePlayerCard = function(e) {
+      e.stopPropagation();
+      let cardNode = document.querySelector("#player-popup .popup-card");
+      html2canvas(cardNode, {backgroundColor: "#fff", scale: 2}).then(function(canvas){
+        let link = document.createElement("a");
+        link.download = "Player-Card.png";
+        link.href = canvas.toDataURL("image/png");
+        link.click();
+      });
+    };
+    function hidePlayerPopup(e) {
+      if (!e || !e.target || e.target.id === "player-popup" || e.target.classList.contains("popup-close")) {
+        const popup = document.getElementById("player-popup");
+        popup.style.display = "none";
+        popup.setAttribute("aria-hidden", "true");
+      }
+    }
+    function renderPlayerComparisonSelectors() {
+      const container = document.querySelector("#compare .player-select-container");
+      if (!container || !statsCache.length) return;
+      container.innerHTML = "";
+      const NUM_SELECTS = 4;
+      const uniquePlayers = Array.from(new Set(statsCache.map(p => p.Player))).sort((a,b) => a.localeCompare(b));
+      for(let i=0; i<NUM_SELECTS; i++) {
+        const select = document.createElement("select");
+        select.setAttribute("aria-label", `Select player ${i+1}`);
+        select.dataset.idx = i;
+        const optionDefault = document.createElement("option");
+        optionDefault.value = "";
+        optionDefault.textContent = i < 2 ? `Select player ${i+1} (required)` : `Select player ${i+1} (optional)`;
+        optionDefault.disabled = (i < 2);
+        optionDefault.selected = true;
+        select.appendChild(optionDefault);
+        uniquePlayers.forEach(player => {
+          const opt = document.createElement("option");
+          opt.value = player;
+          opt.textContent = player;
+          select.appendChild(opt);
+        });
+        container.appendChild(select);
+      }
+      if (compareSelections.length) {
+        setTimeout(() => {
+          const selects = container.querySelectorAll("select");
+          compareSelections.forEach((val, idx) => {
+            if (selects[idx] && val) {
+              selects[idx].value = val;
+            }
+          });
+          updateCompareButtonState();
+        }, 50);
+      }
+      container.querySelectorAll("select").forEach(sel => {
+        sel.addEventListener("change", updateCompareButtonState);
+      });
+      document.getElementById("compare-results").innerHTML = compareTableHtml || "";
+      updateCompareButtonState();
+    }
+    function updateCompareButtonState() {
+      const selects = document.querySelectorAll("#compare .player-select-container select");
+      const selectedValues = Array.from(selects).map(s => s.value).filter(v => v);
+      const compareBtn = document.getElementById("compare-btn");
+      const uniquePlayers = [...new Set(selectedValues)];
+      compareBtn.disabled = uniquePlayers.length < 2;
+      compareBtn.setAttribute("aria-disabled", compareBtn.disabled ? "true" : "false");
+    }
+    function renderPlayerComparison() {
+      const selects = document.querySelectorAll("#compare .player-select-container select");
+      const selectedPlayers = Array.from(selects).map(s => s.value).filter(v => v);
+      const uniquePlayers = [...new Set(selectedPlayers)];
+      if (uniquePlayers.length < 2) {
+        alert("Please select at least two different players to compare.");
+        return;
+      }
+      const container = document.getElementById("compare-results");
+      const keysToShow = [
+        "Match Played", "Sets Played", "Sets Won", "Win Rate (Sets)",
+        "Legs Played", "Legs Won", "Win Rate (Legs)",
+        "3 Dart Avg", "First 9 Avg", "High Finish", "180s", "100+", "High Checkout"
+      ];
+      let thead = "<tr><th class='metric-header' scope='col'>Metric</th>";
+      uniquePlayers.forEach(playerName => {
+        thead += `<th class="player-name-cell" scope="col" title="${playerName}">${playerName}</th>`;
+      });
+      thead += "</tr>";
+      let tbody = "";
+      keysToShow.forEach(metric => {
+        tbody += `<tr><th class="metric-header" scope="row">${metric}</th>`;
+        uniquePlayers.forEach(playerName => {
+          const playerData = statsCache.find(p => p.Player === playerName);
+          let val = (playerData && (playerData[metric] !== undefined && playerData[metric] !== null && playerData[metric] !== '')) ? playerData[metric] : "0";
+          if (metric.includes("Win Rate") && val !== "—") {
+            val = isNaN(parseFloat(val)) ? "—" : `${Math.round(parseFloat(val)*100)}%`;
+          }
+          if (val === "" || val === undefined || val === null) val = "0";
+          tbody += `<td>${val}</td>`;
+        });
+        tbody += "</tr>";
+      });
+      const tableHtml = `<table aria-label="Player comparison table" style="width:100%;max-width:100%;overflow-x:auto;">
+        <thead>${thead}</thead>
+        <tbody>${tbody}</tbody>
+      </table>`;
+      container.innerHTML = tableHtml;
+      compareSelections = Array.from(selects).map(s => s.value);
+      compareTableHtml = tableHtml;
+      window.scrollTo({top:0, behavior:'smooth'});
+    }
+    document.addEventListener("DOMContentLoaded", function() {
+      document.querySelectorAll('.nav-bar-glass .nav-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const tab = this.getAttribute('data-tab');
+          showTab(tab);
+        });
+      });
+      setupWhatsAppShare();
+      document.getElementById("compare-btn").addEventListener("click", renderPlayerComparison);
+      loadData();
+      setInterval(loadData, 60000);
     });
-    tbody += "</tr>";
-  });
-  const tableHtml = `<table aria-label="Player comparison table">
-    <thead>${thead}</thead>
-    <tbody>${tbody}</tbody>
-  </table>`;
-  container.innerHTML = tableHtml;
-  compareSelections = Array.from(selects).map(s => s.value);
-  compareTableHtml = tableHtml;
-  window.scrollTo({top:0, behavior:'smooth'});
-}
-document.addEventListener("DOMContentLoaded", function() {
-  document.querySelectorAll('.nav-bar-glass .nav-btn').forEach(btn => {
-    btn.addEventListener('click', function() {
-      const tab = this.getAttribute('data-tab');
-      showTab(tab);
-    });
-  });
-  setupWhatsAppShare();
-  document.getElementById("compare-btn").addEventListener("click", renderPlayerComparison);
-  loadData();
-  setInterval(loadData, 60000);
-});
   </script>
 </body>
 </html>
