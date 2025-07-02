@@ -210,6 +210,7 @@
       color: #162f4d;
       font-size: 1.02em;
       max-width: 120px;
+      cursor: pointer;
     }
     .stats-table-modern td.stats-team {
       font-weight: 600;
@@ -376,9 +377,7 @@
         <h3>Today's Fixtures</h3>
         <div class="table-scroll">
           <table class="fixtures-table" role="table" aria-live="polite" aria-atomic="true">
-            <thead>
-              <tr><th>Time</th><th>Team 1</th><th></th><th>Team 2</th></tr>
-            </thead>
+            <thead><tr><th>Time</th><th>Team 1</th><th></th><th>Team 2</th></tr></thead>
             <tbody id="dashboard-fixtures"></tbody>
           </table>
         </div>
@@ -435,6 +434,15 @@
         <div id="stats-table"></div>
       </div>
     </section>
+    <section id="top10" class="section" aria-label="Top 10 Stats">
+      <div class="card">
+        <h3>Top 10 Player Stats</h3>
+        <div id="top10-3da" style="margin-bottom:1em;"></div>
+        <div id="top10-f9" style="margin-bottom:1em;"></div>
+        <div id="top10-100p" style="margin-bottom:1em;"></div>
+        <div id="top10-hf" style="margin-bottom:1em;"></div>
+      </div>
+    </section>
     <section id="live" class="section" aria-label="Live Stream">
       <div class="card"><h3>Watch Live</h3><iframe src="https://n01darts.com/n01/tournament/comp.php?id=t_NI0o_4352&tab=live" width="100%" height="320" frameborder="0" style="border-radius:9px;border:none;" title="Live tournament stream"></iframe></div>
     </section>
@@ -456,6 +464,7 @@
     <button class="nav-btn" data-tab="standings" title="Standings"><i class="lucide lucide-trophy"></i><span class="nav-label">Standings</span></button>
     <button class="nav-btn" data-tab="squads" title="Squads"><i class="lucide lucide-users"></i><span class="nav-label">Squads</span></button>
     <button class="nav-btn" data-tab="stats" title="Stats"><i class="lucide lucide-bar-chart"></i><span class="nav-label">Stats</span></button>
+    <button class="nav-btn" data-tab="top10" title="Top 10"><i class="lucide lucide-award"></i><span class="nav-label">Top 10</span></button>
     <button class="nav-btn" data-tab="live" title="Live"><i class="lucide lucide-play-circle"></i><span class="nav-label">Live</span></button>
     <button class="nav-btn" data-tab="compare" title="Compare Players"><i class="lucide lucide-columns"></i><span class="nav-label">Compare</span></button>
   </nav>
@@ -525,6 +534,7 @@
         renderStatHighlights(statsCache, bestLegCache, "stat-highlights");
         renderStats(statsCache, bestLegCache); renderTeamFilter(statsCache);
         renderHomeStatHighlights(statsCache, bestLegCache, "home-stat-highlights");
+        renderTop10(statsCache);
         renderPlayerComparisonSelectors();
         if (
           document.querySelector('.nav-btn.active[data-tab="compare"]') &&
@@ -722,18 +732,27 @@
     }
     function renderHomeStatHighlights(stats, bestLegsSheet, id = "home-stat-highlights") {
       const defs = [
-        { key: "3 Dart Avg", label: "Best 3DA", icon: "★" },
-        { key: "Legs Won", label: "Most Legs", icon: "🏆" },
-        { key: "High Finish", label: "High Finish", icon: "🎯" },
-        { key: "First 9 Avg", label: "Best F9", icon: "🚀" }
+        { key: "3 Dart Avg", label: "Best 3DA", icon: "★", minMatches: 0 },
+        { key: "Win Rate (Legs)", label: "Best Win Rate (Legs)", icon: "🏆", minLegs: 5 },
+        { key: "High Finish", label: "High Finish", icon: "🎯", minMatches: 0 },
+        { key: "First 9 Avg", label: "Best F9", icon: "🚀", minMatches: 0 }
       ];
-      const eligible = stats.filter(p => Number(p["Match Played"]) >= 2);
+      // Filter players by minMatches/minLegs
       let html = `<div class="stat-high-bar">`;
       defs.forEach(def => {
-        const sorted = [...eligible].sort((a, b) => +b[def.key] - +a[def.key]);
+        let eligible = stats;
+        if (def.minMatches) eligible = eligible.filter(p => Number(p["Match Played"]) >= def.minMatches);
+        if (def.minLegs) eligible = eligible.filter(p => Number(p["Legs Played"]) >= def.minLegs);
+        const sorted = [...eligible].sort((a, b) => {
+          let va = a[def.key], vb = b[def.key];
+          va = (typeof va === 'string') ? parseFloat(va) : va;
+          vb = (typeof vb === 'string') ? parseFloat(vb) : vb;
+          return (vb||0) - (va||0);
+        });
         const player = sorted[0];
         if (!player) return;
         let val = player[def.key] ?? "—";
+        if (def.key === "Win Rate (Legs)" && val !== "—" && !isNaN(val)) val = Math.round(parseFloat(val)*100) + "%";
         html += `<div class="stat-high-card">
           <div class="stat-high-label">${def.icon} ${def.label}</div>
           <div class="stat-high-main">${val}</div>
@@ -986,6 +1005,37 @@
       compareSelections = Array.from(selects).map(s => s.value);
       compareTableHtml = tableHtml;
       window.scrollTo({top:0, behavior:'smooth'});
+    }
+    function renderTop10(stats) {
+      if (!stats || !stats.length) return;
+      // filter players with at least 3 matches
+      const eligible = stats.filter(p => Number(p["Match Played"]) >= 3);
+      // Helper to generate table for a stat
+      function genTable(title, key, sortDesc = true, formatter = val => val) {
+        let sorted = [...eligible].sort((a,b) => {
+          let va = a[key], vb = b[key];
+          va = (typeof va === 'string') ? parseFloat(va) : va;
+          vb = (typeof vb === 'string') ? parseFloat(vb) : vb;
+          return sortDesc ? (vb||0)-(va||0) : (va||0)-(vb||0);
+        }).slice(0,10);
+        let html = `<h4 style="margin-bottom:0.25em;color:var(--primary2);">${title}</h4>`;
+        html += `<div class="table-scroll"><table class="standings-table" style="font-size:0.92em;">
+          <thead><tr><th>Rank</th><th>Player</th><th>Team</th><th>${title}</th></tr></thead><tbody>`;
+        sorted.forEach((p,i) => {
+          html += `<tr>
+            <td>${i+1}</td>
+            <td>${p.Player}</td>
+            <td>${p.Team || ""}</td>
+            <td>${formatter(p[key])}</td>
+          </tr>`;
+        });
+        html += "</tbody></table></div>";
+        return html;
+      }
+      document.getElementById('top10-3da').innerHTML = genTable("3 Dart Average", "3 Dart Avg");
+      document.getElementById('top10-f9').innerHTML = genTable("First 9 Darts Avg", "First 9 Avg");
+      document.getElementById('top10-100p').innerHTML = genTable("100+ Scores", "100+", true, val => val || "0");
+      document.getElementById('top10-hf').innerHTML = genTable("High Finish", "High Finish", true, val => val || "0");
     }
     document.addEventListener("DOMContentLoaded", function() {
       document.querySelectorAll('.nav-bar-glass .nav-btn').forEach(btn => {
